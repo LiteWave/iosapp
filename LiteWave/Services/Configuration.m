@@ -14,10 +14,10 @@
 
 + (id)instance {
     static Configuration *theInstance = nil;
-    @synchronized(self) {
-        if (theInstance == nil)
-            theInstance = [[self alloc] init];
-    }
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        theInstance = [[self alloc] init];
+    });
     return theInstance;
 }
 
