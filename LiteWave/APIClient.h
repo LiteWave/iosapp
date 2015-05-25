@@ -7,10 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AFHTTPClient.h"
 
-@interface APIClient : AFHTTPClient
+typedef void (^Success)(id);
+typedef void (^Failure)(NSError*);
 
-+(APIClient *)sharedProxy;
+@interface APIClient : NSObject
+
+@property (nonatomic, retain) NSString *apiURL;
+
++(APIClient *)instance;
+
+-(void)makeRequest:(NSURLRequest*)request onSuccess:(Success)success onFailure:(Failure)failure;
+
+// API METHODS
+
+-(void)getEvents:(NSString*)clientID onSuccess:(Success)success onFailure:(Failure)failure;
+
+// API HELPERS
+
+-(NSString*)eventsPath:(NSString*)clientID;
+-(NSString*)eventsPath:(NSString*)clientID withEvent:(NSString*)eventID;
 
 @end

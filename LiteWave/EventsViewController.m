@@ -8,6 +8,7 @@
 
 #import "EventsViewController.h"
 #import "AFNetworking.h"
+#import "APIClient.h"
 #import "LiteWaveAppDelegate.h"
 #import "SeatsViewController.h"
 
@@ -42,34 +43,24 @@
     continueBtn.hidden = YES;
     LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    if(appDelegate.isOnline){
-        
-    NSURL *requestURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://127.0.0.1:3000/api/clients/%@/lw_events", appDelegate.clientID]];
-    
-    NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
-    
-    AFJSONRequestOperation *operation =
-    [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                        
-                                                        appDelegate.eventsArray = [[NSArray alloc] initWithArray:JSON copyItems:YES];
-                                                        
-                                                        [eventsPicker reloadAllComponents];
-                                                        
-                                                        [spinner stopAnimating];
-                                                        continueBtn.hidden = NO;
-                                                        
-                                                    }
-                                                    failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network Error" message:error.localizedDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                                                        [alert show];
-                                                        
-                                                        [spinner stopAnimating];
-                                                        //[self.navigationController popToRootViewControllerAnimated:YES];
-                                                    }];
-    
-    [operation start];
-    
+    if (appDelegate.isOnline){
+       
+        [[APIClient instance] getEvents:appDelegate.clientID
+                              onSuccess:^(id data) {
+                                  appDelegate.eventsArray = [[NSArray alloc] initWithArray:data copyItems:YES];
+                                  
+                                  [eventsPicker reloadAllComponents];
+                                  
+                                  [spinner stopAnimating];
+                                  continueBtn.hidden = NO;
+                              }
+                              onFailure:^(NSError *error) {
+                                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network Error" message:error.localizedDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                  [alert show];
+                                  
+                                  [spinner stopAnimating];
+                              }];
+
     }else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"Network error", @"Network error")
                                                         message: NSLocalizedString(@"No internet connection found, this application requires an internet connection.", @"Network error") delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];

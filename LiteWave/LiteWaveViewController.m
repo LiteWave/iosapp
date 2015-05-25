@@ -12,6 +12,7 @@
 #import "EventsViewController.h"
 
 #import "Configuration.h"
+#import "APIClient.h"
 
 @interface LiteWaveViewController ()
 
@@ -27,9 +28,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated{
-    
-    NSLog(@"API URL: %@", [[Configuration instance] get: @"apiURL"]);
-    
+        
     LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     if(appDelegate.userID != nil){

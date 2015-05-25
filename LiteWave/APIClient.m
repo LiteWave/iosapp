@@ -16,29 +16,64 @@
 
 #import "APIClient.h"
 #import "AFNetworking.h"
+#import "Configuration.h"
 
 @implementation APIClient
 
-+(APIClient *)sharedProxy {
-    static APIClient *_sharedProxy = nil;
++(APIClient *)instance {
+    static APIClient *theInstance = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
-        _sharedProxy = [[self alloc] initWithBaseURL:[NSURL URLWithString:@"http://127.0.0.1:3000"]];
+        theInstance = [[self alloc] init];
     });
-    return _sharedProxy;
+    return theInstance;
 }
 
--(id)initWithBaseURL:(NSURL *)url {
-    self = [super initWithBaseURL:url];
-    if (!self) {
-        return nil;
+-(id)init {
+    self = [super init];
+    if (self) {
+        _apiURL = [[Configuration instance] get: @"apiURL"];
     }
-    [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
-    [self setDefaultHeader:@"Accept" value:@"application/json"];
-    self.parameterEncoding = AFJSONParameterEncoding;
     
     return self;
-    
 }
+
+-(void)makeRequest:(NSURLRequest*)request onSuccess:(Success)success onFailure:(Failure)failure {
+    
+    NSLog(@"requesting: %@", request.URL);
+    AFJSONRequestOperation *operation =
+    [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                        success(JSON);
+                                                    }
+                                                    failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                                        NSLog(@"failure: %@", response);
+                                                        failure(error);
+                                                    }];
+    [operation start];
+}
+
+// API METHODS
+
+-(void)getEvents:(NSString*)clientID onSuccess:(Success)success onFailure:(Failure)failure {
+    NSURL *url = [[NSURL alloc] initWithString:[self eventsPath:clientID]];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [self makeRequest: request onSuccess: success onFailure: failure];
+}
+
+// API HELPERS
+
+-(NSString*)eventsPath:(NSString*)clientID {
+    return [self eventsPath: clientID withEvent: @""];
+}
+-(NSString*)eventsPath:(NSString*)clientID withEvent:(NSString*)eventID {
+    return [NSString stringWithFormat: @"%@/clients/%@/lw_events/%@", self.apiURL, clientID, eventID];
+}
+
+
+
+
+
 
 @end
