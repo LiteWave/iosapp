@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E83403C3-7380-4DEF-9663-1CC61C3BC100</string>
+	<key>IDESourceControlProjectName</key>
+	<string>LightWave</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>DC9F92B4-DF89-4695-8E7F-7B9EEBAD13FE</key>
+		<string>ssh://166.78.147.206//home/git/git_repositories/litewave_ios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>LightWave/LightWave.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>DC9F92B4-DF89-4695-8E7F-7B9EEBAD13FE</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://166.78.147.206//home/git/git_repositories/litewave_ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>DC9F92B4-DF89-4695-8E7F-7B9EEBAD13FE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DC9F92B4-DF89-4695-8E7F-7B9EEBAD13FE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>source</string>
+		</dict>
+	</array>
+</dict>
+</plist>
