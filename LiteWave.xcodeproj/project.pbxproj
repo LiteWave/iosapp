@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		81A0F8CA1B13A22B007508CE /* Configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A0F8C91B13A22B007508CE /* Configuration.m */; };
 		84067FEC183B073200232065 /* CountDownTimerUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 84067FEB183B073200232065 /* CountDownTimerUtility.m */; };
 		84157950181A286800D4EBB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8415794F181A286800D4EBB1 /* Foundation.framework */; };
 		84157952181A286800D4EBB1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84157951181A286800D4EBB1 /* CoreGraphics.framework */; };
@@ -135,6 +136,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		81A0F8C81B139FF6007508CE /* Configuration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
+		81A0F8C91B13A22B007508CE /* Configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Configuration.m; sourceTree = "<group>"; };
 		84067FEA183B073200232065 /* CountDownTimerUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountDownTimerUtility.h; sourceTree = "<group>"; };
 		84067FEB183B073200232065 /* CountDownTimerUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountDownTimerUtility.m; sourceTree = "<group>"; };
 		8415794C181A286800D4EBB1 /* LiteWave.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiteWave.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -474,6 +477,8 @@
 				8415798F181A3E9500D4EBB1 /* Model.m */,
 				84157991181A3E9500D4EBB1 /* WebServiceRequest.h */,
 				84157992181A3E9500D4EBB1 /* WebServiceRequest.m */,
+				81A0F8C81B139FF6007508CE /* Configuration.h */,
+				81A0F8C91B13A22B007508CE /* Configuration.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -917,6 +922,7 @@
 				84446C1F182704AE002D8BDC /* EventsViewController.m in Sources */,
 				84789FC9181C65E400FC59E4 /* AFNetworkingDataLoader.m in Sources */,
 				84AB8D5E1835F22300E3E8AE /* APIClient.m in Sources */,
+				81A0F8CA1B13A22B007508CE /* Configuration.m in Sources */,
 				84789FD1181C65E400FC59E4 /* BaseJSONDeserializer.m in Sources */,
 				84157993181A3E9500D4EBB1 /* Authorization.m in Sources */,
 				845CD92E1825DE54004932BF /* User.m in Sources */,
