@@ -55,14 +55,51 @@
 
 // API METHODS
 
+// -- STADIUMS
+
+-(void)getStadiums:(Success)success onFailure:(Failure)failure {
+    NSURL *url = [[NSURL alloc] initWithString:[self stadiumsPath]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [self makeRequest: request onSuccess: success onFailure: failure];
+}
+
+-(void)getStadium:(NSString*)stadiumID onSuccess:(Success)success onFailure:(Failure)failure {
+    NSURL *url = [[NSURL alloc] initWithString:[self stadiumsPath: stadiumID]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [self makeRequest: request onSuccess: success onFailure: failure];
+}
+
+// -- EVENTS
+
 -(void)getEvents:(NSString*)clientID onSuccess:(Success)success onFailure:(Failure)failure {
     NSURL *url = [[NSURL alloc] initWithString:[self eventsPath:clientID]];
-    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [self makeRequest: request onSuccess: success onFailure: failure];
+}
+
+// -- SHOWS
+
+-(void)getShows:(NSString*)eventID onSuccess:(Success)success onFailure:(Failure)failure {
+    NSURL *url = [[NSURL alloc] initWithString:[self showsPath:eventID]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [self makeRequest: request onSuccess: success onFailure: failure];
+}
+
+-(void)getShow:(NSString*)showID user:(NSString*)userID onSuccess:(Success)success onFailure:(Failure)failure {
+    NSURL *url = [[NSURL alloc] initWithString:[self showsPath:showID withUser:userID ]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self makeRequest: request onSuccess: success onFailure: failure];
 }
 
 // API HELPERS
+
+-(NSString*)stadiumsPath {
+    return [self stadiumsPath: @""];
+}
+-(NSString*)stadiumsPath:(NSString*)stadiumID {
+    return [NSString stringWithFormat: @"%@/stadiums/%@", self.apiURL, stadiumID];
+}
+
 
 -(NSString*)eventsPath:(NSString*)clientID {
     return [self eventsPath: clientID withEvent: @""];
@@ -70,6 +107,14 @@
 -(NSString*)eventsPath:(NSString*)clientID withEvent:(NSString*)eventID {
     return [NSString stringWithFormat: @"%@/clients/%@/lw_events/%@", self.apiURL, clientID, eventID];
 }
+
+-(NSString*)showsPath:(NSString*)eventID {
+    return [NSString stringWithFormat: @"%@/lw_events/%@/event_liteshows", self.apiURL, eventID];
+}
+-(NSString*)showsPath:(NSString*)showID withUser:(NSString*)userID {
+    return [NSString stringWithFormat: @"%@/event_liteshows/%@/user_locations/%@/liteshow", self.apiURL, showID, userID];
+}
+
 
 
 

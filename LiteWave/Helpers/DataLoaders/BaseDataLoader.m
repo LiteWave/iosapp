@@ -54,8 +54,8 @@
     if (self)
     {
         self.limit = 300;
-        NSString *baseURL = [NSUserDefaults standardUserDefaults].serverURL;
-        self.baseURLString = [NSString stringWithFormat:@"%@", baseURL];
+        //NSString *baseURL = [NSUserDefaults standardUserDefaults].serverURL;
+        //self.baseURLString = [NSString stringWithFormat:@"%@", baseURL];
     }
     return self;
 }
@@ -74,8 +74,8 @@
 - (void)loadData
 {
     NSString *format = [self.deserializer formatIdentifier];
-    NSString *urlString = [NSString stringWithFormat:@"%@?format=%@&limit=%d", self.baseURLString, format, self.limit];
-    self.url = [NSURL URLWithString:urlString];
+    //NSString *urlString = [NSString stringWithFormat:@"%@?format=%@&limit=%d", self.baseURLString, format, self.limit];
+    //self.url = [NSURL URLWithString:urlString];
     self.interval = [NSDate timeIntervalSinceReferenceDate];
     
     // Template method, to be overridden by subclasses

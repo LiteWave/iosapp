@@ -10,6 +10,4 @@
 
 - (void)setDefaultValuesIfRequired;
 
-@property (nonatomic, copy) NSString *serverURL;
-
 @end

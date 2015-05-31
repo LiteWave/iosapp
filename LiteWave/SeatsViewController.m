@@ -10,6 +10,7 @@
 #import "AFNetworking.h"
 #import "LiteWaveAppDelegate.h"
 #import "ReadyViewController.h"
+#import "APIClient.h"
 
 @interface SeatsViewController ()
 
@@ -42,82 +43,85 @@
     registerButton.hidden = YES;
     LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    if(appDelegate.isOnline){
-    //NSURL *requestURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"http://127.0.0.1:3000/api/stadiums/%@", appDelegate.stadiumID]];
+    if (appDelegate.isOnline) {
     
-        NSURL *requestURL = [[NSURL alloc] initWithString:@"http://127.0.0.1:3000/api/stadiums/5269b4c3df96d37c8cfd648f"];
-    
-    NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
-    
-    AFJSONRequestOperation *operation =
-    [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                        
-                                                        NSError *error2;
-                                                        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:JSON options:kNilOptions error:&error2];
-                                                        NSString *jsonArray = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-                                                        NSDictionary *seatsDict =
-                                                        [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
-                                                                                        options: NSJSONReadingMutableContainers
-                                                                                          error: &error2];
-                                                        
-                                                        appDelegate.seatsArray = [[NSDictionary alloc] initWithDictionary:seatsDict copyItems:YES];
-                                                        
-                                                        sections = [[NSMutableArray alloc] initWithArray:[appDelegate.seatsArray objectForKey:@"sections"]];
-                                                        
-                                                        rows = [[NSMutableArray alloc] init];
-                                                        seats = [[NSMutableArray alloc] init];
-                                                        
-                                                        pickedSection = FALSE;
-                                                        pickedRow = FALSE;
-                                                        pickedSeat = FALSE;
-                                                        
-                                                        selectedSectionIndex = 0;
-                                                        selectedRowIndex = 0;
-                                                        selectedSeatIndex = 0;
-                                                        
-                                                        for (int i = 0; i < [sections count]; i++) {
-                                                            
-                                                            sectionDictionary = [sections objectAtIndex:i];
-                                                            
-                                                            if([sectionDictionary objectForKey:@"rows"]){
-                                                                
-                                                                NSArray *tempRowArray = [sectionDictionary objectForKey:@"rows"];
-                                                                [rows addObject:tempRowArray];
-                                                                
-                                                                for (int j = 0; j < [tempRowArray count]; j++) {
-                                                                    
-                                                                    seatDictionary = [tempRowArray objectAtIndex:j];
-                                                                
-                                                                    if([seatDictionary objectForKey:@"seats"]){
-                                                                        NSArray *tempSeatArray = [seatDictionary objectForKey:@"seats"];
-                                                                        [seats addObject:tempSeatArray];
-                                                                    }
-                                                                    
-                                                                }
-                                                                
-                                                            }
-                                                            
+        [[APIClient instance] getStadiums: ^(id data) {
+                                    NSArray *stadiums = [[NSArray alloc] initWithArray:data copyItems:YES];
+                                    appDelegate.stadiumID = stadiums[0][@"_id"];
+            
+                                    [[APIClient instance] getStadium: appDelegate.stadiumID
+                                                           onSuccess:^(id data) {
+                                                               NSError *error2;
+                                                               NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
+                                                               NSString *jsonArray = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                                                               NSDictionary *seatsDict =
+                                                               [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
+                                                                                               options: NSJSONReadingMutableContainers
+                                                                                                 error: &error2];
+                                                               
+                                                               appDelegate.seatsArray = [[NSDictionary alloc] initWithDictionary:seatsDict copyItems:YES];
+                                                               
+                                                               sections = [[NSMutableArray alloc] initWithArray:[appDelegate.seatsArray objectForKey:@"sections"]];
+                                                               
+                                                               rows = [[NSMutableArray alloc] init];
+                                                               seats = [[NSMutableArray alloc] init];
+                                                               
+                                                               pickedSection = FALSE;
+                                                               pickedRow = FALSE;
+                                                               pickedSeat = FALSE;
+                                                               
+                                                               selectedSectionIndex = 0;
+                                                               selectedRowIndex = 0;
+                                                               selectedSeatIndex = 0;
+                                                               
+                                                               for (int i = 0; i < [sections count]; i++) {
+                                                                   
+                                                                   sectionDictionary = [sections objectAtIndex:i];
+                                                                   
+                                                                   if([sectionDictionary objectForKey:@"rows"]){
+                                                                       
+                                                                       NSArray *tempRowArray = [sectionDictionary objectForKey:@"rows"];
+                                                                       [rows addObject:tempRowArray];
+                                                                       
+                                                                       for (int j = 0; j < [tempRowArray count]; j++) {
+                                                                           
+                                                                           seatDictionary = [tempRowArray objectAtIndex:j];
+                                                                           
+                                                                           if([seatDictionary objectForKey:@"seats"]){
+                                                                               NSArray *tempSeatArray = [seatDictionary objectForKey:@"seats"];
+                                                                               [seats addObject:tempSeatArray];
+                                                                           }
+                                                                           
+                                                                       }
+                                                                       
+                                                                   }
+                                                                   
+                                                               }
+                                                               
+                                                               [seatsPicker reloadAllComponents];
+                                                               
+                                                               [spinner stopAnimating];
+                                                               
+                                                               registerButton.hidden = NO;
+                                                           }
+                                                           onFailure:^(NSError *error) {
+                                                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network Error" message:error.localizedDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                                               [alert show];
+                                                               
+                                                               [spinner stopAnimating];
+                                                               [self.navigationController popViewControllerAnimated:YES];
+                                                           }];
+                                    
                                                         }
-                                                        
-                                                        [seatsPicker reloadAllComponents];
-                                                        
-                                                        [spinner stopAnimating];
-                                                        
-                                                        registerButton.hidden = NO;
-                                                        
-                                                    }
-                                                    failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network Error" message:error.localizedDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                                                        [alert show];
-                                                        
-                                                        [spinner stopAnimating];
-                                                        [self.navigationController popViewControllerAnimated:YES];
-                                                    }];
+                                                        onFailure:^(NSError *error) {
+                                                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network Error" message:error.localizedDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                                            [alert show];
+                                                            
+                                                            [spinner stopAnimating];
+                                                            [self.navigationController popViewControllerAnimated:YES];
+                                                        }];
     
-    [operation start];
-    
-    }else{
+    } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"Network error", @"Network error")
                                                         message: NSLocalizedString(@"No internet connection found, this application requires an internet connection.", @"Network error") delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];

@@ -21,11 +21,19 @@ typedef void (^Failure)(NSError*);
 
 // API METHODS
 
+-(void)getStadiums:(Success)success onFailure:(Failure)failure;
+-(void)getStadium:(NSString*)stadiumID onSuccess:(Success)success onFailure:(Failure)failure;
 -(void)getEvents:(NSString*)clientID onSuccess:(Success)success onFailure:(Failure)failure;
+-(void)getShows:(NSString*)eventID onSuccess:(Success)success onFailure:(Failure)failure;
+-(void)getShow:(NSString*)showID user:(NSString*)userID onSuccess:(Success)success onFailure:(Failure)failure;
 
 // API HELPERS
 
 -(NSString*)eventsPath:(NSString*)clientID;
 -(NSString*)eventsPath:(NSString*)clientID withEvent:(NSString*)eventID;
+
+-(NSString*)showsPath:(NSString*)eventID;
+-(NSString*)showsPath:(NSString*)eventID withShow:(NSString*)showID;
+
 
 @end
