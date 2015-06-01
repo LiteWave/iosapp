@@ -18,14 +18,20 @@ typedef void (^Failure)(NSError*);
 +(APIClient *)instance;
 
 -(void)makeRequest:(NSURLRequest*)request onSuccess:(Success)success onFailure:(Failure)failure;
+-(void)get:(NSURL*)url onSuccess:(Success)success onFailure:(Failure)failure;
+-(void)post:(NSURL*)url params:(NSDictionary*)params onSuccess:(Success)success onFailure:(Failure)failure;
 
 // API METHODS
 
 -(void)getStadiums:(Success)success onFailure:(Failure)failure;
 -(void)getStadium:(NSString*)stadiumID onSuccess:(Success)success onFailure:(Failure)failure;
+
 -(void)getEvents:(NSString*)clientID onSuccess:(Success)success onFailure:(Failure)failure;
+-(void)joinEvent:(NSString*)eventID params:(NSDictionary*)params onSuccess:(Success)success onFailure:(Failure)failure;
+
 -(void)getShows:(NSString*)eventID onSuccess:(Success)success onFailure:(Failure)failure;
 -(void)getShow:(NSString*)showID user:(NSString*)userID onSuccess:(Success)success onFailure:(Failure)failure;
+-(void)joinShow:(NSString*)userID params:(NSDictionary*)params onSuccess:(Success)success onFailure:(Failure)failure;
 
 // API HELPERS
 
@@ -33,7 +39,7 @@ typedef void (^Failure)(NSError*);
 -(NSString*)eventsPath:(NSString*)clientID withEvent:(NSString*)eventID;
 
 -(NSString*)showsPath:(NSString*)eventID;
--(NSString*)showsPath:(NSString*)eventID withShow:(NSString*)showID;
+-(NSString*)showsPath:(NSString*)eventID withUser:(NSString*)userID;
 
 
 @end

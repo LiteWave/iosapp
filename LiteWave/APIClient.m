@@ -53,20 +53,40 @@
     [operation start];
 }
 
+-(void)get:(NSURL*)url onSuccess:(Success)success onFailure:(Failure)failure {
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [self makeRequest: request onSuccess: success onFailure: failure];
+}
+
+-(void)post:(NSURL*)url params:(NSDictionary*)params onSuccess:(Success)success onFailure:(Failure)failure {
+    NSMutableString *postString = [[NSMutableString alloc] init];
+    for (NSString *key in params) {
+        [postString appendString:[NSString stringWithFormat:@"%@=%@&", key, params[key]]];
+    }
+    NSData *postData = [postString dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",[postData length]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    
+    [self makeRequest: request onSuccess: success onFailure: failure];
+}
+
 // API METHODS
 
 // -- STADIUMS
 
 -(void)getStadiums:(Success)success onFailure:(Failure)failure {
     NSURL *url = [[NSURL alloc] initWithString:[self stadiumsPath]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self makeRequest: request onSuccess: success onFailure: failure];
+    [self get:url onSuccess: success onFailure: failure];
 }
 
 -(void)getStadium:(NSString*)stadiumID onSuccess:(Success)success onFailure:(Failure)failure {
     NSURL *url = [[NSURL alloc] initWithString:[self stadiumsPath: stadiumID]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self makeRequest: request onSuccess: success onFailure: failure];
+    [self get:url onSuccess: success onFailure: failure];
 }
 
 // -- EVENTS
@@ -77,18 +97,29 @@
     [self makeRequest: request onSuccess: success onFailure: failure];
 }
 
+-(void)joinEvent:(NSString*)eventID params:(NSDictionary*)params onSuccess:(Success)success onFailure:(Failure)failure {
+    NSString *path = [NSString stringWithFormat: @"%@/lw_events/%@/user_locations", self.apiURL, eventID];
+    NSURL *url = [[NSURL alloc] initWithString:path];
+    [self post:url params:params onSuccess: success onFailure: failure];
+}
+
+
 // -- SHOWS
 
 -(void)getShows:(NSString*)eventID onSuccess:(Success)success onFailure:(Failure)failure {
     NSURL *url = [[NSURL alloc] initWithString:[self showsPath:eventID]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self makeRequest: request onSuccess: success onFailure: failure];
+    [self get:url onSuccess: success onFailure: failure];
 }
 
 -(void)getShow:(NSString*)showID user:(NSString*)userID onSuccess:(Success)success onFailure:(Failure)failure {
     NSURL *url = [[NSURL alloc] initWithString:[self showsPath:showID withUser:userID ]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self makeRequest: request onSuccess: success onFailure: failure];
+    [self get:url onSuccess: success onFailure: failure];
+}
+
+-(void)joinShow:(NSString*)userID params:(NSDictionary*)params onSuccess:(Success)success onFailure:(Failure)failure {
+    NSString *path = [NSString stringWithFormat: @"%@/user_locations/%@/event_joins", self.apiURL, userID];
+    NSURL *url = [[NSURL alloc] initWithString:path];
+    [self post:url params:params onSuccess: success onFailure: failure];
 }
 
 // API HELPERS
@@ -114,11 +145,5 @@
 -(NSString*)showsPath:(NSString*)showID withUser:(NSString*)userID {
     return [NSString stringWithFormat: @"%@/event_liteshows/%@/user_locations/%@/liteshow", self.apiURL, showID, userID];
 }
-
-
-
-
-
-
 
 @end

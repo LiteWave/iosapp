@@ -263,66 +263,59 @@
     
     if(appDelegate.isOnline){
     
-    if(appDelegate.sectionID!=nil && appDelegate.rowID!=nil && appDelegate.seatID!=nil){
+    if(appDelegate.sectionID!=nil && appDelegate.rowID!=nil && appDelegate.seatID!=nil) {
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
+        [defaults setValue:appDelegate.sectionID forKey:@"sectionID"];
+        [defaults setValue:appDelegate.rowID forKey:@"rowID"];
+        [defaults setValue:appDelegate.seatID forKey:@"seatID"];
+        
+        [defaults synchronize];
+        
+        NSDictionary *user_seat = [NSDictionary dictionaryWithObjectsAndKeys:appDelegate.sectionID, @"section", appDelegate.rowID, @"row", appDelegate.seatID, @"seat_number", nil];
+        
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                                appDelegate.uniqueID, @"user_key",
+                                user_seat, @"user_seat", nil];
+
     
-    AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://127.0.0.1:3000"]];
-   
-    [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
-    [client setDefaultHeader:@"Accept" value:@"application/json"];
-    [client setParameterEncoding:AFJSONParameterEncoding];
+        [[APIClient instance] joinEvent: appDelegate.eventID
+                                 params: params
+                              onSuccess:^(id data) {
+                                  NSLog(@"USER ADDED RESPONSE: %@", data);
+                                  
+                                  NSError *error2;
+                                  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
+                                  NSString *jsonArray = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                                  
+                                  NSDictionary *userDict =
+                                  [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
+                                                                  options: NSJSONReadingMutableContainers
+                                                                    error: &error2];
+                                  
+                                  appDelegate.userID = [userDict objectForKey:@"_id"];
+                                  
+                                  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                                  
+                                  [defaults setValue:appDelegate.userID forKey:@"userID"];
+                                  
+                                  [defaults synchronize];
+                                  
+                                  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+                                  ReadyViewController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
+                                  [self.navigationController pushViewController:ready animated:YES];
+
+                              }
+                              onFailure:^(NSError *error) {
+                                  if (error) {
+                                      
+                                      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Register Error" message:error.localizedDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                      [alert show];
+                                      
+                                  }
+                              }];
         
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        
-    [defaults setValue:appDelegate.sectionID forKey:@"sectionID"];
-    [defaults setValue:appDelegate.rowID forKey:@"rowID"];
-    [defaults setValue:appDelegate.seatID forKey:@"seatID"];
-        
-    [defaults synchronize];
-        
-    NSDictionary *user_seat = [NSDictionary dictionaryWithObjectsAndKeys:appDelegate.sectionID, @"section", appDelegate.rowID, @"row", appDelegate.seatID, @"seat_number", nil];
-    
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            appDelegate.uniqueID, @"user_key",
-                            user_seat, @"user_seat", nil];
-    
-    NSLog(@"params = %@",params);
-        
-    [client postPath:[NSString stringWithFormat:@"/api/lw_events/%@/user_locations", appDelegate.eventID]
-          parameters:params
-             success:^(id responseObject) {
-                 NSLog(@"USER ADDED RESPONSE: %@", responseObject);
-                 
-                 NSError *error2;
-                 NSData *jsonData = [NSJSONSerialization dataWithJSONObject:responseObject options:kNilOptions error:&error2];
-                 NSString *jsonArray = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-                 
-                 NSDictionary *userDict =
-                 [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
-                                                 options: NSJSONReadingMutableContainers
-                                                   error: &error2];
-                 
-                 appDelegate.userID = [userDict objectForKey:@"_id"];
-                 
-                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                 
-                 [defaults setValue:appDelegate.userID forKey:@"userID"];
-                 
-                 [defaults synchronize];
-                 
-                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-                 ReadyViewController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
-                 [self.navigationController pushViewController:ready animated:YES];
-                 
-             }
-             failure:^(NSHTTPURLResponse *response, NSError *error) {
-                 if (error) {
-                     
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Register Error" message:error.localizedDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                 [alert show];
-                     
-                 }
-                 
-             }];
     }else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Choose Seat" message:@"Please choose all 3 options to pick your section, row, and seat." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];

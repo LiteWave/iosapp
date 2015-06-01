@@ -8,6 +8,7 @@
 #import "AFNetworking.h"
 #import "LiteWaveAppDelegate.h"
 #import "ResultsViewController.h"
+#import "APIClient.h"
 
 #ifdef __APPLE__
 #include "TargetConditionals.h"
@@ -208,10 +209,6 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
     if(appDelegate.isOnline){
         
         [spinner startAnimating];
-        AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://127.0.0.1:3000"]];
-        
-        [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
-        [client setDefaultHeader:@"Accept" value:@"application/json"];
         
         NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
         [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
@@ -222,127 +219,122 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
         NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                                 mobile_start, @"mobile_time", nil];
         
-        NSLog(@"%@", params);
-        
-        [client postPath:[NSString stringWithFormat:@"/user_locations/%@/event_joins", appDelegate.userID]
-              parameters:params
-                 success:^(id responseObject) {
-                     NSLog(@"EVENT JOIN RESPONSE: %@", responseObject);
-                     
-                     NSError *error2;
-                     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:responseObject options:kNilOptions error:&error2];
-                     NSString *jsonArray = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-                     
-                     NSDictionary *joinDict =
-                     [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
-                                                     options: NSJSONReadingMutableContainers
-                                                       error: &error2];
-                     
-                     appDelegate.eventJoinData = [[NSDictionary alloc] initWithDictionary:joinDict copyItems:YES];
-                     
-                     commandArray = [appDelegate.liteShow objectForKey:@"commands"];
-
-                     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                     if([appDelegate.eventJoinData objectForKey:@"_winner_user_locationId"]){
-                         
-                         appDelegate.winnerID = [appDelegate.eventJoinData valueForKey:@"_winner_user_locationId"];
-                         if([appDelegate.winnerID isKindOfClass:[NSNull class]]){
-                             
-                             [defaults removeObjectForKey:@"winnerID"];
-                             isWinner=NO;
-                             
-                         }else{
-                             
-                             [defaults setValue:appDelegate.winnerID forKey:@"winnerID"];
-                             isWinner=YES;
-                             
-                         }
-                         
-                     }else{
-                         appDelegate.winnerID = nil;
-                         [defaults removeObjectForKey:@"winnerID"];
-                         isWinner=NO;
-                     }
-                     [defaults synchronize];
-                     
-                     if([appDelegate.eventJoinData objectForKey:@"mobile_time_offset_ms"]){
-                         
-                         [spinner stopAnimating];
-                         
-                         counterUtil = [[CountDownTimerUtility alloc] init];
-                         [counterUtil setDelegate:self];
-                         
-                         self.waveLabel.hidden = NO;
-                         
-                         [self startAccelerometerData];
-                         
+        [[APIClient instance] joinShow: appDelegate.userID
+                                 params: params
+                              onSuccess:^(id data) {
+                                  NSLog(@"EVENT JOIN RESPONSE: %@", data);
+                                  
+                                  NSError *error2;
+                                  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
+                                  NSString *jsonArray = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                                  
+                                  NSDictionary *joinDict =
+                                  [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
+                                                                  options: NSJSONReadingMutableContainers
+                                                                    error: &error2];
+                                  
+                                  appDelegate.eventJoinData = [[NSDictionary alloc] initWithDictionary:joinDict copyItems:YES];
+                                  
+                                  commandArray = [appDelegate.liteShow objectForKey:@"commands"];
+                                  
+                                  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                                  if([appDelegate.eventJoinData objectForKey:@"_winner_user_locationId"]){
+                                      
+                                      appDelegate.winnerID = [appDelegate.eventJoinData valueForKey:@"_winner_user_locationId"];
+                                      if([appDelegate.winnerID isKindOfClass:[NSNull class]]){
+                                          
+                                          [defaults removeObjectForKey:@"winnerID"];
+                                          isWinner=NO;
+                                          
+                                      }else{
+                                          
+                                          [defaults setValue:appDelegate.winnerID forKey:@"winnerID"];
+                                          isWinner=YES;
+                                          
+                                      }
+                                      
+                                  }else{
+                                      appDelegate.winnerID = nil;
+                                      [defaults removeObjectForKey:@"winnerID"];
+                                      isWinner=NO;
+                                  }
+                                  [defaults synchronize];
+                                  
+                                  if([appDelegate.eventJoinData objectForKey:@"mobile_time_offset_ms"]){
+                                      
+                                      [spinner stopAnimating];
+                                      
+                                      counterUtil = [[CountDownTimerUtility alloc] init];
+                                      [counterUtil setDelegate:self];
+                                      
+                                      self.waveLabel.hidden = NO;
+                                      
+                                      [self startAccelerometerData];
+                                      
 #if (TARGET_IPHONE_SIMULATOR)
-                         
-                         [motionManager stopAccelerometerUpdates];
-                         
-                         NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
-                         [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
-                         [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-                         
-                         NSDate *startDate = [dateformat dateFromString:[appDelegate.eventJoinData valueForKey:@"mobile_start_at"]];
-
-                         NSString *mobile_start_at = [dateformat stringFromDate:startDate];
-                         
-                         NSLog(@"start %@",mobile_start_at);
-                         
-                         diff = [startDate timeIntervalSinceNow] * 100.0f;
-                         
-                         NSLog(@"countdown in %f...", diff);
-                         
-                         if(diff<0){
-                             
-                             [spinner stopAnimating];
-                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Show Expired" message:@"This show is no longer available for this event. Please withdraw and register for a new event." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                             [alert show];
-                             
-                             [self.navigationController popViewControllerAnimated:YES];
-                             
-                         }else{
-                             
-                             [spinner stopAnimating];
-                             self.timerLabel.hidden = NO;
-                             self.startsInLabel.hidden = NO;
-                             
-                             [counterUtil startCountDownTimerWithTime:diff andUILabel:self.timerLabel];
-                             
-                         }
-                         
-                         self.waveLabel.hidden = YES;
-                         motionManager = nil;
-                         
-                         
+                                      
+                                      [motionManager stopAccelerometerUpdates];
+                                      
+                                      NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
+                                      [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+                                      [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+                                      
+                                      NSDate *startDate = [dateformat dateFromString:[appDelegate.eventJoinData valueForKey:@"mobile_start_at"]];
+                                      
+                                      NSString *mobile_start_at = [dateformat stringFromDate:startDate];
+                                      
+                                      NSLog(@"start %@",mobile_start_at);
+                                      
+                                      diff = [startDate timeIntervalSinceNow] * 100.0f;
+                                      
+                                      NSLog(@"countdown in %f...", diff);
+                                      
+                                      if(diff<0){
+                                          
+                                          [spinner stopAnimating];
+                                          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Show Expired" message:@"This show is no longer available for this event. Please withdraw and register for a new event." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                          [alert show];
+                                          
+                                          [self.navigationController popViewControllerAnimated:YES];
+                                          
+                                      }else{
+                                          
+                                          [spinner stopAnimating];
+                                          self.timerLabel.hidden = NO;
+                                          self.startsInLabel.hidden = NO;
+                                          
+                                          [counterUtil startCountDownTimerWithTime:diff andUILabel:self.timerLabel];
+                                          
+                                      }
+                                      
+                                      self.waveLabel.hidden = YES;
+                                      motionManager = nil;
+                                      
+                                      
 #endif
-                         
-                     }
-                     
-                 }
-                 failure:^(NSHTTPURLResponse *response, NSError *error) {
-                     if (error) {
-                         
-                         [spinner stopAnimating];
-                         NSLog(@"error %@", error.localizedDescription);
-                         NSLog(@"code %i", response.statusCode);
-                         
-                         appDelegate.invalidShowAlert = YES;
-                         
-                         strobeIsOn_ = NO;
-                         self.strobeActivated = NO;
-                         strobeFlashOn_ = NO;
-                         
-                         self.timerLabel.hidden = YES;
-                         self.startsInLabel.hidden = YES;
-                         self.waveLabel.hidden = YES;
-                         
-                         [self.navigationController popViewControllerAnimated:YES];
-                         
-                     }
-                     
-                 }];
+                                      
+                                  }
+                              }
+                              onFailure:^(NSError *error) {
+                                  if (error) {
+                                      
+                                      [spinner stopAnimating];
+                                      NSLog(@"error %@", error.localizedDescription);
+                                      
+                                      appDelegate.invalidShowAlert = YES;
+                                      
+                                      strobeIsOn_ = NO;
+                                      self.strobeActivated = NO;
+                                      strobeFlashOn_ = NO;
+                                      
+                                      self.timerLabel.hidden = YES;
+                                      self.startsInLabel.hidden = YES;
+                                      self.waveLabel.hidden = YES;
+                                      
+                                      [self.navigationController popViewControllerAnimated:YES];
+                                      
+                                  }
+                              }];
         
     }else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"Network error", @"Network error")
