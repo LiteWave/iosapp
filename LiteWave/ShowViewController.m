@@ -456,9 +456,9 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
         [self stop];
     
     }else{
-        
-        vibrateDevice = 0; //vibrate 0=no 1=yes
-        strobeDevice = 0;  // strobe 0=no, 1=yes
+        counter = 4;
+        vibrateDevice = 1; //vibrate 0=no 1=yes
+        strobeDevice = 1;  // strobe 0=no, 1=yes
         pl1 = 0; //play time length in milliseconds
         pl2 = 0; //play time length in milliseconds
         pif = nil; // winner (w) looser (l)
@@ -488,7 +488,7 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
         }
         
         if([frameDict objectForKey:@"pl1"]){
-            pl1 = [[frameDict valueForKey:@"pl1"] integerValue];
+            pl1 = @"f";//[[frameDict valueForKey:@"pl1"] integerValue];
             
             if([playType isEqualToString:@"c"]){
                 onORoff=YES;

@@ -159,6 +159,16 @@
     {
         LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
         
+        // leave the event
+        [[APIClient instance] leaveEvent: appDelegate.userID
+                               onSuccess:^(id data) {
+                                   NSLog(@"Left event");
+                               }
+                               onFailure:^(NSError *error) {
+                                   NSLog(@"Error on leaving event");
+                               }];
+        
+        // clear data
         appDelegate.sectionID = nil;
         appDelegate.rowID = nil;
         appDelegate.seatID = nil;

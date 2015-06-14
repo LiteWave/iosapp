@@ -20,6 +20,7 @@ typedef void (^Failure)(NSError*);
 -(void)makeRequest:(NSURLRequest*)request onSuccess:(Success)success onFailure:(Failure)failure;
 -(void)get:(NSURL*)url onSuccess:(Success)success onFailure:(Failure)failure;
 -(void)post:(NSURL*)url params:(NSDictionary*)params onSuccess:(Success)success onFailure:(Failure)failure;
+-(void)delete:(NSURL*)url onSuccess:(Success)success onFailure:(Failure)failure;
 
 // API METHODS
 
@@ -28,6 +29,7 @@ typedef void (^Failure)(NSError*);
 
 -(void)getEvents:(NSString*)clientID onSuccess:(Success)success onFailure:(Failure)failure;
 -(void)joinEvent:(NSString*)eventID params:(NSDictionary*)params onSuccess:(Success)success onFailure:(Failure)failure;
+-(void)leaveEvent:(NSString*)userID onSuccess:(Success)success onFailure:(Failure)failure;
 
 -(void)getShows:(NSString*)eventID onSuccess:(Success)success onFailure:(Failure)failure;
 -(void)getShow:(NSString*)showID user:(NSString*)userID onSuccess:(Success)success onFailure:(Failure)failure;

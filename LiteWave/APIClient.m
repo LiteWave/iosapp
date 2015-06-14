@@ -75,6 +75,13 @@
     [self makeRequest: request onSuccess: success onFailure: failure];
 }
 
+-(void)delete:(NSURL*)url onSuccess:(Success)success onFailure:(Failure)failure {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"DELETE"];
+    [self makeRequest: request onSuccess: success onFailure: failure];
+}
+
+
 // API METHODS
 
 // -- STADIUMS
@@ -101,6 +108,12 @@
     NSString *path = [NSString stringWithFormat: @"%@/lw_events/%@/user_locations", self.apiURL, eventID];
     NSURL *url = [[NSURL alloc] initWithString:path];
     [self post:url params:params onSuccess: success onFailure: failure];
+}
+
+-(void)leaveEvent:(NSString*)userID onSuccess:(Success)success onFailure:(Failure)failure {
+    NSString *path = [NSString stringWithFormat: @"%@/user_locations/%@/", self.apiURL, userID];
+    NSURL *url = [[NSURL alloc] initWithString:path];
+    [self delete:url onSuccess: success onFailure: failure];
 }
 
 
