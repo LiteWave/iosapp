@@ -28,9 +28,10 @@
         _properties = [[NSMutableDictionary alloc] init];
         
     #ifdef DEBUG
-        _properties[@"apiURL"] = @"http://127.0.0.1:3000/api";
+        //_properties[@"apiURL"] = @"http://127.0.0.1:3000/api";
+        _properties[@"apiURL"] = @"http://104.130.156.82:8080/api";
     #else
-        _properties[@"apiURL"] = @"http://test.crowdpxl.com:8081/api";
+        _properties[@"apiURL"] = @"http://104.130.156.82:8080/api";
     #endif
         
     }

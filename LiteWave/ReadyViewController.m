@@ -116,9 +116,17 @@
 
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    if (self.isMovingFromParentViewController) {
+        [self withdraw];
+    }
+}
+
 - (void)viewDidAppear:(BOOL)animated{
     
-    [self.navigationItem setHidesBackButton:YES animated:NO];
+    [self.navigationItem setHidesBackButton:NO animated:NO];
     
     LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
     
@@ -137,10 +145,9 @@
 }
 
 -(IBAction)withdrawUser:(id)sender{
+    [self withdraw];
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Withdraw From Show" message:@"Are you sure you want to withdraw from this show?" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
-    [alert show];
-    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 -(IBAction)retryFetch:(id)sender{
@@ -149,44 +156,35 @@
     
 }
 
-- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)withdraw
+{
+    LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    if (buttonIndex == 0)
-    {
-        //do nothing
-    }
-    else
-    {
-        LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
-        
-        // leave the event
-        [[APIClient instance] leaveEvent: appDelegate.userID
-                               onSuccess:^(id data) {
-                                   NSLog(@"Left event");
-                               }
-                               onFailure:^(NSError *error) {
-                                   NSLog(@"Error on leaving event");
-                               }];
-        
-        // clear data
-        appDelegate.sectionID = nil;
-        appDelegate.rowID = nil;
-        appDelegate.seatID = nil;
-        appDelegate.userID = nil;
-        appDelegate.liteShow = nil;
-        
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        
-        [defaults removeObjectForKey:@"sectionID"];
-        [defaults removeObjectForKey:@"rowID"];
-        [defaults removeObjectForKey:@"seatID"];
-        [defaults removeObjectForKey:@"userID"];
-        [defaults removeObjectForKey:@"liteShow"];
-        
-        [defaults synchronize];
-        
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
+    // leave the event
+    [[APIClient instance] leaveEvent: appDelegate.userID
+                           onSuccess:^(id data) {
+                               NSLog(@"Left event");
+                           }
+                           onFailure:^(NSError *error) {
+                               NSLog(@"Error on leaving event");
+                           }];
+    
+    // clear data
+    appDelegate.sectionID = nil;
+    appDelegate.rowID = nil;
+    appDelegate.seatID = nil;
+    appDelegate.userID = nil;
+    appDelegate.liteShow = nil;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults removeObjectForKey:@"sectionID"];
+    [defaults removeObjectForKey:@"rowID"];
+    [defaults removeObjectForKey:@"seatID"];
+    [defaults removeObjectForKey:@"userID"];
+    [defaults removeObjectForKey:@"liteShow"];
+    
+    [defaults synchronize];
 }
 
 - (void)didReceiveMemoryWarning

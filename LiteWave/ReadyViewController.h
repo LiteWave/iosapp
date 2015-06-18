@@ -18,4 +18,6 @@
     
 }
 
+-(void)withdraw;
+
 @end

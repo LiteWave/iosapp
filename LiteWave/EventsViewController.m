@@ -39,6 +39,8 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     
+    [self.navigationItem setHidesBackButton:YES animated:NO];
+    
     [spinner startAnimating];
     continueBtn.hidden = YES;
     LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];

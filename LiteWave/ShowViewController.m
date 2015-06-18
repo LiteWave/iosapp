@@ -448,7 +448,7 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
 }
 
 -(void)playFrames:(int)counter{
-    
+    //isWinner = YES;
     BOOL winnerLoopFrame = NO;
     NSLog(@"[commandArray count] %i",[commandArray count]);
     if(counter==[commandArray count]){
@@ -456,7 +456,7 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
         [self stop];
     
     }else{
-        counter = 4;
+        //counter = 3;
         vibrateDevice = 1; //vibrate 0=no 1=yes
         strobeDevice = 1;  // strobe 0=no, 1=yes
         pl1 = 0; //play time length in milliseconds
@@ -488,7 +488,7 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
         }
         
         if([frameDict objectForKey:@"pl1"]){
-            pl1 = @"f";//[[frameDict valueForKey:@"pl1"] integerValue];
+            pl1 = [[frameDict valueForKey:@"pl1"] integerValue];
             
             if([playType isEqualToString:@"c"]){
                 onORoff=YES;

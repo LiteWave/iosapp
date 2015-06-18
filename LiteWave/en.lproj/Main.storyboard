@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="UhA-59-4O7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="UhA-59-4O7">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
-        <!--Ready View Controller - My Event-->
+        <!--My Event-->
         <scene sceneID="Axo-Eg-Ar3">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZF0-1N-3LR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="ready" id="Bq9-dY-bod" customClass="ReadyViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FJ3-tq-Jna">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
@@ -98,11 +99,10 @@
                         <outlet property="retryBtn" destination="fDt-NI-VSm" id="UYK-vE-D3I"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZF0-1N-3LR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="367" y="-592"/>
         </scene>
-        <!--Lite Wave View Controller - Start-->
+        <!--Start-->
         <scene sceneID="kXH-VM-hHa">
             <objects>
                 <viewController storyboardIdentifier="register" id="iss-ty-u8M" customClass="LiteWaveViewController" sceneMemberID="viewController">
@@ -111,13 +111,15 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Start" id="I6c-ia-4w7"/>
+                    <navigationItem key="navigationItem" title="Start" id="I6c-ia-4w7">
+                        <barButtonItem key="backBarButtonItem" title=" " id="nsP-yZ-yYp"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jws-Q2-ikA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="367" y="314"/>
         </scene>
-        <!--Events View Controller - Choose Event-->
+        <!--Choose Event-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController storyboardIdentifier="events" id="vXZ-lx-hvc" customClass="EventsViewController" sceneMemberID="viewController">
@@ -149,7 +151,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Choose Event" id="zWd-l8-fDc"/>
+                    <navigationItem key="navigationItem" title="Choose Event" id="zWd-l8-fDc">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Aca-pG-twQ"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="continueBtn" destination="2xv-vr-2qd" id="d5b-3e-JnM"/>
                         <outlet property="eventsPicker" destination="VYG-iR-hYS" id="7XC-aR-OVB"/>
@@ -160,7 +164,7 @@
             </objects>
             <point key="canvasLocation" x="939" y="609"/>
         </scene>
-        <!--Seats View Controller - Choose Seat-->
+        <!--Choose Seat-->
         <scene sceneID="lPt-NJ-28J">
             <objects>
                 <viewController storyboardIdentifier="seats" id="ibx-WV-tNn" customClass="SeatsViewController" sceneMemberID="viewController">
@@ -199,7 +203,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Choose Seat" id="zDk-py-bxr"/>
+                    <navigationItem key="navigationItem" title="Choose Seat" id="zDk-py-bxr">
+                        <barButtonItem key="backBarButtonItem" title=" " id="bgZ-eP-FEu"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="actionTitle" destination="B61-e0-ggL" id="YTy-dC-3wK"/>
                         <outlet property="registerButton" destination="xTR-9V-1sY" id="2D0-WK-YSf"/>
@@ -211,7 +217,7 @@
             </objects>
             <point key="canvasLocation" x="1517" y="260"/>
         </scene>
-        <!--Show View Controller - Playing Show-->
+        <!--Playing Show-->
         <scene sceneID="qqN-7y-9RT">
             <objects>
                 <viewController storyboardIdentifier="playing" id="JjT-sD-7rY" customClass="ShowViewController" sceneMemberID="viewController">
@@ -261,7 +267,7 @@
             </objects>
             <point key="canvasLocation" x="1223" y="-541"/>
         </scene>
-        <!--Results View Controller - :: The End ::-->
+        <!--:: The End ::-->
         <scene sceneID="HDu-M5-KsE">
             <objects>
                 <viewController storyboardIdentifier="results" id="0tU-b8-t7R" customClass="ResultsViewController" sceneMemberID="viewController">
@@ -301,7 +307,7 @@
             </objects>
             <point key="canvasLocation" x="1943" y="-303"/>
         </scene>
-        <!--Navigation Controller - Main Menu-->
+        <!--Main Menu-->
         <scene sceneID="VnS-xG-rdx">
             <objects>
                 <navigationController title="Main Menu" automaticallyAdjustsScrollViewInsets="NO" id="UhA-59-4O7" sceneMemberID="viewController">
@@ -348,10 +354,10 @@
         <image name="redBtn.png" width="320" height="100"/>
         <image name="yellowBtn.png" width="320" height="100"/>
     </resources>
-    <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
 </document>
