@@ -50,7 +50,8 @@
 }
 
 -(IBAction)returnToMenu:(id)sender{
-    [self.navigationController popToRootViewControllerAnimated:NO];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning

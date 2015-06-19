@@ -203,7 +203,7 @@
                              NSString * storyboardName = @"Main";
                              UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
                              UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"playing"];
-                             [self.navigationController pushViewController:vc animated:YES];
+                             [self presentViewController:vc animated:YES completion:nil];
                          }
                          onFailure:^(NSError *error) {
                              if (error) {

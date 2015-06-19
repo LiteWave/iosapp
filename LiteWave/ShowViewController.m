@@ -267,9 +267,6 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
           if(diff<0){
               
               [spinner stopAnimating];
-              UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Show Expired" message:@"This show is no longer available for this event. Please withdraw and register for a new event." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-              [alert show];
-              
               [self.navigationController popViewControllerAnimated:YES];
               
           }else{
@@ -393,8 +390,7 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     ResultsViewController *results = [storyboard instantiateViewControllerWithIdentifier:@"results"];
-    [self.navigationController pushViewController:results animated:YES];
-    
+    [self presentViewController:results animated:YES completion:nil];
 }
 
 -(void)playFrames:(int)counter{

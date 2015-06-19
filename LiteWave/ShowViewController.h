@@ -58,4 +58,6 @@
 - (void)stop;
 - (void)playFrames:(int)counter;
 
+-(void)showComplete;
+
 @end
