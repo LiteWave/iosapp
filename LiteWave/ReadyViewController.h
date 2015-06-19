@@ -15,8 +15,9 @@
     IBOutlet UILabel *mySeat;
     IBOutlet UIButton *playBtn;
     IBOutlet UIButton *retryBtn;
-    
 }
+
+@property (nonatomic, assign) NSTimer* timer;
 
 -(void)withdraw;
 

@@ -26,55 +26,6 @@
                                     <segue destination="ibx-WV-tNn" kind="push" id="Ia9-ac-KLF"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7Gj-mn-sKV">
-                                <rect key="frame" x="20" y="342" width="280" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="25"/>
-                                <state key="normal" title="START SHOW" backgroundImage="blackBtn.png">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="JjT-sD-7rY" kind="push" id="i60-DP-dSN"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="EkQ-S0-FGU">
-                                <rect key="frame" x="20" y="395" width="280" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="25"/>
-                                <state key="normal" title="WITHDRAW FROM SHOW" backgroundImage="yellowBtn.png">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="withdrawUser:" destination="Bq9-dY-bod" eventType="touchUpInside" id="d6D-lr-i0a"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fDt-NI-VSm">
-                                <rect key="frame" x="20" y="288" width="280" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="25"/>
-                                <state key="normal" title="GET MY SHOW NOW" backgroundImage="blueBtn.png">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="retryFetch:" destination="Bq9-dY-bod" eventType="touchUpInside" id="TRu-Vf-0Pn"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My next event:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tKK-hp-PWk">
-                                <rect key="frame" x="20" y="108" width="280" height="26"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no events at this time." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VUv-gr-zHS">
-                                <rect key="frame" x="20" y="138" width="280" height="26"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.84313732389999996" green="0.20000001789999999" blue="0.26274511220000002" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My seat:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9i5-Ym-6ed">
                                 <rect key="frame" x="20" y="190" width="82" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -93,16 +44,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="My Event" id="3Nl-9v-JyO"/>
                     <connections>
-                        <outlet property="eventName" destination="VUv-gr-zHS" id="fc1-Iq-ndW"/>
                         <outlet property="mySeat" destination="D4U-HV-0Nd" id="vwx-ik-3kL"/>
-                        <outlet property="playBtn" destination="7Gj-mn-sKV" id="5Jn-9r-zQm"/>
-                        <outlet property="retryBtn" destination="fDt-NI-VSm" id="UYK-vE-D3I"/>
                     </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="367" y="-592"/>
         </scene>
-        <!--Start-->
+        <!--Lite Wave View Controller-->
         <scene sceneID="kXH-VM-hHa">
             <objects>
                 <viewController storyboardIdentifier="register" id="iss-ty-u8M" customClass="LiteWaveViewController" sceneMemberID="viewController">
@@ -111,7 +59,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Start" id="I6c-ia-4w7">
+                    <navigationItem key="navigationItem" id="I6c-ia-4w7">
                         <barButtonItem key="backBarButtonItem" title=" " id="nsP-yZ-yYp"/>
                     </navigationItem>
                 </viewController>
@@ -349,10 +297,7 @@
     </scenes>
     <resources>
         <image name="Default.png" width="320" height="480"/>
-        <image name="blackBtn.png" width="320" height="100"/>
-        <image name="blueBtn.png" width="320" height="100"/>
         <image name="redBtn.png" width="320" height="100"/>
-        <image name="yellowBtn.png" width="320" height="100"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

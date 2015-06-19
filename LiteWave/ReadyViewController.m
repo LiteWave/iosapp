@@ -7,6 +7,7 @@
 //
 
 #import "ReadyViewController.h"
+#import "ShowViewController.h"
 #import "LiteWaveAppDelegate.h"
 #import "AFNetworking.h"
 #import "APIClient.h"
@@ -127,19 +128,29 @@
 - (void)viewDidAppear:(BOOL)animated{
     
     [self.navigationItem setHidesBackButton:NO animated:NO];
-    
+
     LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    eventName.text = appDelegate.eventName;
+
+    self.title = appDelegate.eventName;
+
     mySeat.text = [NSString stringWithFormat:@"%@-%@-%@",appDelegate.sectionID,appDelegate.rowID,appDelegate.seatID];
     
     if(appDelegate.invalidShowAlert){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Show Unavailable"
-                                                        message: @"This show is not available or has expired. Please try again later." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                                        message: @"This show is not available or has expired. Please try again later."
+                                                       delegate: self
+                                              cancelButtonTitle: @"OK"
+                                              otherButtonTitles:nil];
         [alert show];
         appDelegate.invalidShowAlert=NO;
     }else{
         [self fetchShow];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval: 2.0
+                                                      target: self
+                                                    selector: @selector(retryFetch:)
+                                                    userInfo: nil
+                                                     repeats: YES];
+        
     }
     
 }
@@ -147,17 +158,70 @@
 -(IBAction)withdrawUser:(id)sender{
     [self withdraw];
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    
 }
 
 -(IBAction)retryFetch:(id)sender{
     
-    [self fetchShow];
+    //[self fetchShow];
+    [self joinLiteShow];
+}
+
+-(void) joinLiteShow{
+    
+    LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
+    [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+    [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    
+    NSString *mobile_start = [dateformat stringFromDate:[NSDate date]];
+
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            mobile_start, @"mobile_time", nil];
+
+    
+    [[APIClient instance] joinShow: appDelegate.userID
+                            params: params
+                         onSuccess:^(id data) {
+                             NSLog(@"EVENT JOIN RESPONSE: %@", data);
+                             
+                             [self.timer invalidate];
+                             self.timer = nil;
+                             
+                             NSError *error2;
+                             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
+                             NSString *jsonArray = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                             
+                             NSDictionary *joinDict =
+                             [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
+                                                             options: NSJSONReadingMutableContainers
+                                                               error: &error2];
+                             
+                             appDelegate.eventJoinData = [[NSDictionary alloc] initWithDictionary:joinDict copyItems:YES];
+                             
+                             NSString * storyboardName = @"Main";
+                             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+                             UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"playing"];
+                             [self.navigationController pushViewController:vc animated:YES];
+                         }
+                         onFailure:^(NSError *error) {
+                             if (error) {
+                                 NSLog(@"polling: no event found");
+                             }
+                         }];
     
 }
 
+
+
 - (void)withdraw
 {
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+    
     LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     // leave the event
