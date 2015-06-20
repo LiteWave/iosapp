@@ -15,9 +15,13 @@
     IBOutlet UILabel *mySeat;
     IBOutlet UIButton *playBtn;
     IBOutlet UIButton *retryBtn;
+    
+    IBOutlet UIButton *changeBtn;
+    
+    BOOL pressedChangeSeat;
 }
 
-@property (nonatomic, assign) NSTimer* timer;
+@property (nonatomic, assign) NSTimer *timer;
 
 -(void)withdraw;
 

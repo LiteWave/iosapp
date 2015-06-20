@@ -8,24 +8,11 @@
         <!--My Event-->
         <scene sceneID="Axo-Eg-Ar3">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZF0-1N-3LR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="ready" id="Bq9-dY-bod" customClass="ReadyViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FJ3-tq-Jna">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="e0X-9r-hr3">
-                                <rect key="frame" x="20" y="235" width="280" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="25"/>
-                                <state key="normal" title="CHANGE SEAT" backgroundImage="redBtn.png">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="ibx-WV-tNn" kind="push" id="Ia9-ac-KLF"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My seat:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9i5-Ym-6ed">
                                 <rect key="frame" x="20" y="190" width="82" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -39,7 +26,7 @@
                                 <color key="textColor" red="0.84313732389999996" green="0.20000001789999999" blue="0.26274511220000002" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please wait for event to begin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RS7-pc-aCr">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please wait for the event to begin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RS7-pc-aCr">
                                 <rect key="frame" x="20" y="376" width="280" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -51,14 +38,26 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="0.84313732389999996" green="0.20000001789999999" blue="0.26274511220000002" alpha="1" colorSpace="deviceRGB"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="e0X-9r-hr3">
+                                <rect key="frame" x="20" y="235" width="280" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="25"/>
+                                <state key="normal" title="CHANGE SEAT" backgroundImage="redBtn.png">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="My Event" id="3Nl-9v-JyO"/>
                     <connections>
+                        <outlet property="changeBtn" destination="e0X-9r-hr3" id="pd6-ev-Ckv"/>
                         <outlet property="mySeat" destination="D4U-HV-0Nd" id="vwx-ik-3kL"/>
+                        <outlet property="retryBtn" destination="e0X-9r-hr3" id="yUj-g2-Y1R"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZF0-1N-3LR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="367" y="-592"/>
         </scene>

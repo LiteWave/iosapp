@@ -16,6 +16,7 @@
 
 -(IBAction)withdrawUser:(id)sender;
 -(IBAction)retryFetch:(id)sender;
+-(IBAction)changeSeat:(id)sender;
 
 @end
 
@@ -26,14 +27,20 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     playBtn.enabled = NO;
-    retryBtn.hidden = YES;
+    //retryBtn.hidden = YES;
     [self.navigationItem setHidesBackButton:YES animated:NO];
+    
+    pressedChangeSeat = NO;
+    
+    [changeBtn addTarget: self
+                  action: @selector(changeSeat:)
+        forControlEvents: UIControlEventTouchUpInside];
 }
 
 -(void)fetchShow{
     
     playBtn.enabled = NO;
-    retryBtn.hidden = YES;
+    //retryBtn.hidden = YES;
     
     LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
     
@@ -42,7 +49,7 @@
         NSLog(@"saved liteshow = %@", appDelegate.liteShow);
         
         playBtn.enabled = YES;
-        retryBtn.hidden = YES;
+        //retryBtn.hidden = YES;
     } else {
         
         if (appDelegate.isOnline){
@@ -81,7 +88,7 @@
                                                                 NSLog(@"new liteshow = %@", appDelegate.liteShow);
                                                                 
                                                                 playBtn.enabled = YES;
-                                                                retryBtn.hidden = YES;
+                                                                //retryBtn.hidden = YES;
                                                                 
                                                             }
                                                             onFailure:^(NSError *error) {
@@ -92,7 +99,7 @@
                                                                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Show Available" message:@"There is no show available at this time for this event." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                                                                 [alert show];
                                                                 
-                                                                retryBtn.hidden = NO;
+                                                                //retryBtn.hidden = NO;
                                                             }];
                                   }
                                   onFailure:^(NSError *error) {
@@ -103,7 +110,7 @@
                                       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Shows Available" message:@"There is no shows available at this time for this event." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                                       [alert show];
                                       
-                                      retryBtn.hidden = NO;
+                                      //retryBtn.hidden = NO;
                                   }];
         
             
@@ -119,6 +126,9 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
+    if (pressedChangeSeat)
+        return;
     
     if (self.isMovingFromParentViewController) {
         [self withdraw];
@@ -158,10 +168,14 @@
     
 }
 
+-(IBAction)changeSeat:(id)sender {
+    pressedChangeSeat = YES;
+    [self withdraw];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 -(IBAction)withdrawUser:(id)sender{
     [self withdraw];
-    
-    
 }
 
 -(IBAction)retryFetch:(id)sender{
@@ -216,6 +230,9 @@
     
 }
 
+- (void)popView {
+    
+}
 
 
 - (void)withdraw
