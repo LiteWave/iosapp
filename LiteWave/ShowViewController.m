@@ -453,6 +453,11 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
                 onORoff=NO;
             }
             
+            if ((counter+1) == [commandArray count] && isWinner) {
+                winnerLoopFrame=YES;
+                pif = @"w"; 
+            }
+            
             if([frameDict objectForKey:@"c"]){
                 
                 NSString *colorArray = [frameDict objectForKey:@"c"];
@@ -508,6 +513,9 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
                     flipper=YES;
                     self.waveLabel.hidden=NO;
                     self.waveLabel.text = @"WINNER";
+                    
+                    [self.waveLabel setFont:[UIFont systemFontOfSize:70]];
+                    
                     self.winnerTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(winnerTimerCallback:) userInfo:nil repeats:YES];
                 }
                 

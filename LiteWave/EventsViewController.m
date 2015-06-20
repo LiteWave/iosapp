@@ -139,7 +139,7 @@
     [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'.000Z'"];
     [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     
-    appDelegate.eventDate = [dateformat dateFromString:[event valueForKey:@"event_at"]];
+    appDelegate.eventDate = [dateformat dateFromString:[event valueForKey:@"eventAt"]];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
