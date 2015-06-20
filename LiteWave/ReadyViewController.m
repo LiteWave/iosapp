@@ -135,14 +135,17 @@
 
     mySeat.text = [NSString stringWithFormat:@"%@-%@-%@",appDelegate.sectionID,appDelegate.rowID,appDelegate.seatID];
     
-    if(appDelegate.invalidShowAlert){
+    if (appDelegate.invalidShowAlert){
+        /*
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Show Unavailable"
                                                         message: @"This show is not available or has expired. Please try again later."
                                                        delegate: self
                                               cancelButtonTitle: @"OK"
                                               otherButtonTitles:nil];
         [alert show];
+        */
         appDelegate.invalidShowAlert=NO;
+        
     }else{
         [self fetchShow];
         self.timer = [NSTimer scheduledTimerWithTimeInterval: 2.0
