@@ -14,7 +14,7 @@
 		84157954181A286800D4EBB1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84157953181A286800D4EBB1 /* UIKit.framework */; };
 		8415795A181A286800D4EBB1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84157958181A286800D4EBB1 /* InfoPlist.strings */; };
 		8415795C181A286800D4EBB1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8415795B181A286800D4EBB1 /* main.m */; };
-		84157960181A286800D4EBB1 /* LiteWaveAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8415795F181A286800D4EBB1 /* LiteWaveAppDelegate.m */; };
+		84157960181A286800D4EBB1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8415795F181A286800D4EBB1 /* AppDelegate.m */; };
 		84157963181A286800D4EBB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84157961181A286800D4EBB1 /* Main.storyboard */; };
 		84157966181A286800D4EBB1 /* LiteWaveController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84157965181A286800D4EBB1 /* LiteWaveController.m */; };
 		84157968181A286800D4EBB1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84157967181A286800D4EBB1 /* Images.xcassets */; };
@@ -31,8 +31,6 @@
 		84446C1C1827045D002D8BDC /* SeatsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84446C1B1827045D002D8BDC /* SeatsController.m */; };
 		84446C1F182704AE002D8BDC /* EventsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84446C1E182704AE002D8BDC /* EventsController.m */; };
 		84446C24182CB1AC002D8BDC /* ShowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84446C23182CB1AC002D8BDC /* ShowController.m */; };
-		84446C2A182CB630002D8BDC /* LetterCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 84446C29182CB630002D8BDC /* LetterCode.m */; };
-		84446C2D182CB70C002D8BDC /* AudioCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 84446C2C182CB70C002D8BDC /* AudioCode.m */; };
 		845CD918181DC94B004932BF /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD904181DC94B004932BF /* Default-568h@2x~iphone.png */; };
 		845CD919181DC94B004932BF /* Default~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD905181DC94B004932BF /* Default~iphone.png */; };
 		845CD91A181DC94B004932BF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD906181DC94B004932BF /* Default.png */; };
@@ -54,7 +52,7 @@
 		845CD92A181DC94B004932BF /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD917181DC94B004932BF /* iTunesArtwork@2x.png */; };
 		845CD92E1825DE54004932BF /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 845CD92D1825DE54004932BF /* User.m */; };
 		845CD9311825E377004932BF /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 845CD9301825E377004932BF /* Event.m */; };
-		845CD9341826FCCA004932BF /* EventLiteshow.m in Sources */ = {isa = PBXBuildFile; fileRef = 845CD9331826FCCA004932BF /* EventLiteshow.m */; };
+		845CD9341826FCCA004932BF /* Show.m in Sources */ = {isa = PBXBuildFile; fileRef = 845CD9331826FCCA004932BF /* Show.m */; };
 		846360561834A95D00B3B0D5 /* redBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 846360551834A95D00B3B0D5 /* redBtn.png */; };
 		846360581834B10700B3B0D5 /* blackBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 846360571834B10700B3B0D5 /* blackBtn.png */; };
 		84789ECF181C65DB00FC59E4 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789D95181C65DA00FC59E4 /* AFHTTPClient.m */; };
@@ -143,8 +141,8 @@
 		84157959181A286800D4EBB1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8415795B181A286800D4EBB1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8415795D181A286800D4EBB1 /* LiteWave-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LiteWave-Prefix.pch"; sourceTree = "<group>"; };
-		8415795E181A286800D4EBB1 /* LiteWaveAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiteWaveAppDelegate.h; sourceTree = "<group>"; };
-		8415795F181A286800D4EBB1 /* LiteWaveAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiteWaveAppDelegate.m; sourceTree = "<group>"; };
+		8415795E181A286800D4EBB1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		8415795F181A286800D4EBB1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		84157964181A286800D4EBB1 /* LiteWaveController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiteWaveController.h; sourceTree = "<group>"; };
 		84157965181A286800D4EBB1 /* LiteWaveController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiteWaveController.m; sourceTree = "<group>"; };
 		84157967181A286800D4EBB1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -164,10 +162,6 @@
 		84446C1E182704AE002D8BDC /* EventsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsController.m; sourceTree = "<group>"; };
 		84446C22182CB1AC002D8BDC /* ShowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowController.h; sourceTree = "<group>"; };
 		84446C23182CB1AC002D8BDC /* ShowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowController.m; sourceTree = "<group>"; };
-		84446C28182CB630002D8BDC /* LetterCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LetterCode.h; sourceTree = "<group>"; };
-		84446C29182CB630002D8BDC /* LetterCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LetterCode.m; sourceTree = "<group>"; };
-		84446C2B182CB70C002D8BDC /* AudioCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioCode.h; sourceTree = "<group>"; };
-		84446C2C182CB70C002D8BDC /* AudioCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioCode.m; sourceTree = "<group>"; };
 		845CD904181DC94B004932BF /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
 		845CD905181DC94B004932BF /* Default~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~iphone.png"; sourceTree = "<group>"; };
 		845CD906181DC94B004932BF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -192,8 +186,8 @@
 		845CD92D1825DE54004932BF /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		845CD92F1825E377004932BF /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		845CD9301825E377004932BF /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
-		845CD9321826FCCA004932BF /* EventLiteshow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventLiteshow.h; sourceTree = "<group>"; };
-		845CD9331826FCCA004932BF /* EventLiteshow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventLiteshow.m; sourceTree = "<group>"; };
+		845CD9321826FCCA004932BF /* Show.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Show.h; sourceTree = "<group>"; };
+		845CD9331826FCCA004932BF /* Show.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Show.m; sourceTree = "<group>"; };
 		846360551834A95D00B3B0D5 /* redBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redBtn.png; sourceTree = "<group>"; };
 		846360571834B10700B3B0D5 /* blackBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackBtn.png; sourceTree = "<group>"; };
 		84789D94181C65DA00FC59E4 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
@@ -358,8 +352,8 @@
 		811800F41B4B9B970028254E /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
-				8415795E181A286800D4EBB1 /* LiteWaveAppDelegate.h */,
-				8415795F181A286800D4EBB1 /* LiteWaveAppDelegate.m */,
+				8415795E181A286800D4EBB1 /* AppDelegate.h */,
+				8415795F181A286800D4EBB1 /* AppDelegate.m */,
 			);
 			path = Delegates;
 			sourceTree = "<group>";
@@ -736,14 +730,10 @@
 		84789FFD181C779B00FC59E4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				845CD9321826FCCA004932BF /* EventLiteshow.h */,
-				845CD9331826FCCA004932BF /* EventLiteshow.m */,
+				845CD9321826FCCA004932BF /* Show.h */,
+				845CD9331826FCCA004932BF /* Show.m */,
 				845CD92F1825E377004932BF /* Event.h */,
 				845CD9301825E377004932BF /* Event.m */,
-				84446C28182CB630002D8BDC /* LetterCode.h */,
-				84446C29182CB630002D8BDC /* LetterCode.m */,
-				84446C2B182CB70C002D8BDC /* AudioCode.h */,
-				84446C2C182CB70C002D8BDC /* AudioCode.m */,
 				845CD92C1825DE54004932BF /* User.h */,
 				845CD92D1825DE54004932BF /* User.m */,
 				84789FFE181C779B00FC59E4 /* Stadium.h */,
@@ -880,7 +870,6 @@
 				84789F43181C65DB00FC59E4 /* CJSONDataSerializer.m in Sources */,
 				84789FD7181C65E400FC59E4 /* JSONKitDeserializer.m in Sources */,
 				84789F46181C65DB00FC59E4 /* CJSONSerializer.m in Sources */,
-				84446C2D182CB70C002D8BDC /* AudioCode.m in Sources */,
 				84789ED3181C65DB00FC59E4 /* AFJSONRequestOperation.m in Sources */,
 				84789FCC181C65E400FC59E4 /* NSURLConnectionDataLoader.m in Sources */,
 				84067FEC183B073200232065 /* CountDownTimerUtility.m in Sources */,
@@ -890,17 +879,16 @@
 				84789ED5181C65DB00FC59E4 /* AFPropertyListRequestOperation.m in Sources */,
 				84789F03181C65DB00FC59E4 /* JSONKit.m in Sources */,
 				84789FF2181C65E400FC59E4 /* UIDeviceHardware.m in Sources */,
-				845CD9341826FCCA004932BF /* EventLiteshow.m in Sources */,
+				845CD9341826FCCA004932BF /* Show.m in Sources */,
 				84789EFE181C65DB00FC59E4 /* NSString+SBJSON.m in Sources */,
 				84789EE3181C65DB00FC59E4 /* NSDictionary+BSJSONAdditions.m in Sources */,
 				84789FDF181C65E400FC59E4 /* PlistDeserializer.m in Sources */,
 				84789ED6181C65DB00FC59E4 /* AFURLConnectionOperation.m in Sources */,
 				84789EFD181C65DB00FC59E4 /* NSObject+SBJSON.m in Sources */,
-				84157960181A286800D4EBB1 /* LiteWaveAppDelegate.m in Sources */,
+				84157960181A286800D4EBB1 /* AppDelegate.m in Sources */,
 				84789FE5181C65E400FC59E4 /* TouchJSONDeserializer.m in Sources */,
 				84789EE2181C65DB00FC59E4 /* NSArray+BSJSONAdditions.m in Sources */,
 				84789ED0181C65DB00FC59E4 /* AFHTTPRequestOperation.m in Sources */,
-				84446C2A182CB630002D8BDC /* LetterCode.m in Sources */,
 				84789FD4181C65E400FC59E4 /* BSJSONDeserializer.m in Sources */,
 				84789FC6181C65E400FC59E4 /* NSArray+Extensions.m in Sources */,
 				84789F47181C65DB00FC59E4 /* CSerializedJSONData.m in Sources */,

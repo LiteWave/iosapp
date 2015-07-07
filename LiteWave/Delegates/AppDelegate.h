@@ -10,7 +10,7 @@
 
 @class Reachability;
 
-@interface LiteWaveAppDelegate : UIResponder <UIApplicationDelegate> {
+@interface AppDelegate : UIResponder <UIApplicationDelegate> {
     
     Reachability* hostReach;
     Reachability* internetReach;

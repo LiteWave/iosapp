@@ -1,14 +1,14 @@
 
-#import "EventLiteshow.h"
+#import "Show.h"
 
-@interface EventLiteshow ()
+@interface Show ()
 @property int32_t showId;
 @property (retain) NSString* eventId;
 @property (retain) NSDate* startDate;
 @property (retain) NSString* winnerId;
 @end
 
-@implementation EventLiteshow
+@implementation Show
 
 - (BOOL) hasShowId {
   return !!hasShowId_;
@@ -57,16 +57,16 @@
   }
   return self;
 }
-static EventLiteshow* defaultPersonInstance = nil;
+static Show* defaultPersonInstance = nil;
 + (void) initialize {
-  if (self == [EventLiteshow class]) {
-    defaultPersonInstance = [[EventLiteshow alloc] init];
+  if (self == [Show class]) {
+    defaultPersonInstance = [[Show alloc] init];
   }
 }
-+ (EventLiteshow*) defaultInstance {
++ (Show*) defaultInstance {
   return defaultPersonInstance;
 }
-- (EventLiteshow*) defaultInstance {
+- (Show*) defaultInstance {
   return defaultPersonInstance;
 }
 - (BOOL) isInitialized {
@@ -85,26 +85,26 @@ static EventLiteshow* defaultPersonInstance = nil;
     return YES;
 }
 
-+ (EventLiteshow*) parseFromData:(NSData*) data{
-    return (EventLiteshow*)[[EventLiteshow builder] build];
++ (Show*) parseFromData:(NSData*) data{
+    return (Show*)[[Show builder] build];
 }
-+ (EventLiteshow*) parseFromInputStream:(NSInputStream*) input{
-    return (EventLiteshow*)[[EventLiteshow builder] build];
++ (Show*) parseFromInputStream:(NSInputStream*) input{
+    return (Show*)[[Show builder] build];
 }
 
 + (EventLiteshow_Builder*) builder {
   return [[EventLiteshow_Builder alloc] init];
 }
-+ (EventLiteshow_Builder*) builderWithPrototype:(EventLiteshow*) prototype {
-  return [[EventLiteshow builder] mergeFrom:prototype];
++ (EventLiteshow_Builder*) builderWithPrototype:(Show*) prototype {
+  return [[Show builder] mergeFrom:prototype];
 }
 - (EventLiteshow_Builder*) builder {
-  return [EventLiteshow builder];
+  return [Show builder];
 }
 @end
 
 @interface EventLiteshow_Builder()
-@property (retain) EventLiteshow* result;
+@property (retain) Show* result;
 @end
 
 @implementation EventLiteshow_Builder
@@ -115,31 +115,31 @@ static EventLiteshow* defaultPersonInstance = nil;
 }
 - (id) init {
   if ((self = [super init])) {
-    self.result = [[EventLiteshow alloc] init];
+    self.result = [[Show alloc] init];
   }
   return self;
 }
 
 - (EventLiteshow_Builder*) clear {
-  self.result = [[EventLiteshow alloc] init];
+  self.result = [[Show alloc] init];
   return self;
 }
 - (EventLiteshow_Builder*) clone {
-  return [EventLiteshow builderWithPrototype:result];
+  return [Show builderWithPrototype:result];
 }
-- (EventLiteshow*) defaultInstance {
-  return [EventLiteshow defaultInstance];
+- (Show*) defaultInstance {
+  return [Show defaultInstance];
 }
-- (EventLiteshow*) build {
+- (Show*) build {
     return [self buildPartial];
 }
-- (EventLiteshow*) buildPartial {
-  EventLiteshow* returnMe = result;
+- (Show*) buildPartial {
+  Show* returnMe = result;
   self.result = nil;
   return returnMe;
 }
-- (EventLiteshow_Builder*) mergeFrom:(EventLiteshow*) other {
-  if (other == [EventLiteshow defaultInstance]) {
+- (EventLiteshow_Builder*) mergeFrom:(Show*) other {
+  if (other == [Show defaultInstance]) {
     return self;
   }
   if (other.hasShowId) {

@@ -8,7 +8,7 @@
 
 #import "SeatsController.h"
 #import "AFNetworking.h"
-#import "LiteWaveAppDelegate.h"
+#import "AppDelegate.h"
 #import "ReadyController.h"
 #import "APIClient.h"
 
@@ -41,7 +41,7 @@
     
     [spinner startAnimating];
     registerButton.hidden = YES;
-    LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     if (appDelegate.isOnline) {
     
@@ -204,7 +204,7 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     
-    LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 
     if(component==0){
         
@@ -259,7 +259,7 @@
 
 -(IBAction)registerUserLocation:(id)sender{
     
-    LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     if(appDelegate.isOnline){
     

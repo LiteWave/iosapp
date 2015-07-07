@@ -7,7 +7,7 @@
 //
 
 #import "ResultsController.h"
-#import "LiteWaveAppDelegate.h"
+#import "AppDelegate.h"
 
 @interface ResultsController ()
 
@@ -29,7 +29,7 @@
     
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
-    LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 //    
 //    appDelegate.sectionID = nil;
 //    appDelegate.rowID = nil;

@@ -1,9 +1,9 @@
 
-@class EventLiteshow;
+@class Show;
 @class EventLiteshow_Builder;
 
 
-@interface EventLiteshow : NSObject {
+@interface Show : NSObject {
 @private
     BOOL hasShowId_:1;
     BOOL hasEventId_:1;
@@ -25,34 +25,34 @@
 @property (readonly, retain) NSDate* startDate;
 @property (readonly, retain) NSString* winnerId;
 
-+ (EventLiteshow*) defaultInstance;
-- (EventLiteshow*) defaultInstance;
++ (Show*) defaultInstance;
+- (Show*) defaultInstance;
 
 - (BOOL) isInitialized;
 
 - (EventLiteshow_Builder*) builder;
 + (EventLiteshow_Builder*) builder;
-+ (EventLiteshow_Builder*) builderWithPrototype:(EventLiteshow*) prototype;
++ (EventLiteshow_Builder*) builderWithPrototype:(Show*) prototype;
 
-+ (EventLiteshow*) parseFromData:(NSData*) data;
-+ (EventLiteshow*) parseFromInputStream:(NSInputStream*) input;
++ (Show*) parseFromData:(NSData*) data;
++ (Show*) parseFromInputStream:(NSInputStream*) input;
 
 @end
 
 @interface EventLiteshow_Builder : NSObject {
 @private
-    EventLiteshow* result;
+    Show* result;
 }
 
-- (EventLiteshow*) defaultInstance;
+- (Show*) defaultInstance;
 
 - (EventLiteshow_Builder*) clear;
 - (EventLiteshow_Builder*) clone;
 
-- (EventLiteshow*) build;
-- (EventLiteshow*) buildPartial;
+- (Show*) build;
+- (Show*) buildPartial;
 
-- (EventLiteshow_Builder*) mergeFrom:(EventLiteshow*) other;
+- (EventLiteshow_Builder*) mergeFrom:(Show*) other;
 
 - (BOOL) hasShowId;
 - (int32_t) showId;

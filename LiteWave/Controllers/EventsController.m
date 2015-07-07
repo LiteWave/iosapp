@@ -9,7 +9,7 @@
 #import "EventsController.h"
 #import "AFNetworking.h"
 #import "APIClient.h"
-#import "LiteWaveAppDelegate.h"
+#import "AppDelegate.h"
 #import "SeatsController.h"
 
 @interface EventsController ()
@@ -43,7 +43,7 @@
     
     [spinner startAnimating];
     continueBtn.hidden = YES;
-    LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     if (appDelegate.isOnline){
        
@@ -81,7 +81,7 @@
 // returns the # of rows in each component..
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent: (NSInteger)component
 {
-    LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     //NSLog(@"found %i items", [appDelegate.eventsArray count]);
     return [appDelegate.eventsArray count];
     
@@ -95,7 +95,7 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     
-    LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSDictionary *event = [appDelegate.eventsArray objectAtIndex:row];
     
@@ -127,7 +127,7 @@
           forComponent:(NSInteger)component
            reusingView:(UIView *)view {
     
-    LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSDictionary *event = [appDelegate.eventsArray objectAtIndex:row];
     

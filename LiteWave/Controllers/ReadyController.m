@@ -8,7 +8,7 @@
 
 #import "ReadyController.h"
 #import "ShowController.h"
-#import "LiteWaveAppDelegate.h"
+#import "AppDelegate.h"
 #import "AFNetworking.h"
 #import "APIClient.h"
 
@@ -42,7 +42,7 @@
     playBtn.enabled = NO;
     //retryBtn.hidden = YES;
     
-    LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     if (appDelegate.liteShow){
         
@@ -139,7 +139,7 @@
     
     [self.navigationItem setHidesBackButton:NO animated:NO];
 
-    LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 
     self.title = appDelegate.eventName;
 
@@ -186,7 +186,7 @@
 
 -(void) joinLiteShow{
     
-    LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
     [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
@@ -242,7 +242,7 @@
         self.timer = nil;
     }
     
-    LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     // leave the event
     [[APIClient instance] leaveEvent: appDelegate.userID

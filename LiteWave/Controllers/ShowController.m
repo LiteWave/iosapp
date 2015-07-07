@@ -6,7 +6,7 @@
 #import "ShowController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "AFNetworking.h"
-#import "LiteWaveAppDelegate.h"
+#import "AppDelegate.h"
 #import "ResultsController.h"
 #import "APIClient.h"
 
@@ -161,7 +161,7 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
             
             [motionManager stopAccelerometerUpdates];
             
-            LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
+            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
             
             NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
             [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
@@ -204,7 +204,7 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
 
 -(void) startLiteShow{
     
-    LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     if (appDelegate.isOnline) {
         

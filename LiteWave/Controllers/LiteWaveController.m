@@ -7,7 +7,7 @@
 //
 
 #import "LiteWaveController.h"
-#import "LiteWaveAppDelegate.h"
+#import "AppDelegate.h"
 #import "ReadyController.h"
 #import "EventsController.h"
 
@@ -29,7 +29,7 @@
 
 - (void)viewDidAppear:(BOOL)animated{
         
-    LiteWaveAppDelegate *appDelegate = (LiteWaveAppDelegate *)[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     if(appDelegate.userID != nil){
         
