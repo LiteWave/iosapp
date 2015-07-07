@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ResultsViewController : UIViewController
+@interface ResultsController : UIViewController
 
 @end

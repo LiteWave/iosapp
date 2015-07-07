@@ -6,19 +6,19 @@
 //  Copyright (c) 2013 LiteWave. All rights reserved.
 //
 
-#import "SeatsViewController.h"
+#import "SeatsController.h"
 #import "AFNetworking.h"
 #import "LiteWaveAppDelegate.h"
-#import "ReadyViewController.h"
+#import "ReadyController.h"
 #import "APIClient.h"
 
-@interface SeatsViewController ()
+@interface SeatsController ()
 
 -(IBAction)registerUserLocation:(id)sender;
 
 @end
 
-@implementation SeatsViewController
+@implementation SeatsController
 
 - (void)viewDidLoad
 {
@@ -303,7 +303,7 @@
                                   [defaults synchronize];
                                   
                                   UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-                                  ReadyViewController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
+                                  ReadyController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
                                   [self.navigationController pushViewController:ready animated:YES];
 
                               }

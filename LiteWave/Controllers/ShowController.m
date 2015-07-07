@@ -3,11 +3,11 @@
 //  LiteWave
 //
 
-#import "ShowViewController.h"
+#import "ShowController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "AFNetworking.h"
 #import "LiteWaveAppDelegate.h"
-#import "ResultsViewController.h"
+#import "ResultsController.h"
 #import "APIClient.h"
 
 #ifdef __APPLE__
@@ -27,8 +27,8 @@ OSStatus RenderTone(
 	const double amplitude = 0.25;
     
 	// Get the tone parameters out of the view controller
-	ShowViewController *viewController =
-    (__bridge ShowViewController *)inRefCon;
+	ShowController *viewController =
+    (__bridge ShowController *)inRefCon;
 	double theta = viewController->theta;
 	double theta_increment = 2.0 * M_PI * viewController->frequency / viewController->sampleRate;
     
@@ -56,13 +56,13 @@ OSStatus RenderTone(
 
 void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
 {
-	ShowViewController *viewController =
-    (__bridge ShowViewController *)inClientData;
+	ShowController *viewController =
+    (__bridge ShowController *)inClientData;
 	
 	[viewController stop];
 }
 
-@implementation ShowViewController
+@implementation ShowController
 
 @synthesize startsInLabel = startsInLabel_;
 @synthesize waveLabel = waveLabel_;
@@ -389,7 +389,7 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
     [self.strobeTimer invalidate];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    ResultsViewController *results = [storyboard instantiateViewControllerWithIdentifier:@"results"];
+    ResultsController *results = [storyboard instantiateViewControllerWithIdentifier:@"results"];
     [self presentViewController:results animated:YES completion:nil];
 }
 

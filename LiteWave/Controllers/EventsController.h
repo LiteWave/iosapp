@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EventsViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate> {
+@interface EventsController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate> {
     
     NSMutableData *webData;
 	NSMutableString *jsonResults;

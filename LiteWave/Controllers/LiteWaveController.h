@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LiteWaveViewController : UIViewController {
+@interface LiteWaveController : UIViewController {
     
 
     

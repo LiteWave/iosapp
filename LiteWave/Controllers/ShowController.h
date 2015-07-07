@@ -9,7 +9,7 @@
 #import <CoreMotion/CoreMotion.h>
 #import "CountDownTimerUtility.h"
 
-@interface ShowViewController : UIViewController <UIAccelerometerDelegate, CountDownTimerProtocol>
+@interface ShowController : UIViewController <UIAccelerometerDelegate, CountDownTimerProtocol>
 {
     BOOL isWinner; //device is a winner!
     BOOL onORoff; //screen control

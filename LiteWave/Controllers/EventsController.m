@@ -6,19 +6,19 @@
 //  Copyright (c) 2013 LiteWave. All rights reserved.
 //
 
-#import "EventsViewController.h"
+#import "EventsController.h"
 #import "AFNetworking.h"
 #import "APIClient.h"
 #import "LiteWaveAppDelegate.h"
-#import "SeatsViewController.h"
+#import "SeatsController.h"
 
-@interface EventsViewController ()
+@interface EventsController ()
 
 -(IBAction)continueToNextPage:(id)sender;
 
 @end
 
-@implementation EventsViewController
+@implementation EventsController
 
 - (void)viewDidLoad
 {
@@ -177,7 +177,7 @@
 
 -(IBAction)continueToNextPage:(id)sender{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    SeatsViewController *seats = [storyboard instantiateViewControllerWithIdentifier:@"seats"];
+    SeatsController *seats = [storyboard instantiateViewControllerWithIdentifier:@"seats"];
     [self.navigationController pushViewController:seats animated:YES];
 }
 

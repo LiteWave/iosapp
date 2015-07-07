@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SeatsViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate> {
+@interface SeatsController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate> {
     
     NSMutableData *webData;
 	NSMutableString *jsonResults;

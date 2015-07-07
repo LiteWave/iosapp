@@ -6,19 +6,19 @@
 //  Copyright (c) 2013 LiteWave. All rights reserved.
 //
 
-#import "LiteWaveViewController.h"
+#import "LiteWaveController.h"
 #import "LiteWaveAppDelegate.h"
-#import "ReadyViewController.h"
-#import "EventsViewController.h"
+#import "ReadyController.h"
+#import "EventsController.h"
 
 #import "Configuration.h"
 #import "APIClient.h"
 
-@interface LiteWaveViewController ()
+@interface LiteWaveController ()
 
 @end
 
-@implementation LiteWaveViewController
+@implementation LiteWaveController
 
 - (void)viewDidLoad
 {
@@ -34,13 +34,13 @@
     if(appDelegate.userID != nil){
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-        ReadyViewController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
+        ReadyController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
         [self.navigationController pushViewController:ready animated:NO];
         
     } else {
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-        EventsViewController *events = [storyboard instantiateViewControllerWithIdentifier:@"events"];
+        EventsController *events = [storyboard instantiateViewControllerWithIdentifier:@"events"];
         [self.navigationController pushViewController:events animated:NO];
         
     }

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ReadyViewController : UIViewController <UIAlertViewDelegate> {
+@interface ReadyController : UIViewController <UIAlertViewDelegate> {
     
     IBOutlet UILabel *eventName;
     IBOutlet UILabel *eventDate;

@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 LiteWave. All rights reserved.
 //
 
-#import "ReadyViewController.h"
-#import "ShowViewController.h"
+#import "ReadyController.h"
+#import "ShowController.h"
 #import "LiteWaveAppDelegate.h"
 #import "AFNetworking.h"
 #import "APIClient.h"
 
-@interface ReadyViewController ()
+@interface ReadyController ()
 
 -(IBAction)withdrawUser:(id)sender;
 -(IBAction)retryFetch:(id)sender;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation ReadyViewController
+@implementation ReadyController
 
 - (void)viewDidLoad
 {

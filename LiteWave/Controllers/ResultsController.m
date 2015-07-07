@@ -6,16 +6,16 @@
 //  Copyright (c) 2013 LiteWave. All rights reserved.
 //
 
-#import "ResultsViewController.h"
+#import "ResultsController.h"
 #import "LiteWaveAppDelegate.h"
 
-@interface ResultsViewController ()
+@interface ResultsController ()
 
 -(IBAction)returnToMenu:(id)sender;
 
 @end
 
-@implementation ResultsViewController
+@implementation ResultsController
 
 - (void)viewDidLoad
 {
