@@ -78,51 +78,6 @@
             </objects>
             <point key="canvasLocation" x="367" y="314"/>
         </scene>
-        <!--Choose Event-->
-        <scene sceneID="ufC-wZ-h7g">
-            <objects>
-                <viewController storyboardIdentifier="events" id="vXZ-lx-hvc" customClass="EventsController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <pickerView contentMode="scaleAspectFill" id="VYG-iR-hYS">
-                                <rect key="frame" x="0.0" y="84" width="320" height="162"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2xv-vr-2qd">
-                                <rect key="frame" x="20" y="278" width="280" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="33"/>
-                                <state key="normal" title="CONTINUE" backgroundImage="redBtn.png">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="continueToNextPage:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="KsG-Ne-WHP"/>
-                                </connections>
-                            </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="sZ9-do-xpE">
-                                <rect key="frame" x="142" y="85" width="37" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="color" red="0.84313732389999996" green="0.20000001789999999" blue="0.26274511220000002" alpha="1" colorSpace="deviceRGB"/>
-                            </activityIndicatorView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Choose Event" id="zWd-l8-fDc">
-                        <barButtonItem key="backBarButtonItem" title=" " id="Aca-pG-twQ"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="continueBtn" destination="2xv-vr-2qd" id="d5b-3e-JnM"/>
-                        <outlet property="eventsPicker" destination="VYG-iR-hYS" id="7XC-aR-OVB"/>
-                        <outlet property="spinner" destination="sZ9-do-xpE" id="vmj-bf-FGy"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="939" y="609"/>
-        </scene>
         <!--Choose Seat-->
         <scene sceneID="lPt-NJ-28J">
             <objects>

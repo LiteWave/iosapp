@@ -29,7 +29,6 @@
 		84446C18182703C4002D8BDC /* blueBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 84446C16182703C4002D8BDC /* blueBtn.png */; };
 		84446C19182703C4002D8BDC /* yellowBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 84446C17182703C4002D8BDC /* yellowBtn.png */; };
 		84446C1C1827045D002D8BDC /* SeatsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84446C1B1827045D002D8BDC /* SeatsController.m */; };
-		84446C1F182704AE002D8BDC /* EventsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84446C1E182704AE002D8BDC /* EventsController.m */; };
 		84446C24182CB1AC002D8BDC /* ShowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84446C23182CB1AC002D8BDC /* ShowController.m */; };
 		845CD918181DC94B004932BF /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD904181DC94B004932BF /* Default-568h@2x~iphone.png */; };
 		845CD919181DC94B004932BF /* Default~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD905181DC94B004932BF /* Default~iphone.png */; };
@@ -126,8 +125,6 @@
 		84446C17182703C4002D8BDC /* yellowBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowBtn.png; sourceTree = "<group>"; };
 		84446C1A1827045D002D8BDC /* SeatsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeatsController.h; sourceTree = "<group>"; };
 		84446C1B1827045D002D8BDC /* SeatsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeatsController.m; sourceTree = "<group>"; };
-		84446C1D182704AE002D8BDC /* EventsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsController.h; sourceTree = "<group>"; };
-		84446C1E182704AE002D8BDC /* EventsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsController.m; sourceTree = "<group>"; };
 		84446C22182CB1AC002D8BDC /* ShowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowController.h; sourceTree = "<group>"; };
 		84446C23182CB1AC002D8BDC /* ShowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowController.m; sourceTree = "<group>"; };
 		845CD904181DC94B004932BF /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
@@ -267,8 +264,6 @@
 				84AB8D561835C54A00E3E8AE /* ReadyController.m */,
 				84EFEF3A182CBC9100E3DD89 /* ResultsController.h */,
 				84EFEF3B182CBC9100E3DD89 /* ResultsController.m */,
-				84446C1E182704AE002D8BDC /* EventsController.m */,
-				84446C1D182704AE002D8BDC /* EventsController.h */,
 				84446C23182CB1AC002D8BDC /* ShowController.m */,
 				84446C22182CB1AC002D8BDC /* ShowController.h */,
 			);
@@ -661,7 +656,6 @@
 				84789ED0181C65DB00FC59E4 /* AFHTTPRequestOperation.m in Sources */,
 				84789FC6181C65E400FC59E4 /* NSArray+Extensions.m in Sources */,
 				84446C1C1827045D002D8BDC /* SeatsController.m in Sources */,
-				84446C1F182704AE002D8BDC /* EventsController.m in Sources */,
 				84AB8D5E1835F22300E3E8AE /* APIClient.m in Sources */,
 				81A0F8CA1B13A22B007508CE /* Configuration.m in Sources */,
 				845CD92E1825DE54004932BF /* User.m in Sources */,

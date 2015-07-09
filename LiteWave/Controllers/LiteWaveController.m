@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "SeatsController.h"
 #import "ReadyController.h"
-#import "EventsController.h"
 
 #import "Configuration.h"
 #import "APIClient.h"
@@ -46,25 +45,22 @@
                                   [self saveEvent:event];
                                   [self beginEvent:[event valueForKey:@"_id"]];
                               } else {
-                                  [self clearEvent];
                                   [self showNoEvent];
                               }
                           }
                           onFailure:^(NSError *error) {
-                              [self clearEvent];
+                              [self showNoEvent];
                           }];
 
 }
 
 - (void)saveEvent:(id)event {
     self.appDelegate.eventID = [event valueForKey:@"_id"];
-    //self.appDelegate.stadiumID = [event valueForKey:@"_stadiumId"];
     self.appDelegate.eventName = [event valueForKey:@"name"];
     
     NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
     [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'.000Z'"];
     [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-    
     self.appDelegate.eventDate = [dateformat dateFromString:[event valueForKey:@"eventAt"]];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -100,6 +96,23 @@
 }
 
 - (void)beginEvent:(id)eventID {
+    
+    // if the day is no longer the same, show no event
+    NSDate *todayDate = [NSDate date];
+    NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
+    [dateformat setDateFormat:@"dd"];
+    [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    
+    NSString *today = [dateformat stringFromDate:todayDate];
+    NSString *eventDay = [dateformat stringFromDate:self.appDelegate.eventDate];
+    
+    /*
+    if (![today isEqualToString: eventDay]) {
+        [self showNoEvent];
+        return;
+    }
+     */
+    
     if (self.appDelegate.seatID != nil) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
         
@@ -116,7 +129,7 @@
 }
 
 - (void)showNoEvent {
-    
+    [self clearEvent];
 }
 
 
