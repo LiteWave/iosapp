@@ -1,13 +1,13 @@
 //
-//  LiteWaveViewController.m
+//  LiteWaveController.m
 //  LiteWave
 //
-//  Created by mike draghici on 10/24/13.
 //  Copyright (c) 2013 LiteWave. All rights reserved.
 //
 
 #import "LiteWaveController.h"
 #import "AppDelegate.h"
+#import "SeatsController.h"
 #import "ReadyController.h"
 #import "EventsController.h"
 
@@ -24,28 +24,101 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
+    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
-        
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    if(appDelegate.userID != nil){
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-        ReadyController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
-        [self.navigationController pushViewController:ready animated:NO];
-        
+
+    if (self.appDelegate.eventID != nil) {
+        [self beginEvent:self.appDelegate.eventID];
     } else {
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-        EventsController *events = [storyboard instantiateViewControllerWithIdentifier:@"events"];
-        [self.navigationController pushViewController:events animated:NO];
-        
+        [self getEvent];
     }
     
 }
+
+- (void)getEvent {
+    [[APIClient instance] getEvents:self.appDelegate.clientID
+                          onSuccess:^(id data) {
+                              NSArray *eventsArray = [[NSArray alloc] initWithArray:data copyItems:YES];
+                              if ([eventsArray count] > 0) {
+                                  NSDictionary *event = [eventsArray objectAtIndex:0];
+                                  [self saveEvent:event];
+                                  [self beginEvent:[event valueForKey:@"_id"]];
+                              } else {
+                                  [self clearEvent];
+                                  [self showNoEvent];
+                              }
+                          }
+                          onFailure:^(NSError *error) {
+                              [self clearEvent];
+                          }];
+
+}
+
+- (void)saveEvent:(id)event {
+    self.appDelegate.eventID = [event valueForKey:@"_id"];
+    //self.appDelegate.stadiumID = [event valueForKey:@"_stadiumId"];
+    self.appDelegate.eventName = [event valueForKey:@"name"];
+    
+    NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
+    [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'.000Z'"];
+    [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    
+    self.appDelegate.eventDate = [dateformat dateFromString:[event valueForKey:@"eventAt"]];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults setValue:self.appDelegate.eventID forKey:@"eventID"];
+    [defaults setValue:self.appDelegate.stadiumID forKey:@"stadiumID"];
+    [defaults setValue:self.appDelegate.eventName forKey:@"eventName"];
+    [defaults setObject:self.appDelegate.eventDate forKey:@"eventDate"];
+    
+    [defaults synchronize];
+}
+
+- (void)clearEvent {
+    self.appDelegate.eventID = nil;
+    self.appDelegate.eventName = nil;
+    self.appDelegate.eventDate = nil;
+    
+    self.appDelegate.seatID = nil;
+    self.appDelegate.rowID = nil;
+    self.appDelegate.sectionID = nil;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults setValue:self.appDelegate.eventID forKey:@"eventID"];
+    [defaults setValue:self.appDelegate.eventName forKey:@"eventName"];
+    [defaults setObject:self.appDelegate.eventDate forKey:@"eventDate"];
+    
+    [defaults setObject:self.appDelegate.eventDate forKey:@"seatID"];
+    [defaults setObject:self.appDelegate.eventDate forKey:@"rowID"];
+    [defaults setObject:self.appDelegate.eventDate forKey:@"sectionID"];
+    
+    [defaults synchronize];
+}
+
+- (void)beginEvent:(id)eventID {
+    if (self.appDelegate.seatID != nil) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+        
+        SeatsController *seats = [storyboard instantiateViewControllerWithIdentifier:@"seats"];
+        [self.navigationController pushViewController:seats animated:NO];
+        
+        ReadyController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
+        [self.navigationController pushViewController:ready animated:NO];
+    } else {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+        SeatsController *seats = [storyboard instantiateViewControllerWithIdentifier:@"seats"];
+        [self.navigationController pushViewController:seats animated:NO];
+    }
+}
+
+- (void)showNoEvent {
+    
+}
+
 
 - (void)didReceiveMemoryWarning
 {

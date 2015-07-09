@@ -41,6 +41,8 @@
     
     [spinner startAnimating];
     registerButton.hidden = YES;
+    self.navigationItem.hidesBackButton = YES;
+    
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     if (appDelegate.isOnline) {
