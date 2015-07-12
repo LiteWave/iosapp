@@ -21,7 +21,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, assign) BOOL isOnline;
-@property (nonatomic, assign) BOOL invalidShowAlert;
 @property (nonatomic, strong) NSString *uniqueID;
 @property (nonatomic, strong) NSString *clientID;
 @property (nonatomic, strong) NSString *eventID;

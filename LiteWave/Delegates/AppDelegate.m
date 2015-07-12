@@ -28,7 +28,6 @@
 @synthesize winnerID = _winnerID;
 @synthesize liteshowArray = _liteshowArray;
 @synthesize isOnline = _isOnline;
-@synthesize invalidShowAlert = _invalidShowAlert;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -62,7 +61,6 @@
     self.stadiumID = @"5269eb41d41a51f2dfe8b2ec"; //moda center
     self.liteShow = [defaults objectForKey:@"liteShow"];
     self.liteshowArray = [defaults objectForKey:@"liteshowArray"];
-    self.invalidShowAlert = NO;
     
     //NSLog(@"stored uuid %@", self.uniqueID);
     if(self.uniqueID.length==0){

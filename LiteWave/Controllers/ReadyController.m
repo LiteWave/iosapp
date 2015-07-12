@@ -25,9 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    playBtn.enabled = NO;
-    //retryBtn.hidden = YES;
+	
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
     pressedChangeSeat = NO;
@@ -35,93 +33,6 @@
     [changeBtn addTarget: self
                   action: @selector(changeSeat:)
         forControlEvents: UIControlEventTouchUpInside];
-}
-
--(void)fetchShow{
-    
-    playBtn.enabled = NO;
-    //retryBtn.hidden = YES;
-    
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    if (appDelegate.liteShow){
-        
-        NSLog(@"saved liteshow = %@", appDelegate.liteShow);
-        
-        playBtn.enabled = YES;
-        //retryBtn.hidden = YES;
-    } else {
-        
-        if (appDelegate.isOnline){
-            
-            [[APIClient instance] getShows:appDelegate.eventID
-                                  onSuccess:^(id data) {
-                                      NSError *error2;
-                                      NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
-                                      NSString *jsonArray = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-                                      
-                                      NSArray *showDict =
-                                      [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
-                                                                      options: NSJSONReadingMutableContainers
-                                                                        error: &error2];
-                                      
-                                      appDelegate.liteshowArray = [[NSArray alloc] initWithArray:showDict copyItems:YES];
-                                      
-                                      NSDictionary *liteShowDict = [appDelegate.liteshowArray objectAtIndex:0];
-                                      
-                                      NSString *liteShowID = [liteShowDict valueForKey:@"_id"];
-                                      
-                                      [[APIClient instance] getShow: liteShowID
-                                                               user: appDelegate.userID
-                                                            onSuccess:^(id data) {
-                                                                NSError *error2;
-                                                                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
-                                                                NSString *jsonArray = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-                                                                
-                                                                NSDictionary *showDict =
-                                                                [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
-                                                                                                options: NSJSONReadingMutableContainers
-                                                                                                  error: &error2];
-                                                                
-                                                                appDelegate.liteShow = [[NSDictionary alloc] initWithDictionary:showDict copyItems:YES];
-                                                                
-                                                                NSLog(@"new liteshow = %@", appDelegate.liteShow);
-                                                                
-                                                                playBtn.enabled = YES;
-                                                                //retryBtn.hidden = YES;
-                                                                
-                                                            }
-                                                            onFailure:^(NSError *error) {
-                                                                appDelegate.liteShow = nil;
-                                                                
-                                                                playBtn.enabled = NO;
-                                                                
-                                                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Show Available" message:@"There is no show available at this time for this event." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                                                                [alert show];
-                                                                
-                                                                //retryBtn.hidden = NO;
-                                                            }];
-                                  }
-                                  onFailure:^(NSError *error) {
-                                      appDelegate.liteShow = nil;
-                                      
-                                      playBtn.enabled = NO;
-                                      
-                                      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Shows Available" message:@"There is no shows available at this time for this event." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                                      [alert show];
-                                      
-                                      //retryBtn.hidden = NO;
-                                  }];
-        
-            
-        }else{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"Network error", @"Network error")
-                                                            message: NSLocalizedString(@"No internet connection found, this application requires an internet connection.", @"Network error") delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-        }
-        
-    }
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -145,24 +56,78 @@
 
     mySeat.text = [NSString stringWithFormat:@"%@-%@-%@",appDelegate.sectionID,appDelegate.rowID,appDelegate.seatID];
     
-    if (appDelegate.invalidShowAlert){
-        /*
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Show Unavailable"
-                                                        message: @"This show is not available or has expired. Please try again later."
-                                                       delegate: self
-                                              cancelButtonTitle: @"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-        */
-        appDelegate.invalidShowAlert=NO;
+    [self fetchShow];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval: 2.0
+                                                  target: self
+                                                selector: @selector(retryFetch:)
+                                                userInfo: nil
+                                                 repeats: YES];
+}
+
+-(void)fetchShow {
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if (appDelegate.liteShow){
+        NSLog(@"saved liteshow = %@", appDelegate.liteShow);
+    } else {
         
-    }else{
-        [self fetchShow];
-        self.timer = [NSTimer scheduledTimerWithTimeInterval: 2.0
-                                                      target: self
-                                                    selector: @selector(retryFetch:)
-                                                    userInfo: nil
-                                                     repeats: YES];
+        if (appDelegate.isOnline){
+            
+            [[APIClient instance] getShows:appDelegate.eventID
+                                 onSuccess:^(id data) {
+                                     NSError *error2;
+                                     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
+                                     NSString *jsonArray = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                                     
+                                     NSArray *showDict =
+                                     [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
+                                                                     options: NSJSONReadingMutableContainers
+                                                                       error: &error2];
+                                     
+                                     appDelegate.liteshowArray = [[NSArray alloc] initWithArray:showDict copyItems:YES];
+                                     
+                                     NSDictionary *liteShowDict = [appDelegate.liteshowArray objectAtIndex:0];
+                                     
+                                     NSString *liteShowID = [liteShowDict valueForKey:@"_id"];
+                                     
+                                     [[APIClient instance] getShow: liteShowID
+                                                              user: appDelegate.userID
+                                                         onSuccess:^(id data) {
+                                                             NSError *error2;
+                                                             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
+                                                             NSString *jsonArray = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                                                             
+                                                             NSDictionary *showDict =
+                                                             [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
+                                                                                             options: NSJSONReadingMutableContainers
+                                                                                               error: &error2];
+                                                             
+                                                             appDelegate.liteShow = [[NSDictionary alloc] initWithDictionary:showDict copyItems:YES];
+                                                             
+                                                             NSLog(@"new liteshow = %@", appDelegate.liteShow);
+                                                             
+                                                         }
+                                                         onFailure:^(NSError *error) {
+                                                             appDelegate.liteShow = nil;
+                                                             
+                                                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Show Available" message:@"There is no show available at this time for this event." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                                             [alert show];
+                                                         }];
+                                 }
+                                 onFailure:^(NSError *error) {
+                                     appDelegate.liteShow = nil;
+                                     
+                                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Shows Available" message:@"There is no shows available at this time for this event." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                     [alert show];
+                                 }];
+            
+            
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"Network error", @"Network error")
+                                                            message: NSLocalizedString(@"No internet connection found, this application requires an internet connection.", @"Network error") delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
         
     }
     
@@ -180,7 +145,6 @@
 
 -(IBAction)retryFetch:(id)sender{
     
-    //[self fetchShow];
     [self joinLiteShow];
 }
 
@@ -229,11 +193,6 @@
                          }];
     
 }
-
-- (void)popView {
-    
-}
-
 
 - (void)withdraw
 {

@@ -12,10 +12,7 @@
     
     IBOutlet UILabel *eventName;
     IBOutlet UILabel *eventDate;
-    IBOutlet UILabel *mySeat;
-    IBOutlet UIButton *playBtn;
-    IBOutlet UIButton *retryBtn;
-    
+    IBOutlet UILabel *mySeat;    
     IBOutlet UIButton *changeBtn;
     
     BOOL pressedChangeSeat;
