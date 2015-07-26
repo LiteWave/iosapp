@@ -20,6 +20,8 @@
 
 @property (nonatomic, assign) NSTimer *timer;
 
+
+-(void)updateSettings;
 -(void)withdraw;
 
 @end

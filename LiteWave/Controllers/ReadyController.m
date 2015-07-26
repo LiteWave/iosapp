@@ -33,10 +33,16 @@
     [changeBtn addTarget: self
                   action: @selector(changeSeat:)
         forControlEvents: UIControlEventTouchUpInside];
+    
+    // add observer for when app becomes active
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onBecomeActive) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
+    // remove observers
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     if (pressedChangeSeat)
         return;
@@ -228,6 +234,11 @@
     [defaults removeObjectForKey:@"liteShow"];
     
     [defaults synchronize];
+}
+
+- (void)onBecomeActive
+{
+    NSLog(@"Became Active!");
 }
 
 - (void)didReceiveMemoryWarning

@@ -407,9 +407,16 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
         strobeDevice = 1;  // strobe 0=no, 1=yes
         pl1 = 0; //play time length in milliseconds
         pl2 = 0; //play time length in milliseconds
-        pif = nil; // winner (w) looser (l)
+        pif = nil; // winner (w) looser (l) // not supporting
         playType = @"c"; //wait (w) flash (f) color (c) sound (s)
         frameColor = [UIColor blackColor];
+        
+        // cl -> command length
+        // ct -> command type ('c' for color)
+        // sv -> should vibrate (0=no 1=yes)
+        // ss -> should strobe (0=no 1=yes)
+        // bg -> background color (rgb)
+
         
         NSDictionary *frameDict = [commandArray objectAtIndex:counter];
         NSLog(@"%@", frameDict);
