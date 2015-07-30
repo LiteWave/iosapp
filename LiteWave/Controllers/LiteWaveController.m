@@ -8,6 +8,7 @@
 #import "LiteWaveController.h"
 #import "AppDelegate.h"
 #import "SeatsController.h"
+#import "LevelController.h"
 #import "ReadyController.h"
 
 #import "Configuration.h"
@@ -24,6 +25,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -113,18 +116,20 @@
     }
      */
     
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    
     if (self.appDelegate.seatID != nil) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-        
         SeatsController *seats = [storyboard instantiateViewControllerWithIdentifier:@"seats"];
         [self.navigationController pushViewController:seats animated:NO];
         
         ReadyController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
         [self.navigationController pushViewController:ready animated:NO];
     } else {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-        SeatsController *seats = [storyboard instantiateViewControllerWithIdentifier:@"seats"];
-        [self.navigationController pushViewController:seats animated:NO];
+        //SeatsController *seats = [storyboard instantiateViewControllerWithIdentifier:@"seats"];
+        //[self.navigationController pushViewController:seats animated:NO];
+        
+        LevelController *level = [storyboard instantiateViewControllerWithIdentifier:@"level"];
+        [self.navigationController pushViewController:level animated:NO];
     }
 }
 

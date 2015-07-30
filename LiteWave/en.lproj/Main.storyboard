@@ -96,8 +96,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="6dK-LJ-kmk">
+                                <rect key="frame" x="142" y="135" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="0.84313732389999996" green="0.20000001789999999" blue="0.26274511220000002" alpha="1" colorSpace="deviceRGB"/>
+                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xTR-9V-1sY">
-                                <rect key="frame" x="20" y="292" width="280" height="45"/>
+                                <rect key="frame" x="20" y="295" width="280" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="33"/>
                                 <state key="normal" title="JOIN" backgroundImage="redBtn.png">
@@ -108,11 +113,6 @@
                                     <action selector="registerUserLocation:" destination="ibx-WV-tNn" eventType="touchUpInside" id="LNt-cQ-bAG"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="6dK-LJ-kmk">
-                                <rect key="frame" x="142" y="135" width="37" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="color" red="0.84313732389999996" green="0.20000001789999999" blue="0.26274511220000002" alpha="1" colorSpace="deviceRGB"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -128,7 +128,115 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0fY-hF-Y1C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1517" y="260"/>
+            <point key="canvasLocation" x="845" y="314"/>
+        </scene>
+        <!--Select your level-->
+        <scene sceneID="ae5-yi-0UU">
+            <objects>
+                <viewController storyboardIdentifier="level" id="6Cv-ty-NCf" customClass="LevelController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mw1-EP-AMx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="asY-n2-EqL">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Select your level" id="RXL-7A-gNO">
+                        <barButtonItem key="backBarButtonItem" title=" " id="aLo-Gf-zZW"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="viewTable" destination="asY-n2-EqL" id="2u8-o2-r2Y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I2s-G6-ue4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1268" y="313"/>
+        </scene>
+        <!--Select your section-->
+        <scene sceneID="5VH-DS-xsd">
+            <objects>
+                <viewController storyboardIdentifier="section" id="4eR-oR-QLD" customClass="SectionController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QP2-s4-9OU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OKs-Hq-1aP">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Select your section" id="qPk-30-UhU">
+                        <barButtonItem key="backBarButtonItem" title=" " id="IHO-zi-l9B"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="viewTable" destination="OKs-Hq-1aP" id="kbG-ne-ile"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5Y-RN-eS7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1660" y="313"/>
+        </scene>
+        <!--Select your row-->
+        <scene sceneID="yj2-z7-kWf">
+            <objects>
+                <viewController storyboardIdentifier="row" id="lN9-5v-QnC" customClass="RowController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xZa-Pz-ReC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rkh-Fe-yiI">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Select your row" id="nNw-EW-jcL">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Qtg-pw-AjL"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="viewTable" destination="rkh-Fe-yiI" id="eVi-Ct-GBM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bA5-2x-4YA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2058" y="314"/>
+        </scene>
+        <!--Select you seat-->
+        <scene sceneID="riY-jI-e2p">
+            <objects>
+                <viewController storyboardIdentifier="seat" id="Iox-nc-KfJ" customClass="SeatController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Lhr-sC-6eH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9CP-Fi-nKa">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Select you seat" id="7vM-kh-5ET">
+                        <barButtonItem key="backBarButtonItem" title=" " id="BPV-gI-9qj"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="viewTable" destination="9CP-Fi-nKa" id="0zC-NN-JIt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MJJ-x9-UpN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2466" y="314"/>
         </scene>
         <!--Playing Show-->
         <scene sceneID="qqN-7y-9RT">
