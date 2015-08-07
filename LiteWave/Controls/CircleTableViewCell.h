@@ -13,4 +13,10 @@
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UIButton *button;
 
+@property (nonatomic, strong) NSNumber *index;
+@property (nonatomic, strong) UITableView *tableView;
+
+-(void)select;
+-(void)clear;
+
 @end

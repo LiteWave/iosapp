@@ -130,7 +130,7 @@
             </objects>
             <point key="canvasLocation" x="845" y="314"/>
         </scene>
-        <!--Select your level-->
+        <!--Choose floor level-->
         <scene sceneID="ae5-yi-0UU">
             <objects>
                 <viewController storyboardIdentifier="level" id="6Cv-ty-NCf" customClass="LevelController" sceneMemberID="viewController">
@@ -146,7 +146,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Select your level" id="RXL-7A-gNO">
+                    <navigationItem key="navigationItem" title="Choose floor level" id="RXL-7A-gNO">
                         <barButtonItem key="backBarButtonItem" title=" " id="aLo-Gf-zZW"/>
                     </navigationItem>
                     <connections>
@@ -219,8 +219,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6vE-Cx-tmp">
+                                <rect key="frame" x="106" y="0.0" width="108" height="480"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="26k-7K-6Ka">
+                                <rect key="frame" x="212" y="0.0" width="108" height="480"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9CP-Fi-nKa">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <rect key="frame" x="0.0" y="0.0" width="104" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -231,7 +241,9 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="BPV-gI-9qj"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="viewTable" destination="9CP-Fi-nKa" id="0zC-NN-JIt"/>
+                        <outlet property="rowTable" destination="6vE-Cx-tmp" id="iUj-mg-vln"/>
+                        <outlet property="seatTable" destination="26k-7K-6Ka" id="wCY-SF-U9z"/>
+                        <outlet property="sectionTable" destination="9CP-Fi-nKa" id="sMc-8o-glC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MJJ-x9-UpN" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "AppDelegate.h"
+
 @interface SeatController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     
     IBOutlet UIButton *nextButton;
@@ -23,23 +25,32 @@
     NSMutableArray *sections;
     NSDictionary *sectionDictionary;
     NSArray *sectionArray;
+
     NSMutableArray *rows;
     NSDictionary *rowDictionary;
     NSArray *rowArray;
+    
     NSMutableArray *seats;
     NSDictionary *seatDictionary;
+    NSArray *seatArray;
     
     BOOL pickedSection;
     BOOL pickedRow;
     BOOL pickedSeat;
     
-    IBOutlet UITableView *viewTable;
-    NSArray *seatArray;
+    IBOutlet UITableView *sectionTable;
+    IBOutlet UITableView *rowTable;
+    IBOutlet UITableView *seatTable;
+
     
     int selectedSectionIndex;
     int selectedRowIndex;
     int selectedSeatIndex;
     
+    UILabel *rowLabel;
+    UILabel *seatLabel;
 }
+
+@property (nonatomic, retain) AppDelegate *appDelegate;
 
 @end

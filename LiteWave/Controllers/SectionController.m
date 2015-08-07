@@ -19,7 +19,7 @@
 {
     [super viewDidLoad];
     
-    sectionArray = [NSArray arrayWithObjects:@"100", @"101", @"102", @"103", @"104", @"105", @"106", @"107", @"108", @"109", @"110", @"111", @"112", @"113", @"114", @"115", @"116", @"117", @"118", @"119", nil];
+    sectionArray = [NSArray arrayWithObjects:@"Section", @"100", @"101", @"102", @"103", @"104", @"105", @"106", @"107", @"108", @"109", @"110", @"111", @"112", @"113", @"114", @"115", @"116", @"117", @"118", @"119", nil];
     
     viewTable.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     viewTable.backgroundColor = [UIColor blackColor];

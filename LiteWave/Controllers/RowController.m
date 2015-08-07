@@ -20,7 +20,7 @@
 {
     [super viewDidLoad];
     
-    rowArray = [NSArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"J", @"K", @"L", @"M", @"N", @"O", @"P", nil];
+    rowArray = [NSArray arrayWithObjects:@"Row", @"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"J", @"K", @"L", @"M", @"N", @"O", @"P", nil];
     
     viewTable.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     viewTable.backgroundColor = [UIColor blackColor];

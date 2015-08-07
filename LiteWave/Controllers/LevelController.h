@@ -40,7 +40,6 @@
     int selectedSectionIndex;
     int selectedRowIndex;
     int selectedSeatIndex;
-    
 }
 
 @end

@@ -8,7 +8,7 @@
 
 #import "CircleTableViewCell.h"
 #import "LevelController.h"
-#import "SectionController.h"
+#import "SeatController.h"
 #import "AFNetworking.h"
 #import "AppDelegate.h"
 #import "APIClient.h"
@@ -22,13 +22,11 @@
     
     levelArray = [NSArray arrayWithObjects:@"0", @"1", @"2", @"3", nil];
     
-    viewTable.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    viewTable.frame = CGRectMake(self.view.frame.size.width/3.0, 50, self.view.frame.size.width/3.0, self.view.frame.size.height);
     viewTable.backgroundColor = [UIColor blackColor];
     viewTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [viewTable setDataSource:self];
     [viewTable setDelegate:self];
-    
-
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -51,10 +49,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) selectRow:(NSNotification*)n {
+- (void) selectRow:(NSNotification*)notification {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    SectionController *section = [storyboard instantiateViewControllerWithIdentifier:@"section"];
-    [self.navigationController pushViewController:section animated:YES];
+    SeatController *seat = [storyboard instantiateViewControllerWithIdentifier:@"seat"];
+    [self.navigationController pushViewController:seat animated:YES];
 }
 
 
@@ -77,6 +75,9 @@
         cell = [[CircleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     cell.nameLabel.text = [levelArray objectAtIndex:indexPath.row];
+    
+    cell.index = @(indexPath.row);
+    cell.tableView = tableView;
     
     return cell;
 }

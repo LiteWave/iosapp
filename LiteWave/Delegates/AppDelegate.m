@@ -33,6 +33,8 @@
 {
 
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
     hostReach = [Reachability reachabilityWithHostName:@"http://test.crowdpxl.com"];
     [hostReach startNotifier];
