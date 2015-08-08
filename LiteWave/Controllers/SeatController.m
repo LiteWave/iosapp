@@ -131,7 +131,7 @@
         selected = selectedSeatIndex;
     }
     
-    if (indexPath.row == selectedSectionIndex)
+    if (indexPath.row == selected)
         [cell select];
     else
         [cell clear];
@@ -148,13 +148,27 @@
         
         if (tableView == sectionTable) {
             selectedSectionIndex = [index intValue];
+            
+            selectedRowIndex = -1;
+            [self clearCells:rowTable selected:selectedRowIndex];
+            
+            selectedSeatIndex = -1;
+            [self clearCells:seatTable selected:selectedSeatIndex];
+            
             rowTable.hidden = NO;
             rowLabel.hidden = YES;
+            
+            seatTable.hidden = YES;
+            seatLabel.hidden = NO;
+            
         }
         if (tableView == rowTable) {
             selectedRowIndex = [index intValue];
             seatTable.hidden = NO;
             seatLabel.hidden = YES;
+            
+            selectedSeatIndex = -1;
+            [self clearCells:seatTable selected:selectedSeatIndex];
         }
         if (tableView == seatTable) {
             selectedSeatIndex = [index intValue];
@@ -164,13 +178,19 @@
             [self.navigationController pushViewController:seats animated:YES];
         }
         
-        NSArray *cells = [tableView visibleCells];
-        for (CircleTableViewCell *cell in cells)
-        {
-            if (cell.index != index)
-                [cell clear];
-        }
+        [self clearCells:tableView  selected:(int)index];
+    }
+}
 
+- (void)clearCells:(UITableView*)tableView selected:(int)index
+{
+    NSArray *cells = [tableView visibleCells];
+    for (CircleTableViewCell *cell in cells)
+    {
+        if ((int)cell.index == index)
+            [cell select];
+        else
+            [cell clear];
     }
 }
 
