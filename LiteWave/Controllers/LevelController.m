@@ -22,11 +22,26 @@
     
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    levelArray = [NSArray arrayWithObjects:@"0", @"1", @"2", @"3", nil];
+    CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+    float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
     
-    viewTable.frame = CGRectMake(self.view.frame.size.width/3.0, 50, self.view.frame.size.width/3.0, self.view.frame.size.height);
+    descriptionLabel.frame = CGRectMake(
+                                        50/2,
+                                        self.view.frame.size.height - heightPadding - 110,
+                                        self.view.frame.size.width - 50,
+                                        110);
+    
+    
+    levelArray = [NSArray arrayWithObjects:@"100", @"200", @"300", nil];
+    
+    viewTable.frame = CGRectMake(
+                                 self.view.frame.size.width/3.0,
+                                 0,
+                                 self.view.frame.size.width/3.0,
+                                 self.view.frame.size.height - descriptionLabel.frame.size.height);
     viewTable.backgroundColor = [UIColor blackColor];
     viewTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [viewTable setContentInset:UIEdgeInsetsMake(70,0,0,0)];
     [viewTable setDataSource:self];
     [viewTable setDelegate:self];
     

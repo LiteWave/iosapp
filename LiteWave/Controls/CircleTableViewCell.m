@@ -55,13 +55,13 @@
 }
 
 -(void)select {
-    self.button.layer.borderColor=[UIColor colorWithRed:255.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0].CGColor;
-    self.button.layer.backgroundColor=[UIColor colorWithRed:255.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0].CGColor;
+    self.button.layer.borderColor=[UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0].CGColor;
+    self.button.layer.backgroundColor=[UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0].CGColor;
 }
 
 -(void)clear {
     self.button.layer.borderColor=[UIColor colorWithRed:46.0/255.0 green:46.0/255.0 blue:46.0/255.0 alpha:1.0].CGColor;
-    self.button.layer.backgroundColor=[UIColor colorWithRed:255.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.0].CGColor;
+    self.button.layer.backgroundColor=[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.0].CGColor;
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {

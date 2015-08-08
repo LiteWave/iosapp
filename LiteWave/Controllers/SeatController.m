@@ -32,6 +32,8 @@
     [self loadSections];
     [self loadRows];
     [self loadSeats];
+    
+    [self prepareView];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -124,6 +126,7 @@
             seatTable.hidden = YES;
             seatLabel.hidden = NO;
             
+            [self disableJoin];
         }
         if (tableView == rowTable) {
             selectedRowIndex = [index intValue];
@@ -133,11 +136,13 @@
             selectedSeatIndex = 0;
             [self loadSeats];
             [self clearCells:seatTable selected:selectedSeatIndex];
+            
+            [self disableJoin];
         }
         if (tableView == seatTable) {
             selectedSeatIndex = [index intValue];
             
-            [self saveSeat];
+            [self enableJoin];
         }
         
         [self clearCells:tableView  selected:(int)index];
@@ -174,7 +179,6 @@
     NSDictionary* obj = @{ @"id" : @"",
                             @"name" : @"Section"};
     [sections insertObject:obj atIndex:0];
-    [self prepareTables];
 }
 
 - (void)loadRows
@@ -199,17 +203,33 @@
     [seatTable reloadData];
 }
 
-- (void)prepareTables
+- (void)prepareView
 {
+    CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+    float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
+    
+    joinButton.frame = CGRectMake(0,
+                                   self.view.bounds.size.height - heightPadding - 60,
+                                   self.view.bounds.size.width,
+                                   60);
+    [self disableJoin];
+    
     sectionTable.hidden = NO;
-    sectionTable.frame = CGRectMake(0, 0, self.view.frame.size.width/3.0, self.view.frame.size.height);
+    sectionTable.frame = CGRectMake(0,
+                                    0,
+                                    self.view.frame.size.width/3.0,
+                                    self.view.frame.size.height - joinButton.frame.size.height);
     sectionTable.backgroundColor = [UIColor blackColor];
     sectionTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [sectionTable setContentInset:UIEdgeInsetsMake(0,0,10,0)];
     [sectionTable setDataSource:self];
     [sectionTable setDelegate:self];
     
-    rowTable.frame = CGRectMake(self.view.frame.size.width/3.0, 0, self.view.frame.size.width/3.0, self.view.frame.size.height);
+    rowTable.frame = CGRectMake(
+                                self.view.frame.size.width/3.0,
+                                0,
+                                self.view.frame.size.width/3.0,
+                                self.view.frame.size.height - joinButton.frame.size.height);
     rowTable.backgroundColor = [UIColor blackColor];
     rowTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     rowTable.hidden = YES;
@@ -217,7 +237,11 @@
     [rowTable setDataSource:self];
     [rowTable setDelegate:self];
     
-    seatTable.frame = CGRectMake(2.0*self.view.frame.size.width/3.0, 0, self.view.frame.size.width/3.0, self.view.frame.size.height);
+    seatTable.frame = CGRectMake(
+                                 2.0*self.view.frame.size.width/3.0,
+                                 0,
+                                 self.view.frame.size.width/3.0,
+                                 self.view.frame.size.height - joinButton.frame.size.height);
     seatTable.backgroundColor = [UIColor blackColor];
     seatTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     seatTable.hidden = YES;
@@ -246,6 +270,33 @@
     seatLabel.textAlignment = NSTextAlignmentCenter;
     seatLabel.text = @"Seat";
     [self.view addSubview:seatLabel];
+}
+
+- (void)disableJoin
+{
+    joinButton.layer.borderColor=[UIColor colorWithRed:46.0/255.0 green:46.0/255.0 blue:46.0/255.0 alpha:1.0].CGColor;
+    joinButton.layer.backgroundColor=[UIColor colorWithRed:46.0/255.0 green:46.0/255.0 blue:46.0/255.0 alpha:1.0].CGColor;
+    joinButton.layer.borderWidth=2.0f;
+    
+    [joinButton setTitleColor:[UIColor colorWithRed:100.0/255.0 green:100.0/255.0 blue:100.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+
+    [joinButton removeTarget:self action:@selector(onJoinSelect) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)enableJoin
+{
+    joinButton.layer.borderColor=[UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0].CGColor;
+    joinButton.layer.backgroundColor=[UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0].CGColor;
+    joinButton.layer.borderWidth=2.0f;
+    
+    [joinButton setTitleColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+
+    [joinButton addTarget:self action:@selector(onJoinSelect) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)onJoinSelect
+{
+    [self saveSeat];
 }
 
 - (void)saveSeat

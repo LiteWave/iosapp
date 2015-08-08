@@ -130,7 +130,7 @@
             </objects>
             <point key="canvasLocation" x="845" y="314"/>
         </scene>
-        <!--Choose floor level-->
+        <!--Choose seat-->
         <scene sceneID="ae5-yi-0UU">
             <objects>
                 <viewController storyboardIdentifier="level" id="6Cv-ty-NCf" customClass="LevelController" sceneMemberID="viewController">
@@ -139,17 +139,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="asY-n2-EqL">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="387"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please choose the level you are seated in" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lwq-V2-adE">
+                                <rect key="frame" x="16" y="395" width="288" height="71"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Choose floor level" id="RXL-7A-gNO">
+                    <navigationItem key="navigationItem" title="Choose seat" id="RXL-7A-gNO">
                         <barButtonItem key="backBarButtonItem" title=" " id="aLo-Gf-zZW"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="descriptionLabel" destination="lwq-V2-adE" id="You-IU-t1m"/>
                         <outlet property="viewTable" destination="asY-n2-EqL" id="2u8-o2-r2Y"/>
                     </connections>
                 </viewController>
@@ -211,7 +219,7 @@
             </objects>
             <point key="canvasLocation" x="2058" y="314"/>
         </scene>
-        <!--Select you seat-->
+        <!--Choose seat-->
         <scene sceneID="riY-jI-e2p">
             <objects>
                 <viewController storyboardIdentifier="seat" id="Iox-nc-KfJ" customClass="SeatController" sceneMemberID="viewController">
@@ -220,27 +228,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6vE-Cx-tmp">
-                                <rect key="frame" x="106" y="0.0" width="108" height="480"/>
+                                <rect key="frame" x="106" y="0.0" width="108" height="400"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="26k-7K-6Ka">
-                                <rect key="frame" x="212" y="0.0" width="108" height="480"/>
+                                <rect key="frame" x="212" y="0.0" width="108" height="400"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9CP-Fi-nKa">
-                                <rect key="frame" x="0.0" y="0.0" width="108" height="480"/>
+                                <rect key="frame" x="0.0" y="0.0" width="108" height="400"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Clc-gM-sM2">
+                                <rect key="frame" x="0.0" y="402" width="320" height="78"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="JOIN">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Select you seat" id="7vM-kh-5ET">
+                    <navigationItem key="navigationItem" title="Choose seat" id="7vM-kh-5ET">
                         <barButtonItem key="backBarButtonItem" title=" " id="BPV-gI-9qj"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="joinButton" destination="Clc-gM-sM2" id="oJz-Kc-RBn"/>
                         <outlet property="rowTable" destination="6vE-Cx-tmp" id="iUj-mg-vln"/>
                         <outlet property="seatTable" destination="26k-7K-6Ka" id="wCY-SF-U9z"/>
                         <outlet property="sectionTable" destination="9CP-Fi-nKa" id="sMc-8o-glC"/>

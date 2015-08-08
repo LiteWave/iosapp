@@ -20,7 +20,8 @@
     IBOutlet UIPickerView *seatsPicker;
     IBOutlet UIButton *registerButton;
     IBOutlet UIActivityIndicatorView *spinner;
-    IBOutlet UILabel *actionTitle;
+    
+    IBOutlet UILabel *descriptionLabel;
     
     NSMutableArray *sections;
     NSDictionary *sectionDictionary;

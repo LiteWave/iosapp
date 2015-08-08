@@ -12,15 +12,11 @@
 
 @interface SeatController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     
-    IBOutlet UIButton *nextButton;
+    IBOutlet UIButton *joinButton;
     
     NSMutableData *webData;
     NSMutableString *jsonResults;
     NSURLConnection *theConnection;
-    IBOutlet UIPickerView *seatsPicker;
-    IBOutlet UIButton *registerButton;
-    IBOutlet UIActivityIndicatorView *spinner;
-    IBOutlet UILabel *actionTitle;
     
     NSMutableArray *sections;
     NSDictionary *sectionDictionary;
