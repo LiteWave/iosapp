@@ -60,7 +60,7 @@
     self.eventName = [defaults stringForKey:@"eventName"];
     self.eventDate = [defaults objectForKey:@"eventDate"];
     self.userID = [defaults objectForKey:@"userID"];
-    self.stadiumID = @"5269eb41d41a51f2dfe8b2ec"; //moda center
+    self.stadiumID = @"5269b4c3df96d37c8cfd648f"; //moda center
     self.liteShow = [defaults objectForKey:@"liteShow"];
     self.liteshowArray = [defaults objectForKey:@"liteshowArray"];
     

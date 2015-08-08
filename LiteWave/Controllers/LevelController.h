@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "AppDelegate.h"
+
 @interface LevelController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     
     IBOutlet UIButton *nextButton;
@@ -41,5 +43,7 @@
     int selectedRowIndex;
     int selectedSeatIndex;
 }
+
+@property (nonatomic, retain) AppDelegate *appDelegate;
 
 @end

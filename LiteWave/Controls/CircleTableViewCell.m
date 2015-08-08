@@ -68,10 +68,10 @@
     [self select];
     [self.button removeTarget:self action:@selector(onTouch) forControlEvents:UIControlEventAllTouchEvents];
     
-    NSDictionary* dict = @{ @"index" : self.index,
+    NSDictionary* message = @{ @"index" : self.index,
                             @"tableView" : self.tableView};
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"selectRow" object:dict ];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"selectRow" object:message ];
 }
 
 -(void)onTouchDown {

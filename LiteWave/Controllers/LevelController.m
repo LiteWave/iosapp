@@ -20,6 +20,8 @@
 {
     [super viewDidLoad];
     
+    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     levelArray = [NSArray arrayWithObjects:@"0", @"1", @"2", @"3", nil];
     
     viewTable.frame = CGRectMake(self.view.frame.size.width/3.0, 50, self.view.frame.size.width/3.0, self.view.frame.size.height);
@@ -27,6 +29,8 @@
     viewTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [viewTable setDataSource:self];
     [viewTable setDelegate:self];
+    
+    [self getSeats];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -82,6 +86,30 @@
     return cell;
 }
 
+- (void)getSeats
+{
+    [[APIClient instance] getStadium: self.appDelegate.stadiumID
+                           onSuccess:^(id data) {
+                               NSError *error2;
+                               NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
+                               NSString *jsonArray = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                               NSDictionary *seatsDict =
+                               [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
+                                                               options: NSJSONReadingMutableContainers
+                                                                 error: &error2];
+                               
+                               self.appDelegate.seatsArray = [[NSDictionary alloc] initWithDictionary:seatsDict copyItems:YES];
+                               
+                           }
+                           onFailure:^(NSError *error) {
+                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network Error" message:error.localizedDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                               [alert show];
+                               
+                               [spinner stopAnimating];
+                               [self.navigationController popViewControllerAnimated:YES];
+                           }];
+    
+}
 
 @end
 
