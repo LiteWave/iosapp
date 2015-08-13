@@ -130,7 +130,7 @@
             </objects>
             <point key="canvasLocation" x="845" y="314"/>
         </scene>
-        <!--Choose seat-->
+        <!--Choose level-->
         <scene sceneID="ae5-yi-0UU">
             <objects>
                 <viewController storyboardIdentifier="level" id="6Cv-ty-NCf" customClass="LevelController" sceneMemberID="viewController">
@@ -147,13 +147,13 @@
                                 <rect key="frame" x="16" y="395" width="288" height="71"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Choose seat" id="RXL-7A-gNO">
+                    <navigationItem key="navigationItem" title="Choose level" id="RXL-7A-gNO">
                         <barButtonItem key="backBarButtonItem" title=" " id="aLo-Gf-zZW"/>
                     </navigationItem>
                     <connections>
@@ -252,7 +252,7 @@
                                 </state>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Choose seat" id="7vM-kh-5ET">
                         <barButtonItem key="backBarButtonItem" title=" " id="BPV-gI-9qj"/>

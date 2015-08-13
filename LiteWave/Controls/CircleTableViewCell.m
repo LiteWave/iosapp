@@ -17,16 +17,18 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
+    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     if (self) {
         //reuseID = reuseIdentifier;
         
         NSInteger tableWidth = self.contentView.frame.size.width/3.0;
         
         UIView *bgColorView = [[UIView alloc] init];
-        bgColorView.backgroundColor = [UIColor blackColor];
+        bgColorView.backgroundColor = self.appDelegate.backgroundColor;
         [self setSelectedBackgroundView:bgColorView];
         
-        self.contentView.backgroundColor = [UIColor blackColor];
+        self.contentView.backgroundColor = [UIColor whiteColor];
         
         
         self.button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -36,8 +38,8 @@
                                   ROUND_BUTTON_WIDTH_HEIGHT);
         self.button.clipsToBounds = YES;
         self.button.layer.cornerRadius = ROUND_BUTTON_WIDTH_HEIGHT/2.0f;
-        self.button.layer.borderColor=[UIColor colorWithRed:46.0/255.0 green:46.0/255.0 blue:46.0/255.0 alpha:1.0].CGColor;
-        self.button.layer.borderWidth=2.0f;
+        self.button.layer.borderColor = self.appDelegate.borderColor.CGColor;
+        self.button.layer.borderWidth = 2.0f;
         [self.contentView addSubview:self.button];
         
         UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
@@ -45,8 +47,8 @@
         [self.button addTarget:self action:@selector(onTouchDown) forControlEvents:UIControlEventTouchDown];
         
         self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, tableWidth, CELL_HEIGHT)];
-        [self.nameLabel setTextColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0]];
-        [self.nameLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:25.0f]];
+        [self.nameLabel setTextColor:self.appDelegate.textColor];
+        [self.nameLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:24.0f]];
         [self.nameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
         self.nameLabel.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:self.nameLabel];
@@ -55,13 +57,17 @@
 }
 
 -(void)select {
-    self.button.layer.borderColor=[UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0].CGColor;
-    self.button.layer.backgroundColor=[UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0].CGColor;
+    self.button.layer.borderColor=self.appDelegate.highlightColor.CGColor;
+    self.button.layer.backgroundColor=self.appDelegate.highlightColor.CGColor;
+    
+    [self.nameLabel setTextColor:self.appDelegate.textSelectedColor];
 }
 
 -(void)clear {
-    self.button.layer.borderColor=[UIColor colorWithRed:46.0/255.0 green:46.0/255.0 blue:46.0/255.0 alpha:1.0].CGColor;
-    self.button.layer.backgroundColor=[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.0].CGColor;
+    self.button.layer.borderColor=self.appDelegate.borderColor.CGColor;
+    self.button.layer.backgroundColor=self.appDelegate.backgroundColor.CGColor;
+    
+    [self.nameLabel setTextColor:self.appDelegate.textColor];
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {

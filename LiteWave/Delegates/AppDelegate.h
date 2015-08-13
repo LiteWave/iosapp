@@ -38,4 +38,10 @@
 @property (nonatomic, strong) NSDictionary *liteShow;
 @property (nonatomic, strong) NSDictionary *eventJoinData;
 
+@property (nonatomic, strong) UIColor *backgroundColor;
+@property (nonatomic, strong) UIColor *highlightColor;
+@property (nonatomic, strong) UIColor *borderColor;
+@property (nonatomic, strong) UIColor *textColor;
+@property (nonatomic, strong) UIColor *textSelectedColor;
+
 @end

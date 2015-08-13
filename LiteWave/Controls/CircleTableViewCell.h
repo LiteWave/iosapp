@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "AppDelegate.h"
+
 @interface CircleTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) UILabel *nameLabel;
@@ -15,6 +17,8 @@
 
 @property (nonatomic, strong) NSNumber *index;
 @property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, retain) AppDelegate *appDelegate;
 
 -(void)select;
 -(void)clear;

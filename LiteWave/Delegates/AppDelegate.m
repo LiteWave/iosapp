@@ -64,6 +64,12 @@
     self.liteShow = [defaults objectForKey:@"liteShow"];
     self.liteshowArray = [defaults objectForKey:@"liteshowArray"];
     
+    self.backgroundColor = [UIColor whiteColor];
+    self.borderColor = [UIColor blackColor];//[UIColor colorWithRed:46.0/255.0 green:46.0/255.0 blue:46.0/255.0 alpha:1.0];
+    self.highlightColor = [UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0];
+    self.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255 blue:0.0/255 alpha:1.0];
+    self.textSelectedColor = [UIColor whiteColor];
+    
     //NSLog(@"stored uuid %@", self.uniqueID);
     if(self.uniqueID.length==0){
         self.uniqueID = [self uuid];

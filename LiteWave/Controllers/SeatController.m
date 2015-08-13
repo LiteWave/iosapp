@@ -21,6 +21,8 @@
     
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
+    self.view.backgroundColor = self.appDelegate.backgroundColor;
+    
     sectionTable.hidden = YES;
     rowTable.hidden = YES;
     seatTable.hidden = YES;
@@ -78,12 +80,6 @@
     
     cell.tableView = tableView;
     cell.index = @(indexPath.row);
-
-    if (indexPath.row == 0) {
-        cell.button.hidden = YES;
-    } else {
-        cell.button.hidden = NO;
-    }
     
     int selected;
     if (tableView == sectionTable) {
@@ -98,6 +94,14 @@
         [cell select];
     else
         [cell clear];
+    
+    if (indexPath.row == 0) {
+        cell.button.hidden = YES;
+        cell.nameLabel.frame = CGRectMake(0, 20, cell.nameLabel.frame.size.width, cell.nameLabel.frame.size.height);
+        [cell.nameLabel setTextColor:self.appDelegate.textColor];
+    } else {
+        cell.button.hidden = NO;
+    }
 
     return cell;
 }
@@ -209,9 +213,9 @@
     float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
     
     joinButton.frame = CGRectMake(0,
-                                   self.view.bounds.size.height - heightPadding - 60,
+                                   self.view.bounds.size.height - heightPadding - 50,
                                    self.view.bounds.size.width,
-                                   60);
+                                   50);
     [self disableJoin];
     
     sectionTable.hidden = NO;
@@ -219,9 +223,10 @@
                                     0,
                                     self.view.frame.size.width/3.0,
                                     self.view.frame.size.height - joinButton.frame.size.height);
-    sectionTable.backgroundColor = [UIColor blackColor];
+    sectionTable.backgroundColor = [UIColor whiteColor];
     sectionTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [sectionTable setContentInset:UIEdgeInsetsMake(0,0,10,0)];
+    [sectionTable setShowsVerticalScrollIndicator:NO];
+    [sectionTable setContentInset:UIEdgeInsetsMake(-20,0,10,0)];
     [sectionTable setDataSource:self];
     [sectionTable setDelegate:self];
     
@@ -230,10 +235,11 @@
                                 0,
                                 self.view.frame.size.width/3.0,
                                 self.view.frame.size.height - joinButton.frame.size.height);
-    rowTable.backgroundColor = [UIColor blackColor];
+    rowTable.backgroundColor = [UIColor whiteColor];
     rowTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     rowTable.hidden = YES;
-    [rowTable setContentInset:UIEdgeInsetsMake(0,0,10,0)];
+    [rowTable setShowsVerticalScrollIndicator:NO];
+    [rowTable setContentInset:UIEdgeInsetsMake(-20,0,10,0)];
     [rowTable setDataSource:self];
     [rowTable setDelegate:self];
     
@@ -242,10 +248,11 @@
                                  0,
                                  self.view.frame.size.width/3.0,
                                  self.view.frame.size.height - joinButton.frame.size.height);
-    seatTable.backgroundColor = [UIColor blackColor];
+    seatTable.backgroundColor = [UIColor whiteColor];
     seatTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     seatTable.hidden = YES;
-    [seatTable setContentInset:UIEdgeInsetsMake(0,0,10,0)];
+    [seatTable setShowsVerticalScrollIndicator:NO];
+    [seatTable setContentInset:UIEdgeInsetsMake(-20,0,10,0)];
     [seatTable setDataSource:self];
     [seatTable setDelegate:self];
     
@@ -253,7 +260,7 @@
                                                         rowTable.frame.origin.y,
                                                         rowTable.frame.size.width,
                                                         100)];
-    [rowLabel setTextColor:[UIColor colorWithRed:46.0/255.0 green:46.0/255.0 blue:46.0/255.0 alpha:1.0]];
+    [rowLabel setTextColor:self.appDelegate.textColor];
     [rowLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:25.0f]];
     [rowLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     rowLabel.textAlignment = NSTextAlignmentCenter;
@@ -264,7 +271,7 @@
                                                          seatTable.frame.origin.y,
                                                          seatTable.frame.size.width,
                                                          100)];
-    [seatLabel setTextColor:[UIColor colorWithRed:46.0/255.0 green:46.0/255.0 blue:46.0/255.0 alpha:1.0]];
+    [seatLabel setTextColor:self.appDelegate.textColor];
     [seatLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:25.0f]];
     [seatLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     seatLabel.textAlignment = NSTextAlignmentCenter;

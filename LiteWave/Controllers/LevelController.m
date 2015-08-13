@@ -22,6 +22,8 @@
     
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
+    self.view.backgroundColor = self.appDelegate.backgroundColor;
+    
     CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
     float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
     
@@ -39,7 +41,7 @@
                                  0,
                                  self.view.frame.size.width/3.0,
                                  self.view.frame.size.height - descriptionLabel.frame.size.height);
-    viewTable.backgroundColor = [UIColor blackColor];
+    viewTable.backgroundColor = self.appDelegate.backgroundColor;
     viewTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [viewTable setContentInset:UIEdgeInsetsMake(70,0,0,0)];
     [viewTable setDataSource:self];
