@@ -271,7 +271,7 @@
                                                         rowTable.frame.size.width,
                                                         100)];
     [rowLabel setTextColor:self.appDelegate.textColor];
-    [rowLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:25.0f]];
+    [rowLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:24.0f]];
     [rowLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     rowLabel.textAlignment = NSTextAlignmentCenter;
     rowLabel.text = @"Row";
@@ -282,7 +282,7 @@
                                                          seatTable.frame.size.width,
                                                          100)];
     [seatLabel setTextColor:self.appDelegate.textColor];
-    [seatLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:25.0f]];
+    [seatLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:24.0f]];
     [seatLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     seatLabel.textAlignment = NSTextAlignmentCenter;
     seatLabel.text = @"Seat";

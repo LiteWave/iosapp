@@ -7,7 +7,6 @@
 
 #import "LiteWaveController.h"
 #import "AppDelegate.h"
-#import "SeatsController.h"
 #import "LevelController.h"
 #import "ReadyController.h"
 
@@ -26,7 +25,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0];
+    self.navigationController.navigationBar.barTintColor = self.appDelegate.highlightColor;
 
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar

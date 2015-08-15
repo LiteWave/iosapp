@@ -97,7 +97,7 @@
 }
 
 -(void)joinEvent:(NSString*)eventID params:(NSDictionary*)params onSuccess:(Success)success onFailure:(Failure)failure {
-    NSString *path = [NSString stringWithFormat: @"%@/lw_events/%@/user_locations", self.apiURL, eventID];
+    NSString *path = [NSString stringWithFormat: @"%@/events/%@/user_locations", self.apiURL, eventID];
     NSURL *url = [[NSURL alloc] initWithString:path];
     [self post:url params:params onSuccess: success onFailure: failure];
 }
@@ -141,11 +141,11 @@
     return [self eventsPath: clientID withEvent: @""];
 }
 -(NSString*)eventsPath:(NSString*)clientID withEvent:(NSString*)eventID {
-    return [NSString stringWithFormat: @"%@/clients/%@/lw_events/%@", self.apiURL, clientID, eventID];
+    return [NSString stringWithFormat: @"%@/clients/%@/events/%@", self.apiURL, clientID, eventID];
 }
 
 -(NSString*)showsPath:(NSString*)eventID {
-    return [NSString stringWithFormat: @"%@/lw_events/%@/event_liteshows", self.apiURL, eventID];
+    return [NSString stringWithFormat: @"%@/events/%@/event_liteshows", self.apiURL, eventID];
 }
 -(NSString*)showsPath:(NSString*)showID withUser:(NSString*)userID {
     return [NSString stringWithFormat: @"%@/event_liteshows/%@/user_locations/%@/liteshow", self.apiURL, showID, userID];

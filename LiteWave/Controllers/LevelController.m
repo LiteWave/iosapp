@@ -24,6 +24,8 @@
     
     self.view.backgroundColor = self.appDelegate.backgroundColor;
     
+    selectedLevelIndex = -1;
+    
     [self getSeats];
 }
 
@@ -151,7 +153,6 @@
                                         self.view.frame.size.height - heightPadding - 110,
                                         self.view.frame.size.width - 50,
                                         110);
-    
     
     viewTable.frame = CGRectMake(
                                  self.view.frame.size.width/3.0,
