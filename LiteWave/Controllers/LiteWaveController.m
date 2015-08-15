@@ -123,16 +123,13 @@
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     
+    LevelController *level = [storyboard instantiateViewControllerWithIdentifier:@"level"];
+    [self.navigationController pushViewController:level animated:NO];
+    
     if (self.appDelegate.seatID != nil) {
-        SeatsController *seats = [storyboard instantiateViewControllerWithIdentifier:@"seats"];
-        [self.navigationController pushViewController:seats animated:NO];
-        
         ReadyController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
         [self.navigationController pushViewController:ready animated:NO];
     } else {
-        //SeatsController *seats = [storyboard instantiateViewControllerWithIdentifier:@"seats"];
-        //[self.navigationController pushViewController:seats animated:NO];
-        
         LevelController *level = [storyboard instantiateViewControllerWithIdentifier:@"level"];
         [self.navigationController pushViewController:level animated:NO];
     }

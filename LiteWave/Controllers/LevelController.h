@@ -12,37 +12,14 @@
 
 @interface LevelController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     
-    IBOutlet UIButton *nextButton;
-    
-    NSMutableData *webData;
-    NSMutableString *jsonResults;
-    NSURLConnection *theConnection;
-    IBOutlet UIPickerView *seatsPicker;
-    IBOutlet UIButton *registerButton;
     IBOutlet UIActivityIndicatorView *spinner;
-    
     IBOutlet UILabel *descriptionLabel;
-    
-    NSMutableArray *sections;
-    NSDictionary *sectionDictionary;
-    NSArray *sectionArray;
-    NSMutableArray *rows;
-    NSDictionary *rowDictionary;
-    NSArray *rowArray;
-    NSMutableArray *seats;
-    NSDictionary *seatDictionary;
-    NSArray *seatArray;
-
     IBOutlet UITableView *viewTable;
-    NSArray *levelArray;
     
-    BOOL pickedSection;
-    BOOL pickedRow;
-    BOOL pickedSeat;
+    NSMutableArray *levels;
+    NSDictionary *levelDictionary;
     
-    int selectedSectionIndex;
-    int selectedRowIndex;
-    int selectedSeatIndex;
+    int selectedLevelIndex;
 }
 
 @property (nonatomic, retain) AppDelegate *appDelegate;

@@ -27,6 +27,7 @@
 @property (nonatomic, strong) NSString *eventName;
 @property (nonatomic, strong) NSDate *eventDate;
 @property (nonatomic, strong) NSString *stadiumID;
+@property (nonatomic, strong) NSString *levelID;
 @property (nonatomic, strong) NSString *sectionID;
 @property (nonatomic, strong) NSString *rowID;
 @property (nonatomic, strong) NSString *seatID;

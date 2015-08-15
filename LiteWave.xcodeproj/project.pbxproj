@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		81612A681B656CA4009A7E44 /* SectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81612A671B656CA4009A7E44 /* SectionController.m */; };
-		81612A6B1B656DBE009A7E44 /* RowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81612A6A1B656DBE009A7E44 /* RowController.m */; };
 		81612A6E1B656DEA009A7E44 /* SeatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81612A6D1B656DEA009A7E44 /* SeatController.m */; };
 		81612A721B656E79009A7E44 /* LevelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81612A711B656E79009A7E44 /* LevelController.m */; };
 		8161E3471B69D7ED00857B95 /* CircleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8161E3461B69D7ED00857B95 /* CircleTableViewCell.m */; };
@@ -101,10 +99,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		81612A661B656C5B009A7E44 /* SectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionController.h; sourceTree = "<group>"; };
-		81612A671B656CA4009A7E44 /* SectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionController.m; sourceTree = "<group>"; };
-		81612A691B656DAB009A7E44 /* RowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowController.h; sourceTree = "<group>"; };
-		81612A6A1B656DBE009A7E44 /* RowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowController.m; sourceTree = "<group>"; };
 		81612A6C1B656DD8009A7E44 /* SeatController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeatController.h; sourceTree = "<group>"; };
 		81612A6D1B656DEA009A7E44 /* SeatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeatController.m; sourceTree = "<group>"; };
 		81612A701B656E69009A7E44 /* LevelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelController.h; sourceTree = "<group>"; };
@@ -281,10 +275,6 @@
 				84EFEF3B182CBC9100E3DD89 /* ResultsController.m */,
 				84446C23182CB1AC002D8BDC /* ShowController.m */,
 				84446C22182CB1AC002D8BDC /* ShowController.h */,
-				81612A661B656C5B009A7E44 /* SectionController.h */,
-				81612A671B656CA4009A7E44 /* SectionController.m */,
-				81612A691B656DAB009A7E44 /* RowController.h */,
-				81612A6A1B656DBE009A7E44 /* RowController.m */,
 				81612A6C1B656DD8009A7E44 /* SeatController.h */,
 				81612A6D1B656DEA009A7E44 /* SeatController.m */,
 				81612A701B656E69009A7E44 /* LevelController.h */,
@@ -685,7 +675,6 @@
 				84789EFE181C65DB00FC59E4 /* NSString+SBJSON.m in Sources */,
 				84789ED6181C65DB00FC59E4 /* AFURLConnectionOperation.m in Sources */,
 				84789EFD181C65DB00FC59E4 /* NSObject+SBJSON.m in Sources */,
-				81612A6B1B656DBE009A7E44 /* RowController.m in Sources */,
 				84157960181A286800D4EBB1 /* AppDelegate.m in Sources */,
 				84789ED0181C65DB00FC59E4 /* AFHTTPRequestOperation.m in Sources */,
 				81612A721B656E79009A7E44 /* LevelController.m in Sources */,
@@ -713,7 +702,6 @@
 				84789EFF181C65DB00FC59E4 /* SBJSON.m in Sources */,
 				84789ED1181C65DB00FC59E4 /* AFImageCache.m in Sources */,
 				8161E3471B69D7ED00857B95 /* CircleTableViewCell.m in Sources */,
-				81612A681B656CA4009A7E44 /* SectionController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

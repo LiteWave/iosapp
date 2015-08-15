@@ -227,6 +227,7 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
+    [defaults removeObjectForKey:@"levelID"];
     [defaults removeObjectForKey:@"sectionID"];
     [defaults removeObjectForKey:@"rowID"];
     [defaults removeObjectForKey:@"seatID"];

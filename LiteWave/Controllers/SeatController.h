@@ -13,10 +13,15 @@
 @interface SeatController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     
     IBOutlet UIButton *joinButton;
+    IBOutlet UITableView *sectionTable;
+    IBOutlet UITableView *rowTable;
+    IBOutlet UITableView *seatTable;
     
-    NSMutableData *webData;
-    NSMutableString *jsonResults;
-    NSURLConnection *theConnection;
+    UILabel *rowLabel;
+    UILabel *seatLabel;
+    
+    NSMutableArray *levels;
+    NSDictionary *levelDictionary;
     
     NSMutableArray *sections;
     NSDictionary *sectionDictionary;
@@ -30,21 +35,10 @@
     NSDictionary *seatDictionary;
     NSArray *seatArray;
     
-    BOOL pickedSection;
-    BOOL pickedRow;
-    BOOL pickedSeat;
-    
-    IBOutlet UITableView *sectionTable;
-    IBOutlet UITableView *rowTable;
-    IBOutlet UITableView *seatTable;
-
-    
+    int selectedLevelIndex;
     int selectedSectionIndex;
     int selectedRowIndex;
     int selectedSeatIndex;
-    
-    UILabel *rowLabel;
-    UILabel *seatLabel;
 }
 
 @property (nonatomic, retain) AppDelegate *appDelegate;

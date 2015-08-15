@@ -9,7 +9,6 @@
 #import "CircleTableViewCell.h"
 #import "SeatController.h"
 #import "ReadyController.h"
-#import "AFNetworking.h"
 #import "AppDelegate.h"
 #import "APIClient.h"
 
@@ -178,7 +177,18 @@
 
 - (void)loadSections
 {
-    sections = [[NSMutableArray alloc] initWithArray:[self.appDelegate.seatsArray objectForKey:@"sections"]];
+    levels = [[NSMutableArray alloc] initWithArray:[self.appDelegate.seatsArray objectForKey:@"levels"]];
+    int index = 0;
+    for (NSDictionary *level in levels) {
+        if ([level objectForKey:@"name"] == self.appDelegate.levelID) {
+            selectedLevelIndex = index;
+            break;
+        }
+        index++;
+    }
+    
+    levelDictionary = [levels objectAtIndex:selectedLevelIndex];
+    sections = [NSMutableArray arrayWithArray:[levelDictionary objectForKey:@"sections"]];
     
     NSDictionary* obj = @{ @"id" : @"",
                             @"name" : @"Section"};
@@ -308,12 +318,13 @@
 
 - (void)saveSeat
 {
+    self.appDelegate.levelID = [[levels objectAtIndex:selectedLevelIndex] valueForKeyPath:@"name"];
     self.appDelegate.sectionID = [[sections objectAtIndex:selectedSectionIndex] valueForKeyPath:@"name"];
     self.appDelegate.rowID = [[rows objectAtIndex:selectedRowIndex] valueForKeyPath:@"name"];
     self.appDelegate.seatID = [[seats objectAtIndex:selectedSeatIndex] valueForKeyPath:@"name"];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
+    [defaults setValue:self.appDelegate.levelID forKey:@"leveID"];
     [defaults setValue:self.appDelegate.sectionID forKey:@"sectionID"];
     [defaults setValue:self.appDelegate.rowID forKey:@"rowID"];
     [defaults setValue:self.appDelegate.seatID forKey:@"seatID"];
@@ -321,6 +332,7 @@
     [defaults synchronize];
     
     NSDictionary *userSeat = [NSDictionary dictionaryWithObjectsAndKeys:
+                                self.appDelegate.levelID, @"level",
                                 self.appDelegate.sectionID, @"section",
                                 self.appDelegate.rowID, @"row",
                                 self.appDelegate.seatID, @"seat_number", nil];
@@ -331,7 +343,6 @@
                                 userSeat,
                                 @"user_seat",
                                 nil];
-    
     
     [[APIClient instance] joinEvent: self.appDelegate.eventID
                              params: params

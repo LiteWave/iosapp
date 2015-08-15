@@ -24,29 +24,6 @@
     
     self.view.backgroundColor = self.appDelegate.backgroundColor;
     
-    CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
-    float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
-    
-    descriptionLabel.frame = CGRectMake(
-                                        50/2,
-                                        self.view.frame.size.height - heightPadding - 110,
-                                        self.view.frame.size.width - 50,
-                                        110);
-    
-    
-    levelArray = [NSArray arrayWithObjects:@"100", @"200", @"300", nil];
-    
-    viewTable.frame = CGRectMake(
-                                 self.view.frame.size.width/3.0,
-                                 0,
-                                 self.view.frame.size.width/3.0,
-                                 self.view.frame.size.height - descriptionLabel.frame.size.height);
-    viewTable.backgroundColor = self.appDelegate.backgroundColor;
-    viewTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [viewTable setContentInset:UIEdgeInsetsMake(70,0,0,0)];
-    [viewTable setDataSource:self];
-    [viewTable setDelegate:self];
-    
     [self getSeats];
 }
 
@@ -71,6 +48,15 @@
 }
 
 - (void) selectRow:(NSNotification*)notification {
+    
+    NSDictionary *message = [notification object];
+    NSNumber *index = [message objectForKey:@"index"];
+    
+    selectedLevelIndex = [index intValue];
+    [self clearCells:viewTable  selected:(int)index];
+    
+    self.appDelegate.levelID = [[levels objectAtIndex:selectedLevelIndex] valueForKeyPath:@"name"];
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     SeatController *seat = [storyboard instantiateViewControllerWithIdentifier:@"seat"];
     [self.navigationController pushViewController:seat animated:YES];
@@ -79,7 +65,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [levelArray count];
+    return [levels count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -95,12 +81,31 @@
     if (cell == nil) {
         cell = [[CircleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    cell.nameLabel.text = [levelArray objectAtIndex:indexPath.row];
     
-    cell.index = @(indexPath.row);
+    NSDictionary *data = [levels objectAtIndex:indexPath.row];
+    
+    cell.nameLabel.text = [data valueForKeyPath:@"name"];
     cell.tableView = tableView;
+    cell.index = @(indexPath.row);
+
+    if (indexPath.row == selectedLevelIndex)
+        [cell select];
+    else
+        [cell clear];
     
     return cell;
+}
+
+- (void)clearCells:(UITableView*)tableView selected:(int)index
+{
+    NSArray *cells = [tableView visibleCells];
+    for (CircleTableViewCell *cell in cells)
+    {
+        if ((int)cell.index == index)
+            [cell select];
+        else
+            [cell clear];
+    }
 }
 
 - (void)getSeats
@@ -110,6 +115,7 @@
                                NSError *error2;
                                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
                                NSString *jsonArray = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                               
                                NSDictionary *seatsDict =
                                [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
                                                                options: NSJSONReadingMutableContainers
@@ -117,6 +123,8 @@
                                
                                self.appDelegate.seatsArray = [[NSDictionary alloc] initWithDictionary:seatsDict copyItems:YES];
                                
+                               [self loadLevels];
+                               [self prepareView];
                            }
                            onFailure:^(NSError *error) {
                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network Error" message:error.localizedDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -125,8 +133,38 @@
                                [spinner stopAnimating];
                                [self.navigationController popViewControllerAnimated:YES];
                            }];
-    
 }
+
+- (void)loadLevels
+{
+    levels = [[NSMutableArray alloc] initWithArray:[self.appDelegate.seatsArray objectForKey:@"levels"]];
+}
+
+- (void)prepareView
+{
+    
+    CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+    float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
+    
+    descriptionLabel.frame = CGRectMake(
+                                        50/2,
+                                        self.view.frame.size.height - heightPadding - 110,
+                                        self.view.frame.size.width - 50,
+                                        110);
+    
+    
+    viewTable.frame = CGRectMake(
+                                 self.view.frame.size.width/3.0,
+                                 0,
+                                 self.view.frame.size.width/3.0,
+                                 self.view.frame.size.height - descriptionLabel.frame.size.height);
+    viewTable.backgroundColor = self.appDelegate.backgroundColor;
+    viewTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [viewTable setContentInset:UIEdgeInsetsMake(70,0,0,0)];
+    [viewTable setDataSource:self];
+    [viewTable setDelegate:self];
+}
+
 
 @end
 
