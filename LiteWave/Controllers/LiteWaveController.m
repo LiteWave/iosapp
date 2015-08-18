@@ -33,8 +33,7 @@
     self.navigationController.navigationBar.translucent = NO;
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-
+- (void)viewDidAppear:(BOOL)animated {
     if (self.appDelegate.eventID != nil) {
         [self beginEvent:self.appDelegate.eventID];
     } else {
@@ -128,9 +127,6 @@
     if (self.appDelegate.seatID != nil) {
         ReadyController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
         [self.navigationController pushViewController:ready animated:NO];
-    } else {
-        LevelController *level = [storyboard instantiateViewControllerWithIdentifier:@"level"];
-        [self.navigationController pushViewController:level animated:NO];
     }
 }
 

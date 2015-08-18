@@ -28,14 +28,18 @@
 	
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
+    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     pressedChangeSeat = NO;
     
-    [changeBtn addTarget: self
+    [changeButton addTarget: self
                   action: @selector(changeSeat:)
         forControlEvents: UIControlEventTouchUpInside];
     
     // add observer for when app becomes active
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onBecomeActive) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
+    
+    [self prepareView];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -56,49 +60,40 @@
     
     [self.navigationItem setHidesBackButton:NO animated:NO];
 
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.title = self.appDelegate.eventName;
 
-    self.title = appDelegate.eventName;
-
-    mySeat.text = [NSString stringWithFormat:@"%@-%@-%@",appDelegate.sectionID,appDelegate.rowID,appDelegate.seatID];
+    mySeat.text = [NSString stringWithFormat:@"%@-%@-%@", self.appDelegate.sectionID, self.appDelegate.rowID, self.appDelegate.seatID];
     
     [self fetchShow];
-    self.timer = [NSTimer scheduledTimerWithTimeInterval: 2.0
-                                                  target: self
-                                                selector: @selector(retryFetch:)
-                                                userInfo: nil
-                                                 repeats: YES];
 }
 
 -(void)fetchShow {
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    if (appDelegate.liteShow){
-        NSLog(@"saved liteshow = %@", appDelegate.liteShow);
+    if (self.appDelegate.liteShow) {
+        NSLog(@"saved liteshow = %@", self.appDelegate.liteShow);
     } else {
-        
-        if (appDelegate.isOnline){
-            
-            [[APIClient instance] getShows:appDelegate.eventID
-                                 onSuccess:^(id data) {
-                                     NSError *error2;
-                                     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
-                                     NSString *jsonArray = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-                                     
-                                     NSArray *showDict =
-                                     [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
-                                                                     options: NSJSONReadingMutableContainers
-                                                                       error: &error2];
-                                     
-                                     appDelegate.liteshowArray = [[NSArray alloc] initWithArray:showDict copyItems:YES];
-                                     
-                                     NSDictionary *liteShowDict = [appDelegate.liteshowArray objectAtIndex:0];
+        [[APIClient instance] getShows: self.appDelegate.eventID
+                             onSuccess: ^(id data) {
+                                 NSError *error2;
+                                 NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
+                                 NSString *jsonArray = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                                 
+                                 NSArray *showDict =
+                                 [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
+                                                                 options: NSJSONReadingMutableContainers
+                                                                   error: &error2];
+                                 
+                                 self.appDelegate.liteshowArray = [[NSArray alloc] initWithArray:showDict copyItems:YES];
+                                 
+                                 if (self.appDelegate.liteshowArray.count > 0) {
+                                     [self disableJoin];
+                                 } else {
+                                     NSDictionary *liteShowDict = [self.appDelegate.liteshowArray objectAtIndex:0];
                                      
                                      NSString *liteShowID = [liteShowDict valueForKey:@"_id"];
                                      
                                      [[APIClient instance] getShow: liteShowID
-                                                              user: appDelegate.userID
+                                                              user: self.appDelegate.userID
                                                          onSuccess:^(id data) {
                                                              NSError *error2;
                                                              NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
@@ -109,34 +104,23 @@
                                                                                              options: NSJSONReadingMutableContainers
                                                                                                error: &error2];
                                                              
-                                                             appDelegate.liteShow = [[NSDictionary alloc] initWithDictionary:showDict copyItems:YES];
+                                                             self.appDelegate.liteShow = [[NSDictionary alloc] initWithDictionary:showDict copyItems:YES];
                                                              
-                                                             NSLog(@"new liteshow = %@", appDelegate.liteShow);
+                                                             NSLog(@"new liteshow = %@", self.appDelegate.liteShow);
+                                                             
+                                                             [self enableJoin];
                                                              
                                                          }
                                                          onFailure:^(NSError *error) {
-                                                             appDelegate.liteShow = nil;
-                                                             
-                                                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Show Available" message:@"There is no show available at this time for this event." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                                                             [alert show];
+                                                             self.appDelegate.liteShow = nil;
                                                          }];
-                                 }
-                                 onFailure:^(NSError *error) {
-                                     appDelegate.liteShow = nil;
                                      
-                                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Shows Available" message:@"There is no shows available at this time for this event." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                                     [alert show];
-                                 }];
-            
-            
-        }else{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"Network error", @"Network error")
-                                                            message: NSLocalizedString(@"No internet connection found, this application requires an internet connection.", @"Network error") delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-        }
-        
+                                 }
+                             }
+                             onFailure:^(NSError *error) {
+                                 self.appDelegate.liteShow = nil;
+                             }];
     }
-    
 }
 
 -(IBAction)changeSeat:(id)sender {
@@ -145,18 +129,11 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(IBAction)withdrawUser:(id)sender{
+-(IBAction)withdrawUser:(id)sender {
     [self withdraw];
 }
 
--(IBAction)retryFetch:(id)sender{
-    
-    [self joinLiteShow];
-}
-
--(void) joinLiteShow{
-    
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+-(void)joinShow {
     
     NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
     [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
@@ -168,13 +145,10 @@
                             mobile_start, @"mobile_time", nil];
 
     
-    [[APIClient instance] joinShow: appDelegate.userID
+    [[APIClient instance] joinShow: self.appDelegate.userID
                             params: params
                          onSuccess:^(id data) {
                              NSLog(@"EVENT JOIN RESPONSE: %@", data);
-                             
-                             [self.timer invalidate];
-                             self.timer = nil;
                              
                              NSError *error2;
                              NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
@@ -185,7 +159,7 @@
                                                              options: NSJSONReadingMutableContainers
                                                                error: &error2];
                              
-                             appDelegate.eventJoinData = [[NSDictionary alloc] initWithDictionary:joinDict copyItems:YES];
+                             self.appDelegate.eventJoinData = [[NSDictionary alloc] initWithDictionary:joinDict copyItems:YES];
                              
                              NSString * storyboardName = @"Main";
                              UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
@@ -202,44 +176,76 @@
 
 - (void)withdraw
 {
-    if (self.timer) {
-        [self.timer invalidate];
-        self.timer = nil;
-    }
-    
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
     // leave the event
-    [[APIClient instance] leaveEvent: appDelegate.userID
+    [[APIClient instance] leaveEvent: self.appDelegate.userID
                            onSuccess:^(id data) {
+                               // clear data
+                               self.appDelegate.sectionID = nil;
+                               self.appDelegate.rowID = nil;
+                               self.appDelegate.seatID = nil;
+                               self.appDelegate.userID = nil;
+                               self.appDelegate.liteShow = nil;
+                               
+                               NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                               
+                               [defaults removeObjectForKey:@"levelID"];
+                               [defaults removeObjectForKey:@"sectionID"];
+                               [defaults removeObjectForKey:@"rowID"];
+                               [defaults removeObjectForKey:@"seatID"];
+                               [defaults removeObjectForKey:@"userID"];
+                               [defaults removeObjectForKey:@"liteShow"];
+                               
+                               [defaults synchronize];
+                               
                                NSLog(@"Left event");
                            }
                            onFailure:^(NSError *error) {
                                NSLog(@"Error on leaving event");
                            }];
+}
+
+- (void)prepareView
+{
+    CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+    float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
     
-    // clear data
-    appDelegate.sectionID = nil;
-    appDelegate.rowID = nil;
-    appDelegate.seatID = nil;
-    appDelegate.userID = nil;
-    appDelegate.liteShow = nil;
+    joinButton.frame = CGRectMake(0,
+                                  self.view.bounds.size.height - heightPadding - 50,
+                                  self.view.bounds.size.width,
+                                  50);
+    [self disableJoin];
+}
+
+- (void)disableJoin
+{
+    joinButton.layer.borderColor=[UIColor colorWithRed:46.0/255.0 green:46.0/255.0 blue:46.0/255.0 alpha:1.0].CGColor;
+    joinButton.layer.backgroundColor=[UIColor colorWithRed:46.0/255.0 green:46.0/255.0 blue:46.0/255.0 alpha:1.0].CGColor;
+    joinButton.layer.borderWidth=2.0f;
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [joinButton setTitleColor:[UIColor colorWithRed:100.0/255.0 green:100.0/255.0 blue:100.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     
-    [defaults removeObjectForKey:@"levelID"];
-    [defaults removeObjectForKey:@"sectionID"];
-    [defaults removeObjectForKey:@"rowID"];
-    [defaults removeObjectForKey:@"seatID"];
-    [defaults removeObjectForKey:@"userID"];
-    [defaults removeObjectForKey:@"liteShow"];
+    [joinButton removeTarget:self action:@selector(onJoinSelect) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)enableJoin
+{
+    joinButton.layer.borderColor=[UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0].CGColor;
+    joinButton.layer.backgroundColor=[UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0].CGColor;
+    joinButton.layer.borderWidth=2.0f;
     
-    [defaults synchronize];
+    [joinButton setTitleColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+    
+    [joinButton addTarget:self action:@selector(onJoinSelect) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)onJoinSelect
+{
+    [self joinShow];
 }
 
 - (void)onBecomeActive
 {
-    NSLog(@"Became Active!");
+    [self fetchShow];
 }
 
 - (void)didReceiveMemoryWarning

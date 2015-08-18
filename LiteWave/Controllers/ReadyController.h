@@ -8,18 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+#import "AppDelegate.h"
+
 @interface ReadyController : UIViewController <UIAlertViewDelegate> {
     
     IBOutlet UILabel *eventName;
     IBOutlet UILabel *eventDate;
     IBOutlet UILabel *mySeat;    
-    IBOutlet UIButton *changeBtn;
+    IBOutlet UIButton *changeButton;
+    IBOutlet UIButton *joinButton;
     
     BOOL pressedChangeSeat;
 }
 
-@property (nonatomic, assign) NSTimer *timer;
-
+@property (nonatomic, retain) AppDelegate *appDelegate;
 
 -(void)updateSettings;
 -(void)withdraw;
