@@ -118,6 +118,9 @@
                                  }
                              }
                              onFailure:^(NSError *error) {
+                                 // no shows available
+                                 [self disableJoin];
+                                 
                                  self.appDelegate.liteShow = nil;
                              }];
     }

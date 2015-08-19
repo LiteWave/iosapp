@@ -178,7 +178,7 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
             if(diff<0){
                 
                 [spinner stopAnimating];
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Show Expired" message:@"This show is no longer available for this event. Please withdraw and register for a new event." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Show Expired" message:@"This show is no longer available for this event." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [alert show];
                 
                 [self.navigationController popViewControllerAnimated:YES];

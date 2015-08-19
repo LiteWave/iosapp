@@ -60,7 +60,7 @@
     self.eventName = [defaults stringForKey:@"eventName"];
     self.eventDate = [defaults objectForKey:@"eventDate"];
     self.userID = [defaults objectForKey:@"userID"];
-    self.stadiumID = @"5269b4c3df96d37c8cfd648f"; // moda center
+    self.stadiumID = @"55cfe4392cc4dd6c0fa980a8"; // moda center
     //self.stadiumID = @"55c69c288ce021d0291f6759"; // safeco
     self.liteShow = [defaults objectForKey:@"liteShow"];
     self.liteshowArray = [defaults objectForKey:@"liteshowArray"];
@@ -71,12 +71,12 @@
     self.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255 blue:0.0/255 alpha:1.0];
     self.textSelectedColor = [UIColor whiteColor];
     
-    //NSLog(@"stored uuid %@", self.uniqueID);
+    NSLog(@"stored uuid %@", self.uniqueID);
     if(self.uniqueID.length==0){
         self.uniqueID = [self uuid];
         [defaults setValue:self.uniqueID forKey:@"uuid"];
         [defaults synchronize];
-        //NSLog(@"stored new uuid %@", self.uniqueID);
+        NSLog(@"stored new uuid %@", self.uniqueID);
     }
     
     return YES;
@@ -85,7 +85,6 @@
 static NSString *uuid;
 - (NSString *)uuid
 {
-
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         CFUUIDRef theUUID = CFUUIDCreate(kCFAllocatorDefault);
@@ -116,16 +115,14 @@ static NSString *uuid;
         }
         
     }
-    if(curReach == internetReach)
+    if (curReach == internetReach)
     {
         
     }
-    if(curReach == wifiReach)
+    if (curReach == wifiReach)
     {
        
     }
-    
-    
 }
 
 //Called by Reachability whenever status changes.
@@ -138,32 +135,12 @@ static NSString *uuid;
     Reachability *reachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus internetStatus = [reachability currentReachabilityStatus];
     
-    if(internetStatus == NotReachable) {
-        
+    if (internetStatus != NotReachable) {
         self.isOnline=NO;
-        
-        if(!errorView){
-            
-            errorView = [[UIAlertView alloc]
-                         initWithTitle: NSLocalizedString(@"Network error", @"Network error")
-                         message: NSLocalizedString(@"No internet connection found, this application requires an internet connection.", @"Network error")
-                         delegate: self
-                         cancelButtonTitle: NSLocalizedString(@"Close", @"Network error") otherButtonTitles: nil];
-            
-            [errorView show];
-            
-        }
-        
-    }else{
-        
-        if(errorView){
-            errorView=nil;
-        }
-        
+    } else {
         self.isOnline=YES;
     }
 }
-
 
 							
 - (void)applicationWillResignActive:(UIApplication *)application

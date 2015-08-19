@@ -129,7 +129,10 @@
                                [self prepareView];
                            }
                            onFailure:^(NSError *error) {
-                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network Error" message:error.localizedDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network error"
+                                                                               message: @"Stadium seating could not be retrieved."delegate:self
+                                                                     cancelButtonTitle:@"OK"
+                                                                     otherButtonTitles:nil];
                                [alert show];
                                
                                [spinner stopAnimating];

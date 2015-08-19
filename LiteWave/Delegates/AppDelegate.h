@@ -15,8 +15,6 @@
     Reachability* hostReach;
     Reachability* internetReach;
     Reachability* wifiReach;
-    UIAlertView *errorView;
-    
 }
 
 @property (strong, nonatomic) UIWindow *window;

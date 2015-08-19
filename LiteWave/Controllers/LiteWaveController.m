@@ -112,12 +112,10 @@
     NSString *today = [dateformat stringFromDate:todayDate];
     NSString *eventDay = [dateformat stringFromDate:self.appDelegate.eventDate];
     
-    /*
-    if (![today isEqualToString: eventDay]) {
-        [self showNoEvent];
-        return;
-    }
-     */
+//    if (![today isEqualToString: eventDay]) {
+//        [self showNoEvent];
+//        return;
+//    }
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     

@@ -374,7 +374,11 @@
                           onFailure:^(NSError *error) {
                               if (error) {
                                   
-                                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Register Error" message:error.localizedDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Join error"
+                                                                                  message: @"Sorry, an error occurred when joining the event."
+                                                                                 delegate:self
+                                                                        cancelButtonTitle:@"OK"
+                                                                        otherButtonTitles:nil];
                                   [alert show];
                                   
                               }
