@@ -51,9 +51,6 @@
 		845CD928181DC94B004932BF /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD915181DC94B004932BF /* Icon@2x.png */; };
 		845CD929181DC94B004932BF /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD916181DC94B004932BF /* iTunesArtwork.png */; };
 		845CD92A181DC94B004932BF /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD917181DC94B004932BF /* iTunesArtwork@2x.png */; };
-		845CD92E1825DE54004932BF /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 845CD92D1825DE54004932BF /* User.m */; };
-		845CD9311825E377004932BF /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 845CD9301825E377004932BF /* Event.m */; };
-		845CD9341826FCCA004932BF /* Show.m in Sources */ = {isa = PBXBuildFile; fileRef = 845CD9331826FCCA004932BF /* Show.m */; };
 		846360561834A95D00B3B0D5 /* redBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 846360551834A95D00B3B0D5 /* redBtn.png */; };
 		846360581834B10700B3B0D5 /* blackBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 846360571834B10700B3B0D5 /* blackBtn.png */; };
 		84789ECF181C65DB00FC59E4 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789D95181C65DA00FC59E4 /* AFHTTPClient.m */; };
@@ -81,7 +78,6 @@
 		84789FF8181C66CB00FC59E4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84789FF7181C66CB00FC59E4 /* SystemConfiguration.framework */; };
 		84789FFA181C66DB00FC59E4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84789FF9181C66DB00FC59E4 /* MessageUI.framework */; };
 		84789FFC181C66F100FC59E4 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84789FFB181C66F100FC59E4 /* Social.framework */; };
-		8478A004181C779B00FC59E4 /* Stadium.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789FFF181C779B00FC59E4 /* Stadium.m */; };
 		84AB8D571835C54A00E3E8AE /* LWReadyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AB8D561835C54A00E3E8AE /* LWReadyController.m */; };
 		84AB8D5E1835F22300E3E8AE /* LWAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AB8D5D1835F22300E3E8AE /* LWAPIClient.m */; };
 		84EFEF3C182CBC9100E3DD89 /* LWResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EFEF3B182CBC9100E3DD89 /* LWResultsController.m */; };
@@ -153,12 +149,6 @@
 		845CD916181DC94B004932BF /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		845CD917181DC94B004932BF /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		845CD92B181DCBD7004932BF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
-		845CD92C1825DE54004932BF /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		845CD92D1825DE54004932BF /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		845CD92F1825E377004932BF /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
-		845CD9301825E377004932BF /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
-		845CD9321826FCCA004932BF /* Show.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Show.h; sourceTree = "<group>"; };
-		845CD9331826FCCA004932BF /* Show.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Show.m; sourceTree = "<group>"; };
 		846360551834A95D00B3B0D5 /* redBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redBtn.png; sourceTree = "<group>"; };
 		846360571834B10700B3B0D5 /* blackBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackBtn.png; sourceTree = "<group>"; };
 		84789D94181C65DA00FC59E4 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
@@ -209,8 +199,6 @@
 		84789FF7181C66CB00FC59E4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		84789FF9181C66DB00FC59E4 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		84789FFB181C66F100FC59E4 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		84789FFE181C779B00FC59E4 /* Stadium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stadium.h; sourceTree = "<group>"; };
-		84789FFF181C779B00FC59E4 /* Stadium.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stadium.m; sourceTree = "<group>"; };
 		84AB8D551835C54A00E3E8AE /* LWReadyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWReadyController.h; sourceTree = "<group>"; };
 		84AB8D561835C54A00E3E8AE /* LWReadyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWReadyController.m; sourceTree = "<group>"; };
 		84AB8D5C1835F22300E3E8AE /* LWAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWAPIClient.h; sourceTree = "<group>"; };
@@ -523,14 +511,6 @@
 		84789FFD181C779B00FC59E4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				845CD9321826FCCA004932BF /* Show.h */,
-				845CD9331826FCCA004932BF /* Show.m */,
-				845CD92F1825E377004932BF /* Event.h */,
-				845CD9301825E377004932BF /* Event.m */,
-				845CD92C1825DE54004932BF /* User.h */,
-				845CD92D1825DE54004932BF /* User.m */,
-				84789FFE181C779B00FC59E4 /* Stadium.h */,
-				84789FFF181C779B00FC59E4 /* Stadium.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -659,14 +639,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8478A004181C779B00FC59E4 /* Stadium.m in Sources */,
 				84789ED3181C65DB00FC59E4 /* AFJSONRequestOperation.m in Sources */,
 				84067FEC183B073200232065 /* CountDownTimerUtility.m in Sources */,
 				84789ED2181C65DB00FC59E4 /* AFImageRequestOperation.m in Sources */,
 				84789F35181C65DB00FC59E4 /* Reachability.m in Sources */,
 				84789ED5181C65DB00FC59E4 /* AFPropertyListRequestOperation.m in Sources */,
 				84789F03181C65DB00FC59E4 /* JSONKit.m in Sources */,
-				845CD9341826FCCA004932BF /* Show.m in Sources */,
 				84789EFE181C65DB00FC59E4 /* NSString+SBJSON.m in Sources */,
 				84789ED6181C65DB00FC59E4 /* AFURLConnectionOperation.m in Sources */,
 				84789EFD181C65DB00FC59E4 /* NSObject+SBJSON.m in Sources */,
@@ -677,13 +655,11 @@
 				81612A6E1B656DEA009A7E44 /* LWSeatController.m in Sources */,
 				84AB8D5E1835F22300E3E8AE /* LWAPIClient.m in Sources */,
 				81A0F8CA1B13A22B007508CE /* Configuration.m in Sources */,
-				845CD92E1825DE54004932BF /* User.m in Sources */,
 				8415795C181A286800D4EBB1 /* main.m in Sources */,
 				84AB8D571835C54A00E3E8AE /* LWReadyController.m in Sources */,
 				84EFEF3C182CBC9100E3DD89 /* LWResultsController.m in Sources */,
 				84789F01181C65DB00FC59E4 /* SBJsonParser.m in Sources */,
 				84789ED4181C65DB00FC59E4 /* AFNetworkActivityIndicatorManager.m in Sources */,
-				845CD9311825E377004932BF /* Event.m in Sources */,
 				84789ED8181C65DB00FC59E4 /* UIImageView+AFNetworking.m in Sources */,
 				84789ED7181C65DB00FC59E4 /* AFXMLRequestOperation.m in Sources */,
 				84789FC7181C65E400FC59E4 /* NSDictionary+Extensions.m in Sources */,
