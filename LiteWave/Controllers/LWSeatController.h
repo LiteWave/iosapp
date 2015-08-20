@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "AppDelegate.h"
+#import "LWAppDelegate.h"
 
-@interface SeatController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface LWSeatController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     
     IBOutlet UIButton *joinButton;
     IBOutlet UITableView *sectionTable;
@@ -41,6 +41,6 @@
     int selectedSeatIndex;
 }
 
-@property (nonatomic, retain) AppDelegate *appDelegate;
+@property (nonatomic, retain) LWAppDelegate *appDelegate;
 
 @end

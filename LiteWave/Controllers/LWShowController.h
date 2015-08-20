@@ -8,9 +8,9 @@
 #import <AudioUnit/AudioUnit.h>
 #import <CoreMotion/CoreMotion.h>
 #import "CountDownTimerUtility.h"
-#import "AppDelegate.h"
+#import "LWAppDelegate.h"
 
-@interface ShowController : UIViewController <UIAccelerometerDelegate, CountDownTimerProtocol>
+@interface LWShowController : UIViewController <UIAccelerometerDelegate, CountDownTimerProtocol>
 {
     BOOL isWinner; //device is a winner!
     BOOL onORoff; //screen control
@@ -49,7 +49,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *startsInLabel;
 @property (nonatomic, retain) IBOutlet UILabel *timerLabel;
 @property (nonatomic, assign) BOOL strobeActivated;
-@property (nonatomic, retain) AppDelegate *appDelegate;
+@property (nonatomic, retain) LWAppDelegate *appDelegate;
 
 - (void)strobeTimerCallback:(id)sender;
 - (void)winnerTimerCallback:(id)sender;

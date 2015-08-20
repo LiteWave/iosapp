@@ -6,14 +6,14 @@
 //  Copyright (c) 2013 LightWave. All rights reserved.
 //
 
-#import "APIClient.h"
+#import "LWAPIClient.h"
 #import "AFNetworking.h"
 #import "Configuration.h"
 
-@implementation APIClient
+@implementation LWAPIClient
 
-+(APIClient *)instance {
-    static APIClient *theInstance = nil;
++(LWAPIClient *)instance {
+    static LWAPIClient *theInstance = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
         theInstance = [[self alloc] init];

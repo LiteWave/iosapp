@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "AppDelegate.h"
+#import "LWAppDelegate.h"
 
-@interface LevelController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface LWLevelController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     
     IBOutlet UIActivityIndicatorView *spinner;
     IBOutlet UILabel *descriptionLabel;
@@ -22,6 +22,6 @@
     int selectedLevelIndex;
 }
 
-@property (nonatomic, retain) AppDelegate *appDelegate;
+@property (nonatomic, retain) LWAppDelegate *appDelegate;
 
 @end

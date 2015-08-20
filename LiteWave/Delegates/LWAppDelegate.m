@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 LiteWave. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "LWAppDelegate.h"
 #import "Reachability.h"
 
-@implementation AppDelegate
+@implementation LWAppDelegate
 
 @synthesize uniqueID = _uniqueID;
 @synthesize clientID = _clientID;

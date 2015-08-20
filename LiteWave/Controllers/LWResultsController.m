@@ -6,16 +6,16 @@
 //  Copyright (c) 2013 LiteWave. All rights reserved.
 //
 
-#import "ResultsController.h"
-#import "AppDelegate.h"
+#import "LWResultsController.h"
+#import "LWAppDelegate.h"
 
-@interface ResultsController ()
+@interface LWResultsController ()
 
 -(IBAction)returnToMenu:(id)sender;
 
 @end
 
-@implementation ResultsController
+@implementation LWResultsController
 
 - (void)viewDidLoad
 {
@@ -24,7 +24,7 @@
 
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
-    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
 -(void)viewDidAppear:(BOOL)animated{

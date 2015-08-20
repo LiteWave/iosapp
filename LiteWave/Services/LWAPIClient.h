@@ -2,7 +2,7 @@
 //  APIClient.h
 //  LiteWave
 //
-//  Created by mike draghici on 11/14/13.
+//  Created by david anderson on 08/15/15
 //  Copyright (c) 2013 LightWave. All rights reserved.
 //
 
@@ -11,11 +11,11 @@
 typedef void (^Success)(id);
 typedef void (^Failure)(NSError*);
 
-@interface APIClient : NSObject
+@interface LWAPIClient : NSObject
 
 @property (nonatomic, retain) NSString *apiURL;
 
-+(APIClient *)instance;
++(LWAPIClient *)instance;
 
 -(void)makeRequest:(NSURLRequest*)request onSuccess:(Success)success onFailure:(Failure)failure;
 -(void)get:(NSURL*)url onSuccess:(Success)success onFailure:(Failure)failure;

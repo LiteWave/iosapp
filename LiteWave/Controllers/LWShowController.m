@@ -3,18 +3,18 @@
 //  LiteWave
 //
 
-#import "ShowController.h"
+#import "LWShowController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "AFNetworking.h"
-#import "AppDelegate.h"
-#import "ResultsController.h"
-#import "APIClient.h"
+#import "LWAppDelegate.h"
+#import "LWResultsController.h"
+#import "LWApiClient.h"
 
 #ifdef __APPLE__
 #include "TargetConditionals.h"
 #endif
 
-@implementation ShowController
+@implementation LWShowController
 
 @synthesize startsInLabel = startsInLabel_;
 @synthesize waveLabel = waveLabel_;
@@ -164,7 +164,7 @@
     
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
-    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -242,7 +242,7 @@
     [self.strobeTimer invalidate];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    ResultsController *results = [storyboard instantiateViewControllerWithIdentifier:@"results"];
+    LWResultsController *results = [storyboard instantiateViewControllerWithIdentifier:@"results"];
     [self presentViewController:results animated:YES completion:nil];
 }
 

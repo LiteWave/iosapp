@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "AppDelegate.h"
+#import "LWAppDelegate.h"
 
-@interface CircleTableViewCell : UITableViewCell
+@interface LWCircleTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UIButton *button;
@@ -18,7 +18,7 @@
 @property (nonatomic, strong) NSNumber *index;
 @property (nonatomic, strong) UITableView *tableView;
 
-@property (nonatomic, retain) AppDelegate *appDelegate;
+@property (nonatomic, retain) LWAppDelegate *appDelegate;
 
 -(void)select;
 -(void)clear;

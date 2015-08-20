@@ -6,21 +6,21 @@
 //  Copyright (c) 2015 LightWave. All rights reserved.
 //
 
-#import "CircleTableViewCell.h"
-#import "LevelController.h"
-#import "SeatController.h"
+#import "LWCircleTableViewCell.h"
+#import "LWLevelController.h"
+#import "LWSeatController.h"
 #import "AFNetworking.h"
-#import "AppDelegate.h"
-#import "APIClient.h"
+#import "LWAppDelegate.h"
+#import "LWApiClient.h"
 
 
-@implementation LevelController
+@implementation LWLevelController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     self.view.backgroundColor = self.appDelegate.backgroundColor;
     self.navigationItem.hidesBackButton = YES;
@@ -63,7 +63,7 @@
     self.appDelegate.levelID = [[levels objectAtIndex:selectedLevelIndex] valueForKeyPath:@"name"];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    SeatController *seat = [storyboard instantiateViewControllerWithIdentifier:@"seat"];
+    LWSeatController *seat = [storyboard instantiateViewControllerWithIdentifier:@"seat"];
     [self.navigationController pushViewController:seat animated:YES];
 }
 
@@ -82,9 +82,9 @@
 {
     static NSString *cellIdentifier = @"CircleTableViewCell";
     
-    CircleTableViewCell *cell = (CircleTableViewCell *)[viewTable dequeueReusableCellWithIdentifier:cellIdentifier];
+    LWCircleTableViewCell *cell = (LWCircleTableViewCell *)[viewTable dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[CircleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[LWCircleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
     NSDictionary *data = [levels objectAtIndex:indexPath.row];
@@ -104,7 +104,7 @@
 - (void)clearCells:(UITableView*)tableView selected:(int)index
 {
     NSArray *cells = [tableView visibleCells];
-    for (CircleTableViewCell *cell in cells)
+    for (LWCircleTableViewCell *cell in cells)
     {
         if ((int)cell.index == index)
             [cell select];
@@ -115,7 +115,7 @@
 
 - (void)getSeats
 {
-    [[APIClient instance] getStadium: self.appDelegate.stadiumID
+    [[LWAPIClient instance] getStadium: self.appDelegate.stadiumID
                            onSuccess:^(id data) {
                                NSError *error2;
                                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];

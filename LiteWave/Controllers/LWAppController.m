@@ -5,25 +5,25 @@
 //  Copyright (c) 2013 LiteWave. All rights reserved.
 //
 
-#import "LiteWaveController.h"
-#import "AppDelegate.h"
-#import "LevelController.h"
-#import "ReadyController.h"
+#import "LWAppController.h"
+#import "LWAppDelegate.h"
+#import "LWLevelController.h"
+#import "LWReadyController.h"
 
 #import "Configuration.h"
-#import "APIClient.h"
+#import "LWApiClient.h"
 
-@interface LiteWaveController ()
+@interface LWAppController ()
 
 @end
 
-@implementation LiteWaveController
+@implementation LWAppController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     self.navigationController.navigationBar.barTintColor = self.appDelegate.highlightColor;
 
@@ -43,7 +43,7 @@
 }
 
 - (void)getEvent {
-    [[APIClient instance] getEvents:self.appDelegate.clientID
+    [[LWAPIClient instance] getEvents:self.appDelegate.clientID
                           onSuccess:^(id data) {
                               NSArray *eventsArray = [[NSArray alloc] initWithArray:data copyItems:YES];
                               if ([eventsArray count] > 0) {
@@ -119,11 +119,11 @@
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     
-    LevelController *level = [storyboard instantiateViewControllerWithIdentifier:@"level"];
+    LWLevelController *level = [storyboard instantiateViewControllerWithIdentifier:@"level"];
     [self.navigationController pushViewController:level animated:NO];
     
     if (self.appDelegate.seatID != nil) {
-        ReadyController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
+        LWReadyController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
         [self.navigationController pushViewController:ready animated:NO];
     }
 }

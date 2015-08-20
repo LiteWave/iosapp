@@ -6,19 +6,19 @@
 //  Copyright (c) 2015 LightWave. All rights reserved.
 //
 
-#import "CircleTableViewCell.h"
-#import "SeatController.h"
-#import "ReadyController.h"
-#import "AppDelegate.h"
-#import "APIClient.h"
+#import "LWCircleTableViewCell.h"
+#import "LWSeatController.h"
+#import "LWReadyController.h"
+#import "LWAppDelegate.h"
+#import "LWApiClient.h"
 
-@implementation SeatController
+@implementation LWSeatController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     self.view.backgroundColor = self.appDelegate.backgroundColor;
     
@@ -69,9 +69,9 @@
 {
     static NSString *cellIdentifier = @"CircleTableViewCell";
     
-    CircleTableViewCell *cell = (CircleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    LWCircleTableViewCell *cell = (LWCircleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[CircleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[LWCircleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
     NSDictionary *data = [[self getTableData:tableView] objectAtIndex:indexPath.row];
@@ -155,7 +155,7 @@
 - (void)clearCells:(UITableView*)tableView selected:(int)index
 {
     NSArray *cells = [tableView visibleCells];
-    for (CircleTableViewCell *cell in cells)
+    for (LWCircleTableViewCell *cell in cells)
     {
         if ((int)cell.index == index)
             [cell select];
@@ -344,7 +344,7 @@
                                 @"user_seat",
                                 nil];
     
-    [[APIClient instance] joinEvent: self.appDelegate.eventID
+    [[LWAPIClient instance] joinEvent: self.appDelegate.eventID
                              params: params
                           onSuccess:^(id data) {
                               NSLog(@"USER ADDED RESPONSE: %@", data);
@@ -367,7 +367,7 @@
                               [defaults synchronize];
                               
                               UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-                              ReadyController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
+                              LWReadyController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
                               [self.navigationController pushViewController:ready animated:YES];
                               
                           }

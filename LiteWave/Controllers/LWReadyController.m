@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 LiteWave. All rights reserved.
 //
 
-#import "ReadyController.h"
-#import "ShowController.h"
-#import "AppDelegate.h"
+#import "LWReadyController.h"
+#import "LWShowController.h"
+#import "LWAppDelegate.h"
 #import "AFNetworking.h"
-#import "APIClient.h"
+#import "LWApiClient.h"
 
-@interface ReadyController ()
+@interface LWReadyController ()
 
 -(IBAction)withdrawUser:(id)sender;
 -(IBAction)retryFetch:(id)sender;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation ReadyController
+@implementation LWReadyController
 
 - (void)viewDidLoad
 {
@@ -28,7 +28,7 @@
 	
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
-    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     pressedChangeSeat = NO;
     
@@ -72,7 +72,7 @@
     if (self.appDelegate.liteShow) {
         NSLog(@"saved liteshow = %@", self.appDelegate.liteShow);
     } else {
-        [[APIClient instance] getShows: self.appDelegate.eventID
+        [[LWAPIClient instance] getShows: self.appDelegate.eventID
                              onSuccess: ^(id data) {
                                  NSError *error2;
                                  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
@@ -92,7 +92,7 @@
                                      
                                      NSString *liteShowID = [liteShowDict valueForKey:@"_id"];
                                      
-                                     [[APIClient instance] getShow: self.appDelegate.eventID
+                                     [[LWAPIClient instance] getShow: self.appDelegate.eventID
                                                               show: liteShowID
                                                          onSuccess:^(id data) {
                                                              NSError *error2;
@@ -146,7 +146,7 @@
                             mobile_start, @"mobile_time", nil];
 
     
-    [[APIClient instance] joinShow: self.appDelegate.userID
+    [[LWAPIClient instance] joinShow: self.appDelegate.userID
                             params: params
                          onSuccess:^(id data) {
                              NSLog(@"EVENT JOIN RESPONSE: %@", data);
@@ -181,7 +181,7 @@
 - (void)withdraw
 {
     // leave the event
-    [[APIClient instance] leaveEvent: self.appDelegate.userID
+    [[LWAPIClient instance] leaveEvent: self.appDelegate.userID
                            onSuccess:^(id data) {
                                // clear data
                                self.appDelegate.sectionID = nil;

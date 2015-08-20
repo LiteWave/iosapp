@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "AppDelegate.h"
+#import "LWAppDelegate.h"
 
-@interface ReadyController : UIViewController <UIAlertViewDelegate> {
+@interface LWReadyController : UIViewController <UIAlertViewDelegate> {
     
     IBOutlet UILabel *eventName;
     IBOutlet UILabel *eventDate;
@@ -21,7 +21,7 @@
     BOOL pressedChangeSeat;
 }
 
-@property (nonatomic, retain) AppDelegate *appDelegate;
+@property (nonatomic, retain) LWAppDelegate *appDelegate;
 
 -(void)updateSettings;
 -(void)withdraw;

@@ -10,7 +10,7 @@
 
 @class Reachability;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate> {
+@interface LWAppDelegate : UIResponder <UIApplicationDelegate> {
     
     Reachability* hostReach;
     Reachability* internetReach;

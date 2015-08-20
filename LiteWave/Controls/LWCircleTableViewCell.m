@@ -6,18 +6,18 @@
 //  Copyright (c) 2015 LightWave. All rights reserved.
 //
 
-#import "CircleTableViewCell.h"
+#import "LWCircleTableViewCell.h"
 
 #define ROUND_BUTTON_WIDTH_HEIGHT 75
 #define CELL_HEIGHT 100
 
-@implementation CircleTableViewCell
+@implementation LWCircleTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
-    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     if (self) {
         //reuseID = reuseIdentifier;

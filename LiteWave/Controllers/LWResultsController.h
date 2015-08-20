@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "AppDelegate.h"
+#import "LWAppDelegate.h"
 
-@interface ResultsController : UIViewController
+@interface LWResultsController : UIViewController
 
-@property (nonatomic, retain) AppDelegate *appDelegate;
+@property (nonatomic, retain) LWAppDelegate *appDelegate;
 
 @end
 

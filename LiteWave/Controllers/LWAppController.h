@@ -7,13 +7,13 @@
 
 #import <UIKit/UIKit.h>
 
-#import "AppDelegate.h"
+#import "LWAppDelegate.h"
 
-@interface LiteWaveController : UIViewController {
+@interface LWAppController : UIViewController {
     
 }
 
-@property (nonatomic, retain) AppDelegate *appDelegate;
+@property (nonatomic, retain) LWAppDelegate *appDelegate;
 
 - (void)getEvent;
 - (void)clearEvent;

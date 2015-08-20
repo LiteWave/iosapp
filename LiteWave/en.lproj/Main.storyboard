@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="UhA-59-4O7">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
         <!--My Event-->
         <scene sceneID="Axo-Eg-Ar3">
             <objects>
-                <viewController storyboardIdentifier="ready" id="Bq9-dY-bod" customClass="ReadyController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ready" id="Bq9-dY-bod" customClass="LWReadyController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FJ3-tq-Jna">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -69,10 +68,10 @@
             </objects>
             <point key="canvasLocation" x="367" y="-305"/>
         </scene>
-        <!--Lite Wave Controller-->
+        <!--App Controller-->
         <scene sceneID="kXH-VM-hHa">
             <objects>
-                <viewController storyboardIdentifier="register" id="iss-ty-u8M" customClass="LiteWaveController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="register" id="iss-ty-u8M" customClass="LWAppController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zsY-wE-5ZR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -89,7 +88,7 @@
         <!--Choose level-->
         <scene sceneID="ae5-yi-0UU">
             <objects>
-                <viewController storyboardIdentifier="level" id="6Cv-ty-NCf" customClass="LevelController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="level" id="6Cv-ty-NCf" customClass="LWLevelController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mw1-EP-AMx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -124,7 +123,7 @@
         <!--Choose seat-->
         <scene sceneID="riY-jI-e2p">
             <objects>
-                <viewController storyboardIdentifier="seat" id="Iox-nc-KfJ" customClass="SeatController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="seat" id="Iox-nc-KfJ" customClass="LWSeatController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lhr-sC-6eH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -173,7 +172,7 @@
         <!--Playing Show-->
         <scene sceneID="qqN-7y-9RT">
             <objects>
-                <viewController storyboardIdentifier="playing" id="JjT-sD-7rY" customClass="ShowController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="playing" id="JjT-sD-7rY" customClass="LWShowController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uYq-cy-Sdg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -223,7 +222,7 @@
         <!--:: The End ::-->
         <scene sceneID="HDu-M5-KsE">
             <objects>
-                <viewController storyboardIdentifier="results" id="0tU-b8-t7R" customClass="ResultsController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="results" id="0tU-b8-t7R" customClass="LWResultsController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4HG-WL-Ldo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
