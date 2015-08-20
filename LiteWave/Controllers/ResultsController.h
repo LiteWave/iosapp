@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "AppDelegate.h"
+
 @interface ResultsController : UIViewController
 
+@property (nonatomic, retain) AppDelegate *appDelegate;
+
 @end
+

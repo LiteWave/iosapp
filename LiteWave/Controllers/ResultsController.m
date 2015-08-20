@@ -23,19 +23,20 @@
 	// Do any additional setup after loading the view, typically from a nib.
 
     [self.navigationItem setHidesBackButton:YES animated:NO];
+    
+    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 //    
 //    appDelegate.sectionID = nil;
 //    appDelegate.rowID = nil;
 //    appDelegate.seatID = nil;
 //    appDelegate.userID = nil;
-    appDelegate.liteShow = nil;
+    self.appDelegate.liteShow = nil;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 //    
