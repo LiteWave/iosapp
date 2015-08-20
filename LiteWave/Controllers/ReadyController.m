@@ -85,15 +85,15 @@
                                  
                                  self.appDelegate.liteshowArray = [[NSArray alloc] initWithArray:showDict copyItems:YES];
                                  
-                                 if (self.appDelegate.liteshowArray.count > 0) {
+                                 if (self.appDelegate.liteshowArray.count == 0) {
                                      [self disableJoin];
                                  } else {
                                      NSDictionary *liteShowDict = [self.appDelegate.liteshowArray objectAtIndex:0];
                                      
                                      NSString *liteShowID = [liteShowDict valueForKey:@"_id"];
                                      
-                                     [[APIClient instance] getShow: liteShowID
-                                                              user: self.appDelegate.userID
+                                     [[APIClient instance] getShow: self.appDelegate.eventID
+                                                              show: liteShowID
                                                          onSuccess:^(id data) {
                                                              NSError *error2;
                                                              NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
@@ -108,8 +108,7 @@
                                                              
                                                              NSLog(@"new liteshow = %@", self.appDelegate.liteShow);
                                                              
-                                                             [self enableJoin];
-                                                             
+                                                             [self enableJoin];   
                                                          }
                                                          onFailure:^(NSError *error) {
                                                              self.appDelegate.liteShow = nil;
@@ -129,7 +128,6 @@
 -(IBAction)changeSeat:(id)sender {
     pressedChangeSeat = YES;
     [self withdraw];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(IBAction)withdrawUser:(id)sender {
@@ -170,9 +168,12 @@
                              [self presentViewController:vc animated:YES completion:nil];
                          }
                          onFailure:^(NSError *error) {
-                             if (error) {
-                                 NSLog(@"polling: no event found");
-                             }
+                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Join error"
+                                                                             message: @"Sorry, an error occurred when joining the show."
+                                                                            delegate:self
+                                                                   cancelButtonTitle:@"OK"
+                                                                   otherButtonTitles:nil];
+                             [alert show];
                          }];
     
 }
@@ -200,10 +201,18 @@
                                
                                [defaults synchronize];
                                
+                               if (!pressedChangeSeat)
+                                   [self.navigationController popViewControllerAnimated:YES];
+                               
                                NSLog(@"Left event");
                            }
                            onFailure:^(NSError *error) {
-                               NSLog(@"Error on leaving event");
+                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Leave error"
+                                                                               message: @"Sorry, an error occurred when leaving the event."
+                                                                              delegate:self
+                                                                     cancelButtonTitle:@"OK"
+                                                                     otherButtonTitles:nil];
+                               [alert show];
                            }];
 }
 

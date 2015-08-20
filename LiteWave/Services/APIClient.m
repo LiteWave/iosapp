@@ -116,8 +116,8 @@
     [self get:url onSuccess: success onFailure: failure];
 }
 
--(void)getShow:(NSString*)showID user:(NSString*)userID onSuccess:(Success)success onFailure:(Failure)failure {
-    NSURL *url = [[NSURL alloc] initWithString:[self showsPath:showID withUser:userID ]];
+-(void)getShow:(NSString*)eventID show:(NSString*)showID onSuccess:(Success)success onFailure:(Failure)failure {
+    NSURL *url = [[NSURL alloc] initWithString:[self showsPath:eventID withShow:showID ]];
     [self get:url onSuccess: success onFailure: failure];
 }
 
@@ -145,10 +145,10 @@
 }
 
 -(NSString*)showsPath:(NSString*)eventID {
-    return [NSString stringWithFormat: @"%@/events/%@/event_liteshows", self.apiURL, eventID];
+    return [NSString stringWithFormat: @"%@/events/%@/shows", self.apiURL, eventID];
 }
--(NSString*)showsPath:(NSString*)showID withUser:(NSString*)userID {
-    return [NSString stringWithFormat: @"%@/event_liteshows/%@/user_locations/%@/liteshow", self.apiURL, showID, userID];
+-(NSString*)showsPath:(NSString*)eventID withShow:(NSString*)showID {
+    return [NSString stringWithFormat: @"%@/events/%@/shows/%@", self.apiURL, eventID, showID];
 }
 
 @end

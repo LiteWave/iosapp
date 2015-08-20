@@ -14,54 +14,6 @@
 #include "TargetConditionals.h"
 #endif
 
-OSStatus RenderTone(
-                    void *inRefCon,
-                    AudioUnitRenderActionFlags 	*ioActionFlags,
-                    const AudioTimeStamp 		*inTimeStamp,
-                    UInt32 						inBusNumber,
-                    UInt32 						inNumberFrames,
-                    AudioBufferList 			*ioData)
-
-{
-	// Fixed amplitude is good enough for our purposes
-	const double amplitude = 0.25;
-    
-	// Get the tone parameters out of the view controller
-	ShowController *viewController =
-    (__bridge ShowController *)inRefCon;
-	double theta = viewController->theta;
-	double theta_increment = 2.0 * M_PI * viewController->frequency / viewController->sampleRate;
-    
-	// This is a mono tone generator so we only need the first buffer
-	const int channel = 0;
-	Float32 *buffer = (Float32 *)ioData->mBuffers[channel].mData;
-	
-	// Generate the samples
-	for (UInt32 frame = 0; frame < inNumberFrames; frame++)
-	{
-		buffer[frame] = sin(theta) * amplitude;
-		
-		theta += theta_increment;
-		if (theta > 2.0 * M_PI)
-		{
-			theta -= 2.0 * M_PI;
-		}
-	}
-	
-	// Store the theta back in the view controller
-	viewController->theta = theta;
-    
-	return noErr;
-}
-
-void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
-{
-	ShowController *viewController =
-    (__bridge ShowController *)inClientData;
-	
-	[viewController stop];
-}
-
 @implementation ShowController
 
 @synthesize startsInLabel = startsInLabel_;
@@ -71,103 +23,23 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
 @synthesize strobeActivated = strobeActivated_;
 @synthesize winnerTimer = winnerTimer_;
 
-- (void)createToneUnit
-{
-	// Configure the search parameters to find the default playback output unit
-	// (called the kAudioUnitSubType_RemoteIO on iOS but
-	// kAudioUnitSubType_DefaultOutput on Mac OS X)
-	AudioComponentDescription defaultOutputDescription;
-	defaultOutputDescription.componentType = kAudioUnitType_Output;
-	defaultOutputDescription.componentSubType = kAudioUnitSubType_RemoteIO;
-	defaultOutputDescription.componentManufacturer = kAudioUnitManufacturer_Apple;
-	defaultOutputDescription.componentFlags = 0;
-	defaultOutputDescription.componentFlagsMask = 0;
-	
-	// Get the default playback output unit
-	AudioComponent defaultOutput = AudioComponentFindNext(NULL, &defaultOutputDescription);
-	//NSAssert(defaultOutput, @"Can't find default output");
-	
-	// Create a new unit based on this that we'll use for output
-	OSErr err = AudioComponentInstanceNew(defaultOutput, &toneUnit);
-	//NSAssert1(self.toneUnit, @"Error creating unit: %ld", err);
-	
-	// Set our tone rendering function on the unit
-	AURenderCallbackStruct input;
-	input.inputProc = RenderTone;
-	input.inputProcRefCon = (__bridge void *)(self);
-	err = AudioUnitSetProperty(toneUnit,
-                               kAudioUnitProperty_SetRenderCallback,
-                               kAudioUnitScope_Input,
-                               0,
-                               &input,
-                               sizeof(input));
-	//NSAssert1(err == noErr, @"Error setting callback: %ld", err);
-	
-	// Set the format to 32 bit, single channel, floating point, linear PCM
-	const int four_bytes_per_float = 4;
-	const int eight_bits_per_byte = 8;
-	AudioStreamBasicDescription streamFormat;
-	streamFormat.mSampleRate = sampleRate;
-	streamFormat.mFormatID = kAudioFormatLinearPCM;
-	streamFormat.mFormatFlags =
-    kAudioFormatFlagsNativeFloatPacked | kAudioFormatFlagIsNonInterleaved;
-	streamFormat.mBytesPerPacket = four_bytes_per_float;
-	streamFormat.mFramesPerPacket = 1;
-	streamFormat.mBytesPerFrame = four_bytes_per_float;
-	streamFormat.mChannelsPerFrame = 1;
-	streamFormat.mBitsPerChannel = four_bytes_per_float * eight_bits_per_byte;
-	err = AudioUnitSetProperty (toneUnit,
-                                kAudioUnitProperty_StreamFormat,
-                                kAudioUnitScope_Input,
-                                0,
-                                &streamFormat,
-                                sizeof(AudioStreamBasicDescription));
-	//NSAssert1(err == noErr, @"Error setting stream format: %ld", err);
-}
 
-- (void)togglePlay
-{
-	if (toneUnit)
-	{
-		AudioOutputUnitStop(toneUnit);
-		AudioUnitUninitialize(toneUnit);
-		AudioComponentInstanceDispose(toneUnit);
-		toneUnit = nil;
-		
-	}
-	else
-	{
-		[self createToneUnit];
-		
-		// Stop changing parameters on the unit
-		OSErr err = AudioUnitInitialize(toneUnit);
-		//NSAssert1(err == noErr, @"Error initializing unit: %ld", err);
-		
-		// Start playback
-		err = AudioOutputUnitStart(toneUnit);
-		//NSAssert1(err == noErr, @"Error starting unit: %ld", err);
-		
-	}
-}
-
--(void)startAccelerometerData{
+-(void)startTimer {
     
     motionManager = [[CMMotionManager alloc] init];
     motionManager.accelerometerUpdateInterval = 0.01;
     [motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
         //NSLog(@"x:= %f y:= %f z:= %f", accelerometerData.acceleration.x, accelerometerData.acceleration.x,accelerometerData.acceleration.x);
         
-        if(accelerometerData.acceleration.x > 1.0){
+        if (accelerometerData.acceleration.x > 1.0){
             
             [motionManager stopAccelerometerUpdates];
-            
-            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
             
             NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
             [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
             [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
             
-            NSDate *startDate = [dateformat dateFromString:[appDelegate.eventJoinData valueForKey:@"mobile_start_at"]];
+            NSDate *startDate = [dateformat dateFromString:[self.appDelegate.eventJoinData valueForKey:@"mobile_start_at"]];
             
             NSLog(@"start %@",startDate);
             
@@ -202,95 +74,85 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
     } ];
 }
 
--(void) startLiteShow{
+-(void) startShow{
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [spinner startAnimating];
     
-    if (appDelegate.isOnline) {
-        
-        [spinner startAnimating];
-        
-        commandArray = [appDelegate.liteShow objectForKey:@"commands"];
+    commandArray = [self.appDelegate.liteShow objectForKey:@"commands"];
 
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        if([appDelegate.eventJoinData objectForKey:@"_winner_user_locationId"]) {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if([self.appDelegate.eventJoinData objectForKey:@"_winner_user_locationId"]) {
+      
+      self.appDelegate.winnerID = [self.appDelegate.eventJoinData valueForKey:@"_winner_user_locationId"];
+      if([self.appDelegate.winnerID isKindOfClass:[NSNull class]]){
           
-          appDelegate.winnerID = [appDelegate.eventJoinData valueForKey:@"_winner_user_locationId"];
-          if([appDelegate.winnerID isKindOfClass:[NSNull class]]){
-              
-              [defaults removeObjectForKey:@"winnerID"];
-              isWinner=NO;
-              
-          }else{
-              
-              [defaults setValue:appDelegate.winnerID forKey:@"winnerID"];
-              isWinner=YES;
-              
-          }
-          
-        } else {
-          appDelegate.winnerID = nil;
           [defaults removeObjectForKey:@"winnerID"];
           isWinner=NO;
-        }
-        [defaults synchronize];
+          
+      }else{
+          
+          [defaults setValue:self.appDelegate.winnerID forKey:@"winnerID"];
+          isWinner=YES;
+          
+      }
+      
+    } else {
+      self.appDelegate.winnerID = nil;
+      [defaults removeObjectForKey:@"winnerID"];
+      isWinner=NO;
+    }
+    [defaults synchronize];
 
-        if ([appDelegate.eventJoinData objectForKey:@"mobile_time_offset_ms"]) {
+    if ([self.appDelegate.eventJoinData objectForKey:@"mobile_time_offset_ms"]) {
+      
+      [spinner stopAnimating];
+      
+      counterUtil = [[CountDownTimerUtility alloc] init];
+      [counterUtil setDelegate:self];
+      
+      self.waveLabel.hidden = NO;
+      
+      [self startTimer];
+      
+    #if (TARGET_IPHONE_SIMULATOR)
+      
+      [motionManager stopAccelerometerUpdates];
+      
+      NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
+      [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+      [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+      
+      NSDate *startDate = [dateformat dateFromString:[self.appDelegate.eventJoinData valueForKey:@"mobile_start_at"]];
+      
+      NSString *mobile_start_at = [dateformat stringFromDate:startDate];
+      
+      NSLog(@"start %@",mobile_start_at);
+      
+      diff = [startDate timeIntervalSinceNow] * 100.0f;
+      
+      NSLog(@"countdown in %f...", diff);
+      
+      if(diff<0){
           
           [spinner stopAnimating];
+          [self.navigationController popViewControllerAnimated:YES];
           
-          counterUtil = [[CountDownTimerUtility alloc] init];
-          [counterUtil setDelegate:self];
+      }else{
           
-          self.waveLabel.hidden = NO;
+          [spinner stopAnimating];
+          self.timerLabel.hidden = NO;
+          self.startsInLabel.hidden = NO;
           
-          [self startAccelerometerData];
+          [counterUtil startCountDownTimerWithTime:diff andUILabel:self.timerLabel];
           
-        #if (TARGET_IPHONE_SIMULATOR)
-          
-          [motionManager stopAccelerometerUpdates];
-          
-          NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
-          [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
-          [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-          
-          NSDate *startDate = [dateformat dateFromString:[appDelegate.eventJoinData valueForKey:@"mobile_start_at"]];
-          
-          NSString *mobile_start_at = [dateformat stringFromDate:startDate];
-          
-          NSLog(@"start %@",mobile_start_at);
-          
-          diff = [startDate timeIntervalSinceNow] * 100.0f;
-          
-          NSLog(@"countdown in %f...", diff);
-          
-          if(diff<0){
-              
-              [spinner stopAnimating];
-              [self.navigationController popViewControllerAnimated:YES];
-              
-          }else{
-              
-              [spinner stopAnimating];
-              self.timerLabel.hidden = NO;
-              self.startsInLabel.hidden = NO;
-              
-              [counterUtil startCountDownTimerWithTime:diff andUILabel:self.timerLabel];
-              
-          }
-          
-          self.waveLabel.hidden = YES;
-          motionManager = nil;
-          
-          
-        #endif
-        }
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"Network error", @"Network error")
-                                                        message: NSLocalizedString(@"No internet connection found, this application requires an internet connection.", @"Network error") delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
+      }
+      
+      self.waveLabel.hidden = YES;
+      motionManager = nil;
+      
+      
+    #endif
     }
-    
 }
 
 - (void)viewDidLoad {
@@ -302,16 +164,7 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
     
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
-    sampleRate = 44100;
-    
-	OSStatus result = AudioSessionInitialize(NULL, NULL, ToneInterruptionListener, (__bridge void *)(self));
-	if (result == kAudioSessionNoError)
-	{
-		UInt32 sessionCategory = kAudioSessionCategory_MediaPlayback;
-		AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);
-	}
-	AudioSessionSetActive(true);
-    
+    self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -324,7 +177,7 @@ void ToneInterruptionListener(void *inClientData, UInt32 inInterruptionState)
     position=0;
     diff=0;
     
-    [self startLiteShow];
+    [self startShow];
     
     strobeIsOn_ = NO;
 	self.strobeActivated = NO;

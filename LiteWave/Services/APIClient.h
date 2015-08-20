@@ -32,7 +32,7 @@ typedef void (^Failure)(NSError*);
 -(void)leaveEvent:(NSString*)userID onSuccess:(Success)success onFailure:(Failure)failure;
 
 -(void)getShows:(NSString*)eventID onSuccess:(Success)success onFailure:(Failure)failure;
--(void)getShow:(NSString*)showID user:(NSString*)userID onSuccess:(Success)success onFailure:(Failure)failure;
+-(void)getShow:(NSString*)eventID show:(NSString*)showID onSuccess:(Success)success onFailure:(Failure)failure;
 -(void)joinShow:(NSString*)userID params:(NSDictionary*)params onSuccess:(Success)success onFailure:(Failure)failure;
 
 // API HELPERS
@@ -41,7 +41,7 @@ typedef void (^Failure)(NSError*);
 -(NSString*)eventsPath:(NSString*)clientID withEvent:(NSString*)eventID;
 
 -(NSString*)showsPath:(NSString*)eventID;
--(NSString*)showsPath:(NSString*)eventID withUser:(NSString*)userID;
+-(NSString*)showsPath:(NSString*)eventID withShow:(NSString*)showID;
 
 
 @end

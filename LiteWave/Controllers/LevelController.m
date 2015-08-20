@@ -23,6 +23,9 @@
     self.appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     self.view.backgroundColor = self.appDelegate.backgroundColor;
+    self.navigationItem.hidesBackButton = YES;
+    
+    viewTable.hidden = YES;
     
     selectedLevelIndex = -1;
     
@@ -31,7 +34,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 
-    self.navigationItem.hidesBackButton = YES;
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(selectRow:)
@@ -164,6 +167,7 @@
                                  self.view.frame.size.height - descriptionLabel.frame.size.height);
     viewTable.backgroundColor = self.appDelegate.backgroundColor;
     viewTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    viewTable.hidden = NO;
     [viewTable setContentInset:UIEdgeInsetsMake(70,0,0,0)];
     [viewTable setDataSource:self];
     [viewTable setDelegate:self];

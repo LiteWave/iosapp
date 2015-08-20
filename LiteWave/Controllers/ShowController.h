@@ -8,6 +8,7 @@
 #import <AudioUnit/AudioUnit.h>
 #import <CoreMotion/CoreMotion.h>
 #import "CountDownTimerUtility.h"
+#import "AppDelegate.h"
 
 @interface ShowController : UIViewController <UIAccelerometerDelegate, CountDownTimerProtocol>
 {
@@ -25,8 +26,6 @@
     NSString *audioShowString_;
 	UILabel *frequencyLabel_;
 	UIButton *playButton_;
-	UISlider *frequencySlider_;
-	AudioComponentInstance toneUnit;
     NSTimer *strobeTimer_;
     NSTimer *winnerTimer_;
     CMMotionManager *motionManager;
@@ -39,7 +38,6 @@
 @public
     double diff;
 	double frequency;
-	double sampleRate;
 	double theta;
     int position; //command position in the array
     int framePosition; //seconds elapsed during frame playtime
@@ -51,6 +49,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *startsInLabel;
 @property (nonatomic, retain) IBOutlet UILabel *timerLabel;
 @property (nonatomic, assign) BOOL strobeActivated;
+@property (nonatomic, retain) AppDelegate *appDelegate;
 
 - (void)strobeTimerCallback:(id)sender;
 - (void)winnerTimerCallback:(id)sender;
