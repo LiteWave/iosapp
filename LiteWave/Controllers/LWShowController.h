@@ -7,7 +7,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioUnit/AudioUnit.h>
 #import <CoreMotion/CoreMotion.h>
-#import "CountDownTimerUtility.h"
+#import "LWCountDownTimerUtility.h"
 #import "LWAppDelegate.h"
 
 @interface LWShowController : UIViewController <UIAccelerometerDelegate, CountDownTimerProtocol>
@@ -30,7 +30,7 @@
     NSTimer *winnerTimer_;
     CMMotionManager *motionManager;
     NSArray *commandArray;
-    CountDownTimerUtility *counterUtil;
+    LWCountDownTimerUtility *counterUtil;
     BOOL strobeIsOn_; // For our code to turn strobe on and off
 	BOOL strobeActivated_; // To allow user to turn off the light all together
 	BOOL strobeFlashOn_; // For our code to turn strobe on and off rapidly

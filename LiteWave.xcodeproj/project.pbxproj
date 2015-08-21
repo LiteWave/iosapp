@@ -11,7 +11,7 @@
 		81612A721B656E79009A7E44 /* LWLevelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81612A711B656E79009A7E44 /* LWLevelController.m */; };
 		8161E3471B69D7ED00857B95 /* LWCircleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8161E3461B69D7ED00857B95 /* LWCircleTableViewCell.m */; };
 		81A0F8CA1B13A22B007508CE /* LWConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A0F8C91B13A22B007508CE /* LWConfiguration.m */; };
-		84067FEC183B073200232065 /* CountDownTimerUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 84067FEB183B073200232065 /* CountDownTimerUtility.m */; };
+		84067FEC183B073200232065 /* LWCountDownTimerUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 84067FEB183B073200232065 /* LWCountDownTimerUtility.m */; };
 		84157950181A286800D4EBB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8415794F181A286800D4EBB1 /* Foundation.framework */; };
 		84157952181A286800D4EBB1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84157951181A286800D4EBB1 /* CoreGraphics.framework */; };
 		84157954181A286800D4EBB1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84157953181A286800D4EBB1 /* UIKit.framework */; };
@@ -102,8 +102,8 @@
 		8161E3461B69D7ED00857B95 /* LWCircleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWCircleTableViewCell.m; sourceTree = "<group>"; };
 		81A0F8C81B139FF6007508CE /* LWConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWConfiguration.h; sourceTree = "<group>"; };
 		81A0F8C91B13A22B007508CE /* LWConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWConfiguration.m; sourceTree = "<group>"; };
-		84067FEA183B073200232065 /* CountDownTimerUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountDownTimerUtility.h; sourceTree = "<group>"; };
-		84067FEB183B073200232065 /* CountDownTimerUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountDownTimerUtility.m; sourceTree = "<group>"; };
+		84067FEA183B073200232065 /* LWCountDownTimerUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWCountDownTimerUtility.h; sourceTree = "<group>"; };
+		84067FEB183B073200232065 /* LWCountDownTimerUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWCountDownTimerUtility.m; sourceTree = "<group>"; };
 		8415794C181A286800D4EBB1 /* LiteWave.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiteWave.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8415794F181A286800D4EBB1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		84157951181A286800D4EBB1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -488,8 +488,8 @@
 		84789F61181C65E400FC59E4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				84067FEA183B073200232065 /* CountDownTimerUtility.h */,
-				84067FEB183B073200232065 /* CountDownTimerUtility.m */,
+				84067FEA183B073200232065 /* LWCountDownTimerUtility.h */,
+				84067FEB183B073200232065 /* LWCountDownTimerUtility.m */,
 				84789F62181C65E400FC59E4 /* Categories */,
 			);
 			path = Helpers;
@@ -640,7 +640,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84789ED3181C65DB00FC59E4 /* AFJSONRequestOperation.m in Sources */,
-				84067FEC183B073200232065 /* CountDownTimerUtility.m in Sources */,
+				84067FEC183B073200232065 /* LWCountDownTimerUtility.m in Sources */,
 				84789ED2181C65DB00FC59E4 /* AFImageRequestOperation.m in Sources */,
 				84789F35181C65DB00FC59E4 /* Reachability.m in Sources */,
 				84789ED5181C65DB00FC59E4 /* AFPropertyListRequestOperation.m in Sources */,

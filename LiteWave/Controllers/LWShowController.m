@@ -107,7 +107,7 @@
       
       [spinner stopAnimating];
       
-      counterUtil = [[CountDownTimerUtility alloc] init];
+      counterUtil = [[LWCountDownTimerUtility alloc] init];
       [counterUtil setDelegate:self];
       
       self.waveLabel.hidden = NO;
