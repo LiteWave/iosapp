@@ -19,6 +19,7 @@
 - (void)clearEvent;
 - (void)saveEvent:(id)event;
 - (void)beginEvent:(NSString*)eventID;
-- (void)showNoEvent;
+- (void)handleNoEvent;
+- (void)onBecomeActive;
 
 @end

@@ -35,28 +35,72 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     if (self.appDelegate.eventID != nil) {
-        [self beginEvent:self.appDelegate.eventID];
+        // if the day is no longer the same, show no event
+        NSDate *todayDate = [NSDate date];
+        NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
+        [dateformat setDateFormat:@"dd"];
+        [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+        
+        NSString *today = [dateformat stringFromDate:todayDate];
+        NSString *eventDay = [dateformat stringFromDate:self.appDelegate.eventDate];
+        
+        // clear the event if it has expired
+        if ([today isEqualToString: eventDay]) {
+            [self beginEvent:self.appDelegate.eventID];
+        } else {
+            [self handleNoEvent];
+        }
     } else {
         [self getEvent];
     }
     
 }
 
+- (void)onBecomeActive
+{
+    [self getEvent];
+}
+
+
 - (void)getEvent {
     [[LWAPIClient instance] getEvents:self.appDelegate.clientID
-                          onSuccess:^(id data) {
-                              NSArray *eventsArray = [[NSArray alloc] initWithArray:data copyItems:YES];
-                              if ([eventsArray count] > 0) {
-                                  NSDictionary *event = [eventsArray objectAtIndex:0];
-                                  [self saveEvent:event];
-                                  [self beginEvent:[event valueForKey:@"_id"]];
-                              } else {
-                                  [self showNoEvent];
-                              }
-                          }
-                          onFailure:^(NSError *error) {
-                              [self showNoEvent];
-                          }];
+                            onSuccess:^(id data) {
+                                NSArray *eventsArray = [[NSArray alloc] initWithArray:data copyItems:YES];
+                                NSDictionary *todayEvent;
+
+                                NSDate *todayDate = [NSDate date];
+                                NSDateFormatter *dayformat = [[NSDateFormatter alloc] init];
+                                [dayformat setDateFormat:@"dd"];
+                                [dayformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+                                NSString *today = [dayformat stringFromDate:todayDate];
+
+                                NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
+                                [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'.000Z'"];
+                                [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+
+                                for (NSDictionary *event in eventsArray) {
+
+                                  NSDate *eventDate = [dateformat dateFromString:[event valueForKey:@"date"]];
+                                  NSString *eventDay = [dayformat stringFromDate:eventDate];
+                                  
+                                  // clear the event if it has expired
+                                  if ([today isEqualToString: eventDay]) {
+                                      todayEvent = event;
+                                      break;
+                                  }
+                                }
+
+                                // if there is an event today, save and begin
+                                if (todayEvent) {
+                                  [self saveEvent:todayEvent];
+                                  [self beginEvent:[todayEvent valueForKey:@"_id"]];
+                                } else {
+                                  [self handleNoEvent];
+                                }
+                                }
+                                onFailure:^(NSError *error) {
+                                [self handleNoEvent];
+                                }];
 
 }
 
@@ -103,21 +147,8 @@
 }
 
 - (void)beginEvent:(id)eventID {
-    
-    // if the day is no longer the same, show no event
-    NSDate *todayDate = [NSDate date];
-    NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
-    [dateformat setDateFormat:@"dd"];
-    [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-    
-    NSString *today = [dateformat stringFromDate:todayDate];
-    NSString *eventDay = [dateformat stringFromDate:self.appDelegate.eventDate];
-
-    // clear the event if it has expired
-    if (![today isEqualToString: eventDay]) {
-        [self handleNoEvent];
-        return;
-    }
+    // remove observers
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     
@@ -131,6 +162,10 @@
 }
 
 - (void)handleNoEvent {
+    
+    // add observer for when app becomes active
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onBecomeActive) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
+
     [self clearEvent];
 }
 
