@@ -10,7 +10,7 @@
 #import "LWLevelController.h"
 #import "LWReadyController.h"
 
-#import "Configuration.h"
+#import "LWConfiguration.h"
 #import "LWApiClient.h"
 
 @interface LWAppController ()

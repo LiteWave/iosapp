@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+#import "LWAppDelegate.h"
+
 typedef void (^Success)(id);
 typedef void (^Failure)(NSError*);
 
 @interface LWAPIClient : NSObject
 
-@property (nonatomic, retain) NSString *apiURL;
+@property (nonatomic, retain) LWAppDelegate *appDelegate;
 
 +(LWAPIClient *)instance;
 

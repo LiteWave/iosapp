@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Configuration : NSObject {
+@interface LWConfiguration : NSObject {
 }
 
 @property (nonatomic, retain) NSMutableDictionary *properties;

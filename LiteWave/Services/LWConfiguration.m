@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-#import "Configuration.h"
+#import "LWConfiguration.h"
 
-@implementation Configuration
+@implementation LWConfiguration
 
 + (id)instance {
-    static Configuration *theInstance = nil;
+    static LWConfiguration *theInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         theInstance = [[self alloc] init];
@@ -26,14 +26,6 @@
     self = [super init];
     if (self) {
         _properties = [[NSMutableDictionary alloc] init];
-        
-    #ifdef DEBUG
-        _properties[@"apiURL"] = @"http://127.0.0.1:3000/api";
-        //_properties[@"apiURL"] = @"http://104.130.156.82:8080/api";
-    #else
-        _properties[@"apiURL"] = @"http://104.130.156.82:8080/api";
-    #endif
-        
     }
     return self;
 }

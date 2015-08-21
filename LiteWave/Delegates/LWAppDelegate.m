@@ -36,7 +36,13 @@
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
-    hostReach = [Reachability reachabilityWithHostName:@"http://test.crowdpxl.com"];
+    #ifdef DEBUG
+        self.apiURL = @"http://127.0.0.1:3000/api";
+    #else
+        self.apiURL = @"http://104.130.156.82:8080/api";
+    #endif
+    
+    hostReach = [Reachability reachabilityWithHostName:self.apiURL];
     [hostReach startNotifier];
     [self updateInterfaceWithReachability: hostReach];
     
@@ -66,7 +72,7 @@
     self.liteshowArray = [defaults objectForKey:@"liteshowArray"];
     
     self.backgroundColor = [UIColor whiteColor];
-    self.borderColor = [UIColor blackColor];//[UIColor colorWithRed:46.0/255.0 green:46.0/255.0 blue:46.0/255.0 alpha:1.0];
+    self.borderColor = [UIColor blackColor];
     self.highlightColor = [UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0];
     self.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255 blue:0.0/255 alpha:1.0];
     self.textSelectedColor = [UIColor whiteColor];

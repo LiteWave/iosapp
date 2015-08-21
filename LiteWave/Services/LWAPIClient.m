@@ -8,7 +8,6 @@
 
 #import "LWAPIClient.h"
 #import "AFNetworking.h"
-#import "Configuration.h"
 
 @implementation LWAPIClient
 
@@ -24,7 +23,7 @@
 -(id)init {
     self = [super init];
     if (self) {
-        _apiURL = [[Configuration instance] get: @"apiURL"];
+        self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     }
     
     return self;
@@ -97,13 +96,13 @@
 }
 
 -(void)joinEvent:(NSString*)eventID params:(NSDictionary*)params onSuccess:(Success)success onFailure:(Failure)failure {
-    NSString *path = [NSString stringWithFormat: @"%@/events/%@/user_locations", self.apiURL, eventID];
+    NSString *path = [NSString stringWithFormat: @"%@/events/%@/user_locations", self.appDelegate.apiURL, eventID];
     NSURL *url = [[NSURL alloc] initWithString:path];
     [self post:url params:params onSuccess: success onFailure: failure];
 }
 
 -(void)leaveEvent:(NSString*)userID onSuccess:(Success)success onFailure:(Failure)failure {
-    NSString *path = [NSString stringWithFormat: @"%@/user_locations/%@/", self.apiURL, userID];
+    NSString *path = [NSString stringWithFormat: @"%@/user_locations/%@/", self.appDelegate.apiURL, userID];
     NSURL *url = [[NSURL alloc] initWithString:path];
     [self delete:url onSuccess: success onFailure: failure];
 }
@@ -122,7 +121,7 @@
 }
 
 -(void)joinShow:(NSString*)userID params:(NSDictionary*)params onSuccess:(Success)success onFailure:(Failure)failure {
-    NSString *path = [NSString stringWithFormat: @"%@/user_locations/%@/event_joins", self.apiURL, userID];
+    NSString *path = [NSString stringWithFormat: @"%@/user_locations/%@/event_joins", self.appDelegate.apiURL, userID];
     NSURL *url = [[NSURL alloc] initWithString:path];
     [self post:url params:params onSuccess: success onFailure: failure];
 }
@@ -133,7 +132,7 @@
     return [self stadiumsPath: @""];
 }
 -(NSString*)stadiumsPath:(NSString*)stadiumID {
-    return [NSString stringWithFormat: @"%@/stadiums/%@", self.apiURL, stadiumID];
+    return [NSString stringWithFormat: @"%@/stadiums/%@", self.appDelegate.apiURL, stadiumID];
 }
 
 
@@ -141,14 +140,14 @@
     return [self eventsPath: clientID withEvent: @""];
 }
 -(NSString*)eventsPath:(NSString*)clientID withEvent:(NSString*)eventID {
-    return [NSString stringWithFormat: @"%@/clients/%@/events/%@", self.apiURL, clientID, eventID];
+    return [NSString stringWithFormat: @"%@/clients/%@/events/%@", self.appDelegate.apiURL, clientID, eventID];
 }
 
 -(NSString*)showsPath:(NSString*)eventID {
-    return [NSString stringWithFormat: @"%@/events/%@/shows", self.apiURL, eventID];
+    return [NSString stringWithFormat: @"%@/events/%@/shows", self.appDelegate.apiURL, eventID];
 }
 -(NSString*)showsPath:(NSString*)eventID withShow:(NSString*)showID {
-    return [NSString stringWithFormat: @"%@/events/%@/shows/%@", self.apiURL, eventID, showID];
+    return [NSString stringWithFormat: @"%@/events/%@/shows/%@", self.appDelegate.apiURL, eventID, showID];
 }
 
 @end
