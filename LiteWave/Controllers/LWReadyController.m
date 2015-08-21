@@ -168,8 +168,8 @@
                              [self presentViewController:vc animated:YES completion:nil];
                          }
                          onFailure:^(NSError *error) {
-                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Join error"
-                                                                             message: @"Sorry, an error occurred when joining the show."
+                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Join failed"
+                                                                             message: @"Sorry, this show has expired."
                                                                             delegate:self
                                                                    cancelButtonTitle:@"OK"
                                                                    otherButtonTitles:nil];

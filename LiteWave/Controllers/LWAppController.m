@@ -63,6 +63,7 @@
 - (void)saveEvent:(id)event {
     self.appDelegate.eventID = [event valueForKey:@"_id"];
     self.appDelegate.eventName = [event valueForKey:@"name"];
+    //self.appDelegate.stadiumID = [event valueForKey:@"_stadiumId"];
     
     NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
     [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'.000Z'"];
@@ -111,11 +112,12 @@
     
     NSString *today = [dateformat stringFromDate:todayDate];
     NSString *eventDay = [dateformat stringFromDate:self.appDelegate.eventDate];
-    
-//    if (![today isEqualToString: eventDay]) {
-//        [self showNoEvent];
-//        return;
-//    }
+
+    // clear the event if it has expired
+    if (![today isEqualToString: eventDay]) {
+        [self handleNoEvent];
+        return;
+    }
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     
@@ -128,7 +130,7 @@
     }
 }
 
-- (void)showNoEvent {
+- (void)handleNoEvent {
     [self clearEvent];
 }
 
