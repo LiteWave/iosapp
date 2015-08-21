@@ -22,6 +22,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //[self clearEvent];
+    //return;
 	// Do any additional setup after loading the view, typically from a nib.
     self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
@@ -53,7 +55,6 @@
     } else {
         [self getEvent];
     }
-    
 }
 
 - (void)onBecomeActive
@@ -107,21 +108,15 @@
 - (void)saveEvent:(id)event {
     self.appDelegate.eventID = [event valueForKey:@"_id"];
     self.appDelegate.eventName = [event valueForKey:@"name"];
-    //self.appDelegate.stadiumID = [event valueForKey:@"_stadiumId"];
     
     NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
     [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'.000Z'"];
     [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-    self.appDelegate.eventDate = [dateformat dateFromString:[event valueForKey:@"eventAt"]];
+    self.appDelegate.eventDate = [dateformat dateFromString:[event valueForKey:@"date"]];
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.appDelegate.stadiumID = [event valueForKey:@"_stadiumId"];
     
-    [defaults setValue:self.appDelegate.eventID forKey:@"eventID"];
-    [defaults setValue:self.appDelegate.stadiumID forKey:@"stadiumID"];
-    [defaults setValue:self.appDelegate.eventName forKey:@"eventName"];
-    [defaults setObject:self.appDelegate.eventDate forKey:@"eventDate"];
-    
-    [defaults synchronize];
+    [self updateDefaults];
 }
 
 - (void)clearEvent {
@@ -129,19 +124,29 @@
     self.appDelegate.eventName = nil;
     self.appDelegate.eventDate = nil;
     
+    self.appDelegate.stadiumID = nil;
+    
     self.appDelegate.seatID = nil;
     self.appDelegate.rowID = nil;
     self.appDelegate.sectionID = nil;
+    self.appDelegate.levelID = nil;
     
+    [self updateDefaults];
+}
+
+- (void)updateDefaults {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     [defaults setValue:self.appDelegate.eventID forKey:@"eventID"];
     [defaults setValue:self.appDelegate.eventName forKey:@"eventName"];
     [defaults setObject:self.appDelegate.eventDate forKey:@"eventDate"];
     
-    [defaults setObject:self.appDelegate.eventDate forKey:@"seatID"];
-    [defaults setObject:self.appDelegate.eventDate forKey:@"rowID"];
-    [defaults setObject:self.appDelegate.eventDate forKey:@"sectionID"];
+    [defaults setObject:self.appDelegate.stadiumID forKey:@"stadiumID"];
+    
+    [defaults setObject:self.appDelegate.seatID forKey:@"seatID"];
+    [defaults setObject:self.appDelegate.rowID forKey:@"rowID"];
+    [defaults setObject:self.appDelegate.sectionID forKey:@"sectionID"];
+    [defaults setObject:self.appDelegate.levelID forKey:@"levelID"];
     
     [defaults synchronize];
 }

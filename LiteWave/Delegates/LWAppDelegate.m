@@ -52,6 +52,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.uniqueID = [defaults stringForKey:@"uuid"];
     self.clientID = @"5260316cbf80240000000001"; //trailblazers
+    self.levelID = [defaults stringForKey:@"levelID"];
     self.sectionID = [defaults stringForKey:@"sectionID"];
     self.rowID = [defaults stringForKey:@"rowID"];
     self.seatID = [defaults stringForKey:@"seatID"];
@@ -59,9 +60,8 @@
     self.eventID = [defaults stringForKey:@"eventID"];
     self.eventName = [defaults stringForKey:@"eventName"];
     self.eventDate = [defaults objectForKey:@"eventDate"];
+    self.stadiumID = [defaults stringForKey:@"stadiumID"];
     self.userID = [defaults objectForKey:@"userID"];
-    self.stadiumID = @"55cfe4392cc4dd6c0fa980a8"; // moda center
-    //self.stadiumID = @"55c69c288ce021d0291f6759"; // safeco
     self.liteShow = [defaults objectForKey:@"liteShow"];
     self.liteshowArray = [defaults objectForKey:@"liteshowArray"];
     

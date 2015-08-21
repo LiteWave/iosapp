@@ -182,25 +182,7 @@
 {
     // leave the event
     [[LWAPIClient instance] leaveEvent: self.appDelegate.userID
-                           onSuccess:^(id data) {
-                               // clear data
-                               self.appDelegate.sectionID = nil;
-                               self.appDelegate.rowID = nil;
-                               self.appDelegate.seatID = nil;
-                               self.appDelegate.userID = nil;
-                               self.appDelegate.liteShow = nil;
-                               
-                               NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                               
-                               [defaults removeObjectForKey:@"levelID"];
-                               [defaults removeObjectForKey:@"sectionID"];
-                               [defaults removeObjectForKey:@"rowID"];
-                               [defaults removeObjectForKey:@"seatID"];
-                               [defaults removeObjectForKey:@"userID"];
-                               [defaults removeObjectForKey:@"liteShow"];
-                               
-                               [defaults synchronize];
-                               
+                             onSuccess:^(id data) {
                                if (!pressedChangeSeat)
                                    [self.navigationController popViewControllerAnimated:YES];
                                
@@ -214,6 +196,25 @@
                                                                      otherButtonTitles:nil];
                                [alert show];
                            }];
+    
+    // clear data
+    self.appDelegate.levelID = nil;
+    self.appDelegate.sectionID = nil;
+    self.appDelegate.rowID = nil;
+    self.appDelegate.seatID = nil;
+    self.appDelegate.userID = nil;
+    self.appDelegate.liteShow = nil;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults removeObjectForKey:@"levelID"];
+    [defaults removeObjectForKey:@"sectionID"];
+    [defaults removeObjectForKey:@"rowID"];
+    [defaults removeObjectForKey:@"seatID"];
+    [defaults removeObjectForKey:@"userID"];
+    [defaults removeObjectForKey:@"liteShow"];
+    
+    [defaults synchronize];
 }
 
 - (void)prepareView

@@ -139,7 +139,6 @@
                                [alert show];
                                
                                [spinner stopAnimating];
-                               [self.navigationController popViewControllerAnimated:YES];
                            }];
 }
 
