@@ -23,7 +23,6 @@
 
 @property (nonatomic, retain) LWAppDelegate *appDelegate;
 
--(void)updateSettings;
 -(void)withdraw;
 
 @end

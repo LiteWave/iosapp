@@ -32,10 +32,6 @@
     
     pressedChangeSeat = NO;
     
-    [changeButton addTarget: self
-                  action: @selector(changeSeat:)
-        forControlEvents: UIControlEventTouchUpInside];
-    
     // add observer for when app becomes active
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onBecomeActive) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
     
@@ -126,12 +122,10 @@
 }
 
 -(IBAction)changeSeat:(id)sender {
+    [self withdraw];
+    
     pressedChangeSeat = YES;
-    [self withdraw];
-}
-
--(IBAction)withdrawUser:(id)sender {
-    [self withdraw];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)joinShow {
@@ -183,9 +177,6 @@
     // leave the event
     [[LWAPIClient instance] leaveEvent: self.appDelegate.userID
                              onSuccess:^(id data) {
-                                 if (!pressedChangeSeat)
-                                     [self.navigationController popViewControllerAnimated:YES];
-                            
                                  // clear data
                                  self.appDelegate.levelID = nil;
                                  self.appDelegate.sectionID = nil;
@@ -223,6 +214,15 @@
     CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
     float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
     
+    mySeat.textColor = self.appDelegate.highlightColor;
+    
+    changeButton.layer.borderColor=self.appDelegate.highlightColor.CGColor;
+    changeButton.layer.backgroundColor=self.appDelegate.highlightColor.CGColor;
+    changeButton.layer.borderWidth=2.0f;
+    [changeButton addTarget: self
+                     action: @selector(changeSeat:)
+           forControlEvents: UIControlEventTouchUpInside];
+    
     joinButton.frame = CGRectMake(0,
                                   self.view.bounds.size.height - heightPadding - 50,
                                   self.view.bounds.size.width,
@@ -243,8 +243,8 @@
 
 - (void)enableJoin
 {
-    joinButton.layer.borderColor=[UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0].CGColor;
-    joinButton.layer.backgroundColor=[UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0].CGColor;
+    joinButton.layer.borderColor=self.appDelegate.highlightColor.CGColor;
+    joinButton.layer.backgroundColor=self.appDelegate.highlightColor.CGColor;
     joinButton.layer.borderWidth=2.0f;
     
     [joinButton setTitleColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] forState:UIControlStateNormal];

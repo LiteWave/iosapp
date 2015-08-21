@@ -302,8 +302,8 @@
 
 - (void)enableJoin
 {
-    joinButton.layer.borderColor=[UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0].CGColor;
-    joinButton.layer.backgroundColor=[UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0].CGColor;
+    joinButton.layer.borderColor=self.appDelegate.highlightColor.CGColor;
+    joinButton.layer.backgroundColor=self.appDelegate.highlightColor.CGColor;
     joinButton.layer.borderWidth=2.0f;
     
     [joinButton setTitleColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] forState:UIControlStateNormal];
