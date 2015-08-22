@@ -28,11 +28,11 @@
     self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     self.navigationController.navigationBar.barTintColor = self.appDelegate.highlightColor;
-
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    [self.navigationController.navigationBar
-     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     self.navigationController.navigationBar.translucent = NO;
+    
+    unavailableLabel.hidden = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -152,6 +152,8 @@
 }
 
 - (void)beginEvent:(id)eventID {
+    unavailableLabel.hidden = YES;
+    
     // remove observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
@@ -171,6 +173,8 @@
     // add observer for when app becomes active
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onBecomeActive) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
 
+    unavailableLabel.hidden = NO;
+    
     [self clearEvent];
 }
 

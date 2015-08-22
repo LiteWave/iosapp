@@ -69,18 +69,34 @@
             </objects>
             <point key="canvasLocation" x="367" y="-305"/>
         </scene>
-        <!--App Controller-->
+        <!--LiteWave-->
         <scene sceneID="kXH-VM-hHa">
             <objects>
                 <viewController storyboardIdentifier="register" id="iss-ty-u8M" customClass="LWAppController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zsY-wE-5ZR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default.png" id="Fm1-Uk-Hfe">
+                                <rect key="frame" x="20" y="112" width="280" height="266"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No events today" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XW9-Rt-3fi">
+                                <rect key="frame" x="20" y="261" width="280" height="87"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="25"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="I6c-ia-4w7">
+                    <navigationItem key="navigationItem" title="LiteWave" id="I6c-ia-4w7">
                         <barButtonItem key="backBarButtonItem" title=" " id="nsP-yZ-yYp"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="unavailableLabel" destination="XW9-Rt-3fi" id="IlN-HR-sIE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jws-Q2-ikA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -228,10 +244,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default.png" id="d5U-w0-25k">
-                                <rect key="frame" x="20" y="80" width="280" height="266"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thanks for participating!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zRa-TX-67i">
                                 <rect key="frame" x="20" y="234" width="280" height="87"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -251,6 +263,10 @@
                                     <action selector="returnToMenu:" destination="0tU-b8-t7R" eventType="touchUpInside" id="Kzi-iN-RqA"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default.png" id="d5U-w0-25k">
+                                <rect key="frame" x="20" y="78" width="280" height="266"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>

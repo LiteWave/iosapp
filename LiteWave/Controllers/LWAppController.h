@@ -10,7 +10,7 @@
 #import "LWAppDelegate.h"
 
 @interface LWAppController : UIViewController {
-    
+    IBOutlet UILabel *unavailableLabel;
 }
 
 @property (nonatomic, retain) LWAppDelegate *appDelegate;
