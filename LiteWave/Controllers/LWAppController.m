@@ -22,8 +22,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //[self clearEvent];
-    //return;
+//    [self clearEvent];
+//    return;
 	// Do any additional setup after loading the view, typically from a nib.
     self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
@@ -41,7 +41,7 @@
         NSDate *todayDate = [NSDate date];
         NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
         [dateformat setDateFormat:@"dd"];
-        [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+        [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"PST"]];
         
         NSString *today = [dateformat stringFromDate:todayDate];
         NSString *eventDay = [dateformat stringFromDate:self.appDelegate.eventDate];
@@ -72,12 +72,12 @@
                                 NSDate *todayDate = [NSDate date];
                                 NSDateFormatter *dayformat = [[NSDateFormatter alloc] init];
                                 [dayformat setDateFormat:@"dd"];
-                                [dayformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+                                [dayformat setTimeZone:[NSTimeZone timeZoneWithName:@"PST"]];
                                 NSString *today = [dayformat stringFromDate:todayDate];
 
                                 NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
                                 [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'.000Z'"];
-                                [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+                                [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"PST"]];
 
                                 for (NSDictionary *event in eventsArray) {
 
@@ -111,7 +111,7 @@
     
     NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
     [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'.000Z'"];
-    [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"PST"]];
     self.appDelegate.eventDate = [dateformat dateFromString:[event valueForKey:@"date"]];
     
     self.appDelegate.stadiumID = [event valueForKey:@"_stadiumId"];

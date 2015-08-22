@@ -344,6 +344,8 @@
                                 @"user_seat",
                                 nil];
     
+    NSLog(@"USER ADD REQUEST: %@", params);
+    
     [[LWAPIClient instance] joinEvent: self.appDelegate.eventID
                              params: params
                           onSuccess:^(id data) {

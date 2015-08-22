@@ -297,13 +297,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LiteWave/Controllers/LWReadyController.m"
-            timestampString = "461881808.140347"
+            filePath = "LiteWave/Controllers/LWSeatController.m"
+            timestampString = "461916414.18238"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
-            landmarkName = "-withdraw"
+            startingLineNumber = "347"
+            endingLineNumber = "347"
+            landmarkName = "-saveSeat"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

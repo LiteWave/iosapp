@@ -54,13 +54,17 @@
     for (NSString *key in params) {
         [postString appendString:[NSString stringWithFormat:@"%@=%@&", key, params[key]]];
     }
-    NSData *postData = [postString dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    NSString *postLength = [NSString stringWithFormat:@"%lu",[postData length]];
+    //NSData *postData = [postString dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    NSError *error;
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:params options:0 error:&error];
+
+    //NSString *postLength = [NSString stringWithFormat:@"%lu",[postData length]];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
-    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    //[request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
     
     [self makeRequest: request onSuccess: success onFailure: failure];

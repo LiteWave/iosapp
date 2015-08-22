@@ -132,7 +132,7 @@
     
     NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
     [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
-    [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"PST"]];
     
     NSString *mobile_start = [dateformat stringFromDate:[NSDate date]];
 
