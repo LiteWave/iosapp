@@ -1,8 +1,8 @@
 //
-//  ResultsViewController.m
+//  LWResultsController.m
 //  LiteWave
 //
-//  Created by mike draghici on 10/24/13.
+//  Created by david anderson on 08/24/15.
 //  Copyright (c) 2013 LiteWave. All rights reserved.
 //
 
@@ -14,7 +14,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
 
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
@@ -50,6 +49,7 @@
     
     [defaults synchronize];
     
+    // cleanup
     [returnButton removeTarget:nil
                        action:NULL
              forControlEvents:UIControlEventAllEvents];

@@ -43,6 +43,10 @@
     // remove observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
+    [joinButton removeTarget:nil
+                        action:NULL
+              forControlEvents:UIControlEventAllEvents];
+    
     if (pressedChangeSeat)
         return;
     

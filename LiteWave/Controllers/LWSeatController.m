@@ -46,6 +46,10 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [joinButton removeTarget:nil
+                        action:NULL
+              forControlEvents:UIControlEventAllEvents];
 }
 
 - (void)didReceiveMemoryWarning
