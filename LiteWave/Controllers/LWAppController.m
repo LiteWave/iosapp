@@ -39,16 +39,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     if (self.appDelegate.eventID != nil) {
         // if the day is no longer the same, show no event
-        NSString *today = [LWUtility getToday];
-        
-        NSDateFormatter *dayformat = [[NSDateFormatter alloc] init];
-        [dayformat setDateFormat:@"dd"];
-        [dayformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-        
-        NSString *eventDay = [dayformat stringFromDate:self.appDelegate.eventDate];
-        
-        // clear the event if it has expired
-        if ([today isEqualToString: eventDay]) {
+        if ([LWUtility isToday:self.appDelegate.eventDate]) {
             [self beginEvent:self.appDelegate.eventID];
         } else {
             [self handleNoEvent];
@@ -68,7 +59,6 @@
                             onSuccess:^(id data) {
                                 NSArray *eventsArray = [[NSArray alloc] initWithArray:data copyItems:YES];
                                 NSDictionary *todayEvent;
-                                NSString *today = [LWUtility getToday];
 
                                 NSDateFormatter *dayformat = [[NSDateFormatter alloc] init];
                                 [dayformat setDateFormat:@"dd"];
@@ -79,15 +69,12 @@
                                 [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
 
                                 for (NSDictionary *event in eventsArray) {
+                                    NSDate *eventDate = [dateformat dateFromString:[event valueForKey:@"date"]];
 
-                                  NSDate *eventDate = [dateformat dateFromString:[event valueForKey:@"date"]];
-                                  NSString *eventDay = [dayformat stringFromDate:eventDate];
-                                  
-                                  // clear the event if it has expired
-                                  if ([today isEqualToString: eventDay]) {
+                                    if ([LWUtility isToday:eventDate]) {
                                       todayEvent = event;
                                       break;
-                                  }
+                                    }
                                 }
 
                                 // if there is an event today, save and begin
@@ -97,10 +84,10 @@
                                 } else {
                                   [self handleNoEvent];
                                 }
-                                }
-                                onFailure:^(NSError *error) {
-                                [self handleNoEvent];
-                                }];
+                            }
+                            onFailure:^(NSError *error) {
+                            [self handleNoEvent];
+                            }];
 
 }
 

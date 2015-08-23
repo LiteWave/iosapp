@@ -9,6 +9,7 @@
 #import "LWReadyController.h"
 #import "LWShowController.h"
 #import "LWAppDelegate.h"
+#import "LWUtility.h"
 #import "AFNetworking.h"
 #import "LWApiClient.h"
 
@@ -63,60 +64,48 @@
 
 -(void)getShow {
     
-    if (self.appDelegate.liteShow) {
-        NSLog(@"saved liteshow = %@", self.appDelegate.liteShow);
-    } else {
-        [[LWAPIClient instance] getShows: self.appDelegate.eventID
-                             onSuccess: ^(id data) {
-                                 NSError *error2;
-                                 NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
-                                 NSString *jsonArray = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-                                 
-                                 NSArray *showDict =
-                                 [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
-                                                                 options: NSJSONReadingMutableContainers
-                                                                   error: &error2];
-                                 
-                                 self.appDelegate.liteshowArray = [[NSArray alloc] initWithArray:showDict copyItems:YES];
-                                 
-                                 if (self.appDelegate.liteshowArray.count == 0) {
-                                     [self disableJoin];
-                                 } else {
-                                     NSDictionary *liteShowDict = [self.appDelegate.liteshowArray objectAtIndex:0];
-                                     
-                                     NSString *liteShowID = [liteShowDict valueForKey:@"_id"];
-                                     
-                                     [[LWAPIClient instance] getShow: self.appDelegate.eventID
-                                                              show: liteShowID
-                                                         onSuccess:^(id data) {
-                                                             NSError *error2;
-                                                             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
-                                                             NSString *jsonArray = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-                                                             
-                                                             NSDictionary *showDict =
-                                                             [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
-                                                                                             options: NSJSONReadingMutableContainers
-                                                                                               error: &error2];
-                                                             
-                                                             self.appDelegate.liteShow = [[NSDictionary alloc] initWithDictionary:showDict copyItems:YES];
-                                                             
-                                                             NSLog(@"new liteshow = %@", self.appDelegate.liteShow);
-                                                             
-                                                             [self enableJoin];   
-                                                         }
-                                                         onFailure:^(NSError *error) {
-                                                             self.appDelegate.liteShow = nil;
-                                                         }];
-                                     
+    [[LWAPIClient instance] getShows: self.appDelegate.eventID
+                         onSuccess: ^(id data) {
+                             NSError *error2;
+                             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
+                             NSString *jsonArray = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                             
+                             NSDictionary *currentShow;
+                             NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
+                             [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+                             [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+                             
+                             NSArray *showDict = [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
+                                                                                 options: NSJSONReadingMutableContainers
+                                                                                   error: &error2];
+                             
+                             NSArray *showsArray = [[NSArray alloc] initWithArray:showDict copyItems:YES];
+                             for (NSDictionary *show in showsArray) {
+                                 NSDate *showDate = [dateformat dateFromString:[show valueForKey:@"start_at"]];
+                                 if (showDate && [LWUtility isTodayGreaterThanDate:showDate]) {
+                                     currentShow = show;
+                                     break;
                                  }
                              }
-                             onFailure:^(NSError *error) {
-                                 // no shows available
-                                 [self disableJoin];
+
+                             if (currentShow) {
+                                 NSLog(@"new liteshow = %@", self.appDelegate.liteShow);
                                  
+                                 self.appDelegate.liteShow = [[NSDictionary alloc] initWithDictionary:currentShow copyItems:YES];
+                                 [self enableJoin];
+                             } else {
+                                 // no shows available
                                  self.appDelegate.liteShow = nil;
-                             }];
-    }
+
+                                 [self disableJoin];
+                             }
+                         }
+                         onFailure:^(NSError *error) {
+                             // no shows available
+                             [self disableJoin];
+                             
+                             self.appDelegate.liteShow = nil;
+                         }];
 }
 
 -(IBAction)changeSeat:(id)sender {
