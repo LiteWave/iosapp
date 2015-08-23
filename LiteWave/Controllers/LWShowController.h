@@ -21,17 +21,10 @@
     NSString *pif; // winner (w) looser (l)
     NSString *playType; //wait (w) flash (f) color (c) sound (s)
     UIColor *frameColor;
-    NSString *screenShowString_;
-    NSString *audioShowString_;
-	UILabel *frequencyLabel_;
-	UIButton *playButton_;
-    NSTimer *winnerTimer_;
     NSArray *commandArray;
     LWCountDownTimerUtility *counterUtil;
 @public
     double diff;
-	double frequency;
-	double theta;
     int position; //command position in the array
     int framePosition; //seconds elapsed during frame playtime
 }

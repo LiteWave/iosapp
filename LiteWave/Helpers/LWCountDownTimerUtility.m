@@ -39,15 +39,19 @@
     [self InvalidateCountDownTimer];
     CountDownTimer=[NSTimer scheduledTimerWithTimeInterval:.01 target:self selector:@selector(DecrementCounterValue) userInfo:nil repeats:YES];
     
-    label.text=[NSString stringWithFormat:@"%d", ((int)countDownTime/100)];
+    double time = ((int)countDownTime/100);
+    if ((int)time > 0)
+        label.text=[NSString stringWithFormat:@"%d", (int)time];
 }
 
 -(void)DecrementCounterValue
 {
-    if (((int)countDownTime/100) > 0)
+    double time = ((int)countDownTime/100);
+    if (time > 0)
 	{
         countDownTime--;
-        label.text=[NSString stringWithFormat:@"%d", ((int)countDownTime/100)];
+        if ((int)time > 0)
+            label.text=[NSString stringWithFormat:@"%d", (int)time];
     }
     else
 	{

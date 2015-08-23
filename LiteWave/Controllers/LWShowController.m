@@ -16,10 +16,8 @@
 
 @implementation LWShowController
 
-@synthesize startsInLabel = startsInLabel_;
+@synthesize startsInLabel = _startsInLabel;
 @synthesize timerLabel = _timerLabel;
-@synthesize frameTimer = frameTimer_;
-@synthesize winnerTimer = winnerTimer_;
 
 
 -(void)viewDidLoad {
