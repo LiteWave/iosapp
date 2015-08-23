@@ -10,10 +10,6 @@
 #import "LWResultsController.h"
 #import "LWApiClient.h"
 
-#ifdef __APPLE__
-#include "TargetConditionals.h"
-#endif
-
 @implementation LWShowController
 
 @synthesize startsInLabel = _startsInLabel;
@@ -53,7 +49,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 -(void)startShow {
     commandArray = [self.appDelegate.showData objectForKey:@"commands"];
@@ -133,51 +128,37 @@
         // stop the timers when the end is reached and stop the show
         [self stop];
     } else {
-        vibrateDevice = 1; //vibrate 0=no 1=yes
-        pl1 = 0; //play time length in milliseconds
-        pl2 = 0; //play time length in milliseconds
-        pif = nil; // winner (w) looser (l) // not supporting
-        playType = @"c"; //wait (w) flash (f) color (c) sound (s)
-        frameColor = [UIColor blackColor];
+        commandType = @"c"; // color (c) winner (win)
+        commandLength = 0; // command time length in milliseconds
+        shouldVibrate = 1; // vibrate 0=no 1=yes
+        backgroundColor = [UIColor blackColor]; // (rgb)
+        playIf = nil; // winner (w), loser (l)
         
         // cl -> command length
-        // ct -> command type ('c' for color)
-        // sv -> should vibrate (0=no 1=yes)
+        // ct -> command type
+        // sv -> should vibrate
         // bg -> background color (rgb)
-
         NSDictionary *frameDict = [commandArray objectAtIndex:counter];
         NSLog(@"%@", frameDict);
         
-        if([frameDict objectForKey:@"v"]) {
-            vibrateDevice = [[frameDict valueForKey:@"v"] integerValue];
+        if([frameDict objectForKey:@"sv"]) {
+            shouldVibrate = [[frameDict valueForKey:@"sv"] integerValue];
         }
         
         if ([frameDict objectForKey:@"pif"]) {
-            pif = [frameDict valueForKey:@"pif"];
+            playIf = [frameDict valueForKey:@"pif"];
         }
         
-        if ([frameDict objectForKey:@"pt"]) {
-            playType = [frameDict valueForKey:@"pt"];
+        if ([frameDict objectForKey:@"ct"]) {
+            commandType = [frameDict valueForKey:@"ct"];
         }
         
-        if ([frameDict objectForKey:@"pl2"]) {
-            pl2 = [[frameDict valueForKey:@"pl2"] integerValue];
-        }
-        
-        if ([frameDict objectForKey:@"pl1"]) {
-            pl1 = [[frameDict valueForKey:@"pl1"] integerValue];
+        if ([frameDict objectForKey:@"cl"]) {
+            commandLength = [[frameDict valueForKey:@"cl"] integerValue];
             
-            if ([playType isEqualToString:@"c"]){
+            if ([commandType isEqualToString:@"c"]){
                 onORoff=YES;
-            } else if([playType isEqualToString:@"w"]){
-                onORoff=NO;
-            } else if([playType isEqualToString:@"r"]){
-                onORoff=YES;
-            } else if([playType isEqualToString:@"f"]){
-                onORoff=YES;
-            } else if([playType isEqualToString:@"s"]){
-                onORoff=NO;
-            } else if([playType isEqualToString:@"win"]){
+            } else if([commandType isEqualToString:@"win"]){
                 winnerLoopFrame=YES;
                 onORoff=NO;
             } else{
@@ -186,68 +167,55 @@
             
             if ((counter+1) == [commandArray count] && isWinner) {
                 winnerLoopFrame=YES;
-                pif = @"w"; 
+                playIf = @"w";
             }
             
-            if ([frameDict objectForKey:@"c"]) {
+            if ([frameDict objectForKey:@"bg"]) {
                 
-                NSString *colorArray = [frameDict objectForKey:@"c"];
+                NSString *colorArray = [frameDict objectForKey:@"bg"];
                 NSArray *colorItems = [colorArray componentsSeparatedByString:@","];
             
                 float red = [[colorItems objectAtIndex:0] doubleValue];
                 float green = [[colorItems objectAtIndex:1] doubleValue];
                 float blue = [[colorItems objectAtIndex:2] doubleValue];
             
-                frameColor = [UIColor colorWithRed:red/255.0 green:green/255.0 blue:blue/255.0 alpha:1];
+                backgroundColor = [UIColor colorWithRed:red/255.0 green:green/255.0 blue:blue/255.0 alpha:1];
 
             } else {
-                frameColor = [UIColor blackColor];
+                backgroundColor = [UIColor blackColor];
             }
             
-            if ([pif isEqualToString:@"w"] && !isWinner) {
+            if ([playIf isEqualToString:@"w"] && !isWinner) {
                 //skip frame
                 position++;
                 [self playFrames:position];
-            } else if ([pif isEqualToString:@"l"] && isWinner) {
+            } else if ([playIf isEqualToString:@"l"] && isWinner) {
                 //skip frame
                 position++;
                 [self playFrames:position];
             } else {
                 [self onOffSwitch:onORoff];
                 position++;
-                float timeinterval;
-                long extraTime;
-                
-                if(pl2 > 0) {
-                    long randNum;
-                    
-                    randNum = (pl1 + rand()) % (pl2-pl1); //create the random number.
-                    extraTime = pl2 - randNum;
-                    
-                    timeinterval = randNum/1000.0;
-                    NSLog(@"pl1 RANDOM time = %f", timeinterval);
-                    self.frameTimer = [NSTimer scheduledTimerWithTimeInterval:timeinterval target:self selector:@selector(randomTimerCallback:) userInfo:nil repeats:NO];
-                } else {
-                    timeinterval = pl1/1000.0;
-                    NSLog(@"pl1 time = %f", timeinterval);
-                    self.frameTimer = [NSTimer scheduledTimerWithTimeInterval:timeinterval target:self selector:@selector(frameTimerCallback:) userInfo:nil repeats:NO];
-                }
+                float timeinterval = commandLength/1000.0;
+
+                NSLog(@"cl time = %f", timeinterval);
+                self.frameTimer = [NSTimer scheduledTimerWithTimeInterval:timeinterval target:self selector:@selector(frameTimerCallback:) userInfo:nil repeats:NO];
+      
                 
                 if (winnerLoopFrame) {
                     [self showWinner];
                 }
             }
         } else {
-            //unknown play time skip frame
+            // unknown play time skip frame
             position++;
             [self playFrames:position];
         }
     }
 }
 
-
 -(void)showWinner {
-    frameColor = [UIColor whiteColor];
+    backgroundColor = [UIColor whiteColor];
     flipper=YES;
     //self.waveLabel.hidden=NO;
     //self.waveLabel.text = @"WINNER";
@@ -255,18 +223,6 @@
     //[self.waveLabel setFont:[UIFont systemFontOfSize:70]];
     
     self.winnerTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(winnerTimerCallback:) userInfo:nil repeats:YES];
-}
-
-
-//  if we're doing a random sequence, then the first part is the color, followed by a call to this time, followed by blacking the screen, followed by a timer for remaining amount of time prior to next command.
-- (void)randomTimerCallback:(NSTimer *)sender {
-    float timeInterval;
-    // NSNumber *num = [sender userInfo];
-    timeInterval = 10;  // *num/1000.0;
-    frameColor = [UIColor blackColor];
-    onORoff=NO;
-    [self onOffSwitch:onORoff];
-    NSLog(@"random time done, now finishing with %f", timeInterval);
 }
 
 - (void)frameTimerCallback:(id)sender {
@@ -289,9 +245,9 @@
 {
     if (var) {
         //screen on
-        self.view.backgroundColor = frameColor;
+        self.view.backgroundColor = backgroundColor;
         
-        if (vibrateDevice==1) {
+        if (shouldVibrate==1) {
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         }
     } else {
@@ -300,19 +256,18 @@
     }
 }
 
-
 -(void)onOffSwitch:(BOOL)var
 {
     if (var) {
         // screen on
-        self.view.backgroundColor = frameColor;
+        self.view.backgroundColor = backgroundColor;
         
-        if (vibrateDevice==1) {
+        if (shouldVibrate==1) {
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         }
     } else {
         // screen off
-        self.view.backgroundColor = frameColor;
+        self.view.backgroundColor = backgroundColor;
     }
 }
 

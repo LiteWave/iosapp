@@ -81,10 +81,12 @@
                              
                              NSArray *showsArray = [[NSArray alloc] initWithArray:showDict copyItems:YES];
                              for (NSDictionary *show in showsArray) {
-                                 NSDate *showDate = [dateformat dateFromString:[show valueForKey:@"start_at"]];
-                                 if (showDate && [LWUtility isTodayGreaterThanDate:showDate]) {
-                                     currentShow = show;
-                                     break;
+                                 if ([show valueForKey:@"start_at"] != [NSNull null]) {
+                                     NSDate *showDate = [dateformat dateFromString:[show valueForKey:@"start_at"]];
+                                     if (showDate && [LWUtility isTodayGreaterThanDate:showDate]) {
+                                         currentShow = show;
+                                         break;
+                                     }
                                  }
                              }
 

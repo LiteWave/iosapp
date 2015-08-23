@@ -12,21 +12,22 @@
 
 @interface LWShowController : UIViewController <UIAccelerometerDelegate, CountDownTimerProtocol>
 {
-    BOOL isWinner; //device is a winner!
-    BOOL onORoff; //screen control
-    BOOL flipper; //winner on and off switch
-    long vibrateDevice; //vibrate 0=no 1=yes
-    long pl1; //play time length in milliseconds
-    long pl2; //play time length in milliseconds
-    NSString *pif; // winner (w) looser (l)
-    NSString *playType; //wait (w) flash (f) color (c) sound (s)
-    UIColor *frameColor;
+    BOOL isWinner;  // device is a winner!
+    BOOL onORoff;   // screen control
+    BOOL flipper;   // winner on and off switch
+
     NSArray *commandArray;
+    NSString *commandType;      // color (c) winner (win)
+    long commandLength;         // command time length in milliseconds
+    long shouldVibrate;         // vibrate (0)=no, (1)=yes
+    NSString *playIf;           // winner (w), loser (l)
+    UIColor *backgroundColor;   // (rgb)
+    
     LWCountDownTimerUtility *counterUtil;
 @public
     double diff;
-    int position; //command position in the array
-    int framePosition; //seconds elapsed during frame playtime
+    int position; // command position in the array
+    int framePosition; // seconds elapsed during frame playtime
 }
 @property (nonatomic, retain) NSTimer *frameTimer;
 @property (nonatomic, retain) NSTimer *winnerTimer;
