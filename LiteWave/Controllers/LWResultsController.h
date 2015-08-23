@@ -10,7 +10,13 @@
 
 #import "LWAppDelegate.h"
 
-@interface LWResultsController : UIViewController
+@interface LWResultsController : UIViewController {
+    BOOL isWinner;  // device is a winner!
+    
+    IBOutlet UIButton *returnButton;
+    IBOutlet UIImageView *imageView;
+    IBOutlet UILabel *participationLabel;
+}
 
 @property (nonatomic, retain) LWAppDelegate *appDelegate;
 

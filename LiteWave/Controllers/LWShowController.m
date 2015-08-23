@@ -54,23 +54,12 @@
 -(void)startShow {
     commandArray = [self.appDelegate.showData objectForKey:@"commands"];
 
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([self.appDelegate.showData objectForKey:@"_winner_user_locationId"]) {
-      
-        self.appDelegate.winnerID = [self.appDelegate.showData valueForKey:@"_winner_user_locationId"];
-        if ([self.appDelegate.winnerID isKindOfClass:[NSNull class]]){
-          [defaults removeObjectForKey:@"winnerID"];
-          isWinner=NO;
-        } else {
-          [defaults setValue:self.appDelegate.winnerID forKey:@"winnerID"];
-          isWinner=YES;
-        }
+    NSString *winnerID = [self.appDelegate.show valueForKey:@"_winnerId"];
+    if (winnerID != (id)[NSNull null] && [winnerID isEqualToString:self.appDelegate.userID]) {
+        isWinner=YES;
     } else {
-        self.appDelegate.winnerID = nil;
-        [defaults removeObjectForKey:@"winnerID"];
         isWinner=NO;
     }
-    [defaults synchronize];
 
     if ([self.appDelegate.showData objectForKey:@"mobile_time_offset_ms"]) {
         counterUtil = [[LWCountDownTimerUtility alloc] init];

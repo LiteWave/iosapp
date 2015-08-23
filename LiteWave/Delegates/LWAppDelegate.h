@@ -30,7 +30,6 @@
 @property (nonatomic, strong) NSString *sectionID;
 @property (nonatomic, strong) NSString *rowID;
 @property (nonatomic, strong) NSString *seatID;
-@property (nonatomic, strong) NSString *winnerID;
 @property (nonatomic, strong) NSString *userID;
 @property (nonatomic, strong) NSDictionary *seatsArray;
 @property (nonatomic, strong) NSDictionary *show;

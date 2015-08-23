@@ -24,7 +24,6 @@
 @synthesize userID = _userID;
 @synthesize show = _show;
 @synthesize showData = _showData;
-@synthesize winnerID = _winnerID;
 @synthesize isOnline = _isOnline;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -60,7 +59,6 @@
     self.sectionID = [defaults stringForKey:@"sectionID"];
     self.rowID = [defaults stringForKey:@"rowID"];
     self.seatID = [defaults stringForKey:@"seatID"];
-    self.winnerID = [defaults stringForKey:@"winnerID"];
     self.eventID = [defaults stringForKey:@"eventID"];
     self.eventName = [defaults stringForKey:@"eventName"];
     self.eventDate = [defaults objectForKey:@"eventDate"];
