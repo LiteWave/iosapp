@@ -12,6 +12,7 @@
 
 #import "LWConfiguration.h"
 #import "LWApiClient.h"
+#import "LWUtility.h"
 
 @interface LWAppController ()
 
@@ -38,13 +39,13 @@
 - (void)viewDidAppear:(BOOL)animated {
     if (self.appDelegate.eventID != nil) {
         // if the day is no longer the same, show no event
-        NSDate *todayDate = [NSDate date];
-        NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
-        [dateformat setDateFormat:@"dd"];
-        [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"PST"]];
+        NSString *today = [LWUtility getToday];
         
-        NSString *today = [dateformat stringFromDate:todayDate];
-        NSString *eventDay = [dateformat stringFromDate:self.appDelegate.eventDate];
+        NSDateFormatter *dayformat = [[NSDateFormatter alloc] init];
+        [dayformat setDateFormat:@"dd"];
+        [dayformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+        
+        NSString *eventDay = [dayformat stringFromDate:self.appDelegate.eventDate];
         
         // clear the event if it has expired
         if ([today isEqualToString: eventDay]) {
@@ -62,22 +63,20 @@
     [self getEvent];
 }
 
-
 - (void)getEvent {
     [[LWAPIClient instance] getEvents:self.appDelegate.clientID
                             onSuccess:^(id data) {
                                 NSArray *eventsArray = [[NSArray alloc] initWithArray:data copyItems:YES];
                                 NSDictionary *todayEvent;
+                                NSString *today = [LWUtility getToday];
 
-                                NSDate *todayDate = [NSDate date];
                                 NSDateFormatter *dayformat = [[NSDateFormatter alloc] init];
                                 [dayformat setDateFormat:@"dd"];
-                                [dayformat setTimeZone:[NSTimeZone timeZoneWithName:@"PST"]];
-                                NSString *today = [dayformat stringFromDate:todayDate];
-
+                                [dayformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+                                
                                 NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
                                 [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'.000Z'"];
-                                [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"PST"]];
+                                [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
 
                                 for (NSDictionary *event in eventsArray) {
 
@@ -111,7 +110,7 @@
     
     NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
     [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'.000Z'"];
-    [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"PST"]];
+    [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     self.appDelegate.eventDate = [dateformat dateFromString:[event valueForKey:@"date"]];
     
     self.appDelegate.stadiumID = [event valueForKey:@"_stadiumId"];

@@ -14,8 +14,6 @@
 
 @interface LWReadyController ()
 
--(IBAction)withdrawUser:(id)sender;
--(IBAction)retryFetch:(id)sender;
 -(IBAction)changeSeat:(id)sender;
 
 @end
@@ -60,10 +58,10 @@
 
     mySeat.text = [NSString stringWithFormat:@"%@-%@-%@", self.appDelegate.sectionID, self.appDelegate.rowID, self.appDelegate.seatID];
     
-    [self fetchShow];
+    [self getShow];
 }
 
--(void)fetchShow {
+-(void)getShow {
     
     if (self.appDelegate.liteShow) {
         NSLog(@"saved liteshow = %@", self.appDelegate.liteShow);
@@ -132,7 +130,7 @@
     
     NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
     [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
-    [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"PST"]];
+    [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     
     NSString *mobile_start = [dateformat stringFromDate:[NSDate date]];
 
@@ -174,23 +172,15 @@
 
 - (void)withdraw
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
     // leave the event
     [[LWAPIClient instance] leaveEvent: self.appDelegate.userID
                              onSuccess:^(id data) {
-                                 // clear data
-                                 self.appDelegate.levelID = nil;
-                                 self.appDelegate.sectionID = nil;
-                                 self.appDelegate.rowID = nil;
-                                 self.appDelegate.seatID = nil;
+                                 // clear data on success
                                  self.appDelegate.userID = nil;
                                  self.appDelegate.liteShow = nil;
                                  
-                                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                                 
-                                 [defaults removeObjectForKey:@"levelID"];
-                                 [defaults removeObjectForKey:@"sectionID"];
-                                 [defaults removeObjectForKey:@"rowID"];
-                                 [defaults removeObjectForKey:@"seatID"];
                                  [defaults removeObjectForKey:@"userID"];
                                  [defaults removeObjectForKey:@"liteShow"];
                                  
@@ -207,7 +197,20 @@
                                [alert show];
                            }];
     
-    }
+    // clear this data on pass or fail
+    self.appDelegate.levelID = nil;
+    self.appDelegate.sectionID = nil;
+    self.appDelegate.rowID = nil;
+    self.appDelegate.seatID = nil;
+    
+    [defaults removeObjectForKey:@"levelID"];
+    [defaults removeObjectForKey:@"sectionID"];
+    [defaults removeObjectForKey:@"rowID"];
+    [defaults removeObjectForKey:@"seatID"];
+    
+
+    [defaults synchronize];
+}
 
 - (void)prepareView
 {
@@ -259,7 +262,7 @@
 
 - (void)onBecomeActive
 {
-    [self fetchShow];
+    [self getShow];
 }
 
 - (void)didReceiveMemoryWarning

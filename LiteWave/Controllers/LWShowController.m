@@ -37,7 +37,7 @@
             
             NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
             [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
-            [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"PST"]];
+            [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
             
             NSDate *startDate = [dateformat dateFromString:[self.appDelegate.eventJoinData valueForKey:@"mobile_start_at"]];
             
@@ -120,7 +120,7 @@
       
       NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
       [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
-      [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"PST"]];
+      [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
       
       NSDate *startDate = [dateformat dateFromString:[self.appDelegate.eventJoinData valueForKey:@"mobile_start_at"]];
       

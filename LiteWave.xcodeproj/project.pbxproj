@@ -10,6 +10,7 @@
 		81612A6E1B656DEA009A7E44 /* LWSeatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81612A6D1B656DEA009A7E44 /* LWSeatController.m */; };
 		81612A721B656E79009A7E44 /* LWLevelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81612A711B656E79009A7E44 /* LWLevelController.m */; };
 		8161E3471B69D7ED00857B95 /* LWCircleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8161E3461B69D7ED00857B95 /* LWCircleTableViewCell.m */; };
+		816D5E341B8948610024C6B5 /* LWUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 816D5E331B8948610024C6B5 /* LWUtility.m */; };
 		81A0F8CA1B13A22B007508CE /* LWConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 81A0F8C91B13A22B007508CE /* LWConfiguration.m */; };
 		84067FEC183B073200232065 /* LWCountDownTimerUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 84067FEB183B073200232065 /* LWCountDownTimerUtility.m */; };
 		84157950181A286800D4EBB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8415794F181A286800D4EBB1 /* Foundation.framework */; };
@@ -100,6 +101,8 @@
 		81612A711B656E79009A7E44 /* LWLevelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWLevelController.m; sourceTree = "<group>"; };
 		8161E3451B69D7ED00857B95 /* LWCircleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWCircleTableViewCell.h; sourceTree = "<group>"; };
 		8161E3461B69D7ED00857B95 /* LWCircleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWCircleTableViewCell.m; sourceTree = "<group>"; };
+		816D5E321B8948430024C6B5 /* LWUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWUtility.h; sourceTree = "<group>"; };
+		816D5E331B8948610024C6B5 /* LWUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWUtility.m; sourceTree = "<group>"; };
 		81A0F8C81B139FF6007508CE /* LWConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWConfiguration.h; sourceTree = "<group>"; };
 		81A0F8C91B13A22B007508CE /* LWConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWConfiguration.m; sourceTree = "<group>"; };
 		84067FEA183B073200232065 /* LWCountDownTimerUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWCountDownTimerUtility.h; sourceTree = "<group>"; };
@@ -366,6 +369,8 @@
 				84AB8D5D1835F22300E3E8AE /* LWAPIClient.m */,
 				81A0F8C81B139FF6007508CE /* LWConfiguration.h */,
 				81A0F8C91B13A22B007508CE /* LWConfiguration.m */,
+				816D5E321B8948430024C6B5 /* LWUtility.h */,
+				816D5E331B8948610024C6B5 /* LWUtility.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -654,6 +659,7 @@
 				84789FC6181C65E400FC59E4 /* NSArray+Extensions.m in Sources */,
 				81612A6E1B656DEA009A7E44 /* LWSeatController.m in Sources */,
 				84AB8D5E1835F22300E3E8AE /* LWAPIClient.m in Sources */,
+				816D5E341B8948610024C6B5 /* LWUtility.m in Sources */,
 				81A0F8CA1B13A22B007508CE /* LWConfiguration.m in Sources */,
 				8415795C181A286800D4EBB1 /* main.m in Sources */,
 				84AB8D571835C54A00E3E8AE /* LWReadyController.m in Sources */,

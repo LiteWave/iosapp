@@ -338,6 +338,7 @@
                                 self.appDelegate.seatID, @"seat_number", nil];
     
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                                //[NSString stringWithFormat:@"%@%@", self.appDelegate.uniqueID, @"F"],
                                 self.appDelegate.uniqueID,
                                 @"user_key",
                                 userSeat,
