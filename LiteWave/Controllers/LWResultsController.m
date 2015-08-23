@@ -36,7 +36,7 @@
 //    appDelegate.rowID = nil;
 //    appDelegate.seatID = nil;
 //    appDelegate.userID = nil;
-    self.appDelegate.liteShow = nil;
+    self.appDelegate.show = nil;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 //    

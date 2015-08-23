@@ -39,7 +39,7 @@
             [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
             [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
             
-            NSDate *startDate = [dateformat dateFromString:[self.appDelegate.eventJoinData valueForKey:@"mobile_start_at"]];
+            NSDate *startDate = [dateformat dateFromString:[self.appDelegate.showData valueForKey:@"mobile_start_at"]];
             
             NSLog(@"start %@",startDate);
             
@@ -78,12 +78,12 @@
     
     [spinner startAnimating];
     
-    commandArray = [self.appDelegate.liteShow objectForKey:@"commands"];
+    commandArray = [self.appDelegate.showData objectForKey:@"commands"];
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if([self.appDelegate.eventJoinData objectForKey:@"_winner_user_locationId"]) {
+    if ([self.appDelegate.showData objectForKey:@"_winner_user_locationId"]) {
       
-      self.appDelegate.winnerID = [self.appDelegate.eventJoinData valueForKey:@"_winner_user_locationId"];
+      self.appDelegate.winnerID = [self.appDelegate.showData valueForKey:@"_winner_user_locationId"];
       if([self.appDelegate.winnerID isKindOfClass:[NSNull class]]){
           
           [defaults removeObjectForKey:@"winnerID"];
@@ -103,7 +103,7 @@
     }
     [defaults synchronize];
 
-    if ([self.appDelegate.eventJoinData objectForKey:@"mobile_time_offset_ms"]) {
+    if ([self.appDelegate.showData objectForKey:@"mobile_time_offset_ms"]) {
       
       [spinner stopAnimating];
       
@@ -122,7 +122,7 @@
       [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
       [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
       
-      NSDate *startDate = [dateformat dateFromString:[self.appDelegate.eventJoinData valueForKey:@"mobile_start_at"]];
+      NSDate *startDate = [dateformat dateFromString:[self.appDelegate.showData valueForKey:@"mobile_start_at"]];
       
       NSString *mobile_start_at = [dateformat stringFromDate:startDate];
       

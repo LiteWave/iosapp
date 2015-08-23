@@ -89,13 +89,13 @@
                              }
 
                              if (currentShow) {
-                                 NSLog(@"new liteshow = %@", self.appDelegate.liteShow);
+                                 NSLog(@"new liteshow = %@", self.appDelegate.show);
                                  
-                                 self.appDelegate.liteShow = [[NSDictionary alloc] initWithDictionary:currentShow copyItems:YES];
+                                 self.appDelegate.show = [[NSDictionary alloc] initWithDictionary:currentShow copyItems:YES];
                                  [self enableJoin];
                              } else {
                                  // no shows available
-                                 self.appDelegate.liteShow = nil;
+                                 self.appDelegate.show = nil;
 
                                  [self disableJoin];
                              }
@@ -104,7 +104,7 @@
                              // no shows available
                              [self disableJoin];
                              
-                             self.appDelegate.liteShow = nil;
+                             self.appDelegate.show = nil;
                          }];
 }
 
@@ -141,7 +141,7 @@
                                                              options: NSJSONReadingMutableContainers
                                                                error: &error2];
                              
-                             self.appDelegate.eventJoinData = [[NSDictionary alloc] initWithDictionary:joinDict copyItems:YES];
+                             self.appDelegate.showData = [[NSDictionary alloc] initWithDictionary:joinDict copyItems:YES];
                              
                              NSString * storyboardName = @"Main";
                              UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
@@ -168,7 +168,7 @@
                              onSuccess:^(id data) {
                                  // clear data on success
                                  self.appDelegate.userID = nil;
-                                 self.appDelegate.liteShow = nil;
+                                 self.appDelegate.show = nil;
                                  
                                  [defaults removeObjectForKey:@"userID"];
                                  [defaults removeObjectForKey:@"liteShow"];

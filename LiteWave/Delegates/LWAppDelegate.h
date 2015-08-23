@@ -31,12 +31,10 @@
 @property (nonatomic, strong) NSString *rowID;
 @property (nonatomic, strong) NSString *seatID;
 @property (nonatomic, strong) NSString *winnerID;
-@property (nonatomic, strong) NSArray *liteshowArray;
 @property (nonatomic, strong) NSString *userID;
-@property (nonatomic, strong) NSArray *eventsArray;
 @property (nonatomic, strong) NSDictionary *seatsArray;
-@property (nonatomic, strong) NSDictionary *liteShow;
-@property (nonatomic, strong) NSDictionary *eventJoinData;
+@property (nonatomic, strong) NSDictionary *show;
+@property (nonatomic, strong) NSDictionary *showData;
 
 @property (nonatomic, strong) UIColor *backgroundColor;
 @property (nonatomic, strong) UIColor *highlightColor;

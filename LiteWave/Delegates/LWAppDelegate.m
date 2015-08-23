@@ -13,7 +13,6 @@
 
 @synthesize uniqueID = _uniqueID;
 @synthesize clientID = _clientID;
-@synthesize eventsArray = _eventsArray;
 @synthesize seatsArray = _seatsArray;
 @synthesize eventID = _eventID;
 @synthesize stadiumID = _stadiumID;
@@ -23,10 +22,9 @@
 @synthesize eventName = _eventName;
 @synthesize eventDate = _eventDate;
 @synthesize userID = _userID;
-@synthesize liteShow = _liteShow;
-@synthesize eventJoinData = _eventJoinData;
+@synthesize show = _show;
+@synthesize showData = _showData;
 @synthesize winnerID = _winnerID;
-@synthesize liteshowArray = _liteshowArray;
 @synthesize isOnline = _isOnline;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -68,8 +66,7 @@
     self.eventDate = [defaults objectForKey:@"eventDate"];
     self.stadiumID = [defaults stringForKey:@"stadiumID"];
     self.userID = [defaults objectForKey:@"userID"];
-    self.liteShow = [defaults objectForKey:@"liteShow"];
-    self.liteshowArray = [defaults objectForKey:@"liteshowArray"];
+    self.show = [defaults objectForKey:@"show"];
     
     self.backgroundColor = [UIColor whiteColor];
     self.borderColor = [UIColor blackColor];
