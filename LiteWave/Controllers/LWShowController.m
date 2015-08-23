@@ -21,6 +21,7 @@
     
     self.timerLabel.hidden = YES;
     self.startsInLabel.hidden = YES;
+    self.winnerLabel.hidden = YES;
     
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
@@ -217,10 +218,12 @@
 -(void)showWinner {
     backgroundColor = [UIColor whiteColor];
     flipper=YES;
-    //self.waveLabel.hidden=NO;
-    //self.waveLabel.text = @"WINNER";
     
-    //[self.waveLabel setFont:[UIFont systemFontOfSize:70]];
+    self.winnerLabel.hidden = YES;
+    self.winnerLabel.hidden=NO;
+    self.winnerLabel.text = @"WINNER";
+    [self.winnerLabel setTextColor:self.appDelegate.highlightColor];
+    [self.winnerLabel setFont:[UIFont systemFontOfSize:70]];
     
     self.winnerTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(winnerTimerCallback:) userInfo:nil repeats:YES];
 }

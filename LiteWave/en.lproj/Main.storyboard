@@ -208,6 +208,13 @@
                                 <color key="textColor" red="0.090196080509999998" green="0.180392161" blue="0.33725491169999999" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WINNER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uy1-9O-saY">
+                                <rect key="frame" x="0.0" y="32" width="320" height="115"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -216,6 +223,7 @@
                     <connections>
                         <outlet property="startsInLabel" destination="WY0-xB-TCF" id="8fU-xV-R4O"/>
                         <outlet property="timerLabel" destination="Gc3-Ai-OMg" id="mFc-TZ-OJV"/>
+                        <outlet property="winnerLabel" destination="uy1-9O-saY" id="73s-tU-SCP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b03-Zx-g9E" userLabel="First Responder" sceneMemberID="firstResponder"/>
