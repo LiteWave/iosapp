@@ -31,7 +31,8 @@
 @property (nonatomic, strong) NSString *rowID;
 @property (nonatomic, strong) NSString *seatID;
 @property (nonatomic, strong) NSString *userID;
-@property (nonatomic, strong) NSDictionary *seatsArray;
+@property (nonatomic, strong) NSDictionary *levels;
+@property (nonatomic, strong) NSDictionary *seats;
 @property (nonatomic, strong) NSDictionary *show;
 @property (nonatomic, strong) NSDictionary *showData;
 

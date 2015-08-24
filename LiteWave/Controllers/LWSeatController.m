@@ -75,7 +75,7 @@
     }
     
     NSDictionary *data = [[self getTableData:tableView] objectAtIndex:indexPath.row];
-    cell.nameLabel.text = [data valueForKeyPath:@"name"];
+    cell.nameLabel.text = [data valueForKeyPath:@"nm"];
     
     cell.tableView = tableView;
     cell.index = @(indexPath.row);
@@ -178,7 +178,7 @@
 - (void)getSeats
 {
     [[LWAPIClient instance] getStadium: self.appDelegate.stadiumID
-                             //withLevel: self.appDelegate.levelID
+                             withLevel: self.appDelegate.levelID
                              onSuccess:^(id data) {
                                  NSError *error2;
                                  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
@@ -189,7 +189,7 @@
                                                                  options: NSJSONReadingMutableContainers
                                                                    error: &error2];
                                  
-                                 self.appDelegate.seatsArray = [[NSDictionary alloc] initWithDictionary:seatsDict copyItems:YES];
+                                 self.appDelegate.seats = [[NSDictionary alloc] initWithDictionary:seatsDict copyItems:YES];
                                  
                                  [self loadSections];
                                  [self loadRows];
@@ -208,42 +208,32 @@
 
 - (void)loadSections
 {
-    levels = [[NSMutableArray alloc] initWithArray:[self.appDelegate.seatsArray objectForKey:@"levels"]];
-    int index = 0;
-    for (NSDictionary *level in levels) {
-        if ([level objectForKey:@"name"] == self.appDelegate.levelID) {
-            selectedLevelIndex = index;
-            break;
-        }
-        index++;
-    }
+    sections = [[NSMutableArray alloc] initWithArray:[self.appDelegate.seats objectForKey:@"sctns"]];
     
-    levelDictionary = [levels objectAtIndex:selectedLevelIndex];
-    sections = [NSMutableArray arrayWithArray:[levelDictionary objectForKey:@"sections"]];
-    
-    NSDictionary* obj = @{ @"id" : @"",
-                            @"name" : @"Section"};
+    NSDictionary* obj = @{@"nm" : @"Section"};
     [sections insertObject:obj atIndex:0];
 }
 
 - (void)loadRows
 {
     sectionDictionary = [sections objectAtIndex:selectedSectionIndex];
-    rows = [NSMutableArray arrayWithArray:[sectionDictionary objectForKey:@"rows"]];
+    rows = [NSMutableArray arrayWithArray:[sectionDictionary objectForKey:@"rws"]];
     
-    NSDictionary* obj = @{ @"id" : @"",
-                           @"name" : @"Row"};
+    NSDictionary* obj = @{@"nm" : @"Row"};
     [rows insertObject:obj atIndex:0];
     [rowTable reloadData];
 }
 
 - (void)loadSeats
 {
-    seatDictionary = [rows objectAtIndex:selectedRowIndex];
-    seats = [NSMutableArray arrayWithArray:[seatDictionary objectForKey:@"seats"]];
+    rowDictionary = [rows objectAtIndex:selectedRowIndex];
+    NSArray *seatsAsArray = [NSArray arrayWithArray:[rowDictionary objectForKey:@"sts"]];
+    seats = [[NSMutableArray alloc] init];
+    for (NSString *seat in seatsAsArray) {
+        [seats addObject:@{@"nm" : seat}];
+    }
     
-    NSDictionary* obj = @{ @"id" : @"",
-                           @"name" : @"Seat"};
+    NSDictionary* obj = @{@"nm" : @"Seat"};
     [seats insertObject:obj atIndex:0];
     [seatTable reloadData];
 }
@@ -346,10 +336,10 @@
 
 - (void)saveSeat
 {
-    self.appDelegate.levelID = [[levels objectAtIndex:selectedLevelIndex] valueForKeyPath:@"name"];
-    self.appDelegate.sectionID = [[sections objectAtIndex:selectedSectionIndex] valueForKeyPath:@"name"];
-    self.appDelegate.rowID = [[rows objectAtIndex:selectedRowIndex] valueForKeyPath:@"name"];
-    self.appDelegate.seatID = [[seats objectAtIndex:selectedSeatIndex] valueForKeyPath:@"name"];
+    self.appDelegate.levelID = [[levels objectAtIndex:selectedLevelIndex] valueForKeyPath:@"nm"];
+    self.appDelegate.sectionID = [[sections objectAtIndex:selectedSectionIndex] valueForKeyPath:@"nm"];
+    self.appDelegate.rowID = [[rows objectAtIndex:selectedRowIndex] valueForKeyPath:@"nm"];
+    self.appDelegate.seatID = [[seats objectAtIndex:selectedSeatIndex] valueForKeyPath:@"nm"];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setValue:self.appDelegate.levelID forKey:@"leveID"];

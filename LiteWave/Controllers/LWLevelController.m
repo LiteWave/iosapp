@@ -60,7 +60,7 @@
     selectedLevelIndex = [index intValue];
     [self clearCells:viewTable  selected:(int)index];
     
-    self.appDelegate.levelID = [[levels objectAtIndex:selectedLevelIndex] valueForKeyPath:@"name"];
+    self.appDelegate.levelID = [[levels objectAtIndex:selectedLevelIndex] valueForKeyPath:@"nm"];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     LWSeatController *seat = [storyboard instantiateViewControllerWithIdentifier:@"seat"];
@@ -89,7 +89,7 @@
     
     NSDictionary *data = [levels objectAtIndex:indexPath.row];
     
-    cell.nameLabel.text = [data valueForKeyPath:@"name"];
+    cell.nameLabel.text = [data valueForKeyPath:@"nm"];
     cell.tableView = tableView;
     cell.index = @(indexPath.row);
 
@@ -126,7 +126,7 @@
                                                                options: NSJSONReadingMutableContainers
                                                                  error: &error2];
                                
-                               self.appDelegate.seatsArray = [[NSDictionary alloc] initWithDictionary:seatsDict copyItems:YES];
+                               self.appDelegate.levels = [[NSDictionary alloc] initWithDictionary:seatsDict copyItems:YES];
                                
                                [self loadLevels];
                                [self prepareView];
@@ -144,25 +144,26 @@
 
 - (void)loadLevels
 {
-    levels = [[NSMutableArray alloc] initWithArray:[self.appDelegate.seatsArray objectForKey:@"levels"]];
+    levels = [[NSMutableArray alloc] initWithArray:[self.appDelegate.levels objectForKey:@"levels"]];
 }
 
 - (void)prepareView
 {
     descriptionLabel.frame = CGRectMake(0,
-                                        self.view.frame.size.height - 110,
+                                        self.view.frame.size.height - 100,
                                         self.view.frame.size.width,
-                                        110);
+                                        100);
     
     viewTable.frame = CGRectMake(
                                  self.view.frame.size.width/3.0,
                                  0,
                                  self.view.frame.size.width/3.0,
-                                 self.view.frame.size.height - descriptionLabel.frame.size.height);
+                                 self.view.frame.size.height);
     viewTable.backgroundColor = self.appDelegate.backgroundColor;
     viewTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     viewTable.hidden = NO;
-    [viewTable setContentInset:UIEdgeInsetsMake(70,0,0,0)];
+    [viewTable setShowsVerticalScrollIndicator:NO];
+    [viewTable setContentInset:UIEdgeInsetsMake(10,0,0,0)];
     [viewTable setDataSource:self];
     [viewTable setDelegate:self];
 }

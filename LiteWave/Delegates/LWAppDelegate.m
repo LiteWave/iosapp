@@ -13,7 +13,8 @@
 
 @synthesize uniqueID = _uniqueID;
 @synthesize clientID = _clientID;
-@synthesize seatsArray = _seatsArray;
+@synthesize levels = _levels;
+@synthesize seats = _seats;
 @synthesize eventID = _eventID;
 @synthesize stadiumID = _stadiumID;
 @synthesize sectionID = _sectionID;
