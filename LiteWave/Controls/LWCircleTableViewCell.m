@@ -47,10 +47,10 @@
         [self.button addTarget:self action:@selector(onTouchDown) forControlEvents:UIControlEventTouchDown];
         
         self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, tableWidth, CELL_HEIGHT)];
+        self.nameLabel.textAlignment = NSTextAlignmentCenter;
         [self.nameLabel setTextColor:self.appDelegate.textColor];
         [self.nameLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:24.0f]];
         [self.nameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-        self.nameLabel.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:self.nameLabel];
     }
     return self;

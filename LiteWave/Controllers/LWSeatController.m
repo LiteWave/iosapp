@@ -100,6 +100,7 @@
         [cell.nameLabel setTextColor:self.appDelegate.textColor];
     } else {
         cell.button.hidden = NO;
+        cell.nameLabel.frame = CGRectMake(0, 0, cell.nameLabel.frame.size.width, cell.nameLabel.frame.size.height);
     }
 
     return cell;
