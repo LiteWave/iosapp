@@ -33,9 +33,6 @@
     
     pressedChangeSeat = NO;
     
-    // add observer for when app becomes active
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onBecomeActive) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
-    
     [self prepareView];
 }
 
@@ -44,10 +41,6 @@
     
     // remove observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    [joinButton removeTarget:nil
-                        action:NULL
-              forControlEvents:UIControlEventAllEvents];
     
     if (pressedChangeSeat)
         return;
@@ -58,6 +51,9 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated{
+    
+    // add observer for when app becomes active
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onBecomeActive) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
     
     [self.navigationItem setHidesBackButton:NO animated:NO];
 
@@ -124,7 +120,6 @@
 }
 
 -(void)joinShow {
-    
     NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
     [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
     [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];

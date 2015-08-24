@@ -34,11 +34,8 @@
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
-    #ifdef DEBUG
-        self.apiURL = @"http://127.0.0.1:3000/api";
-    #else
-        self.apiURL = @"http://104.130.156.82:8080/api";
-    #endif
+    //self.apiURL = @"http://127.0.0.1:3000/api"; // DEV
+    self.apiURL = @"http://104.130.156.82:8080/api"; // PROD
     
     hostReach = [Reachability reachabilityWithHostName:self.apiURL];
     [hostReach startNotifier];
@@ -52,10 +49,9 @@
     [wifiReach startNotifier];
     [self updateInterfaceWithReachability: wifiReach];
     
-    //check and store uuid if doesn't exist
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.uniqueID = [defaults stringForKey:@"uuid"];
-    self.clientID = @"5260316cbf80240000000001"; //trailblazers
+    self.clientID = @"5260316cbf80240000000001"; // trailblazers
     self.levelID = [defaults stringForKey:@"levelID"];
     self.sectionID = [defaults stringForKey:@"sectionID"];
     self.rowID = [defaults stringForKey:@"rowID"];
@@ -72,7 +68,8 @@
     self.highlightColor = [UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0];
     self.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255 blue:0.0/255 alpha:1.0];
     self.textSelectedColor = [UIColor whiteColor];
-    
+
+    //check and store uuid if doesn't exist
     NSLog(@"stored uuid %@", self.uniqueID);
     if(self.uniqueID.length==0){
         self.uniqueID = [self uuid];

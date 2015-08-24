@@ -42,10 +42,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    [joinButton removeTarget:nil
-                        action:NULL
-              forControlEvents:UIControlEventAllEvents];
 }
 
 - (void)didReceiveMemoryWarning
@@ -337,7 +333,6 @@
 
 - (void)saveSeat
 {
-    self.appDelegate.levelID = [[levels objectAtIndex:selectedLevelIndex] valueForKeyPath:@"nm"];
     self.appDelegate.sectionID = [[sections objectAtIndex:selectedSectionIndex] valueForKeyPath:@"nm"];
     self.appDelegate.rowID = [[rows objectAtIndex:selectedRowIndex] valueForKeyPath:@"nm"];
     self.appDelegate.seatID = [[seats objectAtIndex:selectedSeatIndex] valueForKeyPath:@"nm"];
