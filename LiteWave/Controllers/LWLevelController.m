@@ -29,7 +29,7 @@
     
     selectedLevelIndex = -1;
     
-    [self getSeats];
+    [self getLevels];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -113,7 +113,7 @@
     }
 }
 
-- (void)getSeats
+- (void)getLevels
 {
     [[LWAPIClient instance] getStadium: self.appDelegate.stadiumID
                            onSuccess:^(id data) {
@@ -149,14 +149,9 @@
 
 - (void)prepareView
 {
-    
-    CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
-    float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
-    
-    descriptionLabel.frame = CGRectMake(
-                                        50/2,
-                                        self.view.frame.size.height - heightPadding - 110,
-                                        self.view.frame.size.width - 50,
+    descriptionLabel.frame = CGRectMake(0,
+                                        self.view.frame.size.height - 110,
+                                        self.view.frame.size.width,
                                         110);
     
     viewTable.frame = CGRectMake(

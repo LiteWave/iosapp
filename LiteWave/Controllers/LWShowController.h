@@ -38,7 +38,7 @@
 
 - (void)winnerTimerCallback:(id)sender;
 - (void)frameTimerCallback:(id)sender;
-- (void)stop;
+- (void)stopShow;
 - (void)playFrames:(int)counter;
 - (void)showWinner;
 

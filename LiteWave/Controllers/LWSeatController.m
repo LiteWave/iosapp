@@ -30,11 +30,7 @@
     selectedRowIndex = 0;
     selectedSeatIndex = 0;
     
-    [self loadSections];
-    [self loadRows];
-    [self loadSeats];
-    
-    [self prepareView];
+    [self getSeats];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -179,6 +175,37 @@
     }
 }
 
+- (void)getSeats
+{
+    [[LWAPIClient instance] getStadium: self.appDelegate.stadiumID
+                             //withLevel: self.appDelegate.levelID
+                             onSuccess:^(id data) {
+                                 NSError *error2;
+                                 NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
+                                 NSString *jsonArray = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                                 
+                                 NSDictionary *seatsDict =
+                                 [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
+                                                                 options: NSJSONReadingMutableContainers
+                                                                   error: &error2];
+                                 
+                                 self.appDelegate.seatsArray = [[NSDictionary alloc] initWithDictionary:seatsDict copyItems:YES];
+                                 
+                                 [self loadSections];
+                                 [self loadRows];
+                                 [self loadSeats];
+                                  
+                                 [self prepareView];
+                             }
+                             onFailure:^(NSError *error) {
+                                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network error"
+                                                                                 message: @"Stadium seating could not be retrieved."delegate:self
+                                                                       cancelButtonTitle:@"OK"
+                                                                       otherButtonTitles:nil];
+                                 [alert show];
+                             }];
+}
+
 - (void)loadSections
 {
     levels = [[NSMutableArray alloc] initWithArray:[self.appDelegate.seatsArray objectForKey:@"levels"]];
@@ -223,13 +250,10 @@
 
 - (void)prepareView
 {
-    CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
-    float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
-    
     joinButton.frame = CGRectMake(0,
-                                   self.view.bounds.size.height - heightPadding - 50,
-                                   self.view.bounds.size.width,
-                                   50);
+                                  self.view.bounds.size.height - 50,
+                                  self.view.bounds.size.width,
+                                  50);
     [self disableJoin];
     
     sectionTable.hidden = NO;
@@ -237,7 +261,7 @@
                                     0,
                                     self.view.frame.size.width/3.0,
                                     self.view.frame.size.height - joinButton.frame.size.height);
-    sectionTable.backgroundColor = [UIColor whiteColor];
+    sectionTable.backgroundColor = self.appDelegate.backgroundColor;
     sectionTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [sectionTable setShowsVerticalScrollIndicator:NO];
     [sectionTable setContentInset:UIEdgeInsetsMake(-20,0,10,0)];
@@ -249,7 +273,7 @@
                                 0,
                                 self.view.frame.size.width/3.0,
                                 self.view.frame.size.height - joinButton.frame.size.height);
-    rowTable.backgroundColor = [UIColor whiteColor];
+    rowTable.backgroundColor = self.appDelegate.backgroundColor;
     rowTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     rowTable.hidden = YES;
     [rowTable setShowsVerticalScrollIndicator:NO];
@@ -262,7 +286,7 @@
                                  0,
                                  self.view.frame.size.width/3.0,
                                  self.view.frame.size.height - joinButton.frame.size.height);
-    seatTable.backgroundColor = [UIColor whiteColor];
+    seatTable.backgroundColor = self.appDelegate.backgroundColor;
     seatTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     seatTable.hidden = YES;
     [seatTable setShowsVerticalScrollIndicator:NO];

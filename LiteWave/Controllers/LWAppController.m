@@ -28,6 +28,8 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
+    self.view.backgroundColor = self.appDelegate.backgroundColor;
+    
     self.navigationController.navigationBar.barTintColor = self.appDelegate.highlightColor;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];

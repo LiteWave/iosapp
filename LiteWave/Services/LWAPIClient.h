@@ -28,6 +28,7 @@ typedef void (^Failure)(NSError*);
 
 -(void)getStadiums:(Success)success onFailure:(Failure)failure;
 -(void)getStadium:(NSString*)stadiumID onSuccess:(Success)success onFailure:(Failure)failure;
+-(void)getStadium:(NSString*)stadiumID withLevel:(NSString*)levelID onSuccess:(Success)success onFailure:(Failure)failure;
 
 -(void)getEvents:(NSString*)clientID onSuccess:(Success)success onFailure:(Failure)failure;
 -(void)joinEvent:(NSString*)eventID params:(NSDictionary*)params onSuccess:(Success)success onFailure:(Failure)failure;

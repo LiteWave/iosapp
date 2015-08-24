@@ -91,6 +91,11 @@
     [self get:url onSuccess: success onFailure: failure];
 }
 
+-(void)getStadium:(NSString*)stadiumID withLevel:(NSString*)levelID onSuccess:(Success)success onFailure:(Failure)failure {
+    NSURL *url = [[NSURL alloc] initWithString:[self stadiumsPath:stadiumID withLevel:levelID]];
+    [self get:url onSuccess: success onFailure: failure];
+}
+
 // -- EVENTS
 
 -(void)getEvents:(NSString*)clientID onSuccess:(Success)success onFailure:(Failure)failure {
@@ -138,7 +143,9 @@
 -(NSString*)stadiumsPath:(NSString*)stadiumID {
     return [NSString stringWithFormat: @"%@/stadiums/%@", self.appDelegate.apiURL, stadiumID];
 }
-
+-(NSString*)stadiumsPath:(NSString*)stadiumID withLevel:(NSString*)levelId {
+    return [NSString stringWithFormat: @"%@/stadiums/%@/levels/%@", self.appDelegate.apiURL, stadiumID, levelId];
+}
 
 -(NSString*)eventsPath:(NSString*)clientID {
     return [self eventsPath: clientID withEvent: @""];

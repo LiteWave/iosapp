@@ -28,7 +28,7 @@
         bgColorView.backgroundColor = self.appDelegate.backgroundColor;
         [self setSelectedBackgroundView:bgColorView];
         
-        self.contentView.backgroundColor = [UIColor whiteColor];
+        self.contentView.backgroundColor = self.appDelegate.backgroundColor;
         
         
         self.button = [UIButton buttonWithType:UIButtonTypeCustom];

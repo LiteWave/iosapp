@@ -29,6 +29,8 @@
     
     self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
+    self.view.backgroundColor = self.appDelegate.backgroundColor;
+    
     pressedChangeSeat = NO;
     
     // add observer for when app becomes active
@@ -61,7 +63,7 @@
 
     self.title = self.appDelegate.eventName;
 
-    mySeat.text = [NSString stringWithFormat:@"%@-%@-%@", self.appDelegate.sectionID, self.appDelegate.rowID, self.appDelegate.seatID];
+    seatLabel.text = [NSString stringWithFormat:@"%@-%@-%@", self.appDelegate.sectionID, self.appDelegate.rowID, self.appDelegate.seatID];
     
     [self getShow];
 }
@@ -155,6 +157,8 @@
                              [self presentViewController:vc animated:YES completion:nil];
                          }
                          onFailure:^(NSError *error) {
+                             [self disableJoin];
+                             
                              UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Join failed"
                                                                              message: @"Sorry, this show has expired."
                                                                             delegate:self
@@ -212,7 +216,9 @@
     CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
     float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
     
-    mySeat.textColor = self.appDelegate.highlightColor;
+    mySeat.textColor = self.appDelegate.textColor;
+    seatLabel.textColor = self.appDelegate.highlightColor;
+    waitLabel.textColor = self.appDelegate.textColor;
     
     changeButton.layer.borderColor=self.appDelegate.highlightColor.CGColor;
     changeButton.layer.backgroundColor=self.appDelegate.highlightColor.CGColor;

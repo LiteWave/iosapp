@@ -15,8 +15,6 @@
 {
     [super viewDidLoad];
 
-    [self.navigationItem setHidesBackButton:YES animated:NO];
-    
     self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSString *winnerID = [self.appDelegate.show valueForKey:@"_winnerId"];
@@ -25,6 +23,8 @@
     } else {
         isWinner=NO;
     }
+    
+    self.view.backgroundColor = self.appDelegate.backgroundColor;
     
     imageView.hidden = YES;
     participationLabel.hidden = YES;
@@ -74,9 +74,9 @@
             NSData *data = [NSData dataWithContentsOfURL:url];
             UIImage *image = [[UIImage alloc] initWithData:data];
             
-            CGFloat imageRatio = image.size.height / image.size.width;
+            CGFloat imageRatio = image.size.width / image.size.height;
             imageView.image = image;
-            imageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width * imageRatio);
+            imageView.frame = CGRectMake(0, 0, self.view.frame.size.height * imageRatio, self.view.frame.size.height);
             UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onImageSelect)];
             [imageView addGestureRecognizer:tapRecognizer];
             imageView.userInteractionEnabled = YES;
@@ -84,6 +84,7 @@
             participationLabel.hidden = YES;
         }
     } else {
+        participationLabel.textColor = self.appDelegate.textColor;
         participationLabel.hidden = NO;
     }
 
@@ -96,9 +97,7 @@
     returnButton.layer.borderColor=self.appDelegate.highlightColor.CGColor;
     returnButton.layer.backgroundColor=self.appDelegate.highlightColor.CGColor;
     returnButton.layer.borderWidth=2.0f;
-    
     [returnButton setTitleColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] forState:UIControlStateNormal];
-    
     [returnButton addTarget:self action:@selector(onReturnSelect) forControlEvents:UIControlEventTouchUpInside];
 }
 

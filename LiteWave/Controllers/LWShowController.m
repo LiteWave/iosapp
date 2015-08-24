@@ -26,6 +26,10 @@
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
     self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    self.view.backgroundColor = self.appDelegate.backgroundColor;
+    self.timerLabel.textColor = self.appDelegate.highlightColor;
+    self.startsInLabel.textColor = self.appDelegate.highlightColor;
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -87,9 +91,17 @@
     }
 }
 
+-(void)stopShow
+{
+    [self.frameTimer invalidate];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    LWResultsController *results = [storyboard instantiateViewControllerWithIdentifier:@"results"];
+    [self presentViewController:results animated:YES completion:nil];
+    
+    self.winnerLabel.hidden = YES;
+}
 
-#pragma mark -
-#pragma mark CountDownTimer Delegate methods
 -(void)timesUpWithLabel:(UILabel *)label
 {
     self.startsInLabel.hidden = YES;
@@ -99,24 +111,12 @@
     [self playFrames:position];
 }
 
-#pragma mark -
-#pragma mark ShowViewController Playing show methods
-
--(void)stop
-{
-    [self.frameTimer invalidate];
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    LWResultsController *results = [storyboard instantiateViewControllerWithIdentifier:@"results"];
-    [self presentViewController:results animated:YES completion:nil];
-}
-
--(void)playFrames:(int)counter{
+-(void)playFrames:(int)counter {
     BOOL winnerLoopFrame = NO;
 
     if (counter==[commandArray count]) {
         // stop the timers when the end is reached and stop the show
-        [self stop];
+        [self stopShow];
     } else {
         commandType = @"c"; // color (c) winner (win)
         commandLength = 0; // command time length in milliseconds
