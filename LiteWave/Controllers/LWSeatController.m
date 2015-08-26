@@ -349,14 +349,14 @@
                                 self.appDelegate.levelID, @"level",
                                 self.appDelegate.sectionID, @"section",
                                 self.appDelegate.rowID, @"row",
-                                self.appDelegate.seatID, @"seat_number", nil];
+                                self.appDelegate.seatID, @"seat", nil];
     
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                                 //[NSString stringWithFormat:@"%@%@", self.appDelegate.uniqueID, @"F"],
                                 self.appDelegate.uniqueID,
-                                @"user_key",
+                                @"userKey",
                                 userSeat,
-                                @"user_seat",
+                                @"userSeat",
                                 nil];
     
     [[LWAPIClient instance] joinEvent: self.appDelegate.eventID

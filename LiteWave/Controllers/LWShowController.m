@@ -58,14 +58,14 @@
 -(void)startShow {
     commandArray = [self.appDelegate.showData objectForKey:@"commands"];
 
-    NSString *winnerID = [self.appDelegate.show valueForKey:@"_winnerId"];
+    NSString *winnerID = [self.appDelegate.showData valueForKey:@"_winner_user_location_id"];
     if (winnerID != (id)[NSNull null] && [winnerID isEqualToString:self.appDelegate.userID]) {
         isWinner=YES;
     } else {
         isWinner=NO;
     }
 
-    if ([self.appDelegate.showData objectForKey:@"mobile_time_offset_ms"]) {
+    if ([self.appDelegate.showData objectForKey:@"mobileTimeOffset"]) {
         counterUtil = [[LWCountDownTimerUtility alloc] init];
         [counterUtil setDelegate:self];
 
@@ -73,9 +73,9 @@
         [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
         [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
 
-        NSDate *startDate = [dateformat dateFromString:[self.appDelegate.showData valueForKey:@"mobile_start_at"]];
-        NSString *mobile_start_at = [dateformat stringFromDate:startDate];
-        NSLog(@"start %@",mobile_start_at);
+        NSDate *startDate = [dateformat dateFromString:[self.appDelegate.showData valueForKey:@"mobileStartAt"]];
+        NSString *mobileStartAt = [dateformat stringFromDate:startDate];
+        NSLog(@"start %@", mobileStartAt);
 
         diff = [startDate timeIntervalSinceNow] * 100.0f;
         NSLog(@"countdown in %f...", diff);
@@ -120,9 +120,9 @@
     } else {
         commandType = @"c"; // color (c) winner (win)
         commandLength = 0; // command time length in milliseconds
+        commandIf = nil; // winner (w), loser (l)
         shouldVibrate = 1; // vibrate 0=no 1=yes
         backgroundColor = [UIColor blackColor]; // (rgb)
-        playIf = nil; // winner (w), loser (l)
         
         // cl -> command length
         // ct -> command type
@@ -135,8 +135,8 @@
             shouldVibrate = [[frameDict valueForKey:@"sv"] integerValue];
         }
         
-        if ([frameDict objectForKey:@"pif"]) {
-            playIf = [frameDict valueForKey:@"pif"];
+        if ([frameDict objectForKey:@"cif"]) {
+            commandIf = [frameDict valueForKey:@"cif"];
         }
         
         if ([frameDict objectForKey:@"ct"]) {
@@ -157,7 +157,7 @@
             
             if ((counter+1) == [commandArray count] && isWinner) {
                 winnerLoopFrame=YES;
-                playIf = @"w";
+                commandIf = @"w";
             }
             
             if ([frameDict objectForKey:@"bg"]) {
@@ -175,11 +175,11 @@
                 backgroundColor = [UIColor blackColor];
             }
             
-            if ([playIf isEqualToString:@"w"] && !isWinner) {
+            if ([commandIf isEqualToString:@"w"] && !isWinner) {
                 //skip frame
                 position++;
                 [self playFrames:position];
-            } else if ([playIf isEqualToString:@"l"] && isWinner) {
+            } else if ([commandIf isEqualToString:@"l"] && isWinner) {
                 //skip frame
                 position++;
                 [self playFrames:position];

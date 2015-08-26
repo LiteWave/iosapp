@@ -18,9 +18,9 @@
 
     NSArray *commandArray;
     NSString *commandType;      // color (c) winner (win)
+    NSString *commandIf;           // winner (w), loser (l)
     long commandLength;         // command time length in milliseconds
     long shouldVibrate;         // vibrate (0)=no, (1)=yes
-    NSString *playIf;           // winner (w), loser (l)
     UIColor *backgroundColor;   // (rgb)
     
     LWCountDownTimerUtility *counterUtil;

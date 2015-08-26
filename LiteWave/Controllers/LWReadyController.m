@@ -83,8 +83,8 @@
                              
                              NSArray *showsArray = [[NSArray alloc] initWithArray:showDict copyItems:YES];
                              for (NSDictionary *show in showsArray) {
-                                 if ([show valueForKey:@"start_at"] != (id)[NSNull null]) {
-                                     NSDate *showDate = [dateformat dateFromString:[show valueForKey:@"start_at"]];
+                                 if ([show valueForKey:@"startAt"] != (id)[NSNull null]) {
+                                     NSDate *showDate = [dateformat dateFromString:[show valueForKey:@"startAt"]];
                                      if (showDate && [LWUtility isTodayGreaterThanDate:showDate]) {
                                          currentShow = show;
                                          break;
@@ -124,10 +124,10 @@
     [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
     [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     
-    NSString *mobile_start = [dateformat stringFromDate:[NSDate date]];
+    NSString *mobileStart = [dateformat stringFromDate:[NSDate date]];
 
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            mobile_start, @"mobile_time", nil];
+                            mobileStart, @"mobileTime", nil];
 
     
     [[LWAPIClient instance] joinShow: self.appDelegate.userID

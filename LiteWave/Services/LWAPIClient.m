@@ -54,16 +54,12 @@
     for (NSString *key in params) {
         [postString appendString:[NSString stringWithFormat:@"%@=%@&", key, params[key]]];
     }
-    //NSData *postData = [postString dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
     NSError *error;
     NSData *postData = [NSJSONSerialization dataWithJSONObject:params options:0 error:&error];
 
-    //NSString *postLength = [NSString stringWithFormat:@"%lu",[postData length]];
-    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
-    //[request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
     
@@ -92,7 +88,9 @@
 }
 
 -(void)getStadium:(NSString*)stadiumID withLevel:(NSString*)levelID onSuccess:(Success)success onFailure:(Failure)failure {
-    NSURL *url = [[NSURL alloc] initWithString:[self stadiumsPath:stadiumID withLevel:levelID]];
+    NSString *baseURL = [self stadiumsPath:stadiumID withLevel:levelID];
+    NSString *encodedUrl = [baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *url = [[NSURL alloc] initWithString:encodedUrl];
     [self get:url onSuccess: success onFailure: failure];
 }
 
