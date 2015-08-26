@@ -12,16 +12,6 @@
 
 @implementation LWUtility
 
-+ (NSString*)getToday {
-    NSTimeZone *currentTimeZone = [NSTimeZone localTimeZone];
-    NSDate *todayDate = [NSDate date];
-    NSDateFormatter *dayformat = [[NSDateFormatter alloc] init];
-    [dayformat setDateFormat:@"dd"];
-    [dayformat setTimeZone:[NSTimeZone timeZoneWithName:currentTimeZone.abbreviation]];
-    
-    return [dayformat stringFromDate:todayDate];
-}
-
 +(BOOL)isToday:(NSDate*)date {
     NSDate *today = [NSDate date];
     NSTimeZone *myTimeZone = [NSTimeZone localTimeZone];
@@ -71,5 +61,26 @@
             return NO;
     }
 }
+
++(UIColor*)getColorFromString:(NSString*)color {
+    NSArray *colorItems = [color componentsSeparatedByString:@","];
+    
+    float red = [[colorItems objectAtIndex:0] doubleValue];
+    float green = [[colorItems objectAtIndex:1] doubleValue];
+    float blue = [[colorItems objectAtIndex:2] doubleValue];
+    
+    return [UIColor colorWithRed:red/255.0 green:green/255.0 blue:blue/255.0 alpha:1];
+}
+
++(NSString*)getStringFromColor:(UIColor*)color {
+    if (color) {
+        const CGFloat *components = CGColorGetComponents(color.CGColor);
+        NSLog(@"%@", [NSString stringWithFormat:@"%i,%i,%i", (int)(components[0]*255), (int)(components[1]*255), (int)(components[2]*255)]);
+        return [NSString stringWithFormat:@"%i,%i,%i", (int)(components[0]*255), (int)(components[1]*255), (int)(components[2]*255)];
+    } else {
+        return @"255,255,255";
+    }
+}
+
 
 @end

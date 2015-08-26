@@ -74,9 +74,18 @@
             NSData *data = [NSData dataWithContentsOfURL:url];
             UIImage *image = [[UIImage alloc] initWithData:data];
             
-            CGFloat imageRatio = image.size.width / image.size.height;
+            CGFloat imageRatio;
+            float size;
+            if (image.size.width > image.size.height) {
+                imageRatio = image.size.width / image.size.height;
+                size = self.view.frame.size.height * imageRatio;
+                imageView.frame = CGRectMake(self.view.frame.size.width/2 - size/2, 0, size, self.view.frame.size.height);
+            } else {
+                imageRatio = image.size.height / image.size.width;
+                size = self.view.frame.size.width * imageRatio;
+                imageView.frame = CGRectMake(0, self.view.frame.size.height/2 - size/2, self.view.frame.size.width, size);
+            }
             imageView.image = image;
-            imageView.frame = CGRectMake(0, 0, self.view.frame.size.height * imageRatio, self.view.frame.size.height);
             UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onImageSelect)];
             [imageView addGestureRecognizer:tapRecognizer];
             imageView.userInteractionEnabled = YES;

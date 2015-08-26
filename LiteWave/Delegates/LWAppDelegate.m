@@ -7,6 +7,7 @@
 //
 
 #import "LWAppDelegate.h"
+#import "LWUtility.h"
 #import "Reachability.h"
 
 @implementation LWAppDelegate
@@ -34,8 +35,8 @@
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
-    //self.apiURL = @"http://127.0.0.1:3000/api"; // DEV
-    self.apiURL = @"http://104.130.156.82:8080/api"; // PROD
+    self.apiURL = @"http://127.0.0.1:3000/api"; // DEV
+    //self.apiURL = @"http://104.130.156.82:8080/api"; // PROD
     
     hostReach = [Reachability reachabilityWithHostName:self.apiURL];
     [hostReach startNotifier];
@@ -63,11 +64,13 @@
     self.userID = [defaults objectForKey:@"userID"];
     self.show = [defaults objectForKey:@"show"];
     
-    self.backgroundColor = [UIColor whiteColor];
-    self.borderColor = [UIColor blackColor];
-    self.highlightColor = [UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0];
-    self.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255 blue:0.0/255 alpha:1.0];
-    self.textSelectedColor = [UIColor whiteColor];
+    self.defaultColor = [UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0];
+    NSLog(@"%@", [defaults objectForKey:@"backgroundColor"]);
+    self.backgroundColor = [LWUtility getColorFromString:[defaults objectForKey:@"backgroundColor"]];
+    self.borderColor = [LWUtility getColorFromString:[defaults objectForKey:@"borderColor"]];
+    self.highlightColor = [LWUtility getColorFromString:[defaults objectForKey:@"highlightColor"]];
+    self.textColor = [LWUtility getColorFromString:[defaults objectForKey:@"textColor"]];
+    self.textSelectedColor = [LWUtility getColorFromString:[defaults objectForKey:@"textSelectedColor"]];
 
     //check and store uuid if doesn't exist
     NSLog(@"stored uuid %@", self.uniqueID);

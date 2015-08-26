@@ -29,6 +29,7 @@
     
     selectedLevelIndex = -1;
     
+    [self prepareView];
     [self getLevels];
 }
 
@@ -57,7 +58,7 @@
     selectedLevelIndex = [index intValue];
     [self clearCells:viewTable  selected:(int)index];
     
-    self.appDelegate.levelID = [[levels objectAtIndex:selectedLevelIndex] valueForKeyPath:@"nm"];
+    self.appDelegate.levelID = [[levels objectAtIndex:selectedLevelIndex] valueForKeyPath:@"name"];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     LWSeatController *seat = [storyboard instantiateViewControllerWithIdentifier:@"seat"];
@@ -86,7 +87,7 @@
     
     NSDictionary *data = [levels objectAtIndex:indexPath.row];
     
-    cell.nameLabel.text = [data valueForKeyPath:@"nm"];
+    cell.nameLabel.text = [data valueForKeyPath:@"name"];
     cell.tableView = tableView;
     cell.index = @(indexPath.row);
 
@@ -126,7 +127,6 @@
                                self.appDelegate.levels = [[NSDictionary alloc] initWithDictionary:seatsDict copyItems:YES];
                                
                                [self loadLevels];
-                               [self prepareView];
                            }
                            onFailure:^(NSError *error) {
                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network error"
@@ -142,13 +142,17 @@
 - (void)loadLevels
 {
     levels = [[NSMutableArray alloc] initWithArray:[self.appDelegate.levels objectForKey:@"levels"]];
+    [viewTable reloadData];
 }
 
 - (void)prepareView
 {
-    descriptionLabel.frame = CGRectMake(0,
-                                        self.view.frame.size.height - 100,
-                                        self.view.frame.size.width,
+    CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+    float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
+    
+    descriptionLabel.frame = CGRectMake(25,
+                                        self.view.frame.size.height - 90 - heightPadding,
+                                        self.view.frame.size.width - 50,
                                         100);
     
     viewTable.frame = CGRectMake(

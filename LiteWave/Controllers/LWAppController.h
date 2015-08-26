@@ -11,6 +11,7 @@
 
 @interface LWAppController : UIViewController {
     IBOutlet UILabel *unavailableLabel;
+    IBOutlet UIImageView *imageView;
 }
 
 @property (nonatomic, retain) LWAppDelegate *appDelegate;

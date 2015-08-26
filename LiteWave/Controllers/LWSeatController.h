@@ -17,6 +17,7 @@
     IBOutlet UITableView *rowTable;
     IBOutlet UITableView *seatTable;
     
+    UILabel *sectionLabel;
     UILabel *rowLabel;
     UILabel *seatLabel;
     

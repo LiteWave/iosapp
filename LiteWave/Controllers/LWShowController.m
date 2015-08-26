@@ -8,6 +8,7 @@
 #import "AFNetworking.h"
 #import "LWAppDelegate.h"
 #import "LWResultsController.h"
+#import "LWUtility.h"
 #import "LWApiClient.h"
 
 @implementation LWShowController
@@ -161,16 +162,7 @@
             }
             
             if ([frameDict objectForKey:@"bg"]) {
-                
-                NSString *colorArray = [frameDict objectForKey:@"bg"];
-                NSArray *colorItems = [colorArray componentsSeparatedByString:@","];
-            
-                float red = [[colorItems objectAtIndex:0] doubleValue];
-                float green = [[colorItems objectAtIndex:1] doubleValue];
-                float blue = [[colorItems objectAtIndex:2] doubleValue];
-            
-                backgroundColor = [UIColor colorWithRed:red/255.0 green:green/255.0 blue:blue/255.0 alpha:1];
-
+                backgroundColor = [LWUtility getColorFromString:[frameDict objectForKey:@"bg"]];
             } else {
                 backgroundColor = [UIColor blackColor];
             }
@@ -190,7 +182,6 @@
 
                 NSLog(@"cl time = %f", timeinterval);
                 self.frameTimer = [NSTimer scheduledTimerWithTimeInterval:timeinterval target:self selector:@selector(frameTimerCallback:) userInfo:nil repeats:NO];
-      
                 
                 if (winnerLoopFrame) {
                     [self showWinner];

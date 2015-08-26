@@ -30,6 +30,7 @@
     selectedRowIndex = 0;
     selectedSeatIndex = 0;
     
+    [self prepareView];
     [self getSeats];
 }
 
@@ -71,7 +72,7 @@
     }
     
     NSDictionary *data = [[self getTableData:tableView] objectAtIndex:indexPath.row];
-    cell.nameLabel.text = [data valueForKeyPath:@"nm"];
+    cell.nameLabel.text = [data valueForKeyPath:@"name"];
     
     cell.tableView = tableView;
     cell.index = @(indexPath.row);
@@ -192,7 +193,7 @@
                                  [self loadRows];
                                  [self loadSeats];
                                   
-                                 [self prepareView];
+                                 sectionTable.hidden = YES;
                              }
                              onFailure:^(NSError *error) {
                                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network error"
@@ -205,18 +206,19 @@
 
 - (void)loadSections
 {
-    sections = [[NSMutableArray alloc] initWithArray:[self.appDelegate.seats objectForKey:@"sctns"]];
+    sections = [[NSMutableArray alloc] initWithArray:[self.appDelegate.seats objectForKey:@"sections"]];
     
-    NSDictionary* obj = @{@"nm" : @"Section"};
+    NSDictionary* obj = @{@"name" : @"Section"};
     [sections insertObject:obj atIndex:0];
+    [sectionTable reloadData];
 }
 
 - (void)loadRows
 {
     sectionDictionary = [sections objectAtIndex:selectedSectionIndex];
-    rows = [NSMutableArray arrayWithArray:[sectionDictionary objectForKey:@"rws"]];
+    rows = [NSMutableArray arrayWithArray:[sectionDictionary objectForKey:@"rows"]];
     
-    NSDictionary* obj = @{@"nm" : @"Row"};
+    NSDictionary* obj = @{@"name" : @"Row"};
     [rows insertObject:obj atIndex:0];
     [rowTable reloadData];
 }
@@ -224,21 +226,24 @@
 - (void)loadSeats
 {
     rowDictionary = [rows objectAtIndex:selectedRowIndex];
-    NSArray *seatsAsArray = [NSArray arrayWithArray:[rowDictionary objectForKey:@"sts"]];
+    NSArray *seatsAsArray = [NSArray arrayWithArray:[rowDictionary objectForKey:@"seats"]];
     seats = [[NSMutableArray alloc] init];
     for (NSString *seat in seatsAsArray) {
-        [seats addObject:@{@"nm" : seat}];
+        [seats addObject:@{@"name" : seat}];
     }
     
-    NSDictionary* obj = @{@"nm" : @"Seat"};
+    NSDictionary* obj = @{@"name" : @"Seat"};
     [seats insertObject:obj atIndex:0];
     [seatTable reloadData];
 }
 
 - (void)prepareView
 {
+    CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+    float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
+    
     joinButton.frame = CGRectMake(0,
-                                  self.view.bounds.size.height - 50,
+                                  self.view.bounds.size.height - 50 - heightPadding,
                                   self.view.bounds.size.width,
                                   50);
     [self disableJoin];
@@ -280,6 +285,17 @@
     [seatTable setContentInset:UIEdgeInsetsMake(-20,0,10,0)];
     [seatTable setDataSource:self];
     [seatTable setDelegate:self];
+    
+    sectionLabel = [[UILabel alloc]initWithFrame:CGRectMake(sectionTable.frame.origin.x,
+                                                        sectionTable.frame.origin.y,
+                                                        sectionTable.frame.size.width,
+                                                        100)];
+    [sectionLabel setTextColor:self.appDelegate.textColor];
+    [sectionLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:24.0f]];
+    [sectionLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    sectionLabel.textAlignment = NSTextAlignmentCenter;
+    sectionLabel.text = @"Section";
+    [self.view addSubview:sectionLabel];
     
     rowLabel = [[UILabel alloc]initWithFrame:CGRectMake(rowTable.frame.origin.x,
                                                         rowTable.frame.origin.y,
@@ -333,9 +349,9 @@
 
 - (void)saveSeat
 {
-    self.appDelegate.sectionID = [[sections objectAtIndex:selectedSectionIndex] valueForKeyPath:@"nm"];
-    self.appDelegate.rowID = [[rows objectAtIndex:selectedRowIndex] valueForKeyPath:@"nm"];
-    self.appDelegate.seatID = [[seats objectAtIndex:selectedSeatIndex] valueForKeyPath:@"nm"];
+    self.appDelegate.sectionID = [[sections objectAtIndex:selectedSectionIndex] valueForKeyPath:@"name"];
+    self.appDelegate.rowID = [[rows objectAtIndex:selectedRowIndex] valueForKeyPath:@"name"];
+    self.appDelegate.seatID = [[seats objectAtIndex:selectedSeatIndex] valueForKeyPath:@"name"];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setValue:self.appDelegate.levelID forKey:@"leveID"];

@@ -10,8 +10,9 @@
 
 @interface LWUtility : NSObject
 
-+ (NSString*)getToday;
 +(BOOL)isToday:(NSDate*)date;
 +(BOOL)isTodayGreaterThanDate:(NSDate*)date;
++(UIColor*)getColorFromString:(NSString*)color;
++(NSString*)getStringFromColor:(UIColor*)color;
 
 @end

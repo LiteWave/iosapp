@@ -36,6 +36,7 @@
 @property (nonatomic, strong) NSDictionary *show;
 @property (nonatomic, strong) NSDictionary *showData;
 
+@property (nonatomic, strong) UIColor *defaultColor; // if no event returned, will use this color
 @property (nonatomic, strong) UIColor *backgroundColor;
 @property (nonatomic, strong) UIColor *highlightColor;
 @property (nonatomic, strong) UIColor *borderColor;
