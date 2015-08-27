@@ -59,7 +59,7 @@
 -(void)startShow {
     commandArray = [self.appDelegate.showData objectForKey:@"commands"];
 
-    NSString *winnerID = [self.appDelegate.showData valueForKey:@"_winner_user_location_id"];
+    NSString *winnerID = [self.appDelegate.showData valueForKey:@"_winnerId"];
     if (winnerID != (id)[NSNull null] && [winnerID isEqualToString:self.appDelegate.userID]) {
         isWinner=YES;
     } else {
@@ -86,7 +86,9 @@
         } else {
             self.timerLabel.hidden = NO;
             self.startsInLabel.hidden = NO;
-
+            
+            self.view.backgroundColor = [UIColor blackColor];
+            
             [counterUtil startCountDownTimerWithTime:diff andUILabel:self.timerLabel];
         }
     }

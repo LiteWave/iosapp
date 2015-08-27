@@ -192,8 +192,8 @@
                                  [self loadSections];
                                  [self loadRows];
                                  [self loadSeats];
-                                  
-                                 sectionTable.hidden = YES;
+                                 
+                                 sectionLabel.hidden = YES;
                              }
                              onFailure:^(NSError *error) {
                                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network error"
@@ -211,6 +211,7 @@
     NSDictionary* obj = @{@"name" : @"Section"};
     [sections insertObject:obj atIndex:0];
     [sectionTable reloadData];
+    
 }
 
 - (void)loadRows

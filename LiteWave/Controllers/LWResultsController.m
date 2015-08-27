@@ -17,13 +17,12 @@
 
     self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    NSString *winnerID = [self.appDelegate.showData valueForKey:@"_winner_user_location_id"];
+    NSString *winnerID = [self.appDelegate.showData valueForKey:@"_winnerId"];
     if (winnerID != (id)[NSNull null] && [winnerID isEqualToString:self.appDelegate.userID]) {
         isWinner=YES;
     } else {
         isWinner=NO;
     }
-    isWinner = NO;
     self.view.backgroundColor = self.appDelegate.backgroundColor;
     
     imageView.hidden = YES;
