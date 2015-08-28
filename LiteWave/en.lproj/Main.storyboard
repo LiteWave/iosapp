@@ -71,7 +71,7 @@
             </objects>
             <point key="canvasLocation" x="367" y="-305"/>
         </scene>
-        <!--LiteWave-->
+        <!--Events-->
         <scene sceneID="kXH-VM-hHa">
             <objects>
                 <viewController storyboardIdentifier="register" id="iss-ty-u8M" customClass="LWAppController" sceneMemberID="viewController">
@@ -79,25 +79,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default.png" id="Fm1-Uk-Hfe">
-                                <rect key="frame" x="20" y="112" width="280" height="266"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Fm1-Uk-Hfe">
+                                <rect key="frame" x="20" y="67" width="280" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No events today" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XW9-Rt-3fi">
-                                <rect key="frame" x="20" y="261" width="280" height="87"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are currently no events scheduled." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XW9-Rt-3fi">
+                                <rect key="frame" x="20" y="205" width="280" height="87"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="25"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="powered by" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SaD-9o-2SZ">
+                                <rect key="frame" x="20" y="376" width="284" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lwlogo-sm.png" id="fxf-cD-RiV">
+                                <rect key="frame" x="72" y="410" width="176" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="LiteWave" id="I6c-ia-4w7">
+                    <navigationItem key="navigationItem" title="Events" id="I6c-ia-4w7">
                         <barButtonItem key="backBarButtonItem" title=" " id="nsP-yZ-yYp"/>
                     </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="Fm1-Uk-Hfe" id="Yhi-er-VCt"/>
+                        <outlet property="logoImageView" destination="fxf-cD-RiV" id="Ziw-Ti-zD1"/>
+                        <outlet property="poweredByLabel" destination="SaD-9o-2SZ" id="eCV-TR-elL"/>
                         <outlet property="unavailableLabel" destination="XW9-Rt-3fi" id="IlN-HR-sIE"/>
                     </connections>
                 </viewController>
@@ -317,6 +330,7 @@
     </scenes>
     <resources>
         <image name="Default.png" width="320" height="480"/>
+        <image name="lwlogo-sm.png" width="500" height="142"/>
         <image name="redBtn.png" width="320" height="100"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

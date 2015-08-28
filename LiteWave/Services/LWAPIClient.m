@@ -75,6 +75,19 @@
 
 // API METHODS
 
+// -- CLIENTS
+
+-(void)getClients:(Success)success onFailure:(Failure)failure {
+    NSURL *url = [[NSURL alloc] initWithString:[self clientsPath]];
+    [self get:url onSuccess: success onFailure: failure];
+}
+
+-(void)getClient:(NSString*)clientID onSuccess:(Success)success onFailure:(Failure)failure {
+    NSURL *url = [[NSURL alloc] initWithString:[self clientsPath:clientID]];
+    [self get:url onSuccess: success onFailure: failure];
+}
+
+
 // -- STADIUMS
 
 -(void)getStadiums:(Success)success onFailure:(Failure)failure {
@@ -114,7 +127,6 @@
     [self delete:url onSuccess: success onFailure: failure];
 }
 
-
 // -- SHOWS
 
 -(void)getShows:(NSString*)eventID onSuccess:(Success)success onFailure:(Failure)failure {
@@ -134,6 +146,14 @@
 }
 
 // API HELPERS
+
+-(NSString*)clientsPath {
+    return [self clientsPath: @""];
+}
+
+-(NSString*)clientsPath:(NSString*)clientID {
+    return [NSString stringWithFormat: @"%@/clients/%@", self.appDelegate.apiURL, clientID];
+}
 
 -(NSString*)stadiumsPath {
     return [self stadiumsPath: @""];

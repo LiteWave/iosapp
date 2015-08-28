@@ -71,6 +71,7 @@
     self.highlightColor = [LWUtility getColorFromString:[defaults objectForKey:@"highlightColor"]];
     self.textColor = [LWUtility getColorFromString:[defaults objectForKey:@"textColor"]];
     self.textSelectedColor = [LWUtility getColorFromString:[defaults objectForKey:@"textSelectedColor"]];
+    self.logoUrl = [defaults stringForKey:@"stadiumID"];
 
     //check and store uuid if doesn't exist
     NSLog(@"stored uuid %@", self.uniqueID);

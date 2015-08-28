@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		815EA9071B904D16007D6C73 /* lwlogo-sm.png in Resources */ = {isa = PBXBuildFile; fileRef = 815EA9061B904D16007D6C73 /* lwlogo-sm.png */; };
 		81612A6E1B656DEA009A7E44 /* LWSeatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81612A6D1B656DEA009A7E44 /* LWSeatController.m */; };
 		81612A721B656E79009A7E44 /* LWLevelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81612A711B656E79009A7E44 /* LWLevelController.m */; };
 		8161E3471B69D7ED00857B95 /* LWCircleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8161E3461B69D7ED00857B95 /* LWCircleTableViewCell.m */; };
@@ -30,8 +31,6 @@
 		841579B9181A4A5E00D4EBB1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841579B8181A4A5E00D4EBB1 /* CFNetwork.framework */; };
 		841579BB181A4A7800D4EBB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841579BA181A4A7800D4EBB1 /* CoreLocation.framework */; };
 		841579BD181A4A8100D4EBB1 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841579BC181A4A8000D4EBB1 /* CoreMotion.framework */; };
-		84446C18182703C4002D8BDC /* blueBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 84446C16182703C4002D8BDC /* blueBtn.png */; };
-		84446C19182703C4002D8BDC /* yellowBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 84446C17182703C4002D8BDC /* yellowBtn.png */; };
 		84446C24182CB1AC002D8BDC /* LWShowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84446C23182CB1AC002D8BDC /* LWShowController.m */; };
 		845CD918181DC94B004932BF /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD904181DC94B004932BF /* Default-568h@2x~iphone.png */; };
 		845CD919181DC94B004932BF /* Default~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD905181DC94B004932BF /* Default~iphone.png */; };
@@ -52,8 +51,6 @@
 		845CD928181DC94B004932BF /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD915181DC94B004932BF /* Icon@2x.png */; };
 		845CD929181DC94B004932BF /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD916181DC94B004932BF /* iTunesArtwork.png */; };
 		845CD92A181DC94B004932BF /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD917181DC94B004932BF /* iTunesArtwork@2x.png */; };
-		846360561834A95D00B3B0D5 /* redBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 846360551834A95D00B3B0D5 /* redBtn.png */; };
-		846360581834B10700B3B0D5 /* blackBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 846360571834B10700B3B0D5 /* blackBtn.png */; };
 		84789ECF181C65DB00FC59E4 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789D95181C65DA00FC59E4 /* AFHTTPClient.m */; };
 		84789ED0181C65DB00FC59E4 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789D97181C65DA00FC59E4 /* AFHTTPRequestOperation.m */; };
 		84789ED1181C65DB00FC59E4 /* AFImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789D99181C65DA00FC59E4 /* AFImageCache.m */; };
@@ -95,6 +92,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		815EA9061B904D16007D6C73 /* lwlogo-sm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lwlogo-sm.png"; sourceTree = "<group>"; };
 		81612A6C1B656DD8009A7E44 /* LWSeatController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWSeatController.h; sourceTree = "<group>"; };
 		81612A6D1B656DEA009A7E44 /* LWSeatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWSeatController.m; sourceTree = "<group>"; };
 		81612A701B656E69009A7E44 /* LWLevelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWLevelController.h; sourceTree = "<group>"; };
@@ -128,8 +126,6 @@
 		841579B8181A4A5E00D4EBB1 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		841579BA181A4A7800D4EBB1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		841579BC181A4A8000D4EBB1 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		84446C16182703C4002D8BDC /* blueBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueBtn.png; sourceTree = "<group>"; };
-		84446C17182703C4002D8BDC /* yellowBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowBtn.png; sourceTree = "<group>"; };
 		84446C22182CB1AC002D8BDC /* LWShowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWShowController.h; sourceTree = "<group>"; };
 		84446C23182CB1AC002D8BDC /* LWShowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWShowController.m; sourceTree = "<group>"; };
 		845CD904181DC94B004932BF /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
@@ -152,8 +148,6 @@
 		845CD916181DC94B004932BF /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		845CD917181DC94B004932BF /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		845CD92B181DCBD7004932BF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
-		846360551834A95D00B3B0D5 /* redBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redBtn.png; sourceTree = "<group>"; };
-		846360571834B10700B3B0D5 /* blackBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackBtn.png; sourceTree = "<group>"; };
 		84789D94181C65DA00FC59E4 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		84789D95181C65DA00FC59E4 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		84789D96181C65DA00FC59E4 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -378,10 +372,7 @@
 		845CD903181DC94B004932BF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				846360571834B10700B3B0D5 /* blackBtn.png */,
-				846360551834A95D00B3B0D5 /* redBtn.png */,
-				84446C16182703C4002D8BDC /* blueBtn.png */,
-				84446C17182703C4002D8BDC /* yellowBtn.png */,
+				815EA9061B904D16007D6C73 /* lwlogo-sm.png */,
 				845CD904181DC94B004932BF /* Default-568h@2x~iphone.png */,
 				845CD905181DC94B004932BF /* Default~iphone.png */,
 				845CD906181DC94B004932BF /* Default.png */,
@@ -605,7 +596,6 @@
 				845CD926181DC94B004932BF /* Icon-Small@2x.png in Resources */,
 				845CD924181DC94B004932BF /* Icon-Small-50@2x.png in Resources */,
 				84157968181A286800D4EBB1 /* Images.xcassets in Resources */,
-				84446C19182703C4002D8BDC /* yellowBtn.png in Resources */,
 				845CD921181DC94B004932BF /* Icon-76.png in Resources */,
 				845CD929181DC94B004932BF /* iTunesArtwork.png in Resources */,
 				8415795A181A286800D4EBB1 /* InfoPlist.strings in Resources */,
@@ -615,12 +605,10 @@
 				845CD91F181DC94B004932BF /* Icon-72.png in Resources */,
 				845CD91C181DC94B004932BF /* Icon-40@2x.png in Resources */,
 				845CD927181DC94B004932BF /* Icon.png in Resources */,
-				846360581834B10700B3B0D5 /* blackBtn.png in Resources */,
+				815EA9071B904D16007D6C73 /* lwlogo-sm.png in Resources */,
 				84157963181A286800D4EBB1 /* Main.storyboard in Resources */,
 				845CD918181DC94B004932BF /* Default-568h@2x~iphone.png in Resources */,
 				845CD928181DC94B004932BF /* Icon@2x.png in Resources */,
-				84446C18182703C4002D8BDC /* blueBtn.png in Resources */,
-				846360561834A95D00B3B0D5 /* redBtn.png in Resources */,
 				845CD919181DC94B004932BF /* Default~iphone.png in Resources */,
 				845CD91A181DC94B004932BF /* Default.png in Resources */,
 				845CD922181DC94B004932BF /* Icon-76@2x.png in Resources */,

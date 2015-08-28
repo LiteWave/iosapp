@@ -43,4 +43,6 @@
 @property (nonatomic, strong) UIColor *textColor;
 @property (nonatomic, strong) UIColor *textSelectedColor;
 
+@property (nonatomic, strong) NSString *logoUrl;
+
 @end

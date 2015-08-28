@@ -11,6 +11,8 @@
 
 @interface LWAppController : UIViewController {
     IBOutlet UILabel *unavailableLabel;
+    IBOutlet UILabel *poweredByLabel;
+    IBOutlet UIImageView *logoImageView;
     IBOutlet UIImageView *imageView;
 }
 

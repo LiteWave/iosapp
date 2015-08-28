@@ -26,6 +26,9 @@ typedef void (^Failure)(NSError*);
 
 // API METHODS
 
+-(void)getClients:(Success)success onFailure:(Failure)failure;
+-(void)getClient:(NSString*)clientID onSuccess:(Success)success onFailure:(Failure)failure;
+
 -(void)getStadiums:(Success)success onFailure:(Failure)failure;
 -(void)getStadium:(NSString*)stadiumID onSuccess:(Success)success onFailure:(Failure)failure;
 -(void)getStadium:(NSString*)stadiumID withLevel:(NSString*)levelID onSuccess:(Success)success onFailure:(Failure)failure;

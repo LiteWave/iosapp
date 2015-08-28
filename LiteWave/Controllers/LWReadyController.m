@@ -129,7 +129,7 @@
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             mobileStart, @"mobileTime", nil];
 
-    
+    NSLog(@"EVENT JOIN REQUEST: %@", params);
     [[LWAPIClient instance] joinShow: self.appDelegate.userID
                             params: params
                          onSuccess:^(id data) {
