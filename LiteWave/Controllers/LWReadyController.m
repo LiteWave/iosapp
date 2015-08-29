@@ -209,6 +209,8 @@
     CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
     float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
     
+    [self loadImage];
+    
     waitLabel.textColor = self.appDelegate.textColor;
     waitLabel.frame = CGRectMake(waitLabel.frame.origin.x,
                                  0,
@@ -216,10 +218,10 @@
                                  waitLabel.frame.size.height);
     
     spinner.frame = CGRectMake(spinner.frame.origin.x,
-                               waitLabel.frame.origin.y + 100,
+                               waitLabel.frame.origin.y + 75,
                                spinner.frame.size.width,
                                spinner.frame.size.height);
-
+    spinner.color = self.appDelegate.highlightColor;
     
     
     changeButton.layer.borderColor=self.appDelegate.highlightColor.CGColor;
@@ -303,6 +305,29 @@
                                   self.view.bounds.size.width,
                                   50);
     [self disableJoin];
+}
+
+- (void)loadImage
+{
+    CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+    float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
+    
+    //NSURL *url = [NSURL URLWithString:self.appDelegate.logoUrl];
+    NSURL *url = [NSURL URLWithString:@"https://s-media-cache-ak0.pinimg.com/originals/a7/e0/5d/a7e05d588e5bdf5f4f7a4d3ea03486a2.gif"];
+    
+    NSData *imageData = [NSData dataWithContentsOfURL:url];
+    UIImage *image = [[UIImage alloc] initWithData:imageData];
+    
+    float height = 700;
+    float width = (image.size.width*height)/image.size.height;
+    imageView.frame = CGRectMake(
+                                 self.view.frame.size.width/2 - width/2,
+                                 self.view.frame.size.height/2 - height/2 -heightPadding,
+                                 width,
+                                 height);
+    imageView.image = image;
+    imageView.alpha = .04;
+    imageView.hidden = NO;
 }
 
 -(void)buildSeatButton:(NSString*)label x:(int)x y:(int)y size:(int)size

@@ -16,6 +16,7 @@
     IBOutlet UIButton *joinButton;
     IBOutlet UILabel *waitLabel;
     IBOutlet UIActivityIndicatorView *spinner;
+    IBOutlet UIImageView *imageView;
     
     BOOL pressedChangeSeat;
 }

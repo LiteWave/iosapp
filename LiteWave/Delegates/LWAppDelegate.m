@@ -65,13 +65,12 @@
     self.show = [defaults objectForKey:@"show"];
     
     self.defaultColor = [UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0];
-    NSLog(@"%@", [defaults objectForKey:@"backgroundColor"]);
     self.backgroundColor = [LWUtility getColorFromString:[defaults objectForKey:@"backgroundColor"]];
     self.borderColor = [LWUtility getColorFromString:[defaults objectForKey:@"borderColor"]];
     self.highlightColor = [LWUtility getColorFromString:[defaults objectForKey:@"highlightColor"]];
     self.textColor = [LWUtility getColorFromString:[defaults objectForKey:@"textColor"]];
     self.textSelectedColor = [LWUtility getColorFromString:[defaults objectForKey:@"textSelectedColor"]];
-    self.logoUrl = [defaults stringForKey:@"stadiumID"];
+    self.logoUrl = [defaults stringForKey:@"logoUrl"];
 
     //check and store uuid if doesn't exist
     NSLog(@"stored uuid %@", self.uniqueID);
