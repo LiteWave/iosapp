@@ -125,6 +125,11 @@
     self.appDelegate.textColor = [LWUtility getColorFromString:[settings objectForKey:@"textColor"]];
     self.appDelegate.textSelectedColor = [LWUtility getColorFromString:[settings objectForKey:@"textSelectedColor"]];
     self.appDelegate.logoUrl = [settings valueForKey:@"logoUrl"];
+    if (self.appDelegate.logoUrl) {
+        NSURL *url = [NSURL URLWithString:self.appDelegate.logoUrl];
+        NSData *imageData = [NSData dataWithContentsOfURL:url];
+        self.appDelegate.logoImage = [[UIImage alloc] initWithData:imageData];
+    }
 }
 
 - (void)clearEvent {
@@ -232,18 +237,14 @@
 
 - (void)loadImage
 {
-    if (!self.appDelegate.logoUrl)
+    if (!self.appDelegate.logoUrl || !self.appDelegate.logoImage)
         return;
     
-    NSURL *url = [NSURL URLWithString:self.appDelegate.logoUrl];
-    NSData *imageData = [NSData dataWithContentsOfURL:url];
-    UIImage *image = [[UIImage alloc] initWithData:imageData];
-    
     float height = 700;
-    float width = (image.size.width*height)/image.size.height;
+    float width = (self.appDelegate.logoImage.size.width*height)/self.appDelegate.logoImage.size.height;
     imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, self.view.frame.size.height/2 - height/2, width, height);
-    imageView.image = image;
-    imageView.alpha = .04;
+    imageView.image = self.appDelegate.logoImage;
+    imageView.alpha = .05;
     imageView.hidden = NO;
 }
 

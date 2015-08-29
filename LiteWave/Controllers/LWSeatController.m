@@ -38,6 +38,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     
+    //imageView.hidden = NO;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(selectRow:)
                                                  name:@"selectRow" object:nil];
@@ -48,7 +50,7 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    imageView.hidden = YES;
+    //imageView.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -331,25 +333,17 @@
 
 - (void)loadImage
 {
-    if (!self.appDelegate.logoUrl)
+    if (!self.appDelegate.logoUrl || !self.appDelegate.logoImage)
         return;
     
     CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
     float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
     
-    NSURL *url = [NSURL URLWithString:self.appDelegate.logoUrl];
-    NSData *imageData = [NSData dataWithContentsOfURL:url];
-    UIImage *image = [[UIImage alloc] initWithData:imageData];
-    
     float height = 700;
-    float width = (image.size.width*height)/image.size.height;
-    imageView.frame = CGRectMake(
-                                 self.view.frame.size.width/2 - width/2,
-                                 self.view.frame.size.height/2 - height/2 -heightPadding,
-                                 width,
-                                 height);
-    imageView.image = image;
-    imageView.alpha = .04;
+    float width = (self.appDelegate.logoImage.size.width*height)/self.appDelegate.logoImage.size.height;
+    imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, self.view.frame.size.height/2 - height/2 - heightPadding, width, height);
+    imageView.image = self.appDelegate.logoImage;
+    imageView.alpha = .05;
     imageView.hidden = NO;
 }
 
@@ -438,8 +432,8 @@
                           onFailure:^(NSError *error) {
                               if (error) {
                                   
-                                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Join error"
-                                                                                  message: @"Sorry, an error occurred when joining the event."
+                                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Seat"
+                                                                                  message: @"Sorry, this seat has been taken."
                                                                                  delegate:self
                                                                         cancelButtonTitle:@"OK"
                                                                         otherButtonTitles:nil];

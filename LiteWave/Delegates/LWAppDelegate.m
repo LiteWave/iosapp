@@ -71,6 +71,11 @@
     self.textColor = [LWUtility getColorFromString:[defaults objectForKey:@"textColor"]];
     self.textSelectedColor = [LWUtility getColorFromString:[defaults objectForKey:@"textSelectedColor"]];
     self.logoUrl = [defaults stringForKey:@"logoUrl"];
+    if (self.logoUrl) {
+        NSURL *url = [NSURL URLWithString:self.logoUrl];
+        NSData *imageData = [NSData dataWithContentsOfURL:url];
+        self.logoImage = [[UIImage alloc] initWithData:imageData];
+    }
 
     //check and store uuid if doesn't exist
     NSLog(@"stored uuid %@", self.uniqueID);

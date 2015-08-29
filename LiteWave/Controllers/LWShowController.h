@@ -14,7 +14,6 @@
 {
     BOOL isWinner;  // device is a winner!
     BOOL onORoff;   // screen control
-    BOOL flipper;   // winner on and off switch
 
     NSArray *commandArray;
     NSString *commandType;      // color (c) winner (win)
@@ -36,10 +35,9 @@
 @property (nonatomic, retain) IBOutlet UILabel *winnerLabel;
 @property (nonatomic, retain) LWAppDelegate *appDelegate;
 
-- (void)winnerTimerCallback:(id)sender;
 - (void)frameTimerCallback:(id)sender;
-- (void)stopShow;
 - (void)playFrames:(int)counter;
+- (void)stopShow;
 - (void)showWinner;
 
 @end

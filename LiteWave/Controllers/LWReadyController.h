@@ -12,7 +12,6 @@
 
 @interface LWReadyController : UIViewController <UIAlertViewDelegate> {
     
-    IBOutlet UIButton *changeButton;
     IBOutlet UIButton *joinButton;
     IBOutlet UILabel *waitLabel;
     IBOutlet UIActivityIndicatorView *spinner;

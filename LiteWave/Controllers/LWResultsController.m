@@ -23,6 +23,7 @@
     } else {
         isWinner=NO;
     }
+    isWinner = NO;
     self.view.backgroundColor = self.appDelegate.backgroundColor;
     
     imageView.hidden = YES;
@@ -97,7 +98,7 @@
         [self loadImage];
         
         logoImageView.frame = CGRectMake(logoImageView.frame.origin.x,
-                                         self.view.frame.size.height - logoImageView.frame.size.height - 10,
+                                         self.view.frame.size.height - logoImageView.frame.size.height - 65,
                                          logoImageView.frame.size.width,
                                          logoImageView.frame.size.height);
         logoImageView.hidden = NO;
@@ -127,21 +128,16 @@
 
 - (void)loadImage
 {
-    if (!self.appDelegate.logoUrl)
+    if (!self.appDelegate.logoUrl || !self.appDelegate.logoImage)
         return;
     
-    NSURL *url = [NSURL URLWithString:self.appDelegate.logoUrl];
-    NSData *imageData = [NSData dataWithContentsOfURL:url];
-    UIImage *image = [[UIImage alloc] initWithData:imageData];
-    
     float height = 700;
-    float width = (image.size.width*height)/image.size.height;
+    float width = (self.appDelegate.logoImage.size.width*height)/self.appDelegate.logoImage.size.height;
     imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, self.view.frame.size.height/2 - height/2, width, height);
-    imageView.image = image;
-    imageView.alpha = .04;
+    imageView.image = self.appDelegate.logoImage;
+    imageView.alpha = .05;
     imageView.hidden = NO;
 }
-
 
 -(void)onImageSelect
 {

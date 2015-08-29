@@ -39,8 +39,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    imageView.hidden = YES;
-    
     // remove observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
@@ -191,12 +189,10 @@
                            }];
     
     // clear this data on pass or fail
-    self.appDelegate.levelID = nil;
     self.appDelegate.sectionID = nil;
     self.appDelegate.rowID = nil;
     self.appDelegate.seatID = nil;
     
-    [defaults removeObjectForKey:@"levelID"];
     [defaults removeObjectForKey:@"sectionID"];
     [defaults removeObjectForKey:@"rowID"];
     [defaults removeObjectForKey:@"seatID"];
@@ -225,79 +221,29 @@
     spinner.color = self.appDelegate.highlightColor;
     
     
-    changeButton.layer.borderColor=self.appDelegate.highlightColor.CGColor;
-    changeButton.layer.backgroundColor=self.appDelegate.highlightColor.CGColor;
-    changeButton.layer.borderWidth=2.0f;
-    [changeButton addTarget: self
-                     action: @selector(changeSeat:)
-           forControlEvents: UIControlEventTouchUpInside];
-    
-    
     int buttonWidth = 70;
     int buttonPadding = (self.view.frame.size.width - (4*buttonWidth))/5;
     int buttonXPosition = buttonPadding;
-    int buttonYPostion = self.view.frame.size.height - 225;
+    int buttonYPostion = self.view.frame.size.height - 220;
     UILabel *infoLabel;
     
     // level
-    infoLabel = [[UILabel alloc]initWithFrame:CGRectMake(buttonXPosition-5,
-                                                         buttonYPostion - 50,
-                                                         buttonWidth+10,
-                                                         50)];
-    [infoLabel setTextColor:self.appDelegate.textColor];
-    [infoLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:20.0f]];
-    [infoLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    infoLabel.textAlignment = NSTextAlignmentCenter;
-    infoLabel.text = @"Level";
-    [self.view addSubview:infoLabel];
-    
+    [self buildInfoLabel:@"level" x:(buttonXPosition-5) y:(buttonYPostion-50) size:(buttonWidth+10)];
     [self buildSeatButton:self.appDelegate.levelID x:buttonXPosition y:buttonYPostion size:buttonWidth];
     buttonXPosition += buttonPadding + buttonWidth;
     
     // section
-    infoLabel = [[UILabel alloc]initWithFrame:CGRectMake(buttonXPosition-5,
-                                                         buttonYPostion - 50,
-                                                         buttonWidth+10,
-                                                         50)];
-    [infoLabel setTextColor:self.appDelegate.textColor];
-    [infoLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:20.0f]];
-    [infoLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    infoLabel.textAlignment = NSTextAlignmentCenter;
-    infoLabel.text = @"Section";
-    [self.view addSubview:infoLabel];
-    
+    [self buildInfoLabel:@"section" x:(buttonXPosition-5) y:(buttonYPostion-50) size:(buttonWidth+10)];
     [self buildSeatButton:self.appDelegate.sectionID x:buttonXPosition y:buttonYPostion size:buttonWidth];
     buttonXPosition += buttonPadding + buttonWidth;
     
     // row
-    infoLabel = [[UILabel alloc]initWithFrame:CGRectMake(buttonXPosition-5,
-                                                         buttonYPostion - 50,
-                                                         buttonWidth+10,
-                                                         50)];
-    [infoLabel setTextColor:self.appDelegate.textColor];
-    [infoLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:20.0f]];
-    [infoLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    infoLabel.textAlignment = NSTextAlignmentCenter;
-    infoLabel.text = @"Row";
-    [self.view addSubview:infoLabel];
-
-    
+    [self buildInfoLabel:@"row" x:(buttonXPosition-5) y:(buttonYPostion-50) size:(buttonWidth+10)];
     [self buildSeatButton:self.appDelegate.rowID x:buttonXPosition y:buttonYPostion size:buttonWidth];
     buttonXPosition += buttonPadding + buttonWidth;
 
     // seat
-    infoLabel = [[UILabel alloc]initWithFrame:CGRectMake(buttonXPosition-5,
-                                                         buttonYPostion - 50,
-                                                         buttonWidth+10,
-                                                         50)];
-    [infoLabel setTextColor:self.appDelegate.textColor];
-    [infoLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:20.0f]];
-    [infoLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-    infoLabel.textAlignment = NSTextAlignmentCenter;
-    infoLabel.text = @"Seat";
-    [self.view addSubview:infoLabel];
-
-    
+    [self buildInfoLabel:@"seat" x:(buttonXPosition-5) y:(buttonYPostion-50) size:(buttonWidth+10)];
     [self buildSeatButton:self.appDelegate.seatID x:buttonXPosition y:buttonYPostion size:buttonWidth];
     
     
@@ -310,25 +256,17 @@
 
 - (void)loadImage
 {
-    if (!self.appDelegate.logoUrl)
+    if (!self.appDelegate.logoUrl || !self.appDelegate.logoImage)
         return;
     
     CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
     float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
     
-    NSURL *url = [NSURL URLWithString:self.appDelegate.logoUrl];
-    NSData *imageData = [NSData dataWithContentsOfURL:url];
-    UIImage *image = [[UIImage alloc] initWithData:imageData];
-    
     float height = 700;
-    float width = (image.size.width*height)/image.size.height;
-    imageView.frame = CGRectMake(
-                                 self.view.frame.size.width/2 - width/2,
-                                 self.view.frame.size.height/2 - height/2 -heightPadding,
-                                 width,
-                                 height);
-    imageView.image = image;
-    imageView.alpha = .04;
+    float width = (self.appDelegate.logoImage.size.width*height)/self.appDelegate.logoImage.size.height;
+    imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, self.view.frame.size.height/2 - height/2 - heightPadding, width, height);
+    imageView.image = self.appDelegate.logoImage;
+    imageView.alpha = .05;
     imageView.hidden = NO;
 }
 
@@ -353,6 +291,20 @@
     [buttonLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:20.0f]];
     [buttonLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:buttonLabel];
+}
+
+-(void)buildInfoLabel:(NSString*)label x:(int)x y:(int)y size:(int)size
+{
+    UILabel *infoLabel = [[UILabel alloc]initWithFrame:CGRectMake(x,
+                                                         y,
+                                                         size,
+                                                         50)];
+    [infoLabel setTextColor:self.appDelegate.textColor];
+    [infoLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:19.0f]];
+    [infoLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    infoLabel.textAlignment = NSTextAlignmentCenter;
+    infoLabel.text = label;
+    [self.view addSubview:infoLabel];
 }
 
 - (void)disableJoin

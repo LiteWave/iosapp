@@ -151,18 +151,15 @@
             
             if ([commandType isEqualToString:@"c"]){
                 onORoff=YES;
-            } else if([commandType isEqualToString:@"win"]){
+            } else if([commandType isEqualToString:@"win"] && isWinner){
                 winnerLoopFrame=YES;
                 onORoff=NO;
+                [self showWinner];
+                
             } else{
                 onORoff=NO;
             }
-            
-            if ((counter+1) == [commandArray count] && isWinner) {
-                winnerLoopFrame=YES;
-                commandIf = @"w";
-            }
-            
+
             if ([frameDict objectForKey:@"bg"]) {
                 backgroundColor = [LWUtility getColorFromString:[frameDict objectForKey:@"bg"]];
             } else {
@@ -184,10 +181,6 @@
 
                 NSLog(@"cl time = %f", timeinterval);
                 self.frameTimer = [NSTimer scheduledTimerWithTimeInterval:timeinterval target:self selector:@selector(frameTimerCallback:) userInfo:nil repeats:NO];
-                
-                if (winnerLoopFrame) {
-                    [self showWinner];
-                }
             }
         } else {
             // unknown play time skip frame
@@ -198,47 +191,16 @@
 }
 
 -(void)showWinner {
-    backgroundColor = [UIColor whiteColor];
-    flipper=YES;
-    
-    self.winnerLabel.hidden = YES;
     self.winnerLabel.hidden=NO;
     self.winnerLabel.text = @"WINNER";
     [self.winnerLabel setTextColor:self.appDelegate.highlightColor];
     [self.winnerLabel setFont:[UIFont systemFontOfSize:70]];
-    
-    self.winnerTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(winnerTimerCallback:) userInfo:nil repeats:YES];
 }
 
 - (void)frameTimerCallback:(id)sender {
     
     [self.frameTimer invalidate];
-    [self.winnerTimer invalidate];
     [self playFrames:position];
-    
-}
-
-- (void)winnerTimerCallback:(id)sender {
-
-    flipper = !flipper;
-    
-    [self winnerAnimation:flipper];
-    
-}
-
--(void)winnerAnimation:(BOOL)var
-{
-    if (var) {
-        //screen on
-        self.view.backgroundColor = backgroundColor;
-        
-        if (shouldVibrate==1) {
-            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        }
-    } else {
-        // screen off
-        self.view.backgroundColor = [UIColor blackColor];
-    }
 }
 
 -(void)onOffSwitch:(BOOL)var
