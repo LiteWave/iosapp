@@ -27,6 +27,8 @@
     
     imageView.hidden = YES;
     participationLabel.hidden = YES;
+    logoImageView.hidden = YES;
+    poweredByLabel.hidden = YES;
     
     [self prepareView];
 }
@@ -92,6 +94,20 @@
             participationLabel.hidden = YES;
         }
     } else {
+        [self loadImage];
+        
+        logoImageView.frame = CGRectMake(logoImageView.frame.origin.x,
+                                         self.view.frame.size.height - logoImageView.frame.size.height - 10,
+                                         logoImageView.frame.size.width,
+                                         logoImageView.frame.size.height);
+        logoImageView.hidden = NO;
+        
+        poweredByLabel.frame = CGRectMake(poweredByLabel.frame.origin.x,
+                                          logoImageView.frame.origin.y - 20,
+                                          poweredByLabel.frame.size.width,
+                                          poweredByLabel.frame.size.height);
+        poweredByLabel.hidden = NO;
+        
         participationLabel.textColor = self.appDelegate.textColor;
         participationLabel.hidden = NO;
     }
@@ -108,6 +124,20 @@
     [returnButton setTitleColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     [returnButton addTarget:self action:@selector(onReturnSelect) forControlEvents:UIControlEventTouchUpInside];
 }
+
+- (void)loadImage
+{
+    NSURL *url = [NSURL URLWithString:self.appDelegate.logoUrl];
+    NSData *imageData = [NSData dataWithContentsOfURL:url];
+    UIImage *image = [[UIImage alloc] initWithData:imageData];
+    
+    float height = 150;
+    float width = (image.size.width*height)/image.size.height;
+    imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, 40, width, height);
+    imageView.image = image;
+    imageView.hidden = NO;
+}
+
 
 -(void)onImageSelect
 {

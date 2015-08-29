@@ -16,6 +16,8 @@
     IBOutlet UIButton *returnButton;
     IBOutlet UIImageView *imageView;
     IBOutlet UILabel *participationLabel;
+    IBOutlet UILabel *poweredByLabel;
+    IBOutlet UIImageView *logoImageView;
 }
 
 @property (nonatomic, retain) LWAppDelegate *appDelegate;
