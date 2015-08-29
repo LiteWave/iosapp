@@ -25,6 +25,9 @@
     self.winnerLabel.hidden = YES;
     
     [self.navigationItem setHidesBackButton:YES animated:NO];
+
+    // disable fade of screen
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     
     self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
