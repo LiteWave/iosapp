@@ -15,6 +15,7 @@
     IBOutlet UIActivityIndicatorView *spinner;
     IBOutlet UILabel *descriptionLabel;
     IBOutlet UITableView *viewTable;
+    IBOutlet UIImageView *imageView;
     
     NSMutableArray *levels;
     NSDictionary *levelDictionary;

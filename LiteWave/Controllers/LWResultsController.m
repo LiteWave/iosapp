@@ -127,14 +127,18 @@
 
 - (void)loadImage
 {
+    if (!self.appDelegate.logoUrl)
+        return;
+    
     NSURL *url = [NSURL URLWithString:self.appDelegate.logoUrl];
     NSData *imageData = [NSData dataWithContentsOfURL:url];
     UIImage *image = [[UIImage alloc] initWithData:imageData];
     
-    float height = 140;
+    float height = 700;
     float width = (image.size.width*height)/image.size.height;
-    imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, 45, width, height);
+    imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, self.view.frame.size.height/2 - height/2, width, height);
     imageView.image = image;
+    imageView.alpha = .04;
     imageView.hidden = NO;
 }
 

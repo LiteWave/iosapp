@@ -24,11 +24,8 @@
         
         NSInteger tableWidth = self.contentView.frame.size.width/3.0;
         
-        UIView *bgColorView = [[UIView alloc] init];
-        bgColorView.backgroundColor = self.appDelegate.backgroundColor;
-        [self setSelectedBackgroundView:bgColorView];
-        
-        self.contentView.backgroundColor = self.appDelegate.backgroundColor;
+        self.contentView.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0];
+        self.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0];
         
         
         self.button = [UIButton buttonWithType:UIButtonTypeCustom];

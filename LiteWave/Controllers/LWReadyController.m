@@ -39,6 +39,8 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
+    imageView.hidden = YES;
+    
     // remove observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
@@ -51,7 +53,6 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated{
-    
     // add observer for when app becomes active
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onBecomeActive) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
     
@@ -309,12 +310,13 @@
 
 - (void)loadImage
 {
+    if (!self.appDelegate.logoUrl)
+        return;
+    
     CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
     float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
     
-    //NSURL *url = [NSURL URLWithString:self.appDelegate.logoUrl];
-    NSURL *url = [NSURL URLWithString:@"https://s-media-cache-ak0.pinimg.com/originals/a7/e0/5d/a7e05d588e5bdf5f4f7a4d3ea03486a2.gif"];
-    
+    NSURL *url = [NSURL URLWithString:self.appDelegate.logoUrl];
     NSData *imageData = [NSData dataWithContentsOfURL:url];
     UIImage *image = [[UIImage alloc] initWithData:imageData];
     

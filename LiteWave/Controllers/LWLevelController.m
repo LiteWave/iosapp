@@ -26,6 +26,7 @@
     self.navigationItem.hidesBackButton = YES;
     
     viewTable.hidden = YES;
+    imageView.hidden = YES;
     
     selectedLevelIndex = -1;
     
@@ -160,13 +161,39 @@
                                  0,
                                  self.view.frame.size.width/3.0,
                                  self.view.frame.size.height);
-    viewTable.backgroundColor = self.appDelegate.backgroundColor;
+    viewTable.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0];
     viewTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     viewTable.hidden = NO;
     [viewTable setShowsVerticalScrollIndicator:NO];
-    [viewTable setContentInset:UIEdgeInsetsMake(10,0,0,0)];
+    [viewTable setContentInset:UIEdgeInsetsMake(30,0,0,0)];
     [viewTable setDataSource:self];
     [viewTable setDelegate:self];
+    
+    [self loadImage];
+}
+
+- (void)loadImage
+{
+    if (!self.appDelegate.logoUrl)
+        return;
+    
+    CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+    float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
+    
+    NSURL *url = [NSURL URLWithString:self.appDelegate.logoUrl];
+    NSData *imageData = [NSData dataWithContentsOfURL:url];
+    UIImage *image = [[UIImage alloc] initWithData:imageData];
+    
+    float height = 700;
+    float width = (image.size.width*height)/image.size.height;
+    imageView.frame = CGRectMake(
+                                 self.view.frame.size.width/2 - width/2,
+                                 self.view.frame.size.height/2 - height/2 -heightPadding,
+                                 width,
+                                 height);
+    imageView.image = image;
+    imageView.alpha = .04;
+    imageView.hidden = NO;
 }
 
 

@@ -21,6 +21,8 @@
     UILabel *rowLabel;
     UILabel *seatLabel;
     
+    IBOutlet UIImageView *imageView;
+    
     NSMutableArray *levels;
     NSDictionary *levelDictionary;
     

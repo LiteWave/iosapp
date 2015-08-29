@@ -26,6 +26,8 @@
     rowTable.hidden = YES;
     seatTable.hidden = YES;
     
+    imageView.hidden = YES;
+    
     selectedSectionIndex = 0;
     selectedRowIndex = 0;
     selectedSeatIndex = 0;
@@ -42,7 +44,11 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    imageView.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -254,7 +260,7 @@
                                     0,
                                     self.view.frame.size.width/3.0,
                                     self.view.frame.size.height - joinButton.frame.size.height);
-    sectionTable.backgroundColor = self.appDelegate.backgroundColor;
+    sectionTable.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0];
     sectionTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [sectionTable setShowsVerticalScrollIndicator:NO];
     [sectionTable setContentInset:UIEdgeInsetsMake(-20,0,10,0)];
@@ -266,7 +272,7 @@
                                 0,
                                 self.view.frame.size.width/3.0,
                                 self.view.frame.size.height - joinButton.frame.size.height);
-    rowTable.backgroundColor = self.appDelegate.backgroundColor;
+    rowTable.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0];
     rowTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     rowTable.hidden = YES;
     [rowTable setShowsVerticalScrollIndicator:NO];
@@ -279,7 +285,7 @@
                                  0,
                                  self.view.frame.size.width/3.0,
                                  self.view.frame.size.height - joinButton.frame.size.height);
-    seatTable.backgroundColor = self.appDelegate.backgroundColor;
+    seatTable.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0];
     seatTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     seatTable.hidden = YES;
     [seatTable setShowsVerticalScrollIndicator:NO];
@@ -319,6 +325,32 @@
     seatLabel.textAlignment = NSTextAlignmentCenter;
     seatLabel.text = @"Seat";
     [self.view addSubview:seatLabel];
+    
+    [self loadImage];
+}
+
+- (void)loadImage
+{
+    if (!self.appDelegate.logoUrl)
+        return;
+    
+    CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+    float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
+    
+    NSURL *url = [NSURL URLWithString:self.appDelegate.logoUrl];
+    NSData *imageData = [NSData dataWithContentsOfURL:url];
+    UIImage *image = [[UIImage alloc] initWithData:imageData];
+    
+    float height = 700;
+    float width = (image.size.width*height)/image.size.height;
+    imageView.frame = CGRectMake(
+                                 self.view.frame.size.width/2 - width/2,
+                                 self.view.frame.size.height/2 - height/2 -heightPadding,
+                                 width,
+                                 height);
+    imageView.image = image;
+    imageView.alpha = .04;
+    imageView.hidden = NO;
 }
 
 - (void)disableJoin

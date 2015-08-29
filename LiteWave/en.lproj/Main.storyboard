@@ -107,6 +107,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="nrU-rN-Uee">
+                                <rect key="frame" x="0.0" y="165" width="320" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="asY-n2-EqL">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="387"/>
                                 <autoresizingMask key="autoresizingMask"/>
@@ -127,6 +131,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="descriptionLabel" destination="lwq-V2-adE" id="You-IU-t1m"/>
+                        <outlet property="imageView" destination="nrU-rN-Uee" id="FL2-7h-Qdd"/>
                         <outlet property="viewTable" destination="asY-n2-EqL" id="2u8-o2-r2Y"/>
                     </connections>
                 </viewController>
@@ -142,6 +147,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="WSL-xI-pue">
+                                <rect key="frame" x="20" y="2" width="280" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6vE-Cx-tmp">
                                 <rect key="frame" x="106" y="0.0" width="108" height="400"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -173,6 +182,7 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="BPV-gI-9qj"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="imageView" destination="WSL-xI-pue" id="Qec-y9-LnT"/>
                         <outlet property="joinButton" destination="Clc-gM-sM2" id="oJz-Kc-RBn"/>
                         <outlet property="rowTable" destination="6vE-Cx-tmp" id="iUj-mg-vln"/>
                         <outlet property="seatTable" destination="26k-7K-6Ka" id="wCY-SF-U9z"/>
