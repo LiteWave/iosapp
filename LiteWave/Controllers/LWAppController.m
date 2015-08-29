@@ -206,7 +206,7 @@
                                 [self loadImage];
                                 
                                 logoImageView.frame = CGRectMake(logoImageView.frame.origin.x,
-                                                                 self.view.frame.size.height - logoImageView.frame.size.height - 5,
+                                                                 self.view.frame.size.height - logoImageView.frame.size.height - 10,
                                                                  logoImageView.frame.size.width,
                                                                  logoImageView.frame.size.height);
                                 logoImageView.hidden = NO;
@@ -236,11 +236,16 @@
     NSData *imageData = [NSData dataWithContentsOfURL:url];
     UIImage *image = [[UIImage alloc] initWithData:imageData];
     
-    float height = 140;
+//    float height = 140;
+//    float width = (image.size.width*height)/image.size.height;
+//    imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, 45, width, height);
+//    imageView.image = image;
+    
+    float height = 700;
     float width = (image.size.width*height)/image.size.height;
-    imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, 45, width, height);
+    imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, self.view.frame.size.height/2 - height/2, width, height);
     imageView.image = image;
-    imageView.alpha = .8;
+    imageView.alpha = .05;
     imageView.hidden = NO;
 }
 

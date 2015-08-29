@@ -97,7 +97,7 @@
         [self loadImage];
         
         logoImageView.frame = CGRectMake(logoImageView.frame.origin.x,
-                                         self.view.frame.size.height - logoImageView.frame.size.height - 5,
+                                         self.view.frame.size.height - logoImageView.frame.size.height - 10,
                                          logoImageView.frame.size.width,
                                          logoImageView.frame.size.height);
         logoImageView.hidden = NO;
@@ -135,7 +135,6 @@
     float width = (image.size.width*height)/image.size.height;
     imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, 45, width, height);
     imageView.image = image;
-    imageView.alpha = .8;
     imageView.hidden = NO;
 }
 
