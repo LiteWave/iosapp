@@ -12,11 +12,10 @@
 
 @interface LWReadyController : UIViewController <UIAlertViewDelegate> {
     
-    IBOutlet UILabel *mySeat;    
     IBOutlet UIButton *changeButton;
     IBOutlet UIButton *joinButton;
     IBOutlet UILabel *waitLabel;
-    IBOutlet UILabel *seatLabel;
+    IBOutlet UIActivityIndicatorView *spinner;
     
     BOOL pressedChangeSeat;
 }

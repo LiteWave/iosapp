@@ -355,7 +355,7 @@
     self.appDelegate.seatID = [[seats objectAtIndex:selectedSeatIndex] valueForKeyPath:@"name"];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setValue:self.appDelegate.levelID forKey:@"leveID"];
+    [defaults setValue:self.appDelegate.levelID forKey:@"levelID"];
     [defaults setValue:self.appDelegate.sectionID forKey:@"sectionID"];
     [defaults setValue:self.appDelegate.rowID forKey:@"rowID"];
     [defaults setValue:self.appDelegate.seatID forKey:@"seatID"];

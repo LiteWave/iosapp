@@ -59,8 +59,6 @@
 
     self.title = self.appDelegate.eventName;
 
-    seatLabel.text = [NSString stringWithFormat:@"%@-%@-%@", self.appDelegate.sectionID, self.appDelegate.rowID, self.appDelegate.seatID];
-    
     [self getShow];
 }
 
@@ -211,9 +209,18 @@
     CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
     float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
     
-    mySeat.textColor = self.appDelegate.textColor;
-    seatLabel.textColor = self.appDelegate.highlightColor;
     waitLabel.textColor = self.appDelegate.textColor;
+    waitLabel.frame = CGRectMake(waitLabel.frame.origin.x,
+                                 0,
+                                 waitLabel.frame.size.width,
+                                 waitLabel.frame.size.height);
+    
+    spinner.frame = CGRectMake(spinner.frame.origin.x,
+                               waitLabel.frame.origin.y + 100,
+                               spinner.frame.size.width,
+                               spinner.frame.size.height);
+
+    
     
     changeButton.layer.borderColor=self.appDelegate.highlightColor.CGColor;
     changeButton.layer.backgroundColor=self.appDelegate.highlightColor.CGColor;
@@ -222,11 +229,103 @@
                      action: @selector(changeSeat:)
            forControlEvents: UIControlEventTouchUpInside];
     
+    
+    int buttonWidth = 70;
+    int buttonPadding = (self.view.frame.size.width - (4*buttonWidth))/5;
+    int buttonXPosition = buttonPadding;
+    int buttonYPostion = self.view.frame.size.height - 225;
+    UILabel *infoLabel;
+    
+    // level
+    infoLabel = [[UILabel alloc]initWithFrame:CGRectMake(buttonXPosition-5,
+                                                         buttonYPostion - 50,
+                                                         buttonWidth+10,
+                                                         50)];
+    [infoLabel setTextColor:self.appDelegate.textColor];
+    [infoLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:20.0f]];
+    [infoLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    infoLabel.textAlignment = NSTextAlignmentCenter;
+    infoLabel.text = @"Level";
+    [self.view addSubview:infoLabel];
+    
+    [self buildSeatButton:self.appDelegate.levelID x:buttonXPosition y:buttonYPostion size:buttonWidth];
+    buttonXPosition += buttonPadding + buttonWidth;
+    
+    // section
+    infoLabel = [[UILabel alloc]initWithFrame:CGRectMake(buttonXPosition-5,
+                                                         buttonYPostion - 50,
+                                                         buttonWidth+10,
+                                                         50)];
+    [infoLabel setTextColor:self.appDelegate.textColor];
+    [infoLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:20.0f]];
+    [infoLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    infoLabel.textAlignment = NSTextAlignmentCenter;
+    infoLabel.text = @"Section";
+    [self.view addSubview:infoLabel];
+    
+    [self buildSeatButton:self.appDelegate.sectionID x:buttonXPosition y:buttonYPostion size:buttonWidth];
+    buttonXPosition += buttonPadding + buttonWidth;
+    
+    // row
+    infoLabel = [[UILabel alloc]initWithFrame:CGRectMake(buttonXPosition-5,
+                                                         buttonYPostion - 50,
+                                                         buttonWidth+10,
+                                                         50)];
+    [infoLabel setTextColor:self.appDelegate.textColor];
+    [infoLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:20.0f]];
+    [infoLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    infoLabel.textAlignment = NSTextAlignmentCenter;
+    infoLabel.text = @"Row";
+    [self.view addSubview:infoLabel];
+
+    
+    [self buildSeatButton:self.appDelegate.rowID x:buttonXPosition y:buttonYPostion size:buttonWidth];
+    buttonXPosition += buttonPadding + buttonWidth;
+
+    // seat
+    infoLabel = [[UILabel alloc]initWithFrame:CGRectMake(buttonXPosition-5,
+                                                         buttonYPostion - 50,
+                                                         buttonWidth+10,
+                                                         50)];
+    [infoLabel setTextColor:self.appDelegate.textColor];
+    [infoLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:20.0f]];
+    [infoLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    infoLabel.textAlignment = NSTextAlignmentCenter;
+    infoLabel.text = @"Seat";
+    [self.view addSubview:infoLabel];
+
+    
+    [self buildSeatButton:self.appDelegate.seatID x:buttonXPosition y:buttonYPostion size:buttonWidth];
+    
+    
     joinButton.frame = CGRectMake(0,
                                   self.view.bounds.size.height - heightPadding - 50,
                                   self.view.bounds.size.width,
                                   50);
     [self disableJoin];
+}
+
+-(void)buildSeatButton:(NSString*)label x:(int)x y:(int)y size:(int)size
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(x,
+                              y,
+                              size,
+                              size);
+    button.clipsToBounds = YES;
+    button.layer.cornerRadius = size/2.0f;
+    button.layer.borderColor=self.appDelegate.highlightColor.CGColor;
+    button.layer.backgroundColor=self.appDelegate.highlightColor.CGColor;
+    button.layer.borderWidth = 2.0f;
+    [self.view addSubview:button];
+    
+    UILabel *buttonLabel = [[UILabel alloc]initWithFrame:CGRectMake(x, y, size, size)];
+    buttonLabel.text = label;
+    buttonLabel.textAlignment = NSTextAlignmentCenter;
+    [buttonLabel setTextColor:self.appDelegate.textSelectedColor];
+    [buttonLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:20.0f]];
+    [buttonLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.view addSubview:buttonLabel];
 }
 
 - (void)disableJoin
@@ -238,6 +337,9 @@
     [joinButton setTitleColor:[UIColor colorWithRed:100.0/255.0 green:100.0/255.0 blue:100.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     
     [joinButton removeTarget:self action:@selector(onJoinSelect) forControlEvents:UIControlEventTouchUpInside];
+    
+    waitLabel.text = @"Waiting for the event to begin";
+    spinner.hidden = NO;
 }
 
 - (void)enableJoin
@@ -249,6 +351,10 @@
     [joinButton setTitleColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     
     [joinButton addTarget:self action:@selector(onJoinSelect) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    waitLabel.text = @"Join the event to begin";
+    spinner.hidden = YES;
 }
 
 -(void)onJoinSelect
