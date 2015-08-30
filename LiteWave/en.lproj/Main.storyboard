@@ -222,12 +222,20 @@
                                 <color key="textColor" red="0.090196080509999998" green="0.180392161" blue="0.33725491169999999" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Point your screen toward the court once the show begins" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dmg-UU-zYO">
+                                <rect key="frame" x="16" y="409" width="288" height="71"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Playing Show" id="4Do-vK-feR"/>
                     <connections>
+                        <outlet property="infoLabel" destination="dmg-UU-zYO" id="Zfi-eS-ejf"/>
                         <outlet property="startsInLabel" destination="WY0-xB-TCF" id="8fU-xV-R4O"/>
                         <outlet property="timerLabel" destination="Gc3-Ai-OMg" id="mFc-TZ-OJV"/>
                         <outlet property="winnerLabel" destination="uy1-9O-saY" id="73s-tU-SCP"/>

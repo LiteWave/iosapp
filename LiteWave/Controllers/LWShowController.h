@@ -33,6 +33,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *startsInLabel;
 @property (nonatomic, retain) IBOutlet UILabel *timerLabel;
 @property (nonatomic, retain) IBOutlet UILabel *winnerLabel;
+@property (nonatomic, retain) IBOutlet UILabel *infoLabel;
 @property (nonatomic, retain) LWAppDelegate *appDelegate;
 
 - (void)frameTimerCallback:(id)sender;

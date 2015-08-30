@@ -33,6 +33,9 @@
     
     pressedChangeSeat = NO;
     
+    // enable fade of screen
+    [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+    
     [self prepareView];
 }
 

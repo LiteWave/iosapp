@@ -17,9 +17,6 @@
 
     self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    // enable fade of screen
-    [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
-    
     NSString *winnerID = [self.appDelegate.showData valueForKey:@"_winnerId"];
     if (winnerID != (id)[NSNull null] && [winnerID isEqualToString:self.appDelegate.userID]) {
         isWinner=YES;

@@ -23,6 +23,7 @@
     self.timerLabel.hidden = YES;
     self.startsInLabel.hidden = YES;
     self.winnerLabel.hidden = YES;
+    self.infoLabel.hidden = YES;
     
     [self.navigationItem setHidesBackButton:YES animated:NO];
 
@@ -31,9 +32,14 @@
     
     self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    self.view.backgroundColor = self.appDelegate.backgroundColor;
+    self.view.backgroundColor = [UIColor blackColor];
     self.timerLabel.textColor = self.appDelegate.highlightColor;
     self.startsInLabel.textColor = self.appDelegate.highlightColor;
+    self.infoLabel.textColor = self.appDelegate.highlightColor;
+    self.infoLabel.frame = CGRectMake(self.infoLabel.frame.origin.x,
+                                      self.view.frame.size.height - self.infoLabel.frame.size.height - 10,
+                                      self.infoLabel.frame.size.width,
+                                      self.infoLabel.frame.size.height);
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -42,6 +48,7 @@
     
     self.timerLabel.hidden = YES;
     self.startsInLabel.hidden = YES;
+    self.infoLabel.hidden = YES;
     position=0;
     diff=0;
     
@@ -89,6 +96,7 @@
         } else {
             self.timerLabel.hidden = NO;
             self.startsInLabel.hidden = NO;
+            self.infoLabel.hidden = NO;
             
             self.view.backgroundColor = [UIColor blackColor];
             
@@ -112,6 +120,7 @@
 {
     self.startsInLabel.hidden = YES;
     self.timerLabel.hidden = YES;
+    self.infoLabel.hidden = YES;
     
     position = 0;
     [self playFrames:position];
