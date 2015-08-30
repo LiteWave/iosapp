@@ -112,13 +112,6 @@
                          }];
 }
 
--(IBAction)changeSeat:(id)sender {
-    [self withdraw];
-    
-    pressedChangeSeat = YES;
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 -(void)joinShow {
     NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
     [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
