@@ -7,6 +7,7 @@
 //
 
 #import "LWAPIClient.h"
+#import "LWConfiguration.h"
 #import "AFNetworking.h"
 
 @implementation LWAPIClient
@@ -116,13 +117,13 @@
 }
 
 -(void)joinEvent:(NSString*)eventID params:(NSDictionary*)params onSuccess:(Success)success onFailure:(Failure)failure {
-    NSString *path = [NSString stringWithFormat: @"%@/events/%@/user_locations", self.appDelegate.apiURL, eventID];
+    NSString *path = [NSString stringWithFormat: @"%@/events/%@/user_locations", [LWConfiguration instance].apiURL, eventID];
     NSURL *url = [[NSURL alloc] initWithString:path];
     [self post:url params:params onSuccess: success onFailure: failure];
 }
 
 -(void)leaveEvent:(NSString*)userID onSuccess:(Success)success onFailure:(Failure)failure {
-    NSString *path = [NSString stringWithFormat: @"%@/user_locations/%@/", self.appDelegate.apiURL, userID];
+    NSString *path = [NSString stringWithFormat: @"%@/user_locations/%@/", [LWConfiguration instance].apiURL, userID];
     NSURL *url = [[NSURL alloc] initWithString:path];
     [self delete:url onSuccess: success onFailure: failure];
 }
@@ -140,7 +141,7 @@
 }
 
 -(void)joinShow:(NSString*)userID params:(NSDictionary*)params onSuccess:(Success)success onFailure:(Failure)failure {
-    NSString *path = [NSString stringWithFormat: @"%@/user_locations/%@/event_joins", self.appDelegate.apiURL, userID];
+    NSString *path = [NSString stringWithFormat: @"%@/user_locations/%@/event_joins", [LWConfiguration instance].apiURL, userID];
     NSURL *url = [[NSURL alloc] initWithString:path];
     [self post:url params:params onSuccess: success onFailure: failure];
 }
@@ -152,31 +153,31 @@
 }
 
 -(NSString*)clientsPath:(NSString*)clientID {
-    return [NSString stringWithFormat: @"%@/clients/%@", self.appDelegate.apiURL, clientID];
+    return [NSString stringWithFormat: @"%@/clients/%@", [LWConfiguration instance].apiURL, clientID];
 }
 
 -(NSString*)stadiumsPath {
     return [self stadiumsPath: @""];
 }
 -(NSString*)stadiumsPath:(NSString*)stadiumID {
-    return [NSString stringWithFormat: @"%@/stadiums/%@", self.appDelegate.apiURL, stadiumID];
+    return [NSString stringWithFormat: @"%@/stadiums/%@", [LWConfiguration instance].apiURL, stadiumID];
 }
 -(NSString*)stadiumsPath:(NSString*)stadiumID withLevel:(NSString*)levelId {
-    return [NSString stringWithFormat: @"%@/stadiums/%@/levels/%@", self.appDelegate.apiURL, stadiumID, levelId];
+    return [NSString stringWithFormat: @"%@/stadiums/%@/levels/%@", [LWConfiguration instance].apiURL, stadiumID, levelId];
 }
 
 -(NSString*)eventsPath:(NSString*)clientID {
     return [self eventsPath: clientID withEvent: @""];
 }
 -(NSString*)eventsPath:(NSString*)clientID withEvent:(NSString*)eventID {
-    return [NSString stringWithFormat: @"%@/clients/%@/events/%@", self.appDelegate.apiURL, clientID, eventID];
+    return [NSString stringWithFormat: @"%@/clients/%@/events/%@", [LWConfiguration instance].apiURL, clientID, eventID];
 }
 
 -(NSString*)showsPath:(NSString*)eventID {
-    return [NSString stringWithFormat: @"%@/events/%@/shows", self.appDelegate.apiURL, eventID];
+    return [NSString stringWithFormat: @"%@/events/%@/shows", [LWConfiguration instance].apiURL, eventID];
 }
 -(NSString*)showsPath:(NSString*)eventID withShow:(NSString*)showID {
-    return [NSString stringWithFormat: @"%@/events/%@/shows/%@", self.appDelegate.apiURL, eventID, showID];
+    return [NSString stringWithFormat: @"%@/events/%@/shows/%@", [LWConfiguration instance].apiURL, eventID, showID];
 }
 
 @end

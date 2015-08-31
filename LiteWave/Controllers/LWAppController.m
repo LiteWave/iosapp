@@ -28,7 +28,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    [self updateNavigationColor: self.appDelegate.defaultColor];
+    [self updateNavigationColor: [LWConfiguration instance].defaultColor];
     
     imageView.hidden = YES;
     unavailableLabel.hidden = YES;
@@ -37,10 +37,10 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    if (self.appDelegate.eventID != nil) {
+    if ([LWConfiguration instance].eventID != nil) {
         // if the day is no longer the same, show no event
-        if ([LWUtility isToday:self.appDelegate.eventDate]) {
-            [self beginEvent:self.appDelegate.eventID];
+        if ([LWUtility isToday:[LWConfiguration instance].eventDate]) {
+            [self beginEvent:[LWConfiguration instance].eventID];
         } else {
             [self handleNoEvent];
         }
@@ -63,7 +63,7 @@
 }
 
 - (void)getEvent {
-    [[LWAPIClient instance] getEvents:self.appDelegate.clientID
+    [[LWAPIClient instance] getEvents:[LWConfiguration instance].clientID
                             onSuccess:^(id data) {
                                 NSArray *eventsArray = [[NSArray alloc] initWithArray:data copyItems:YES];
                                 NSDictionary *todayEvent;
@@ -100,48 +100,48 @@
 }
 
 - (void)saveEvent:(id)event {
-    self.view.backgroundColor = self.appDelegate.backgroundColor;
+    self.view.backgroundColor = [LWConfiguration instance].backgroundColor;
     
-    self.appDelegate.eventID = [event valueForKey:@"_id"];
-    self.appDelegate.eventName = [event valueForKey:@"name"];
+    [LWConfiguration instance].eventID = [event valueForKey:@"_id"];
+    [LWConfiguration instance].eventName = [event valueForKey:@"name"];
     
     NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
     [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'.000Z'"];
     [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-    self.appDelegate.eventDate = [dateformat dateFromString:[event valueForKey:@"date"]];
+    [LWConfiguration instance].eventDate = [dateformat dateFromString:[event valueForKey:@"date"]];
     
-    self.appDelegate.stadiumID = [event valueForKey:@"_stadiumId"];
+    [LWConfiguration instance].stadiumID = [event valueForKey:@"_stadiumId"];
     
     [self saveSettings:[event objectForKey:@"settings"]];
     
-    [self updateNavigationColor:self.appDelegate.highlightColor];
+    [self updateNavigationColor:[LWConfiguration instance].highlightColor];
     [self updateDefaults];
 }
 
 - (void)saveSettings:(id)settings {
-    self.appDelegate.backgroundColor = [LWUtility getColorFromString:[settings objectForKey:@"backgroundColor"]];
-    self.appDelegate.borderColor = [LWUtility getColorFromString:[settings objectForKey:@"borderColor"]];
-    self.appDelegate.highlightColor = [LWUtility getColorFromString:[settings objectForKey:@"highlightColor"]];
-    self.appDelegate.textColor = [LWUtility getColorFromString:[settings objectForKey:@"textColor"]];
-    self.appDelegate.textSelectedColor = [LWUtility getColorFromString:[settings objectForKey:@"textSelectedColor"]];
-    self.appDelegate.logoUrl = [settings valueForKey:@"logoUrl"];
-    if (self.appDelegate.logoUrl) {
-        NSURL *url = [NSURL URLWithString:self.appDelegate.logoUrl];
+    [LWConfiguration instance].backgroundColor = [LWUtility getColorFromString:[settings objectForKey:@"backgroundColor"]];
+    [LWConfiguration instance].borderColor = [LWUtility getColorFromString:[settings objectForKey:@"borderColor"]];
+    [LWConfiguration instance].highlightColor = [LWUtility getColorFromString:[settings objectForKey:@"highlightColor"]];
+    [LWConfiguration instance].textColor = [LWUtility getColorFromString:[settings objectForKey:@"textColor"]];
+    [LWConfiguration instance].textSelectedColor = [LWUtility getColorFromString:[settings objectForKey:@"textSelectedColor"]];
+    [LWConfiguration instance].logoUrl = [settings valueForKey:@"logoUrl"];
+    if ([LWConfiguration instance].logoUrl) {
+        NSURL *url = [NSURL URLWithString:[LWConfiguration instance].logoUrl];
         NSData *imageData = [NSData dataWithContentsOfURL:url];
-        self.appDelegate.logoImage = [[UIImage alloc] initWithData:imageData];
+        [LWConfiguration instance].logoImage = [[UIImage alloc] initWithData:imageData];
     }
 }
 
 - (void)clearEvent {
-    self.appDelegate.eventID = nil;
-    self.appDelegate.eventName = nil;
-    self.appDelegate.eventDate = nil;
+    [LWConfiguration instance].eventID = nil;
+    [LWConfiguration instance].eventName = nil;
+    [LWConfiguration instance].eventDate = nil;
     
-    self.appDelegate.stadiumID = nil;
-    self.appDelegate.seatID = nil;
-    self.appDelegate.rowID = nil;
-    self.appDelegate.sectionID = nil;
-    self.appDelegate.levelID = nil;
+    [LWConfiguration instance].stadiumID = nil;
+    [LWConfiguration instance].seatID = nil;
+    [LWConfiguration instance].rowID = nil;
+    [LWConfiguration instance].sectionID = nil;
+    [LWConfiguration instance].levelID = nil;
     
     [self updateDefaults];
 }
@@ -149,23 +149,23 @@
 - (void)updateDefaults {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    [defaults setValue:self.appDelegate.eventID forKey:@"eventID"];
-    [defaults setValue:self.appDelegate.eventName forKey:@"eventName"];
-    [defaults setObject:self.appDelegate.eventDate forKey:@"eventDate"];
+    [defaults setValue:[LWConfiguration instance].eventID forKey:@"eventID"];
+    [defaults setValue:[LWConfiguration instance].eventName forKey:@"eventName"];
+    [defaults setObject:[LWConfiguration instance].eventDate forKey:@"eventDate"];
     
-    [defaults setObject:self.appDelegate.stadiumID forKey:@"stadiumID"];
-    [defaults setObject:self.appDelegate.seatID forKey:@"seatID"];
-    [defaults setObject:self.appDelegate.rowID forKey:@"rowID"];
-    [defaults setObject:self.appDelegate.sectionID forKey:@"sectionID"];
-    [defaults setObject:self.appDelegate.levelID forKey:@"levelID"];
+    [defaults setObject:[LWConfiguration instance].stadiumID forKey:@"stadiumID"];
+    [defaults setObject:[LWConfiguration instance].seatID forKey:@"seatID"];
+    [defaults setObject:[LWConfiguration instance].rowID forKey:@"rowID"];
+    [defaults setObject:[LWConfiguration instance].sectionID forKey:@"sectionID"];
+    [defaults setObject:[LWConfiguration instance].levelID forKey:@"levelID"];
 
-    [defaults setObject:[LWUtility getStringFromColor:self.appDelegate.backgroundColor] forKey:@"backgroundColor"];
-    [defaults setObject:[LWUtility getStringFromColor:self.appDelegate.borderColor] forKey:@"borderColor"];
-    [defaults setObject:[LWUtility getStringFromColor:self.appDelegate.highlightColor] forKey:@"highlightColor"];
-    [defaults setObject:[LWUtility getStringFromColor:self.appDelegate.textColor] forKey:@"textColor"];
-    [defaults setObject:[LWUtility getStringFromColor:self.appDelegate.textSelectedColor] forKey:@"textSelectedColor"];
+    [defaults setObject:[LWUtility getStringFromColor:[LWConfiguration instance].backgroundColor] forKey:@"backgroundColor"];
+    [defaults setObject:[LWUtility getStringFromColor:[LWConfiguration instance].borderColor] forKey:@"borderColor"];
+    [defaults setObject:[LWUtility getStringFromColor:[LWConfiguration instance].highlightColor] forKey:@"highlightColor"];
+    [defaults setObject:[LWUtility getStringFromColor:[LWConfiguration instance].textColor] forKey:@"textColor"];
+    [defaults setObject:[LWUtility getStringFromColor:[LWConfiguration instance].textSelectedColor] forKey:@"textSelectedColor"];
     
-    [defaults setObject:self.appDelegate.logoUrl forKey:@"logoUrl"];
+    [defaults setObject:[LWConfiguration instance].logoUrl forKey:@"logoUrl"];
     
     
     [defaults synchronize];
@@ -185,7 +185,7 @@
     LWLevelController *level = [storyboard instantiateViewControllerWithIdentifier:@"level"];
     [self.navigationController pushViewController:level animated:NO];
     
-    if (self.appDelegate.seatID != nil) {
+    if ([LWConfiguration instance].seatID != nil) {
         LWReadyController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
         [self.navigationController pushViewController:ready animated:NO];
     }
@@ -195,7 +195,7 @@
     // add observer for when app becomes active
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onBecomeActive) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
     
-    [[LWAPIClient instance] getClient:self.appDelegate.clientID
+    [[LWAPIClient instance] getClient:[LWConfiguration instance].clientID
                             onSuccess:^(id data) {
                                 NSError *error2;
                                 NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
@@ -237,13 +237,13 @@
 
 - (void)loadImage
 {
-    if (!self.appDelegate.logoUrl || !self.appDelegate.logoImage)
+    if (![LWConfiguration instance].logoUrl || ![LWConfiguration instance].logoImage)
         return;
     
     float height = 700;
-    float width = (self.appDelegate.logoImage.size.width*height)/self.appDelegate.logoImage.size.height;
+    float width = ([LWConfiguration instance].logoImage.size.width*height)/[LWConfiguration instance].logoImage.size.height;
     imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, self.view.frame.size.height/2 - height/2, width, height);
-    imageView.image = self.appDelegate.logoImage;
+    imageView.image = [LWConfiguration instance].logoImage;
     imageView.alpha = .05;
     imageView.hidden = NO;
 }

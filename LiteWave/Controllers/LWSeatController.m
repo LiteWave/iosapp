@@ -11,6 +11,7 @@
 #import "LWReadyController.h"
 #import "LWAppDelegate.h"
 #import "LWApiClient.h"
+#import "LWConfiguration.h"
 
 @implementation LWSeatController
 
@@ -20,7 +21,7 @@
     
     self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    self.view.backgroundColor = self.appDelegate.backgroundColor;
+    self.view.backgroundColor = [LWConfiguration instance].backgroundColor;
     
     sectionTable.hidden = YES;
     rowTable.hidden = YES;
@@ -102,7 +103,7 @@
     if (indexPath.row == 0) {
         cell.button.hidden = YES;
         cell.nameLabel.frame = CGRectMake(0, 20, cell.nameLabel.frame.size.width, cell.nameLabel.frame.size.height);
-        [cell.nameLabel setTextColor:self.appDelegate.textColor];
+        [cell.nameLabel setTextColor:[LWConfiguration instance].textColor];
     } else {
         cell.button.hidden = NO;
         cell.nameLabel.frame = CGRectMake(0, 0, cell.nameLabel.frame.size.width, cell.nameLabel.frame.size.height);
@@ -183,8 +184,8 @@
 
 - (void)getSeats
 {
-    [[LWAPIClient instance] getStadium: self.appDelegate.stadiumID
-                             withLevel: self.appDelegate.levelID
+    [[LWAPIClient instance] getStadium: [LWConfiguration instance].stadiumID
+                             withLevel: [LWConfiguration instance].levelID
                              onSuccess:^(id data) {
                                  NSError *error2;
                                  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
@@ -195,7 +196,7 @@
                                                                  options: NSJSONReadingMutableContainers
                                                                    error: &error2];
                                  
-                                 self.appDelegate.seats = [[NSDictionary alloc] initWithDictionary:seatsDict copyItems:YES];
+                                 [LWConfiguration instance].seats = [[NSDictionary alloc] initWithDictionary:seatsDict copyItems:YES];
                                  
                                  [self loadSections];
                                  [self loadRows];
@@ -214,7 +215,7 @@
 
 - (void)loadSections
 {
-    sections = [[NSMutableArray alloc] initWithArray:[self.appDelegate.seats objectForKey:@"sections"]];
+    sections = [[NSMutableArray alloc] initWithArray:[[LWConfiguration instance].seats objectForKey:@"sections"]];
     
     NSDictionary* obj = @{@"name" : @"Section"};
     [sections insertObject:obj atIndex:0];
@@ -299,7 +300,7 @@
                                                         sectionTable.frame.origin.y,
                                                         sectionTable.frame.size.width,
                                                         100)];
-    [sectionLabel setTextColor:self.appDelegate.textColor];
+    [sectionLabel setTextColor:[LWConfiguration instance].textColor];
     [sectionLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:24.0f]];
     [sectionLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     sectionLabel.textAlignment = NSTextAlignmentCenter;
@@ -310,7 +311,7 @@
                                                         rowTable.frame.origin.y,
                                                         rowTable.frame.size.width,
                                                         100)];
-    [rowLabel setTextColor:self.appDelegate.textColor];
+    [rowLabel setTextColor:[LWConfiguration instance].textColor];
     [rowLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:24.0f]];
     [rowLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     rowLabel.textAlignment = NSTextAlignmentCenter;
@@ -321,7 +322,7 @@
                                                          seatTable.frame.origin.y,
                                                          seatTable.frame.size.width,
                                                          100)];
-    [seatLabel setTextColor:self.appDelegate.textColor];
+    [seatLabel setTextColor:[LWConfiguration instance].textColor];
     [seatLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:24.0f]];
     [seatLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     seatLabel.textAlignment = NSTextAlignmentCenter;
@@ -333,16 +334,16 @@
 
 - (void)loadImage
 {
-    if (!self.appDelegate.logoUrl || !self.appDelegate.logoImage)
+    if (![LWConfiguration instance].logoUrl || ![LWConfiguration instance].logoImage)
         return;
     
     CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
     float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
     
     float height = 700;
-    float width = (self.appDelegate.logoImage.size.width*height)/self.appDelegate.logoImage.size.height;
+    float width = ([LWConfiguration instance].logoImage.size.width*height)/[LWConfiguration instance].logoImage.size.height;
     imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, self.view.frame.size.height/2 - height/2 - heightPadding, width, height);
-    imageView.image = self.appDelegate.logoImage;
+    imageView.image = [LWConfiguration instance].logoImage;
     imageView.alpha = .05;
     imageView.hidden = NO;
 }
@@ -360,8 +361,8 @@
 
 - (void)enableJoin
 {
-    joinButton.layer.borderColor=self.appDelegate.highlightColor.CGColor;
-    joinButton.layer.backgroundColor=self.appDelegate.highlightColor.CGColor;
+    joinButton.layer.borderColor=[LWConfiguration instance].highlightColor.CGColor;
+    joinButton.layer.backgroundColor=[LWConfiguration instance].highlightColor.CGColor;
     joinButton.layer.borderWidth=2.0f;
     
     [joinButton setTitleColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] forState:UIControlStateNormal];
@@ -376,27 +377,27 @@
 
 - (void)saveSeat
 {
-    self.appDelegate.sectionID = [[sections objectAtIndex:selectedSectionIndex] valueForKeyPath:@"name"];
-    self.appDelegate.rowID = [[rows objectAtIndex:selectedRowIndex] valueForKeyPath:@"name"];
-    self.appDelegate.seatID = [[seats objectAtIndex:selectedSeatIndex] valueForKeyPath:@"name"];
+    [LWConfiguration instance].sectionID = [[sections objectAtIndex:selectedSectionIndex] valueForKeyPath:@"name"];
+    [LWConfiguration instance].rowID = [[rows objectAtIndex:selectedRowIndex] valueForKeyPath:@"name"];
+    [LWConfiguration instance].seatID = [[seats objectAtIndex:selectedSeatIndex] valueForKeyPath:@"name"];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setValue:self.appDelegate.levelID forKey:@"levelID"];
-    [defaults setValue:self.appDelegate.sectionID forKey:@"sectionID"];
-    [defaults setValue:self.appDelegate.rowID forKey:@"rowID"];
-    [defaults setValue:self.appDelegate.seatID forKey:@"seatID"];
+    [defaults setValue:[LWConfiguration instance].levelID forKey:@"levelID"];
+    [defaults setValue:[LWConfiguration instance].sectionID forKey:@"sectionID"];
+    [defaults setValue:[LWConfiguration instance].rowID forKey:@"rowID"];
+    [defaults setValue:[LWConfiguration instance].seatID forKey:@"seatID"];
     
     [defaults synchronize];
     
     NSDictionary *userSeat = [NSDictionary dictionaryWithObjectsAndKeys:
-                                self.appDelegate.levelID, @"level",
-                                self.appDelegate.sectionID, @"section",
-                                self.appDelegate.rowID, @"row",
-                                self.appDelegate.seatID, @"seat", nil];
+                                [LWConfiguration instance].levelID, @"level",
+                                [LWConfiguration instance].sectionID, @"section",
+                                [LWConfiguration instance].rowID, @"row",
+                                [LWConfiguration instance].seatID, @"seat", nil];
     
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                                //[NSString stringWithFormat:@"%@%@", self.appDelegate.uniqueID, @"F"],
-                                self.appDelegate.uniqueID,
+                                //[NSString stringWithFormat:@"%@%@", [LWConfiguration instance].uniqueID, @"F"],
+                                [LWConfiguration instance].uniqueID,
                                 @"userKey",
                                 userSeat,
                                 @"userSeat",
@@ -404,7 +405,7 @@
     
     NSLog(@"USER ADDED REQUEST: %@", params);
     
-    [[LWAPIClient instance] joinEvent: self.appDelegate.eventID
+    [[LWAPIClient instance] joinEvent: [LWConfiguration instance].eventID
                              params: params
                           onSuccess:^(id data) {
                               NSLog(@"USER ADDED RESPONSE: %@", data);
@@ -418,11 +419,11 @@
                                                               options: NSJSONReadingMutableContainers
                                                                 error: &error2];
                               
-                              self.appDelegate.userID = [userDict objectForKey:@"_id"];
+                              [LWConfiguration instance].userID = [userDict objectForKey:@"_id"];
                               
                               NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                               
-                              [defaults setValue:self.appDelegate.userID forKey:@"userID"];
+                              [defaults setValue:[LWConfiguration instance].userID forKey:@"userID"];
                               
                               [defaults synchronize];
                               

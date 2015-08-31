@@ -12,6 +12,7 @@
 #import "LWUtility.h"
 #import "AFNetworking.h"
 #import "LWApiClient.h"
+#import "LWConfiguration.h"
 
 @interface LWReadyController ()
 
@@ -29,7 +30,7 @@
     
     self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    self.view.backgroundColor = self.appDelegate.backgroundColor;
+    self.view.backgroundColor = [LWConfiguration instance].backgroundColor;
     
     pressedChangeSeat = NO;
     
@@ -59,14 +60,14 @@
     
     [self.navigationItem setHidesBackButton:NO animated:NO];
 
-    self.title = self.appDelegate.eventName;
+    self.title = [LWConfiguration instance].eventName;
 
     [self getShow];
 }
 
 -(void)getShow {
     
-    [[LWAPIClient instance] getShows: self.appDelegate.eventID
+    [[LWAPIClient instance] getShows: [LWConfiguration instance].eventID
                          onSuccess: ^(id data) {
                              NSError *error2;
                              NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
@@ -93,13 +94,13 @@
                              }
 
                              if (currentShow) {
-                                 NSLog(@"new liteshow = %@", self.appDelegate.show);
+                                 NSLog(@"new liteshow = %@", [LWConfiguration instance].show);
                                  
-                                 self.appDelegate.show = [[NSDictionary alloc] initWithDictionary:currentShow copyItems:YES];
+                                 [LWConfiguration instance].show = [[NSDictionary alloc] initWithDictionary:currentShow copyItems:YES];
                                  [self enableJoin];
                              } else {
                                  // no shows available
-                                 self.appDelegate.show = nil;
+                                 [LWConfiguration instance].show = nil;
 
                                  [self disableJoin];
                              }
@@ -108,7 +109,7 @@
                              // no shows available
                              [self disableJoin];
                              
-                             self.appDelegate.show = nil;
+                             [LWConfiguration instance].show = nil;
                          }];
 }
 
@@ -123,7 +124,7 @@
                             mobileStart, @"mobileTime", nil];
 
     NSLog(@"EVENT JOIN REQUEST: %@", params);
-    [[LWAPIClient instance] joinShow: self.appDelegate.userID
+    [[LWAPIClient instance] joinShow: [LWConfiguration instance].userID
                             params: params
                          onSuccess:^(id data) {
                              NSLog(@"EVENT JOIN RESPONSE: %@", data);
@@ -137,7 +138,7 @@
                                                              options: NSJSONReadingMutableContainers
                                                                error: &error2];
                              
-                             self.appDelegate.showData = [[NSDictionary alloc] initWithDictionary:joinDict copyItems:YES];
+                             [LWConfiguration instance].showData = [[NSDictionary alloc] initWithDictionary:joinDict copyItems:YES];
                              
                              NSString * storyboardName = @"Main";
                              UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
@@ -162,11 +163,11 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     // leave the event
-    [[LWAPIClient instance] leaveEvent: self.appDelegate.userID
+    [[LWAPIClient instance] leaveEvent: [LWConfiguration instance].userID
                              onSuccess:^(id data) {
                                  // clear data on success
-                                 self.appDelegate.userID = nil;
-                                 self.appDelegate.show = nil;
+                                 [LWConfiguration instance].userID = nil;
+                                 [LWConfiguration instance].show = nil;
                                  
                                  [defaults removeObjectForKey:@"userID"];
                                  [defaults removeObjectForKey:@"liteShow"];
@@ -185,9 +186,9 @@
                            }];
     
     // clear this data on pass or fail
-    self.appDelegate.sectionID = nil;
-    self.appDelegate.rowID = nil;
-    self.appDelegate.seatID = nil;
+    [LWConfiguration instance].sectionID = nil;
+    [LWConfiguration instance].rowID = nil;
+    [LWConfiguration instance].seatID = nil;
     
     [defaults removeObjectForKey:@"sectionID"];
     [defaults removeObjectForKey:@"rowID"];
@@ -204,7 +205,7 @@
     
     [self loadImage];
     
-    waitLabel.textColor = self.appDelegate.textColor;
+    waitLabel.textColor = [LWConfiguration instance].textColor;
     waitLabel.frame = CGRectMake(waitLabel.frame.origin.x,
                                  0,
                                  waitLabel.frame.size.width,
@@ -214,7 +215,7 @@
                                waitLabel.frame.origin.y + 75,
                                spinner.frame.size.width,
                                spinner.frame.size.height);
-    spinner.color = self.appDelegate.highlightColor;
+    spinner.color = [LWConfiguration instance].highlightColor;
     
     
     int buttonWidth = 70;
@@ -225,22 +226,22 @@
     
     // level
     [self buildInfoLabel:@"level" x:(buttonXPosition-5) y:(buttonYPostion-50) size:(buttonWidth+10)];
-    [self buildSeatButton:self.appDelegate.levelID x:buttonXPosition y:buttonYPostion size:buttonWidth];
+    [self buildSeatButton:[LWConfiguration instance].levelID x:buttonXPosition y:buttonYPostion size:buttonWidth];
     buttonXPosition += buttonPadding + buttonWidth;
     
     // section
     [self buildInfoLabel:@"section" x:(buttonXPosition-5) y:(buttonYPostion-50) size:(buttonWidth+10)];
-    [self buildSeatButton:self.appDelegate.sectionID x:buttonXPosition y:buttonYPostion size:buttonWidth];
+    [self buildSeatButton:[LWConfiguration instance].sectionID x:buttonXPosition y:buttonYPostion size:buttonWidth];
     buttonXPosition += buttonPadding + buttonWidth;
     
     // row
     [self buildInfoLabel:@"row" x:(buttonXPosition-5) y:(buttonYPostion-50) size:(buttonWidth+10)];
-    [self buildSeatButton:self.appDelegate.rowID x:buttonXPosition y:buttonYPostion size:buttonWidth];
+    [self buildSeatButton:[LWConfiguration instance].rowID x:buttonXPosition y:buttonYPostion size:buttonWidth];
     buttonXPosition += buttonPadding + buttonWidth;
 
     // seat
     [self buildInfoLabel:@"seat" x:(buttonXPosition-5) y:(buttonYPostion-50) size:(buttonWidth+10)];
-    [self buildSeatButton:self.appDelegate.seatID x:buttonXPosition y:buttonYPostion size:buttonWidth];
+    [self buildSeatButton:[LWConfiguration instance].seatID x:buttonXPosition y:buttonYPostion size:buttonWidth];
     
     
     joinButton.frame = CGRectMake(0,
@@ -252,16 +253,16 @@
 
 - (void)loadImage
 {
-    if (!self.appDelegate.logoUrl || !self.appDelegate.logoImage)
+    if (![LWConfiguration instance].logoUrl || ![LWConfiguration instance].logoImage)
         return;
     
     CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
     float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
     
     float height = 700;
-    float width = (self.appDelegate.logoImage.size.width*height)/self.appDelegate.logoImage.size.height;
+    float width = ([LWConfiguration instance].logoImage.size.width*height)/[LWConfiguration instance].logoImage.size.height;
     imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, self.view.frame.size.height/2 - height/2 - heightPadding, width, height);
-    imageView.image = self.appDelegate.logoImage;
+    imageView.image = [LWConfiguration instance].logoImage;
     imageView.alpha = .05;
     imageView.hidden = NO;
 }
@@ -275,15 +276,15 @@
                               size);
     button.clipsToBounds = YES;
     button.layer.cornerRadius = size/2.0f;
-    button.layer.borderColor=self.appDelegate.highlightColor.CGColor;
-    button.layer.backgroundColor=self.appDelegate.highlightColor.CGColor;
+    button.layer.borderColor=[LWConfiguration instance].highlightColor.CGColor;
+    button.layer.backgroundColor=[LWConfiguration instance].highlightColor.CGColor;
     button.layer.borderWidth = 2.0f;
     [self.view addSubview:button];
     
     UILabel *buttonLabel = [[UILabel alloc]initWithFrame:CGRectMake(x, y, size, size)];
     buttonLabel.text = label;
     buttonLabel.textAlignment = NSTextAlignmentCenter;
-    [buttonLabel setTextColor:self.appDelegate.textSelectedColor];
+    [buttonLabel setTextColor:[LWConfiguration instance].textSelectedColor];
     [buttonLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:20.0f]];
     [buttonLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:buttonLabel];
@@ -295,7 +296,7 @@
                                                          y,
                                                          size,
                                                          50)];
-    [infoLabel setTextColor:self.appDelegate.textColor];
+    [infoLabel setTextColor:[LWConfiguration instance].textColor];
     [infoLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:19.0f]];
     [infoLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     infoLabel.textAlignment = NSTextAlignmentCenter;
@@ -319,8 +320,8 @@
 
 - (void)enableJoin
 {
-    joinButton.layer.borderColor=self.appDelegate.highlightColor.CGColor;
-    joinButton.layer.backgroundColor=self.appDelegate.highlightColor.CGColor;
+    joinButton.layer.borderColor=[LWConfiguration instance].highlightColor.CGColor;
+    joinButton.layer.backgroundColor=[LWConfiguration instance].highlightColor.CGColor;
     joinButton.layer.borderWidth=2.0f;
     
     [joinButton setTitleColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] forState:UIControlStateNormal];

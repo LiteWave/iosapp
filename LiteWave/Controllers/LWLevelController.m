@@ -12,7 +12,7 @@
 #import "AFNetworking.h"
 #import "LWAppDelegate.h"
 #import "LWApiClient.h"
-
+#import "LWConfiguration.h"
 
 @implementation LWLevelController
 
@@ -22,7 +22,7 @@
     
     self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    self.view.backgroundColor = self.appDelegate.backgroundColor;
+    self.view.backgroundColor = [LWConfiguration instance].backgroundColor;
     self.navigationItem.hidesBackButton = YES;
     
     viewTable.hidden = YES;
@@ -59,7 +59,7 @@
     selectedLevelIndex = [index intValue];
     [self clearCells:viewTable  selected:(int)index];
     
-    self.appDelegate.levelID = [[levels objectAtIndex:selectedLevelIndex] valueForKeyPath:@"name"];
+    [LWConfiguration instance].levelID = [[levels objectAtIndex:selectedLevelIndex] valueForKeyPath:@"name"];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     LWSeatController *seat = [storyboard instantiateViewControllerWithIdentifier:@"seat"];
@@ -114,7 +114,7 @@
 
 - (void)getLevels
 {
-    [[LWAPIClient instance] getStadium: self.appDelegate.stadiumID
+    [[LWAPIClient instance] getStadium: [LWConfiguration instance].stadiumID
                            onSuccess:^(id data) {
                                NSError *error2;
                                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
@@ -125,7 +125,7 @@
                                                                options: NSJSONReadingMutableContainers
                                                                  error: &error2];
                                
-                               self.appDelegate.levels = [[NSDictionary alloc] initWithDictionary:seatsDict copyItems:YES];
+                               [LWConfiguration instance].levels = [[NSDictionary alloc] initWithDictionary:seatsDict copyItems:YES];
                                
                                [self loadLevels];
                            }
@@ -142,7 +142,7 @@
 
 - (void)loadLevels
 {
-    levels = [[NSMutableArray alloc] initWithArray:[self.appDelegate.levels objectForKey:@"levels"]];
+    levels = [[NSMutableArray alloc] initWithArray:[[LWConfiguration instance].levels objectForKey:@"levels"]];
     [viewTable reloadData];
 }
 
@@ -174,16 +174,16 @@
 
 - (void)loadImage
 {
-    if (!self.appDelegate.logoUrl || !self.appDelegate.logoImage)
+    if (![LWConfiguration instance].logoUrl || ![LWConfiguration instance].logoImage)
         return;
     
     CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
     float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
     
     float height = 700;
-    float width = (self.appDelegate.logoImage.size.width*height)/self.appDelegate.logoImage.size.height;
+    float width = ([LWConfiguration instance].logoImage.size.width*height)/[LWConfiguration instance].logoImage.size.height;
     imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, self.view.frame.size.height/2 - height/2 - heightPadding, width, height);
-    imageView.image = self.appDelegate.logoImage;
+    imageView.image = [LWConfiguration instance].logoImage;
     imageView.alpha = .05;
     imageView.hidden = NO;
 }
