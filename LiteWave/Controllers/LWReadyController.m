@@ -140,8 +140,8 @@
                              
                              [LWConfiguration instance].showData = [[NSDictionary alloc] initWithDictionary:joinDict copyItems:YES];
                              
-                             NSString * storyboardName = @"Main";
-                             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+                             UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main"
+                                                                                  bundle:[NSBundle bundleForClass:LWReadyController.class]];
                              UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"playing"];
                              [self presentViewController:vc animated:YES completion:nil];
                          }

@@ -180,7 +180,8 @@
     // remove observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main"
+                                                         bundle:[NSBundle bundleForClass:LWAppController.class]];
     
     LWLevelController *level = [storyboard instantiateViewControllerWithIdentifier:@"level"];
     [self.navigationController pushViewController:level animated:NO];

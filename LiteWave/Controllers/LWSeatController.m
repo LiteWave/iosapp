@@ -427,7 +427,8 @@
                               
                               [defaults synchronize];
                               
-                              UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+                              UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main"
+                                                                                   bundle:[NSBundle bundleForClass:LWSeatController.class]];
                               LWReadyController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
                               [self.navigationController pushViewController:ready animated:YES];
                               
