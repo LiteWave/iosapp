@@ -7,6 +7,7 @@
 //
 
 #import "LWCircleTableViewCell.h"
+#import "LWConfiguration.h"
 
 #define ROUND_BUTTON_WIDTH_HEIGHT 75
 #define CELL_HEIGHT 100
@@ -40,7 +41,7 @@
                                   ROUND_BUTTON_WIDTH_HEIGHT);
         self.button.clipsToBounds = YES;
         self.button.layer.cornerRadius = ROUND_BUTTON_WIDTH_HEIGHT/2.0f;
-        self.button.layer.borderColor = self.appDelegate.borderColor.CGColor;
+        self.button.layer.borderColor = [LWConfiguration instance].borderColor.CGColor;
         self.button.layer.borderWidth = 2.0f;
         [self.contentView addSubview:self.button];
         
@@ -50,7 +51,7 @@
         
         self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, tableWidth, CELL_HEIGHT)];
         self.nameLabel.textAlignment = NSTextAlignmentCenter;
-        [self.nameLabel setTextColor:self.appDelegate.textColor];
+        [self.nameLabel setTextColor:[LWConfiguration instance].textColor];
         [self.nameLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:24.0f]];
         [self.nameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.contentView addSubview:self.nameLabel];
@@ -59,17 +60,17 @@
 }
 
 -(void)select {
-    self.button.layer.borderColor=self.appDelegate.highlightColor.CGColor;
-    self.button.layer.backgroundColor=self.appDelegate.highlightColor.CGColor;
+    self.button.layer.borderColor=[LWConfiguration instance].highlightColor.CGColor;
+    self.button.layer.backgroundColor=[LWConfiguration instance].highlightColor.CGColor;
     
-    [self.nameLabel setTextColor:self.appDelegate.textSelectedColor];
+    [self.nameLabel setTextColor:[LWConfiguration instance].textSelectedColor];
 }
 
 -(void)clear {
-    self.button.layer.borderColor=self.appDelegate.borderColor.CGColor;
-    self.button.layer.backgroundColor=self.appDelegate.backgroundColor.CGColor;
+    self.button.layer.borderColor=[LWConfiguration instance].borderColor.CGColor;
+    self.button.layer.backgroundColor=[LWConfiguration instance].backgroundColor.CGColor;
     
-    [self.nameLabel setTextColor:self.appDelegate.textColor];
+    [self.nameLabel setTextColor:[LWConfiguration instance].textColor];
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {

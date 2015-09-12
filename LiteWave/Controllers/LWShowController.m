@@ -10,6 +10,7 @@
 #import "LWResultsController.h"
 #import "LWUtility.h"
 #import "LWApiClient.h"
+#import "LWConfiguration.h"
 
 @implementation LWShowController
 
@@ -33,9 +34,9 @@
     self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     self.view.backgroundColor = [UIColor blackColor];
-    self.timerLabel.textColor = self.appDelegate.highlightColor;
-    self.startsInLabel.textColor = self.appDelegate.highlightColor;
-    self.infoLabel.textColor = self.appDelegate.highlightColor;
+    self.timerLabel.textColor = [LWConfiguration instance].highlightColor;
+    self.startsInLabel.textColor = [LWConfiguration instance].highlightColor;
+    self.infoLabel.textColor = [LWConfiguration instance].highlightColor;
     self.infoLabel.frame = CGRectMake(self.infoLabel.frame.origin.x,
                                       self.view.frame.size.height - self.infoLabel.frame.size.height - 10,
                                       self.infoLabel.frame.size.width,
@@ -67,16 +68,16 @@
 }
 
 -(void)startShow {
-    commandArray = [self.appDelegate.showData objectForKey:@"commands"];
+    commandArray = [[LWConfiguration instance].showData objectForKey:@"commands"];
 
-    NSString *winnerID = [self.appDelegate.showData valueForKey:@"_winnerId"];
-    if (winnerID != (id)[NSNull null] && [winnerID isEqualToString:self.appDelegate.userID]) {
+    NSString *winnerID = [[LWConfiguration instance].showData valueForKey:@"_winnerId"];
+    if (winnerID != (id)[NSNull null] && [winnerID isEqualToString:[LWConfiguration instance].userID]) {
         isWinner=YES;
     } else {
         isWinner=NO;
     }
 
-    if ([self.appDelegate.showData objectForKey:@"mobileTimeOffset"]) {
+    if ([[LWConfiguration instance].showData objectForKey:@"mobileTimeOffset"]) {
         counterUtil = [[LWCountDownTimerUtility alloc] init];
         [counterUtil setDelegate:self];
 
@@ -84,7 +85,7 @@
         [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
         [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
 
-        NSDate *startDate = [dateformat dateFromString:[self.appDelegate.showData valueForKey:@"mobileStartAt"]];
+        NSDate *startDate = [dateformat dateFromString:[[LWConfiguration instance].showData valueForKey:@"mobileStartAt"]];
         NSString *mobileStartAt = [dateformat stringFromDate:startDate];
         NSLog(@"start %@", mobileStartAt);
 
@@ -109,7 +110,8 @@
 {
     [self.frameTimer invalidate];
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main"
+                                                         bundle:[NSBundle bundleForClass:LWShowController.class]];
     LWResultsController *results = [storyboard instantiateViewControllerWithIdentifier:@"results"];
     [self presentViewController:results animated:YES completion:nil];
     
@@ -205,7 +207,7 @@
 -(void)showWinner {
     self.winnerLabel.hidden=NO;
     self.winnerLabel.text = @"WINNER";
-    [self.winnerLabel setTextColor:self.appDelegate.highlightColor];
+    [self.winnerLabel setTextColor:[LWConfiguration instance].highlightColor];
     [self.winnerLabel setFont:[UIFont systemFontOfSize:70]];
 }
 
