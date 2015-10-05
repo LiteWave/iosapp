@@ -560,7 +560,7 @@
 				ORGANIZATIONNAME = LightWave;
 				TargetAttributes = {
 					8415794B181A286800D4EBB1 = {
-						DevelopmentTeam = PXYA582CAS;
+						DevelopmentTeam = F863Y4QL35;
 					};
 					8415796C181A286800D4EBB1 = {
 						TestTargetID = 8415794B181A286800D4EBB1;
@@ -819,6 +819,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/LiteWave/LiteWave-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.litewaveinc.litewave;
 				PRODUCT_NAME = LiteWave;
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "arm64 armv7 armv7s";
@@ -848,6 +849,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.litewaveinc.litewave;
 				PRODUCT_NAME = LiteWave;
 				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "arm64 armv7 armv7s";

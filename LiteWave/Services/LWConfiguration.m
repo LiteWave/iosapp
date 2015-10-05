@@ -36,7 +36,7 @@
 -(void)loadData
 {
     //self.apiURL = @"http://127.0.0.1:3000/api"; // DEV
-    self.apiURL = @"http://104.130.156.82:8080/api"; // PROD
+    self.apiURL = @"http://www.litewaveinc.com/api"; // PROD
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.uniqueID = [defaults stringForKey:@"uuid"];

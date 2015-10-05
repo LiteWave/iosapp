@@ -396,7 +396,6 @@
                                 [LWConfiguration instance].seatID, @"seat", nil];
     
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                                //[NSString stringWithFormat:@"%@%@", [LWConfiguration instance].uniqueID, @"F"],
                                 [LWConfiguration instance].uniqueID,
                                 @"userKey",
                                 userSeat,

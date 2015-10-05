@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>8FB60B4A-ACDF-4EBA-851D-BD4D30751C2E</string>
 	<key>IDESourceControlProjectName</key>
-	<string>LiteWave</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>C9D0759B510CE295483524CE28BB8C3B0ADBD784</key>
 		<string>github.com:LiteWave/iosapp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>LiteWave.xcodeproj</string>
+	<string>LiteWave.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>C9D0759B510CE295483524CE28BB8C3B0ADBD784</key>
