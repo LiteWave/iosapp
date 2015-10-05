@@ -93,7 +93,14 @@
         NSLog(@"countdown in %f...", diff);
       
         if (diff < 0) {
-            [self.navigationController popViewControllerAnimated:YES];
+            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Join error"
+                                                            message:@"Sorry, the show has expired."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+
         } else {
             self.timerLabel.hidden = NO;
             self.startsInLabel.hidden = NO;

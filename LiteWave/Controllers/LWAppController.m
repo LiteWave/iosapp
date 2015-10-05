@@ -227,7 +227,8 @@
                             }
                             onFailure:^(NSError *error) {
                                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network error"
-                                                                                message: @"Need an internet connection to continue."delegate:self
+                                                                                message:@"Need an internet connection to continue."
+                                                                               delegate:self
                                                                       cancelButtonTitle:@"OK"
                                                                       otherButtonTitles:nil];
                                 [alert show];
