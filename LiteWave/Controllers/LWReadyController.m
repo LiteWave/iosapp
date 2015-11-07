@@ -79,6 +79,8 @@
                              [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
                              [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
                              
+                             int offset = [[LWConfiguration instance].mobileOffset intValue];
+                             
                              NSArray *showDict = [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
                                                                                  options: NSJSONReadingMutableContainers
                                                                                    error: &error2];
@@ -87,7 +89,7 @@
                              for (NSDictionary *show in showsArray) {
                                  if ([show valueForKey:@"startAt"] != (id)[NSNull null]) {
                                      NSDate *showDate = [dateformat dateFromString:[show valueForKey:@"startAt"]];
-                                     if (showDate && [LWUtility isTodayGreaterThanDate:showDate]) {
+                                     if (showDate && [LWUtility isTodayLessThanDate:showDate todayOffsetInMilliseconds:offset]) {
                                          currentShow = show;
                                          break;
                                      }
@@ -116,14 +118,9 @@
 }
 
 -(void)joinShow {
-    NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
-    [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
-    [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-    
-    NSString *mobileStart = [dateformat stringFromDate:[NSDate date]];
-
+    NSString *mobileTime = [LWUtility getTodayInGMT];
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            mobileStart, @"mobileTime", nil];
+                            mobileTime, @"mobileTime", nil];
 
     NSLog(@"EVENT JOIN REQUEST: %@", params);
     [[LWAPIClient instance] joinShow: [LWConfiguration instance].userLocationID
@@ -140,6 +137,7 @@
                                                              options: NSJSONReadingMutableContainers
                                                                error: &error2];
                              
+                             [LWConfiguration instance].mobileOffset = [joinDict objectForKey:@"mobileTimeOffset"];
                              [LWConfiguration instance].showData = [[NSDictionary alloc] initWithDictionary:joinDict copyItems:YES];
                              
                              UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main"

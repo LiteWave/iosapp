@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSString *seatID;
 @property (nonatomic, strong) NSString *userID;
 @property (nonatomic, strong) NSString *userLocationID;
+@property (nonatomic, strong) NSString *mobileOffset;
 @property (nonatomic, strong) NSDictionary *levels;
 @property (nonatomic, strong) NSDictionary *seats;
 @property (nonatomic, strong) NSDictionary *show;

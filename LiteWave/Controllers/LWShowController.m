@@ -77,39 +77,30 @@
         isWinner=NO;
     }
 
-    if ([[LWConfiguration instance].showData objectForKey:@"mobileTimeOffset"]) {
-        counterUtil = [[LWCountDownTimerUtility alloc] init];
-        [counterUtil setDelegate:self];
+    counterUtil = [[LWCountDownTimerUtility alloc] init];
+    [counterUtil setDelegate:self];
 
-        NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
-        [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
-        [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
+    [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+    [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
 
-        NSDate *startDate = [dateformat dateFromString:[[LWConfiguration instance].showData valueForKey:@"mobileStartAt"]];
-        NSString *mobileStartAt = [dateformat stringFromDate:startDate];
-        NSLog(@"start %@", mobileStartAt);
-
-        diff = [startDate timeIntervalSinceNow] * 100.0f;
-        NSLog(@"countdown in %f...", diff);
-      
-        if (diff < 0) {
-            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Join error"
-                                                            message:@"Sorry, the show has expired."
-                                                           delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-
-        } else {
-            self.timerLabel.hidden = NO;
-            self.startsInLabel.hidden = NO;
-            self.infoLabel.hidden = NO;
-            
-            self.view.backgroundColor = [UIColor blackColor];
-            
-            [counterUtil startCountDownTimerWithTime:diff andUILabel:self.timerLabel];
-        }
+    NSDate *startDate = [dateformat dateFromString:[[LWConfiguration instance].showData valueForKey:@"mobileStartAt"]];
+    NSString *mobileStartAt = [dateformat stringFromDate:startDate];
+    NSLog(@"start %@", mobileStartAt);
+    diff = [startDate timeIntervalSinceNow] * 100.0f;
+    NSLog(@"countdown in %f...", diff);
+  
+    if (diff < 0) {
+        // show has expired
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        self.timerLabel.hidden = NO;
+        self.startsInLabel.hidden = NO;
+        self.infoLabel.hidden = NO;
+        
+        self.view.backgroundColor = [UIColor blackColor];
+        
+        [counterUtil startCountDownTimerWithTime:diff andUILabel:self.timerLabel];
     }
 }
 

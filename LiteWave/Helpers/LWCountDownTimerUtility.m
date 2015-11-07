@@ -47,7 +47,7 @@
 -(void)DecrementCounterValue
 {
     double time = ((int)countDownTime/100);
-    if (time > 0)
+    if (countDownTime > 0)
 	{
         countDownTime--;
         if ((int)time > 0)

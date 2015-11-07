@@ -50,6 +50,7 @@
     self.stadiumID = [defaults stringForKey:@"stadiumID"];
     self.userID = [defaults stringForKey:@"uuid"];
     self.userLocationID = [defaults objectForKey:@"userLocationID"];
+    self.mobileOffset = [defaults objectForKey:@"mobileOffset"];
     self.show = [defaults objectForKey:@"show"];
     
     self.defaultColor = [UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0];

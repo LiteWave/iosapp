@@ -11,6 +11,7 @@
 #import "LWReadyController.h"
 #import "LWAppDelegate.h"
 #import "LWApiClient.h"
+#import "LWUtility.h"
 #import "LWConfiguration.h"
 
 @implementation LWSeatController
@@ -389,6 +390,8 @@
     
     [defaults synchronize];
     
+    NSString *mobileTime = [LWUtility getTodayInGMT];
+    
     NSDictionary *userSeat = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [LWConfiguration instance].levelID, @"level",
                                 [LWConfiguration instance].sectionID, @"section",
@@ -400,6 +403,8 @@
                                 @"userKey",
                                 userSeat,
                                 @"userSeat",
+                                mobileTime,
+                                @"mobileTime",
                                 nil];
     
     NSLog(@"USER ADDED REQUEST: %@", params);
@@ -419,11 +424,11 @@
                                                                 error: &error2];
                               
                               [LWConfiguration instance].userLocationID = [userDict objectForKey:@"_id"];
+                              [LWConfiguration instance].mobileOffset = [userDict objectForKey:@"mobileTimeOffset"];
                               
                               NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                              
                               [defaults setValue:[LWConfiguration instance].userLocationID forKey:@"userLocationID"];
-                              
+                              [defaults setValue:[LWConfiguration instance].mobileOffset forKey:@"mobileOffset"];
                               [defaults synchronize];
                               
                               UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main"

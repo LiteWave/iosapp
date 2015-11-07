@@ -11,7 +11,8 @@
 @interface LWUtility : NSObject
 
 +(BOOL)isToday:(NSDate*)date;
-+(BOOL)isTodayGreaterThanDate:(NSDate*)date;
++(BOOL)isTodayLessThanDate:(NSDate*)date todayOffsetInMilliseconds:(int)offset;
++(NSString*)getTodayInGMT;
 +(UIColor*)getColorFromString:(NSString*)color;
 +(NSString*)getStringFromColor:(UIColor*)color;
 

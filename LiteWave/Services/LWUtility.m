@@ -22,7 +22,7 @@
     return [calendar isDate:today inSameDayAsDate:date];
 }
 
-+(BOOL)isTodayGreaterThanDate:(NSDate*)date {
++(BOOL)isTodayLessThanDate:(NSDate*)date todayOffsetInMilliseconds:(int)offset {
     NSTimeZone* sourceTimeZone = [NSTimeZone timeZoneWithName:@"GMT"];
     NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
     
@@ -41,7 +41,7 @@
     
     sourceGMTOffset = [destinationTimeZone secondsFromGMTForDate:today];
     destinationGMTOffset = [sourceTimeZone secondsFromGMTForDate:today];
-    interval = destinationGMTOffset - sourceGMTOffset;
+    interval = destinationGMTOffset - sourceGMTOffset + offset/1000;
     
     NSDate* todayDate = [[NSDate alloc] initWithTimeInterval:interval sinceDate:today];
 
@@ -60,6 +60,14 @@
         default:
             return NO;
     }
+}
+
++(NSString*)getTodayInGMT {
+    NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
+    [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+    [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    
+    return [dateformat stringFromDate:[NSDate date]];
 }
 
 +(UIColor*)getColorFromString:(NSString*)color {
