@@ -70,6 +70,8 @@
 -(void)prepareView {
     
     if (isWinner) {
+        self.view.backgroundColor = [UIColor blackColor];
+        
         NSString *winnerImageURL = [[LWConfiguration instance].show valueForKey:@"winnerImageUrl"];
         if (winnerImageURL != (id)[NSNull null]) {
             NSURL *url = [NSURL URLWithString:winnerImageURL];
@@ -78,14 +80,15 @@
             
             CGFloat imageRatio;
             float size;
+            float returnHeight = returnButton.frame.size.height/2;
             if (image.size.width > image.size.height) {
                 imageRatio = image.size.width / image.size.height;
-                size = self.view.frame.size.height * imageRatio;
-                imageView.frame = CGRectMake(self.view.frame.size.width/2 - size/2, 0, size, self.view.frame.size.height);
+                size = (self.view.frame.size.height-returnHeight) * imageRatio;
+                imageView.frame = CGRectMake(self.view.frame.size.width/2 - size/2, 0, size, (self.view.frame.size.height-returnHeight));
             } else {
                 imageRatio = image.size.height / image.size.width;
                 size = self.view.frame.size.width * imageRatio;
-                imageView.frame = CGRectMake(0, self.view.frame.size.height/2 - size/2, self.view.frame.size.width, size);
+                imageView.frame = CGRectMake(0, (self.view.frame.size.height-returnHeight)/2 - size/2, self.view.frame.size.width, size);
             }
             imageView.image = image;
             UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onImageSelect)];

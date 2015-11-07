@@ -63,6 +63,7 @@
     self.title = [LWConfiguration instance].eventName;
 
     [self getShow];
+    [self beginTimer];
 }
 
 -(void)getShow {
@@ -97,6 +98,7 @@
                                  NSLog(@"new liteshow = %@", [LWConfiguration instance].show);
                                  
                                  [LWConfiguration instance].show = [[NSDictionary alloc] initWithDictionary:currentShow copyItems:YES];
+                                 [self stopTimer];
                                  [self enableJoin];
                              } else {
                                  // no shows available
@@ -146,14 +148,16 @@
                              [self presentViewController:vc animated:YES completion:nil];
                          }
                          onFailure:^(NSError *error) {
-                             [self disableJoin];
                              
-                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Join failed"
+                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Show"
                                                                              message: @"Sorry, this show has expired."
                                                                             delegate:self
                                                                    cancelButtonTitle:@"OK"
                                                                    otherButtonTitles:nil];
                              [alert show];
+                             
+                             [self disableJoin];
+                             [self beginTimer];
                          }];
     
 }
@@ -333,14 +337,32 @@
     spinner.hidden = YES;
 }
 
+- (void)beginTimer
+{
+    double interval = [[LWConfiguration instance].pollInterval doubleValue];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval: interval/1000
+                                                  target: self
+                                                selector: @selector(retryFetch:)
+                                                userInfo: nil
+                                                 repeats: YES];
+}
+
+- (void)stopTimer
+{
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+}
+
+-(IBAction)retryFetch:(id)sender{
+    
+    [self getShow];
+}
+
 -(void)onJoinSelect
 {
     [self joinShow];
-}
-
-- (void)onBecomeActive
-{
-    [self getShow];
 }
 
 - (void)didReceiveMemoryWarning

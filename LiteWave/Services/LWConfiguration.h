@@ -41,6 +41,8 @@
 @property (nonatomic, strong) NSString *logoUrl;
 @property (nonatomic, strong) UIImage *logoImage;
 
+@property (nonatomic, strong) NSString *pollInterval;
+
 + (LWConfiguration*)instance;
 
 - (id)get:(NSString*)property;

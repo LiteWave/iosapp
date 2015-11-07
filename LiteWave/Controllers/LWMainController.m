@@ -119,6 +119,9 @@
         NSData *imageData = [NSData dataWithContentsOfURL:url];
         [LWConfiguration instance].logoImage = [[UIImage alloc] initWithData:imageData];
     }
+    if ([settings objectForKey:@"pollInterval"]) {
+        [LWConfiguration instance].pollInterval = [settings valueForKey:@"pollInterval"];
+    }
 }
 
 - (void)clearEvent {
@@ -151,6 +154,7 @@
     [defaults setObject:[LWUtility getStringFromColor:[LWConfiguration instance].textColor] forKey:@"textColor"];
     [defaults setObject:[LWUtility getStringFromColor:[LWConfiguration instance].textSelectedColor] forKey:@"textSelectedColor"];
     
+    [defaults setObject:[LWConfiguration instance].pollInterval forKey:@"pollInterval"];
     [defaults setObject:[LWConfiguration instance].logoUrl forKey:@"logoUrl"];
     
     

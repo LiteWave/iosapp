@@ -21,6 +21,7 @@
 }
 
 @property (nonatomic, retain) LWAppDelegate *appDelegate;
+@property (nonatomic, assign) NSTimer* timer;
 
 -(void)withdraw;
 

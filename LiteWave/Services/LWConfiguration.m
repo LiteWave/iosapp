@@ -65,9 +65,14 @@
         self.logoImage = [[UIImage alloc] initWithData:imageData];
     }
     
+    self.pollInterval = [defaults stringForKey:@"pollInterval"];
+    if (self.pollInterval.length==0){
+        self.pollInterval = @"5000";
+    }
+    
     //check and store uuid if doesn't exist
     NSLog(@"stored uuid %@", self.userID);
-    if(self.userID.length==0){
+    if (self.userID.length==0){
         self.userID = [self uuid];
         [defaults setValue:self.userID forKey:@"uuid"];
         [defaults synchronize];
