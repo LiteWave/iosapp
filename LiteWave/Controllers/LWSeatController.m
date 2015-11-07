@@ -405,6 +405,8 @@
                                 @"userSeat",
                                 mobileTime,
                                 @"mobileTime",
+                                @"ios",
+                                @"device",
                                 nil];
     
     NSLog(@"USER ADDED REQUEST: %@", params);
