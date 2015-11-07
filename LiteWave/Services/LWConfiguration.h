@@ -15,7 +15,6 @@
 
 @property (nonatomic, assign) BOOL isOnline;
 @property (nonatomic, strong) NSString *apiURL;
-@property (nonatomic, strong) NSString *uniqueID;
 @property (nonatomic, strong) NSString *clientID;
 @property (nonatomic, strong) NSString *eventID;
 @property (nonatomic, strong) NSString *eventName;
@@ -26,6 +25,7 @@
 @property (nonatomic, strong) NSString *rowID;
 @property (nonatomic, strong) NSString *seatID;
 @property (nonatomic, strong) NSString *userID;
+@property (nonatomic, strong) NSString *userLocationID;
 @property (nonatomic, strong) NSDictionary *levels;
 @property (nonatomic, strong) NSDictionary *seats;
 @property (nonatomic, strong) NSDictionary *show;

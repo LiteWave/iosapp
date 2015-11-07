@@ -396,7 +396,7 @@
                                 [LWConfiguration instance].seatID, @"seat", nil];
     
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [LWConfiguration instance].uniqueID,
+                                [LWConfiguration instance].userID,
                                 @"userKey",
                                 userSeat,
                                 @"userSeat",
@@ -418,11 +418,11 @@
                                                               options: NSJSONReadingMutableContainers
                                                                 error: &error2];
                               
-                              [LWConfiguration instance].userID = [userDict objectForKey:@"_id"];
+                              [LWConfiguration instance].userLocationID = [userDict objectForKey:@"_id"];
                               
                               NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                               
-                              [defaults setValue:[LWConfiguration instance].userID forKey:@"userID"];
+                              [defaults setValue:[LWConfiguration instance].userLocationID forKey:@"userLocationID"];
                               
                               [defaults synchronize];
                               

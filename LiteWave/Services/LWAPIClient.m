@@ -122,8 +122,8 @@
     [self post:url params:params onSuccess: success onFailure: failure];
 }
 
--(void)leaveEvent:(NSString*)userID onSuccess:(Success)success onFailure:(Failure)failure {
-    NSString *path = [NSString stringWithFormat: @"%@/user_locations/%@/", [LWConfiguration instance].apiURL, userID];
+-(void)leaveEvent:(NSString*)userLocationID onSuccess:(Success)success onFailure:(Failure)failure {
+    NSString *path = [NSString stringWithFormat: @"%@/user_locations/%@/", [LWConfiguration instance].apiURL, userLocationID];
     NSURL *url = [[NSURL alloc] initWithString:path];
     [self delete:url onSuccess: success onFailure: failure];
 }
@@ -140,8 +140,8 @@
     [self get:url onSuccess: success onFailure: failure];
 }
 
--(void)joinShow:(NSString*)userID params:(NSDictionary*)params onSuccess:(Success)success onFailure:(Failure)failure {
-    NSString *path = [NSString stringWithFormat: @"%@/user_locations/%@/event_joins", [LWConfiguration instance].apiURL, userID];
+-(void)joinShow:(NSString*)userLocationID params:(NSDictionary*)params onSuccess:(Success)success onFailure:(Failure)failure {
+    NSString *path = [NSString stringWithFormat: @"%@/user_locations/%@/event_joins", [LWConfiguration instance].apiURL, userLocationID];
     NSURL *url = [[NSURL alloc] initWithString:path];
     [self post:url params:params onSuccess: success onFailure: failure];
 }

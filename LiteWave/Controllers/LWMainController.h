@@ -9,7 +9,7 @@
 
 #import "LWAppDelegate.h"
 
-@interface LWAppController : UIViewController {
+@interface LWMainController : UIViewController {
     IBOutlet UILabel *unavailableLabel;
     IBOutlet UILabel *poweredByLabel;
     IBOutlet UIImageView *logoImageView;

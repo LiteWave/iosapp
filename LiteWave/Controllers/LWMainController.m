@@ -5,7 +5,7 @@
 //  Copyright (c) 2013 LiteWave. All rights reserved.
 //
 
-#import "LWAppController.h"
+#import "LWMainController.h"
 #import "LWAppDelegate.h"
 #import "LWLevelController.h"
 #import "LWReadyController.h"
@@ -14,17 +14,15 @@
 #import "LWApiClient.h"
 #import "LWUtility.h"
 
-@interface LWAppController ()
+@interface LWMainController ()
 
 @end
 
-@implementation LWAppController
+@implementation LWMainController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [self clearEvent];
-//    return;
 	// Do any additional setup after loading the view, typically from a nib.
     self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
@@ -37,16 +35,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    if ([LWConfiguration instance].eventID != nil) {
-        // if the day is no longer the same, show no event
-        if ([LWUtility isToday:[LWConfiguration instance].eventDate]) {
-            [self beginEvent:[LWConfiguration instance].eventID];
-        } else {
-            [self handleNoEvent];
-        }
-    } else {
-        [self getEvent];
-    }
+    [self getEvent];
 }
 
 - (void)onBecomeActive
@@ -136,8 +125,9 @@
     [LWConfiguration instance].eventID = nil;
     [LWConfiguration instance].eventName = nil;
     [LWConfiguration instance].eventDate = nil;
-    
+
     [LWConfiguration instance].stadiumID = nil;
+    [LWConfiguration instance].userLocationID = nil;
     [LWConfiguration instance].seatID = nil;
     [LWConfiguration instance].rowID = nil;
     [LWConfiguration instance].sectionID = nil;
@@ -148,10 +138,6 @@
 
 - (void)updateDefaults {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    [defaults setValue:[LWConfiguration instance].eventID forKey:@"eventID"];
-    [defaults setValue:[LWConfiguration instance].eventName forKey:@"eventName"];
-    [defaults setObject:[LWConfiguration instance].eventDate forKey:@"eventDate"];
     
     [defaults setObject:[LWConfiguration instance].stadiumID forKey:@"stadiumID"];
     [defaults setObject:[LWConfiguration instance].seatID forKey:@"seatID"];
@@ -181,12 +167,12 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main"
-                                                         bundle:[NSBundle bundleForClass:LWAppController.class]];
+                                                         bundle:[NSBundle bundleForClass:LWMainController.class]];
     
     LWLevelController *level = [storyboard instantiateViewControllerWithIdentifier:@"level"];
     [self.navigationController pushViewController:level animated:NO];
     
-    if ([LWConfiguration instance].seatID != nil) {
+    if ([LWConfiguration instance].userLocationID != nil) {
         LWReadyController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
         [self.navigationController pushViewController:ready animated:NO];
     }

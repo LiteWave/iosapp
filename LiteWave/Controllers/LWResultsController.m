@@ -19,7 +19,7 @@
     self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSString *winnerID = [[LWConfiguration instance].showData valueForKey:@"_winnerId"];
-    if (winnerID != (id)[NSNull null] && [winnerID isEqualToString:[LWConfiguration instance].userID]) {
+    if (winnerID != (id)[NSNull null] && [winnerID isEqualToString:[LWConfiguration instance].userLocationID]) {
         isWinner=YES;
     } else {
         isWinner=NO;

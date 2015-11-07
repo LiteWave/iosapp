@@ -35,11 +35,11 @@ typedef void (^Failure)(NSError*);
 
 -(void)getEvents:(NSString*)clientID onSuccess:(Success)success onFailure:(Failure)failure;
 -(void)joinEvent:(NSString*)eventID params:(NSDictionary*)params onSuccess:(Success)success onFailure:(Failure)failure;
--(void)leaveEvent:(NSString*)userID onSuccess:(Success)success onFailure:(Failure)failure;
+-(void)leaveEvent:(NSString*)userLocationID onSuccess:(Success)success onFailure:(Failure)failure;
 
 -(void)getShows:(NSString*)eventID onSuccess:(Success)success onFailure:(Failure)failure;
 -(void)getShow:(NSString*)eventID show:(NSString*)showID onSuccess:(Success)success onFailure:(Failure)failure;
--(void)joinShow:(NSString*)userID params:(NSDictionary*)params onSuccess:(Success)success onFailure:(Failure)failure;
+-(void)joinShow:(NSString*)userLocationID params:(NSDictionary*)params onSuccess:(Success)success onFailure:(Failure)failure;
 
 // API HELPERS
 

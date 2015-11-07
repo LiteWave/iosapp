@@ -124,7 +124,7 @@
                             mobileStart, @"mobileTime", nil];
 
     NSLog(@"EVENT JOIN REQUEST: %@", params);
-    [[LWAPIClient instance] joinShow: [LWConfiguration instance].userID
+    [[LWAPIClient instance] joinShow: [LWConfiguration instance].userLocationID
                             params: params
                          onSuccess:^(id data) {
                              NSLog(@"EVENT JOIN RESPONSE: %@", data);
@@ -163,13 +163,13 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     // leave the event
-    [[LWAPIClient instance] leaveEvent: [LWConfiguration instance].userID
+    [[LWAPIClient instance] leaveEvent: [LWConfiguration instance].userLocationID
                              onSuccess:^(id data) {
                                  // clear data on success
-                                 [LWConfiguration instance].userID = nil;
+                                 [LWConfiguration instance].userLocationID = nil;
                                  [LWConfiguration instance].show = nil;
                                  
-                                 [defaults removeObjectForKey:@"userID"];
+                                 [defaults removeObjectForKey:@"userLocationID"];
                                  [defaults removeObjectForKey:@"liteShow"];
                                  
                                  [defaults synchronize];

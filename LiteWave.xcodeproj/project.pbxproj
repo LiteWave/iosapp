@@ -22,7 +22,7 @@
 		8415795C181A286800D4EBB1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8415795B181A286800D4EBB1 /* main.m */; };
 		84157960181A286800D4EBB1 /* LWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8415795F181A286800D4EBB1 /* LWAppDelegate.m */; };
 		84157963181A286800D4EBB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84157961181A286800D4EBB1 /* Main.storyboard */; };
-		84157966181A286800D4EBB1 /* LWAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84157965181A286800D4EBB1 /* LWAppController.m */; };
+		84157966181A286800D4EBB1 /* LWMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84157965181A286800D4EBB1 /* LWMainController.m */; };
 		8415796F181A286800D4EBB1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8415796E181A286800D4EBB1 /* XCTest.framework */; };
 		84157970181A286800D4EBB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8415794F181A286800D4EBB1 /* Foundation.framework */; };
 		84157971181A286800D4EBB1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84157953181A286800D4EBB1 /* UIKit.framework */; };
@@ -116,8 +116,8 @@
 		8415795D181A286800D4EBB1 /* LiteWave-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LiteWave-Prefix.pch"; sourceTree = "<group>"; };
 		8415795E181A286800D4EBB1 /* LWAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWAppDelegate.h; sourceTree = "<group>"; };
 		8415795F181A286800D4EBB1 /* LWAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWAppDelegate.m; sourceTree = "<group>"; };
-		84157964181A286800D4EBB1 /* LWAppController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWAppController.h; sourceTree = "<group>"; };
-		84157965181A286800D4EBB1 /* LWAppController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWAppController.m; sourceTree = "<group>"; };
+		84157964181A286800D4EBB1 /* LWMainController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWMainController.h; sourceTree = "<group>"; };
+		84157965181A286800D4EBB1 /* LWMainController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWMainController.m; sourceTree = "<group>"; };
 		8415796D181A286800D4EBB1 /* LiteWaveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiteWaveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8415796E181A286800D4EBB1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		84157976181A286800D4EBB1 /* LightWaveTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LightWaveTests-Info.plist"; sourceTree = "<group>"; };
@@ -247,8 +247,8 @@
 		811C45511B4B975C0072621D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				84157964181A286800D4EBB1 /* LWAppController.h */,
-				84157965181A286800D4EBB1 /* LWAppController.m */,
+				84157964181A286800D4EBB1 /* LWMainController.h */,
+				84157965181A286800D4EBB1 /* LWMainController.m */,
 				84AB8D551835C54A00E3E8AE /* LWReadyController.h */,
 				84AB8D561835C54A00E3E8AE /* LWReadyController.m */,
 				84EFEF3A182CBC9100E3DD89 /* LWResultsController.h */,
@@ -556,7 +556,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = LightWave;
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = LightWave;
 				TargetAttributes = {
 					8415794B181A286800D4EBB1 = {
@@ -660,7 +660,7 @@
 				84789FC8181C65E400FC59E4 /* NSUserDefaults+Extensions.m in Sources */,
 				84446C24182CB1AC002D8BDC /* LWShowController.m in Sources */,
 				84789ECF181C65DB00FC59E4 /* AFHTTPClient.m in Sources */,
-				84157966181A286800D4EBB1 /* LWAppController.m in Sources */,
+				84157966181A286800D4EBB1 /* LWMainController.m in Sources */,
 				84789F02181C65DB00FC59E4 /* SBJsonWriter.m in Sources */,
 				84789F00181C65DB00FC59E4 /* SBJsonBase.m in Sources */,
 				84789EFF181C65DB00FC59E4 /* SBJSON.m in Sources */,
@@ -735,6 +735,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -873,6 +874,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "LiteWaveTests/LiteWaveTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imobiledeveloper.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = LiteWaveTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -892,6 +894,7 @@
 				GCC_PREFIX_HEADER = "LiteWave/LiteWave-Prefix.pch";
 				INFOPLIST_FILE = "LiteWaveTests/LiteWaveTests-Info.plist";
 				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.imobiledeveloper.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = LiteWaveTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

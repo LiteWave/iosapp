@@ -39,7 +39,6 @@
     self.apiURL = @"http://www.litewaveinc.com/api"; // PROD
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    self.uniqueID = [defaults stringForKey:@"uuid"];
     self.clientID = @"5260316cbf80240000000001"; // trailblazers
     self.levelID = [defaults stringForKey:@"levelID"];
     self.sectionID = [defaults stringForKey:@"sectionID"];
@@ -49,7 +48,8 @@
     self.eventName = [defaults stringForKey:@"eventName"];
     self.eventDate = [defaults objectForKey:@"eventDate"];
     self.stadiumID = [defaults stringForKey:@"stadiumID"];
-    self.userID = [defaults objectForKey:@"userID"];
+    self.userID = [defaults stringForKey:@"uuid"];
+    self.userLocationID = [defaults objectForKey:@"userLocationID"];
     self.show = [defaults objectForKey:@"show"];
     
     self.defaultColor = [UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0];
@@ -66,12 +66,12 @@
     }
     
     //check and store uuid if doesn't exist
-    NSLog(@"stored uuid %@", self.uniqueID);
-    if(self.uniqueID.length==0){
-        self.uniqueID = [self uuid];
-        [defaults setValue:self.uniqueID forKey:@"uuid"];
+    NSLog(@"stored uuid %@", self.userID);
+    if(self.userID.length==0){
+        self.userID = [self uuid];
+        [defaults setValue:self.userID forKey:@"uuid"];
         [defaults synchronize];
-        NSLog(@"stored new uuid %@", self.uniqueID);
+        NSLog(@"stored new uuid %@", self.userID);
     }
 }
 
