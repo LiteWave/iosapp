@@ -43,9 +43,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    // remove observers
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
     if (pressedChangeSeat)
         return;
     
@@ -55,9 +52,6 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated{
-    // add observer for when app becomes active
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onBecomeActive) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
-    
     [self.navigationItem setHidesBackButton:NO animated:NO];
 
     self.title = [LWConfiguration instance].eventName;
