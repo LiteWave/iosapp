@@ -201,24 +201,24 @@
     
     [self loadImage];
     
+    [waitLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:self.view.frame.size.width*.065]];
     waitLabel.textColor = [LWConfiguration instance].textColor;
-    waitLabel.frame = CGRectMake(waitLabel.frame.origin.x,
-                                 0,
-                                 waitLabel.frame.size.width,
+    waitLabel.frame = CGRectMake(0,
+                                 self.view.frame.size.height*.03,
+                                 self.view.frame.size.width,
                                  waitLabel.frame.size.height);
     
-    spinner.frame = CGRectMake(spinner.frame.origin.x,
+    spinner.frame = CGRectMake(self.view.frame.size.width/2 - spinner.frame.size.width/2,
                                waitLabel.frame.origin.y + 75,
                                spinner.frame.size.width,
                                spinner.frame.size.height);
     spinner.color = [LWConfiguration instance].highlightColor;
     
     
-    int buttonWidth = 70;
+    int buttonWidth = self.view.frame.size.width*.2;
     int buttonPadding = (self.view.frame.size.width - (4*buttonWidth))/5;
     int buttonXPosition = buttonPadding;
     int buttonYPostion = self.view.frame.size.height - 220;
-    UILabel *infoLabel;
     
     // level
     [self buildInfoLabel:@"level" x:(buttonXPosition-5) y:(buttonYPostion-50) size:(buttonWidth+10)];

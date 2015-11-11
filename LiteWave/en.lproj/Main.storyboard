@@ -10,7 +10,7 @@
             <objects>
                 <viewController storyboardIdentifier="ready" id="Bq9-dY-bod" customClass="LWReadyController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FJ3-tq-Jna">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="cJK-DT-Fpe">
@@ -55,14 +55,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZF0-1N-3LR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="367" y="-305"/>
+            <point key="canvasLocation" x="367" y="-360.91666666666669"/>
         </scene>
         <!--Events-->
         <scene sceneID="kXH-VM-hHa">
             <objects>
-                <viewController storyboardIdentifier="register" id="iss-ty-u8M" customClass="LWMainController" sceneMemberID="viewController">
+                <viewController restorationIdentifier="register" storyboardIdentifier="register" id="iss-ty-u8M" customClass="LWMainController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zsY-wE-5ZR">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Fm1-Uk-Hfe">
@@ -107,14 +107,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jws-Q2-ikA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="367" y="314"/>
+            <point key="canvasLocation" x="367" y="371.56666666666666"/>
         </scene>
         <!--Choose level-->
         <scene sceneID="ae5-yi-0UU">
             <objects>
                 <viewController storyboardIdentifier="level" id="6Cv-ty-NCf" customClass="LWLevelController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mw1-EP-AMx">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="nrU-rN-Uee">
@@ -124,7 +124,7 @@
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="asY-n2-EqL">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="387"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -151,14 +151,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I2s-G6-ue4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="772" y="313"/>
+            <point key="canvasLocation" x="772" y="370.38333333333333"/>
         </scene>
         <!--Choose seat-->
         <scene sceneID="riY-jI-e2p">
             <objects>
                 <viewController storyboardIdentifier="seat" id="Iox-nc-KfJ" customClass="LWSeatController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lhr-sC-6eH">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="WSL-xI-pue">
@@ -168,19 +168,19 @@
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6vE-Cx-tmp">
                                 <rect key="frame" x="106" y="0.0" width="108" height="400"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="26k-7K-6Ka">
                                 <rect key="frame" x="212" y="0.0" width="108" height="400"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9CP-Fi-nKa">
                                 <rect key="frame" x="0.0" y="0.0" width="108" height="400"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -211,14 +211,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MJJ-x9-UpN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1188" y="314"/>
+            <point key="canvasLocation" x="1188" y="371.56666666666666"/>
         </scene>
         <!--Playing Show-->
         <scene sceneID="qqN-7y-9RT">
             <objects>
                 <viewController storyboardIdentifier="playing" id="JjT-sD-7rY" customClass="LWShowController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uYq-cy-Sdg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHOW STARTS IN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WY0-xB-TCF">
@@ -268,14 +268,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b03-Zx-g9E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="772" y="-305"/>
+            <point key="canvasLocation" x="772" y="-360.91666666666669"/>
         </scene>
         <!--:: The End ::-->
         <scene sceneID="HDu-M5-KsE">
             <objects>
                 <viewController storyboardIdentifier="results" id="0tU-b8-t7R" customClass="LWResultsController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4HG-WL-Ldo">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="d5U-w0-25k">
@@ -328,7 +328,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oO3-f9-qmV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1179" y="-305"/>
+            <point key="canvasLocation" x="1179" y="-360.91666666666669"/>
         </scene>
         <!--Main Menu-->
         <scene sceneID="VnS-xG-rdx">
@@ -350,7 +350,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YEJ-kL-u4m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-148" y="314"/>
+            <point key="canvasLocation" x="-148" y="371.56666666666666"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lQS-Ot-7jp">
@@ -369,16 +369,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tha-2U-PfI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-148" y="-305"/>
+            <point key="canvasLocation" x="-148" y="-360.91666666666669"/>
         </scene>
     </scenes>
     <resources>
         <image name="lwlogo-sm.png" width="500" height="112"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
-    </simulatedMetricsContainer>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
 </document>

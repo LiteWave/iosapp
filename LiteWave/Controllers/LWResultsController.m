@@ -69,6 +69,17 @@
 
 -(void)prepareView {
     
+    returnButton.frame = CGRectMake(0,
+                                    self.view.bounds.size.height - 50,
+                                    self.view.bounds.size.width,
+                                    50);
+    returnButton.layer.borderColor=[LWConfiguration instance].highlightColor.CGColor;
+    returnButton.layer.backgroundColor=[LWConfiguration instance].highlightColor.CGColor;
+    returnButton.layer.borderWidth=2.0f;
+    [returnButton setTitleColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+    [returnButton addTarget:self action:@selector(onReturnSelect) forControlEvents:UIControlEventTouchUpInside];
+    
+    float returnHeight = returnButton.frame.size.height;
     if (isWinner) {
         self.view.backgroundColor = [UIColor blackColor];
         
@@ -78,19 +89,15 @@
             NSData *data = [NSData dataWithContentsOfURL:url];
             UIImage *image = [[UIImage alloc] initWithData:data];
             
-            CGFloat imageRatio;
-            float size;
-            float returnHeight = returnButton.frame.size.height/2;
-            if (image.size.width > image.size.height) {
-                imageRatio = image.size.width / image.size.height;
-                size = (self.view.frame.size.height-returnHeight) * imageRatio;
-                imageView.frame = CGRectMake(self.view.frame.size.width/2 - size/2, 0, size, (self.view.frame.size.height-returnHeight));
-            } else {
-                imageRatio = image.size.height / image.size.width;
-                size = self.view.frame.size.width * imageRatio;
-                imageView.frame = CGRectMake(0, (self.view.frame.size.height-returnHeight)/2 - size/2, self.view.frame.size.width, size);
-            }
+            float newWidth = self.view.frame.size.width;
+            float newHeight = newWidth*image.size.height/image.size.width;
+            imageView.frame = CGRectMake(self.view.frame.size.width/2 - newWidth/2,
+                                         (self.view.frame.size.height-returnHeight/2)/2 - newHeight/2,
+                                         newWidth,
+                                         newHeight);
+            
             imageView.image = image;
+            imageView.hidden = NO;
             UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onImageSelect)];
             [imageView addGestureRecognizer:tapRecognizer];
             imageView.userInteractionEnabled = YES;
@@ -100,33 +107,26 @@
     } else {
         [self loadImage];
         
-        logoImageView.frame = CGRectMake(logoImageView.frame.origin.x,
-                                         self.view.frame.size.height - logoImageView.frame.size.height - 65,
+        logoImageView.frame = CGRectMake(self.view.frame.size.width/2 - logoImageView.frame.size.width/2,
+                                         self.view.frame.size.height - logoImageView.frame.size.height - 20 - returnHeight,
                                          logoImageView.frame.size.width,
                                          logoImageView.frame.size.height);
         logoImageView.hidden = NO;
         
-        poweredByLabel.frame = CGRectMake(poweredByLabel.frame.origin.x,
+        poweredByLabel.frame = CGRectMake(0,
                                           logoImageView.frame.origin.y - 20,
-                                          poweredByLabel.frame.size.width,
+                                          self.view.frame.size.width,
                                           poweredByLabel.frame.size.height);
         poweredByLabel.hidden = NO;
-        
+
+        [participationLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:self.view.frame.size.width*.075]];
         participationLabel.textColor = [LWConfiguration instance].textColor;
         participationLabel.hidden = NO;
+        participationLabel.frame = CGRectMake(0,
+                                     self.view.frame.size.height*.04,
+                                     self.view.frame.size.width,
+                                     participationLabel.frame.size.height);
     }
-
-    imageView.hidden = NO;
-    
-    returnButton.frame = CGRectMake(0,
-                                  self.view.bounds.size.height - 50,
-                                  self.view.bounds.size.width,
-                                  50);
-    returnButton.layer.borderColor=[LWConfiguration instance].highlightColor.CGColor;
-    returnButton.layer.backgroundColor=[LWConfiguration instance].highlightColor.CGColor;
-    returnButton.layer.borderWidth=2.0f;
-    [returnButton setTitleColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] forState:UIControlStateNormal];
-    [returnButton addTarget:self action:@selector(onReturnSelect) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)loadImage

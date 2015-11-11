@@ -3,6 +3,8 @@
 //  CountDownTimer
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 @protocol CountDownTimerProtocol
 @optional
 -(void)timesUpWithLabel:(UILabel *)label;

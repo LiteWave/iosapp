@@ -201,27 +201,29 @@
                                 
                                 [self loadImage];
                                 
-                                logoImageView.frame = CGRectMake(logoImageView.frame.origin.x,
+                                logoImageView.frame = CGRectMake(self.view.frame.size.width/2 - logoImageView.frame.size.width/2,
                                                                  self.view.frame.size.height - logoImageView.frame.size.height - 10,
                                                                  logoImageView.frame.size.width,
                                                                  logoImageView.frame.size.height);
                                 logoImageView.hidden = NO;
                                 
-                                poweredByLabel.frame = CGRectMake(poweredByLabel.frame.origin.x,
-                                                                 logoImageView.frame.origin.y - 20,
-                                                                 poweredByLabel.frame.size.width,
-                                                                 poweredByLabel.frame.size.height);
+
                                 poweredByLabel.hidden = NO;
-                                
+                                poweredByLabel.frame = CGRectMake(self.view.frame.size.width/2 - (self.view.frame.size.width*.85)/2,
+                                                                  logoImageView.frame.origin.y - 20,
+                                                                  self.view.frame.size.width*.85,
+                                                                  poweredByLabel.frame.size.height);
+
+                                [unavailableLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:self.view.frame.size.width*.065]];
                                 unavailableLabel.hidden = NO;
+                                unavailableLabel.frame = CGRectMake(self.view.frame.size.width/2 - (self.view.frame.size.width*.85)/2,
+                                                                  self.view.frame.size.height*.03,
+                                                                  self.view.frame.size.width*.85,
+                                                                  unavailableLabel.frame.size.height);
                             }
                             onFailure:^(NSError *error) {
-                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network error"
-                                                                                message:@"Need an internet connection to continue."
-                                                                               delegate:self
-                                                                      cancelButtonTitle:@"OK"
-                                                                      otherButtonTitles:nil];
-                                [alert show];
+                                // no event
+                                NSLog(@"No internet connection");
                             }];
 
     [self clearEvent];

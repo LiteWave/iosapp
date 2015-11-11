@@ -32,8 +32,8 @@
 		841579BB181A4A7800D4EBB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841579BA181A4A7800D4EBB1 /* CoreLocation.framework */; };
 		841579BD181A4A8100D4EBB1 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841579BC181A4A8000D4EBB1 /* CoreMotion.framework */; };
 		84446C24182CB1AC002D8BDC /* LWShowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84446C23182CB1AC002D8BDC /* LWShowController.m */; };
-		845CD918181DC94B004932BF /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD904181DC94B004932BF /* Default-568h@2x~iphone.png */; };
-		845CD919181DC94B004932BF /* Default~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD905181DC94B004932BF /* Default~iphone.png */; };
+		845CD918181DC94B004932BF /* Default-568h@2x~iphone-old.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD904181DC94B004932BF /* Default-568h@2x~iphone-old.png */; };
+		845CD919181DC94B004932BF /* Default~iphone-old.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD905181DC94B004932BF /* Default~iphone-old.png */; };
 		845CD91A181DC94B004932BF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD906181DC94B004932BF /* Default.png */; };
 		845CD91B181DC94B004932BF /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD908181DC94B004932BF /* Icon-40.png */; };
 		845CD91C181DC94B004932BF /* Icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 845CD909181DC94B004932BF /* Icon-40@2x.png */; };
@@ -128,8 +128,8 @@
 		841579BC181A4A8000D4EBB1 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		84446C22182CB1AC002D8BDC /* LWShowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWShowController.h; sourceTree = "<group>"; };
 		84446C23182CB1AC002D8BDC /* LWShowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWShowController.m; sourceTree = "<group>"; };
-		845CD904181DC94B004932BF /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
-		845CD905181DC94B004932BF /* Default~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~iphone.png"; sourceTree = "<group>"; };
+		845CD904181DC94B004932BF /* Default-568h@2x~iphone-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone-old.png"; sourceTree = "<group>"; };
+		845CD905181DC94B004932BF /* Default~iphone-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~iphone-old.png"; sourceTree = "<group>"; };
 		845CD906181DC94B004932BF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		845CD908181DC94B004932BF /* Icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40.png"; sourceTree = "<group>"; };
 		845CD909181DC94B004932BF /* Icon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-40@2x.png"; sourceTree = "<group>"; };
@@ -373,8 +373,8 @@
 			isa = PBXGroup;
 			children = (
 				815EA9061B904D16007D6C73 /* lwlogo-sm.png */,
-				845CD904181DC94B004932BF /* Default-568h@2x~iphone.png */,
-				845CD905181DC94B004932BF /* Default~iphone.png */,
+				845CD904181DC94B004932BF /* Default-568h@2x~iphone-old.png */,
+				845CD905181DC94B004932BF /* Default~iphone-old.png */,
 				845CD906181DC94B004932BF /* Default.png */,
 				845CD907181DC94B004932BF /* icons */,
 			);
@@ -607,9 +607,9 @@
 				845CD927181DC94B004932BF /* Icon.png in Resources */,
 				815EA9071B904D16007D6C73 /* lwlogo-sm.png in Resources */,
 				84157963181A286800D4EBB1 /* Main.storyboard in Resources */,
-				845CD918181DC94B004932BF /* Default-568h@2x~iphone.png in Resources */,
+				845CD918181DC94B004932BF /* Default-568h@2x~iphone-old.png in Resources */,
 				845CD928181DC94B004932BF /* Icon@2x.png in Resources */,
-				845CD919181DC94B004932BF /* Default~iphone.png in Resources */,
+				845CD919181DC94B004932BF /* Default~iphone-old.png in Resources */,
 				845CD91A181DC94B004932BF /* Default.png in Resources */,
 				845CD922181DC94B004932BF /* Icon-76@2x.png in Resources */,
 				845CD920181DC94B004932BF /* Icon-72@2x.png in Resources */,
@@ -818,11 +818,11 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/LiteWave/LiteWave-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.litewaveinc.litewave;
 				PRODUCT_NAME = LiteWave;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -847,12 +847,12 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/LiteWave/LiteWave-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.litewaveinc.litewave;
 				PRODUCT_NAME = LiteWave;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

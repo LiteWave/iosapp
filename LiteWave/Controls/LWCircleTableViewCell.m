@@ -9,21 +9,20 @@
 #import "LWCircleTableViewCell.h"
 #import "LWConfiguration.h"
 
-#define ROUND_BUTTON_WIDTH_HEIGHT 75
-#define CELL_HEIGHT 100
-
 @implementation LWCircleTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
-    self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
+    return self;
+}
+
+-(void)draw {
     if (self) {
-        //reuseID = reuseIdentifier;
-        
-        NSInteger tableWidth = self.contentView.frame.size.width/3.0;
+        int cellWidth = [self.width intValue];
+        double cellCircleHeight = cellWidth *.85;
+        double cellHeight = cellWidth;
         
         self.contentView.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0];
         self.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0];
@@ -35,28 +34,28 @@
         
         
         self.button = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.button.frame = CGRectMake(tableWidth/2 - ROUND_BUTTON_WIDTH_HEIGHT/2,
-                                  CELL_HEIGHT/2 - ROUND_BUTTON_WIDTH_HEIGHT/2,
-                                  ROUND_BUTTON_WIDTH_HEIGHT,
-                                  ROUND_BUTTON_WIDTH_HEIGHT);
+        self.button.frame = CGRectMake(cellWidth/2 - cellCircleHeight/2,
+                                       cellHeight/2 - cellCircleHeight/2,
+                                       cellCircleHeight,
+                                       cellCircleHeight);
         self.button.clipsToBounds = YES;
-        self.button.layer.cornerRadius = ROUND_BUTTON_WIDTH_HEIGHT/2.0f;
+        self.button.layer.cornerRadius = cellCircleHeight/2.0f;
         self.button.layer.borderColor = [LWConfiguration instance].borderColor.CGColor;
         self.button.layer.borderWidth = 2.0f;
         [self.contentView addSubview:self.button];
+        
         
         UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
         [self.button addGestureRecognizer:singleFingerTap];
         [self.button addTarget:self action:@selector(onTouchDown) forControlEvents:UIControlEventTouchDown];
         
-        self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, tableWidth, CELL_HEIGHT)];
+        self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, cellWidth, cellHeight)];
         self.nameLabel.textAlignment = NSTextAlignmentCenter;
-        [self.nameLabel setTextColor:[LWConfiguration instance].textColor];
-        [self.nameLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:24.0f]];
+        [self.nameLabel setTextColor:[UIColor blackColor]];
+        [self.nameLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:cellWidth*.22]];
         [self.nameLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.contentView addSubview:self.nameLabel];
     }
-    return self;
 }
 
 -(void)select {
@@ -79,7 +78,7 @@
     
     NSDictionary* message = @{ @"index" : self.index,
                             @"tableView" : self.tableView};
-    
+    NSLog(@"tableview-in: %f", self.tableView.frame.size.width);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"selectRow" object:message ];
 }
 

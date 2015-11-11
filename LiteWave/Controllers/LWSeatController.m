@@ -40,8 +40,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     
-    //imageView.hidden = NO;
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(selectRow:)
                                                  name:@"selectRow" object:nil];
@@ -51,8 +49,6 @@
     [super viewWillDisappear:animated];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    //imageView.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,7 +65,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return tableView.frame.size.width;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -82,11 +78,15 @@
     }
     
     NSDictionary *data = [[self getTableData:tableView] objectAtIndex:indexPath.row];
-    cell.nameLabel.text = [data valueForKeyPath:@"name"];
     
     cell.tableView = tableView;
     cell.index = @(indexPath.row);
-    
+    if (!cell.width) {
+        cell.width = @(tableView.frame.size.width);
+        [cell draw];
+    }
+
+    cell.nameLabel.text = [data valueForKeyPath:@"name"];
     int selected;
     if (tableView == sectionTable) {
         selected = selectedSectionIndex;
@@ -267,7 +267,7 @@
     sectionTable.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0];
     sectionTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [sectionTable setShowsVerticalScrollIndicator:NO];
-    [sectionTable setContentInset:UIEdgeInsetsMake(-20,0,10,0)];
+    [sectionTable setContentInset:UIEdgeInsetsMake(-sectionTable.frame.size.width*.3,0,0,0)];
     [sectionTable setDataSource:self];
     [sectionTable setDelegate:self];
     
@@ -280,7 +280,7 @@
     rowTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     rowTable.hidden = YES;
     [rowTable setShowsVerticalScrollIndicator:NO];
-    [rowTable setContentInset:UIEdgeInsetsMake(-20,0,10,0)];
+    [rowTable setContentInset:UIEdgeInsetsMake(-rowTable.frame.size.width*.3,0,0,0)];
     [rowTable setDataSource:self];
     [rowTable setDelegate:self];
     
@@ -293,14 +293,14 @@
     seatTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     seatTable.hidden = YES;
     [seatTable setShowsVerticalScrollIndicator:NO];
-    [seatTable setContentInset:UIEdgeInsetsMake(-20,0,10,0)];
+    [seatTable setContentInset:UIEdgeInsetsMake(-seatTable.frame.size.width*.3,0,0,0)];
     [seatTable setDataSource:self];
     [seatTable setDelegate:self];
     
     sectionLabel = [[UILabel alloc]initWithFrame:CGRectMake(sectionTable.frame.origin.x,
-                                                        sectionTable.frame.origin.y,
+                                                        sectionTable.frame.origin.y-(int)(sectionTable.frame.size.width*.3)/2,
                                                         sectionTable.frame.size.width,
-                                                        100)];
+                                                        sectionTable.frame.size.width)];
     [sectionLabel setTextColor:[LWConfiguration instance].textColor];
     [sectionLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:24.0f]];
     [sectionLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -309,22 +309,22 @@
     [self.view addSubview:sectionLabel];
     
     rowLabel = [[UILabel alloc]initWithFrame:CGRectMake(rowTable.frame.origin.x,
-                                                        rowTable.frame.origin.y,
+                                                        rowTable.frame.origin.y-(int)(rowTable.frame.size.width*.3)/2,
                                                         rowTable.frame.size.width,
-                                                        100)];
+                                                        rowTable.frame.size.width)];
     [rowLabel setTextColor:[LWConfiguration instance].textColor];
-    [rowLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:24.0f]];
+    [rowLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size: rowTable.frame.size.width*.22]];
     [rowLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     rowLabel.textAlignment = NSTextAlignmentCenter;
     rowLabel.text = @"Row";
     [self.view addSubview:rowLabel];
     
     seatLabel = [[UILabel alloc]initWithFrame:CGRectMake(seatTable.frame.origin.x,
-                                                         seatTable.frame.origin.y,
+                                                         seatTable.frame.origin.y-(int)(seatTable.frame.size.width*.3)/2,
                                                          seatTable.frame.size.width,
-                                                         100)];
+                                                         seatTable.frame.size.width)];
     [seatLabel setTextColor:[LWConfiguration instance].textColor];
-    [seatLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:24.0f]];
+    [seatLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:seatTable.frame.size.width*.22]];
     [seatLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     seatLabel.textAlignment = NSTextAlignmentCenter;
     seatLabel.text = @"Seat";

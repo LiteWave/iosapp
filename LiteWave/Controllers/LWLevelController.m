@@ -75,7 +75,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return tableView.frame.size.width;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -89,10 +89,14 @@
     
     NSDictionary *data = [levels objectAtIndex:indexPath.row];
     
-    cell.nameLabel.text = [data valueForKeyPath:@"name"];
     cell.tableView = tableView;
     cell.index = @(indexPath.row);
-
+    if (!cell.width) {
+        cell.width = @(tableView.frame.size.width);
+        [cell draw];
+    }
+    
+    cell.nameLabel.text = [data valueForKeyPath:@"name"];
     if (indexPath.row == selectedLevelIndex)
         [cell select];
     else
@@ -152,13 +156,13 @@
     CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
     float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
     
+    [descriptionLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:self.view.frame.size.width*.06]];
     descriptionLabel.frame = CGRectMake(25,
                                         self.view.frame.size.height - 90 - heightPadding,
                                         self.view.frame.size.width - 50,
                                         100);
     
-    viewTable.frame = CGRectMake(
-                                 self.view.frame.size.width/3.0,
+    viewTable.frame = CGRectMake(self.view.frame.size.width/2 - (self.view.frame.size.width/3)/2,
                                  0,
                                  self.view.frame.size.width/3.0,
                                  self.view.frame.size.height);

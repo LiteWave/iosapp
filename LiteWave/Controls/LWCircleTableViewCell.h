@@ -14,12 +14,11 @@
 
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UIButton *button;
-
+@property (nonatomic, strong) NSNumber *width;
 @property (nonatomic, strong) NSNumber *index;
 @property (nonatomic, strong) UITableView *tableView;
 
-@property (nonatomic, retain) LWAppDelegate *appDelegate;
-
+-(void)draw;
 -(void)select;
 -(void)clear;
 
