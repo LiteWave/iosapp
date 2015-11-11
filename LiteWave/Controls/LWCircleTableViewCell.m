@@ -78,7 +78,6 @@
     
     NSDictionary* message = @{ @"index" : self.index,
                             @"tableView" : self.tableView};
-    NSLog(@"tableview-in: %f", self.tableView.frame.size.width);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"selectRow" object:message ];
 }
 

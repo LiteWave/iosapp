@@ -267,7 +267,7 @@
     sectionTable.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0];
     sectionTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [sectionTable setShowsVerticalScrollIndicator:NO];
-    [sectionTable setContentInset:UIEdgeInsetsMake(-sectionTable.frame.size.width*.3,0,0,0)];
+    [sectionTable setContentInset:UIEdgeInsetsMake(-sectionTable.frame.size.width*.3,0,joinButton.frame.size.height+25,0)];
     [sectionTable setDataSource:self];
     [sectionTable setDelegate:self];
     
@@ -280,7 +280,7 @@
     rowTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     rowTable.hidden = YES;
     [rowTable setShowsVerticalScrollIndicator:NO];
-    [rowTable setContentInset:UIEdgeInsetsMake(-rowTable.frame.size.width*.3,0,0,0)];
+    [rowTable setContentInset:UIEdgeInsetsMake(-rowTable.frame.size.width*.3,0,joinButton.frame.size.height+25,0)];
     [rowTable setDataSource:self];
     [rowTable setDelegate:self];
     
@@ -293,7 +293,7 @@
     seatTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     seatTable.hidden = YES;
     [seatTable setShowsVerticalScrollIndicator:NO];
-    [seatTable setContentInset:UIEdgeInsetsMake(-seatTable.frame.size.width*.3,0,0,0)];
+    [seatTable setContentInset:UIEdgeInsetsMake(-seatTable.frame.size.width*.3,0,joinButton.frame.size.height+25,0)];
     [seatTable setDataSource:self];
     [seatTable setDelegate:self];
     
@@ -302,7 +302,7 @@
                                                         sectionTable.frame.size.width,
                                                         sectionTable.frame.size.width)];
     [sectionLabel setTextColor:[LWConfiguration instance].textColor];
-    [sectionLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:24.0f]];
+    [sectionLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:sectionLabel.frame.size.width*.22]];
     [sectionLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     sectionLabel.textAlignment = NSTextAlignmentCenter;
     sectionLabel.text = @"Section";

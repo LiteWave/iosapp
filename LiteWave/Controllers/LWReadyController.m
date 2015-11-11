@@ -140,13 +140,12 @@
                              [self presentViewController:vc animated:YES completion:nil];
                          }
                          onFailure:^(NSError *error) {
+                             UIAlertController * alert =  [UIAlertController
+                                                           alertControllerWithTitle:@"Show"
+                                                           message:@"Sorry, this show has expired."
+                                                           preferredStyle:UIAlertControllerStyleAlert];
                              
-                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Show"
-                                                                             message: @"Sorry, this show has expired."
-                                                                            delegate:self
-                                                                   cancelButtonTitle:@"OK"
-                                                                   otherButtonTitles:nil];
-                             [alert show];
+                             [self presentViewController:alert animated:YES completion:nil];
                              
                              [self disableJoin];
                              [self beginTimer];
@@ -173,12 +172,12 @@
                                  NSLog(@"Left event");
                            }
                            onFailure:^(NSError *error) {
-                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Leave error"
-                                                                               message: @"Sorry, an error occurred when leaving the event."
-                                                                              delegate:self
-                                                                     cancelButtonTitle:@"OK"
-                                                                     otherButtonTitles:nil];
-                               [alert show];
+                               UIAlertController * alert =  [UIAlertController
+                                                             alertControllerWithTitle:@"Leave error"
+                                                             message:@"Sorry, an error occurred when leaving the event."
+                                                             preferredStyle:UIAlertControllerStyleAlert];
+                               
+                               [self presentViewController:alert animated:YES completion:nil];
                            }];
     
     // clear this data on pass or fail
