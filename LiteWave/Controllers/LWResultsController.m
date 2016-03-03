@@ -2,7 +2,6 @@
 //  LWResultsController.m
 //  LiteWave
 //
-//  Created by david anderson on 08/24/15.
 //  Copyright (c) 2013 LiteWave. All rights reserved.
 //
 
