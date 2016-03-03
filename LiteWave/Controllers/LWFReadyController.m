@@ -139,10 +139,16 @@
                              [self presentViewController:vc animated:YES completion:nil];
                          }
                          onFailure:^(NSError *error) {
-                             UIAlertController * alert =  [UIAlertController
+                             UIAlertController *alert =  [UIAlertController
                                                            alertControllerWithTitle:@"Show"
                                                            message:@"Sorry, this show has expired."
                                                            preferredStyle:UIAlertControllerStyleAlert];
+                             UIAlertAction *okAction = [UIAlertAction
+                                                        actionWithTitle:@"OK"
+                                                        style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction *action)
+                                                        {}];
+                             [alert addAction:okAction];
                              
                              [self presentViewController:alert animated:YES completion:nil];
                              
@@ -171,10 +177,17 @@
                                  NSLog(@"Left event");
                            }
                            onFailure:^(NSError *error) {
-                               UIAlertController * alert =  [UIAlertController
+                               UIAlertController *alert = [UIAlertController
                                                              alertControllerWithTitle:@"Leave error"
                                                              message:@"Sorry, an error occurred when leaving the event."
                                                              preferredStyle:UIAlertControllerStyleAlert];
+                               UIAlertAction *okAction = [UIAlertAction
+                                                          actionWithTitle:@"OK"
+                                                          style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *action)
+                                                          {}];
+                               [alert addAction:okAction];
+                               
                                
                                [self presentViewController:alert animated:YES completion:nil];
                            }];
