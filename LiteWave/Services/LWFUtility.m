@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "LWUtility.h"
+#import "LWFUtility.h"
 
-@implementation LWUtility
+@implementation LWFUtility
 
 +(BOOL)isToday:(NSDate*)date {
     NSDate *today = [NSDate date];

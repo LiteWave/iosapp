@@ -3,16 +3,16 @@
 //  LiteWave
 //
 
-#import "LWShowController.h"
+#import "LWFShowController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "LWFAFNetworking.h"
-#import "LWAppDelegate.h"
-#import "LWResultsController.h"
-#import "LWUtility.h"
-#import "LWApiClient.h"
-#import "LWConfiguration.h"
+#import "LWFAppDelegate.h"
+#import "LWFResultsController.h"
+#import "LWFUtility.h"
+#import "LWFApiClient.h"
+#import "LWFConfiguration.h"
 
-@implementation LWShowController
+@implementation LWFShowController
 
 @synthesize startsInLabel = _startsInLabel;
 @synthesize timerLabel = _timerLabel;
@@ -31,12 +31,12 @@
     // disable fade of screen
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     
-    self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.appDelegate = (LWFAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     self.view.backgroundColor = [UIColor blackColor];
-    self.timerLabel.textColor = [LWConfiguration instance].highlightColor;
-    self.startsInLabel.textColor = [LWConfiguration instance].highlightColor;
-    self.infoLabel.textColor = [LWConfiguration instance].highlightColor;
+    self.timerLabel.textColor = [LWFConfiguration instance].highlightColor;
+    self.startsInLabel.textColor = [LWFConfiguration instance].highlightColor;
+    self.infoLabel.textColor = [LWFConfiguration instance].highlightColor;
     self.infoLabel.frame = CGRectMake(self.infoLabel.frame.origin.x,
                                       self.view.frame.size.height - self.infoLabel.frame.size.height - 10,
                                       self.infoLabel.frame.size.width,
@@ -68,23 +68,23 @@
 }
 
 -(void)startShow {
-    commandArray = [[LWConfiguration instance].showData objectForKey:@"commands"];
+    commandArray = [[LWFConfiguration instance].showData objectForKey:@"commands"];
 
-    NSString *winnerID = [[LWConfiguration instance].showData valueForKey:@"_winnerId"];
-    if (winnerID != (id)[NSNull null] && [winnerID isEqualToString:[LWConfiguration instance].userLocationID]) {
+    NSString *winnerID = [[LWFConfiguration instance].showData valueForKey:@"_winnerId"];
+    if (winnerID != (id)[NSNull null] && [winnerID isEqualToString:[LWFConfiguration instance].userLocationID]) {
         isWinner=YES;
     } else {
         isWinner=NO;
     }
 
-    counterUtil = [[LWCountDownTimerUtility alloc] init];
+    counterUtil = [[LWFCountDownTimerUtility alloc] init];
     [counterUtil setDelegate:self];
 
     NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
     [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
     [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
 
-    NSDate *startDate = [dateformat dateFromString:[[LWConfiguration instance].showData valueForKey:@"mobileStartAt"]];
+    NSDate *startDate = [dateformat dateFromString:[[LWFConfiguration instance].showData valueForKey:@"mobileStartAt"]];
     NSString *mobileStartAt = [dateformat stringFromDate:startDate];
     NSLog(@"start %@", mobileStartAt);
     diff = [startDate timeIntervalSinceNow] * 100.0f;
@@ -127,8 +127,8 @@
     [self.frameTimer invalidate];
     
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"LWMain"
-                                                         bundle:[NSBundle bundleForClass:LWShowController.class]];
-    LWResultsController *results = [storyboard instantiateViewControllerWithIdentifier:@"results"];
+                                                         bundle:[NSBundle bundleForClass:LWFShowController.class]];
+    LWFResultsController *results = [storyboard instantiateViewControllerWithIdentifier:@"results"];
     [self presentViewController:results animated:YES completion:nil];
     
     self.winnerLabel.hidden = YES;
@@ -191,7 +191,7 @@
             }
 
             if ([frameDict objectForKey:@"bg"]) {
-                backgroundColor = [LWUtility getColorFromString:[frameDict objectForKey:@"bg"]];
+                backgroundColor = [LWFUtility getColorFromString:[frameDict objectForKey:@"bg"]];
             } else {
                 backgroundColor = [UIColor blackColor];
             }
@@ -221,7 +221,7 @@
 }
 
 -(void)showWinner {
-    [self.winnerLabel setTextColor:[LWConfiguration instance].highlightColor];
+    [self.winnerLabel setTextColor:[LWFConfiguration instance].highlightColor];
     [self.winnerLabel setFont:[UIFont systemFontOfSize:70]];
     self.winnerLabel.hidden=NO;
     self.winnerLabel.text = @"WINNER!";

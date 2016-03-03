@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface LWConfiguration : NSObject {
+@interface LWFConfiguration : NSObject {
 }
 
 @property (nonatomic, retain) NSMutableDictionary *properties;
@@ -44,7 +44,7 @@
 
 @property (nonatomic, strong) NSString *pollInterval;
 
-+ (LWConfiguration*)instance;
++ (LWFConfiguration*)instance;
 
 - (id)get:(NSString*)property;
 - (void)set:(NSString*)property value:(id)value;

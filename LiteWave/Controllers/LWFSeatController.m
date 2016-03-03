@@ -5,23 +5,23 @@
 //  Copyright (c) 2015 LightWave. All rights reserved.
 //
 
-#import "LWCircleTableViewCell.h"
-#import "LWSeatController.h"
-#import "LWReadyController.h"
-#import "LWAppDelegate.h"
-#import "LWApiClient.h"
-#import "LWUtility.h"
-#import "LWConfiguration.h"
+#import "LWFCircleTableViewCell.h"
+#import "LWFSeatController.h"
+#import "LWFReadyController.h"
+#import "LWFAppDelegate.h"
+#import "LWFApiClient.h"
+#import "LWFUtility.h"
+#import "LWFConfiguration.h"
 
-@implementation LWSeatController
+@implementation LWFSeatController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.appDelegate = (LWFAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    self.view.backgroundColor = [LWConfiguration instance].backgroundColor;
+    self.view.backgroundColor = [LWFConfiguration instance].backgroundColor;
     
     sectionTable.hidden = YES;
     rowTable.hidden = YES;
@@ -71,9 +71,9 @@
 {
     static NSString *cellIdentifier = @"CircleTableViewCell";
     
-    LWCircleTableViewCell *cell = (LWCircleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    LWFCircleTableViewCell *cell = (LWFCircleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[LWCircleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[LWFCircleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
     NSDictionary *data = [[self getTableData:tableView] objectAtIndex:indexPath.row];
@@ -103,7 +103,7 @@
     if (indexPath.row == 0) {
         cell.button.hidden = YES;
         cell.nameLabel.frame = CGRectMake(0, 20, cell.nameLabel.frame.size.width, cell.nameLabel.frame.size.height);
-        [cell.nameLabel setTextColor:[LWConfiguration instance].textColor];
+        [cell.nameLabel setTextColor:[LWFConfiguration instance].textColor];
     } else {
         cell.button.hidden = NO;
         cell.nameLabel.frame = CGRectMake(0, 0, cell.nameLabel.frame.size.width, cell.nameLabel.frame.size.height);
@@ -162,7 +162,7 @@
 - (void)clearCells:(UITableView*)tableView selected:(int)index
 {
     NSArray *cells = [tableView visibleCells];
-    for (LWCircleTableViewCell *cell in cells)
+    for (LWFCircleTableViewCell *cell in cells)
     {
         if ((int)cell.index == index)
             [cell select];
@@ -184,8 +184,8 @@
 
 - (void)getSeats
 {
-    [[LWAPIClient instance] getStadium: [LWConfiguration instance].stadiumID
-                             withLevel: [LWConfiguration instance].levelID
+    [[LWFAPIClient instance] getStadium: [LWFConfiguration instance].stadiumID
+                             withLevel: [LWFConfiguration instance].levelID
                              onSuccess:^(id data) {
                                  NSError *error2;
                                  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
@@ -196,7 +196,7 @@
                                                                  options: NSJSONReadingMutableContainers
                                                                    error: &error2];
                                  
-                                 [LWConfiguration instance].seats = [[NSDictionary alloc] initWithDictionary:seatsDict copyItems:YES];
+                                 [LWFConfiguration instance].seats = [[NSDictionary alloc] initWithDictionary:seatsDict copyItems:YES];
                                  
                                  [self loadSections];
                                  [self loadRows];
@@ -215,7 +215,7 @@
 
 - (void)loadSections
 {
-    sections = [[NSMutableArray alloc] initWithArray:[[LWConfiguration instance].seats objectForKey:@"sections"]];
+    sections = [[NSMutableArray alloc] initWithArray:[[LWFConfiguration instance].seats objectForKey:@"sections"]];
     
     NSDictionary* obj = @{@"name" : @"Section"};
     [sections insertObject:obj atIndex:0];
@@ -300,7 +300,7 @@
                                                         sectionTable.frame.origin.y-(int)(sectionTable.frame.size.width*.3)/2,
                                                         sectionTable.frame.size.width,
                                                         sectionTable.frame.size.width)];
-    [sectionLabel setTextColor:[LWConfiguration instance].textColor];
+    [sectionLabel setTextColor:[LWFConfiguration instance].textColor];
     [sectionLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:sectionLabel.frame.size.width*.22]];
     [sectionLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     sectionLabel.textAlignment = NSTextAlignmentCenter;
@@ -311,7 +311,7 @@
                                                         rowTable.frame.origin.y-(int)(rowTable.frame.size.width*.3)/2,
                                                         rowTable.frame.size.width,
                                                         rowTable.frame.size.width)];
-    [rowLabel setTextColor:[LWConfiguration instance].textColor];
+    [rowLabel setTextColor:[LWFConfiguration instance].textColor];
     [rowLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size: rowTable.frame.size.width*.22]];
     [rowLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     rowLabel.textAlignment = NSTextAlignmentCenter;
@@ -322,7 +322,7 @@
                                                          seatTable.frame.origin.y-(int)(seatTable.frame.size.width*.3)/2,
                                                          seatTable.frame.size.width,
                                                          seatTable.frame.size.width)];
-    [seatLabel setTextColor:[LWConfiguration instance].textColor];
+    [seatLabel setTextColor:[LWFConfiguration instance].textColor];
     [seatLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:seatTable.frame.size.width*.22]];
     [seatLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     seatLabel.textAlignment = NSTextAlignmentCenter;
@@ -334,16 +334,16 @@
 
 - (void)loadImage
 {
-    if (![LWConfiguration instance].logoUrl || ![LWConfiguration instance].logoImage)
+    if (![LWFConfiguration instance].logoUrl || ![LWFConfiguration instance].logoImage)
         return;
     
     CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
     float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
     
     float height = 700;
-    float width = ([LWConfiguration instance].logoImage.size.width*height)/[LWConfiguration instance].logoImage.size.height;
+    float width = ([LWFConfiguration instance].logoImage.size.width*height)/[LWFConfiguration instance].logoImage.size.height;
     imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, self.view.frame.size.height/2 - height/2 - heightPadding, width, height);
-    imageView.image = [LWConfiguration instance].logoImage;
+    imageView.image = [LWFConfiguration instance].logoImage;
     imageView.alpha = .05;
     imageView.hidden = NO;
 }
@@ -361,8 +361,8 @@
 
 - (void)enableJoin
 {
-    joinButton.layer.borderColor=[LWConfiguration instance].highlightColor.CGColor;
-    joinButton.layer.backgroundColor=[LWConfiguration instance].highlightColor.CGColor;
+    joinButton.layer.borderColor=[LWFConfiguration instance].highlightColor.CGColor;
+    joinButton.layer.backgroundColor=[LWFConfiguration instance].highlightColor.CGColor;
     joinButton.layer.borderWidth=2.0f;
     
     [joinButton setTitleColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] forState:UIControlStateNormal];
@@ -377,28 +377,28 @@
 
 - (void)saveSeat
 {
-    [LWConfiguration instance].sectionID = [[sections objectAtIndex:selectedSectionIndex] valueForKeyPath:@"name"];
-    [LWConfiguration instance].rowID = [[rows objectAtIndex:selectedRowIndex] valueForKeyPath:@"name"];
-    [LWConfiguration instance].seatID = [[seats objectAtIndex:selectedSeatIndex] valueForKeyPath:@"name"];
+    [LWFConfiguration instance].sectionID = [[sections objectAtIndex:selectedSectionIndex] valueForKeyPath:@"name"];
+    [LWFConfiguration instance].rowID = [[rows objectAtIndex:selectedRowIndex] valueForKeyPath:@"name"];
+    [LWFConfiguration instance].seatID = [[seats objectAtIndex:selectedSeatIndex] valueForKeyPath:@"name"];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setValue:[LWConfiguration instance].levelID forKey:@"levelID"];
-    [defaults setValue:[LWConfiguration instance].sectionID forKey:@"sectionID"];
-    [defaults setValue:[LWConfiguration instance].rowID forKey:@"rowID"];
-    [defaults setValue:[LWConfiguration instance].seatID forKey:@"seatID"];
+    [defaults setValue:[LWFConfiguration instance].levelID forKey:@"levelID"];
+    [defaults setValue:[LWFConfiguration instance].sectionID forKey:@"sectionID"];
+    [defaults setValue:[LWFConfiguration instance].rowID forKey:@"rowID"];
+    [defaults setValue:[LWFConfiguration instance].seatID forKey:@"seatID"];
     
     [defaults synchronize];
     
-    NSString *mobileTime = [LWUtility getTodayInGMT];
+    NSString *mobileTime = [LWFUtility getTodayInGMT];
     
     NSDictionary *userSeat = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [LWConfiguration instance].levelID, @"level",
-                                [LWConfiguration instance].sectionID, @"section",
-                                [LWConfiguration instance].rowID, @"row",
-                                [LWConfiguration instance].seatID, @"seat", nil];
+                                [LWFConfiguration instance].levelID, @"level",
+                                [LWFConfiguration instance].sectionID, @"section",
+                                [LWFConfiguration instance].rowID, @"row",
+                                [LWFConfiguration instance].seatID, @"seat", nil];
     
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [LWConfiguration instance].userID,
+                                [LWFConfiguration instance].userID,
                                 @"userKey",
                                 userSeat,
                                 @"userSeat",
@@ -410,7 +410,7 @@
     
     NSLog(@"USER ADDED REQUEST: %@", params);
     
-    [[LWAPIClient instance] joinEvent: [LWConfiguration instance].eventID
+    [[LWFAPIClient instance] joinEvent: [LWFConfiguration instance].eventID
                              params: params
                           onSuccess:^(id data) {
                               NSLog(@"USER ADDED RESPONSE: %@", data);
@@ -424,17 +424,17 @@
                                                               options: NSJSONReadingMutableContainers
                                                                 error: &error2];
                               
-                              [LWConfiguration instance].userLocationID = [userDict objectForKey:@"_id"];
-                              [LWConfiguration instance].mobileOffset = [userDict objectForKey:@"mobileTimeOffset"];
+                              [LWFConfiguration instance].userLocationID = [userDict objectForKey:@"_id"];
+                              [LWFConfiguration instance].mobileOffset = [userDict objectForKey:@"mobileTimeOffset"];
                               
                               NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                              [defaults setValue:[LWConfiguration instance].userLocationID forKey:@"userLocationID"];
-                              [defaults setValue:[LWConfiguration instance].mobileOffset forKey:@"mobileOffset"];
+                              [defaults setValue:[LWFConfiguration instance].userLocationID forKey:@"userLocationID"];
+                              [defaults setValue:[LWFConfiguration instance].mobileOffset forKey:@"mobileOffset"];
                               [defaults synchronize];
                               
                               UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"LWMain"
-                                                                                   bundle:[NSBundle bundleForClass:LWSeatController.class]];
-                              LWReadyController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
+                                                                                   bundle:[NSBundle bundleForClass:LWFSeatController.class]];
+                              LWFReadyController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
                               [self.navigationController pushViewController:ready animated:YES];
                               
                           }

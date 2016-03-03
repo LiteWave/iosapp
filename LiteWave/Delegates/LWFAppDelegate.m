@@ -5,10 +5,10 @@
 //  Copyright (c) 2013 LiteWave. All rights reserved.
 //
 
-#import "LWAppDelegate.h"
-#import "LWUtility.h"
+#import "LWFAppDelegate.h"
+#import "LWFUtility.h"
 
-@implementation LWAppDelegate
+@implementation LWFAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

@@ -7,9 +7,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "LWAppDelegate.h"
+#import "LWFAppDelegate.h"
 
-@interface LWReadyController : UIViewController <UIAlertViewDelegate> {
+@interface LWFReadyController : UIViewController <UIAlertViewDelegate> {
     
     IBOutlet UIButton *joinButton;
     IBOutlet UILabel *waitLabel;
@@ -19,7 +19,7 @@
     BOOL pressedChangeSeat;
 }
 
-@property (nonatomic, retain) LWAppDelegate *appDelegate;
+@property (nonatomic, retain) LWFAppDelegate *appDelegate;
 @property (nonatomic, assign) NSTimer* timer;
 
 -(void)withdraw;

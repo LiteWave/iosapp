@@ -7,16 +7,16 @@
 
 #import <UIKit/UIKit.h>
 
-#import "LWAppDelegate.h"
+#import "LWFAppDelegate.h"
 
-@interface LWMainController : UIViewController {
+@interface LWFMainController : UIViewController {
     IBOutlet UILabel *unavailableLabel;
     IBOutlet UILabel *poweredByLabel;
     IBOutlet UIImageView *logoImageView;
     IBOutlet UIImageView *imageView;
 }
 
-@property (nonatomic, retain) LWAppDelegate *appDelegate;
+@property (nonatomic, retain) LWFAppDelegate *appDelegate;
 
 - (void)getEvent;
 - (void)clearEvent;

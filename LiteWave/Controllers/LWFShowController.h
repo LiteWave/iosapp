@@ -7,10 +7,10 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioUnit/AudioUnit.h>
 #import <CoreMotion/CoreMotion.h>
-#import "LWCountDownTimerUtility.h"
-#import "LWAppDelegate.h"
+#import "LWFCountDownTimerUtility.h"
+#import "LWFAppDelegate.h"
 
-@interface LWShowController : UIViewController <UIAccelerometerDelegate, CountDownTimerProtocol>
+@interface LWFShowController : UIViewController <UIAccelerometerDelegate, CountDownTimerProtocol>
 {
     BOOL isWinner;  // device is a winner!
     BOOL onORoff;   // screen control
@@ -22,7 +22,7 @@
     long shouldVibrate;         // vibrate (0)=no, (1)=yes
     UIColor *backgroundColor;   // (rgb)
     
-    LWCountDownTimerUtility *counterUtil;
+    LWFCountDownTimerUtility *counterUtil;
 @public
     double diff;
     int position; // command position in the array
@@ -34,7 +34,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *timerLabel;
 @property (nonatomic, retain) IBOutlet UILabel *winnerLabel;
 @property (nonatomic, retain) IBOutlet UILabel *infoLabel;
-@property (nonatomic, retain) LWAppDelegate *appDelegate;
+@property (nonatomic, retain) LWFAppDelegate *appDelegate;
 
 - (void)frameTimerCallback:(id)sender;
 - (void)playFrames:(int)counter;

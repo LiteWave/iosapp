@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface LWUtility : NSObject
+@interface LWFUtility : NSObject
 
 +(BOOL)isToday:(NSDate*)date;
 +(BOOL)isTodayLessThanDate:(NSDate*)date todayOffsetInMilliseconds:(int)offset;

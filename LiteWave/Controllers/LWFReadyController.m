@@ -5,21 +5,21 @@
 //  Copyright (c) 2013 LiteWave. All rights reserved.
 //
 
-#import "LWReadyController.h"
-#import "LWShowController.h"
-#import "LWAppDelegate.h"
-#import "LWUtility.h"
+#import "LWFReadyController.h"
+#import "LWFShowController.h"
+#import "LWFAppDelegate.h"
+#import "LWFUtility.h"
 #import "LWFAFNetworking.h"
-#import "LWApiClient.h"
-#import "LWConfiguration.h"
+#import "LWFApiClient.h"
+#import "LWFConfiguration.h"
 
-@interface LWReadyController ()
+@interface LWFReadyController ()
 
 -(IBAction)changeSeat:(id)sender;
 
 @end
 
-@implementation LWReadyController
+@implementation LWFReadyController
 
 - (void)viewDidLoad
 {
@@ -27,9 +27,9 @@
 	
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
-    self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.appDelegate = (LWFAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    self.view.backgroundColor = [LWConfiguration instance].backgroundColor;
+    self.view.backgroundColor = [LWFConfiguration instance].backgroundColor;
     
     pressedChangeSeat = NO;
     
@@ -53,7 +53,7 @@
 - (void)viewDidAppear:(BOOL)animated{
     [self.navigationItem setHidesBackButton:NO animated:NO];
 
-    self.title = [LWConfiguration instance].eventName;
+    self.title = [LWFConfiguration instance].eventName;
 
     [self getShow];
     [self beginTimer];
@@ -61,7 +61,7 @@
 
 -(void)getShow {
     
-    [[LWAPIClient instance] getShows: [LWConfiguration instance].eventID
+    [[LWFAPIClient instance] getShows: [LWFConfiguration instance].eventID
                          onSuccess: ^(id data) {
                              NSError *error2;
                              NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
@@ -72,7 +72,7 @@
                              [dateformat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
                              [dateformat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
                              
-                             int offset = [[LWConfiguration instance].mobileOffset intValue];
+                             int offset = [[LWFConfiguration instance].mobileOffset intValue];
                              
                              NSArray *showDict = [NSJSONSerialization JSONObjectWithData: [jsonArray dataUsingEncoding:NSUTF8StringEncoding]
                                                                                  options: NSJSONReadingMutableContainers
@@ -82,7 +82,7 @@
                              for (NSDictionary *show in showsArray) {
                                  if ([show valueForKey:@"startAt"] != (id)[NSNull null]) {
                                      NSDate *showDate = [dateformat dateFromString:[show valueForKey:@"startAt"]];
-                                     if (showDate && [LWUtility isTodayLessThanDate:showDate todayOffsetInMilliseconds:offset]) {
+                                     if (showDate && [LWFUtility isTodayLessThanDate:showDate todayOffsetInMilliseconds:offset]) {
                                          currentShow = show;
                                          break;
                                      }
@@ -90,14 +90,14 @@
                              }
 
                              if (currentShow) {
-                                 NSLog(@"new liteshow = %@", [LWConfiguration instance].show);
+                                 NSLog(@"new liteshow = %@", [LWFConfiguration instance].show);
                                  
-                                 [LWConfiguration instance].show = [[NSDictionary alloc] initWithDictionary:currentShow copyItems:YES];
+                                 [LWFConfiguration instance].show = [[NSDictionary alloc] initWithDictionary:currentShow copyItems:YES];
                                  [self stopTimer];
                                  [self enableJoin];
                              } else {
                                  // no shows available
-                                 [LWConfiguration instance].show = nil;
+                                 [LWFConfiguration instance].show = nil;
 
                                  [self disableJoin];
                              }
@@ -106,17 +106,17 @@
                              // no shows available
                              [self disableJoin];
                              
-                             [LWConfiguration instance].show = nil;
+                             [LWFConfiguration instance].show = nil;
                          }];
 }
 
 -(void)joinShow {
-    NSString *mobileTime = [LWUtility getTodayInGMT];
+    NSString *mobileTime = [LWFUtility getTodayInGMT];
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             mobileTime, @"mobileTime", nil];
 
     NSLog(@"EVENT JOIN REQUEST: %@", params);
-    [[LWAPIClient instance] joinShow: [LWConfiguration instance].userLocationID
+    [[LWFAPIClient instance] joinShow: [LWFConfiguration instance].userLocationID
                             params: params
                          onSuccess:^(id data) {
                              NSLog(@"EVENT JOIN RESPONSE: %@", data);
@@ -130,11 +130,11 @@
                                                              options: NSJSONReadingMutableContainers
                                                                error: &error2];
                              
-                             [LWConfiguration instance].mobileOffset = [joinDict objectForKey:@"mobileTimeOffset"];
-                             [LWConfiguration instance].showData = [[NSDictionary alloc] initWithDictionary:joinDict copyItems:YES];
+                             [LWFConfiguration instance].mobileOffset = [joinDict objectForKey:@"mobileTimeOffset"];
+                             [LWFConfiguration instance].showData = [[NSDictionary alloc] initWithDictionary:joinDict copyItems:YES];
                              
                              UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"LWMain"
-                                                                                  bundle:[NSBundle bundleForClass:LWReadyController.class]];
+                                                                                  bundle:[NSBundle bundleForClass:LWFReadyController.class]];
                              UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"playing"];
                              [self presentViewController:vc animated:YES completion:nil];
                          }
@@ -157,11 +157,11 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     // leave the event
-    [[LWAPIClient instance] leaveEvent: [LWConfiguration instance].userLocationID
+    [[LWFAPIClient instance] leaveEvent: [LWFConfiguration instance].userLocationID
                              onSuccess:^(id data) {
                                  // clear data on success
-                                 [LWConfiguration instance].userLocationID = nil;
-                                 [LWConfiguration instance].show = nil;
+                                 [LWFConfiguration instance].userLocationID = nil;
+                                 [LWFConfiguration instance].show = nil;
                                  
                                  [defaults removeObjectForKey:@"userLocationID"];
                                  [defaults removeObjectForKey:@"liteShow"];
@@ -180,9 +180,9 @@
                            }];
     
     // clear this data on pass or fail
-    [LWConfiguration instance].sectionID = nil;
-    [LWConfiguration instance].rowID = nil;
-    [LWConfiguration instance].seatID = nil;
+    [LWFConfiguration instance].sectionID = nil;
+    [LWFConfiguration instance].rowID = nil;
+    [LWFConfiguration instance].seatID = nil;
     
     [defaults removeObjectForKey:@"sectionID"];
     [defaults removeObjectForKey:@"rowID"];
@@ -200,7 +200,7 @@
     [self loadImage];
     
     [waitLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:self.view.frame.size.width*.065]];
-    waitLabel.textColor = [LWConfiguration instance].textColor;
+    waitLabel.textColor = [LWFConfiguration instance].textColor;
     waitLabel.frame = CGRectMake(0,
                                  self.view.frame.size.height*.03,
                                  self.view.frame.size.width,
@@ -210,7 +210,7 @@
                                waitLabel.frame.origin.y + 75,
                                spinner.frame.size.width,
                                spinner.frame.size.height);
-    spinner.color = [LWConfiguration instance].highlightColor;
+    spinner.color = [LWFConfiguration instance].highlightColor;
     
     
     int buttonWidth = self.view.frame.size.width*.2;
@@ -220,22 +220,22 @@
     
     // level
     [self buildInfoLabel:@"level" x:(buttonXPosition-5) y:(buttonYPostion-50) size:(buttonWidth+10)];
-    [self buildSeatButton:[LWConfiguration instance].levelID x:buttonXPosition y:buttonYPostion size:buttonWidth];
+    [self buildSeatButton:[LWFConfiguration instance].levelID x:buttonXPosition y:buttonYPostion size:buttonWidth];
     buttonXPosition += buttonPadding + buttonWidth;
     
     // section
     [self buildInfoLabel:@"section" x:(buttonXPosition-5) y:(buttonYPostion-50) size:(buttonWidth+10)];
-    [self buildSeatButton:[LWConfiguration instance].sectionID x:buttonXPosition y:buttonYPostion size:buttonWidth];
+    [self buildSeatButton:[LWFConfiguration instance].sectionID x:buttonXPosition y:buttonYPostion size:buttonWidth];
     buttonXPosition += buttonPadding + buttonWidth;
     
     // row
     [self buildInfoLabel:@"row" x:(buttonXPosition-5) y:(buttonYPostion-50) size:(buttonWidth+10)];
-    [self buildSeatButton:[LWConfiguration instance].rowID x:buttonXPosition y:buttonYPostion size:buttonWidth];
+    [self buildSeatButton:[LWFConfiguration instance].rowID x:buttonXPosition y:buttonYPostion size:buttonWidth];
     buttonXPosition += buttonPadding + buttonWidth;
 
     // seat
     [self buildInfoLabel:@"seat" x:(buttonXPosition-5) y:(buttonYPostion-50) size:(buttonWidth+10)];
-    [self buildSeatButton:[LWConfiguration instance].seatID x:buttonXPosition y:buttonYPostion size:buttonWidth];
+    [self buildSeatButton:[LWFConfiguration instance].seatID x:buttonXPosition y:buttonYPostion size:buttonWidth];
     
     
     joinButton.frame = CGRectMake(0,
@@ -247,16 +247,16 @@
 
 - (void)loadImage
 {
-    if (![LWConfiguration instance].logoUrl || ![LWConfiguration instance].logoImage)
+    if (![LWFConfiguration instance].logoUrl || ![LWFConfiguration instance].logoImage)
         return;
     
     CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
     float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
     
     float height = 700;
-    float width = ([LWConfiguration instance].logoImage.size.width*height)/[LWConfiguration instance].logoImage.size.height;
+    float width = ([LWFConfiguration instance].logoImage.size.width*height)/[LWFConfiguration instance].logoImage.size.height;
     imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, self.view.frame.size.height/2 - height/2 - heightPadding, width, height);
-    imageView.image = [LWConfiguration instance].logoImage;
+    imageView.image = [LWFConfiguration instance].logoImage;
     imageView.alpha = .05;
     imageView.hidden = NO;
 }
@@ -270,15 +270,15 @@
                               size);
     button.clipsToBounds = YES;
     button.layer.cornerRadius = size/2.0f;
-    button.layer.borderColor=[LWConfiguration instance].highlightColor.CGColor;
-    button.layer.backgroundColor=[LWConfiguration instance].highlightColor.CGColor;
+    button.layer.borderColor=[LWFConfiguration instance].highlightColor.CGColor;
+    button.layer.backgroundColor=[LWFConfiguration instance].highlightColor.CGColor;
     button.layer.borderWidth = 2.0f;
     [self.view addSubview:button];
     
     UILabel *buttonLabel = [[UILabel alloc]initWithFrame:CGRectMake(x, y, size, size)];
     buttonLabel.text = label;
     buttonLabel.textAlignment = NSTextAlignmentCenter;
-    [buttonLabel setTextColor:[LWConfiguration instance].textSelectedColor];
+    [buttonLabel setTextColor:[LWFConfiguration instance].textSelectedColor];
     [buttonLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:20.0f]];
     [buttonLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:buttonLabel];
@@ -290,7 +290,7 @@
                                                          y,
                                                          size,
                                                          50)];
-    [infoLabel setTextColor:[LWConfiguration instance].textColor];
+    [infoLabel setTextColor:[LWFConfiguration instance].textColor];
     [infoLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:19.0f]];
     [infoLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     infoLabel.textAlignment = NSTextAlignmentCenter;
@@ -314,8 +314,8 @@
 
 - (void)enableJoin
 {
-    joinButton.layer.borderColor=[LWConfiguration instance].highlightColor.CGColor;
-    joinButton.layer.backgroundColor=[LWConfiguration instance].highlightColor.CGColor;
+    joinButton.layer.borderColor=[LWFConfiguration instance].highlightColor.CGColor;
+    joinButton.layer.backgroundColor=[LWFConfiguration instance].highlightColor.CGColor;
     joinButton.layer.borderWidth=2.0f;
     
     [joinButton setTitleColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] forState:UIControlStateNormal];
@@ -329,7 +329,7 @@
 
 - (void)beginTimer
 {
-    double interval = [[LWConfiguration instance].pollInterval doubleValue];
+    double interval = [[LWFConfiguration instance].pollInterval doubleValue];
     self.timer = [NSTimer scheduledTimerWithTimeInterval: interval/1000
                                                   target: self
                                                 selector: @selector(retryFetch:)

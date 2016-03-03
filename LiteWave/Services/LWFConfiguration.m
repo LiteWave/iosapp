@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-#import "LWConfiguration.h"
-#import "LWUtility.h"
+#import "LWFConfiguration.h"
+#import "LWFUtility.h"
 
-@implementation LWConfiguration
+@implementation LWFConfiguration
 
-+ (LWConfiguration*)instance {
-    static LWConfiguration *theInstance = nil;
++ (LWFConfiguration*)instance {
+    static LWFConfiguration *theInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         theInstance = [[self alloc] init];
@@ -22,7 +22,7 @@
     return theInstance;
 }
 
-- (LWConfiguration*)init {
+- (LWFConfiguration*)init {
     // Forward to the "designated" initialization method
     self = [super init];
     if (self) {
@@ -54,11 +54,11 @@
     self.show = [defaults objectForKey:@"show"];
     
     self.defaultColor = [UIColor colorWithRed:222.0/255.0 green:32.0/255 blue:50.0/255 alpha:1.0];
-    self.backgroundColor = [LWUtility getColorFromString:[defaults objectForKey:@"backgroundColor"]];
-    self.borderColor = [LWUtility getColorFromString:[defaults objectForKey:@"borderColor"]];
-    self.highlightColor = [LWUtility getColorFromString:[defaults objectForKey:@"highlightColor"]];
-    self.textColor = [LWUtility getColorFromString:[defaults objectForKey:@"textColor"]];
-    self.textSelectedColor = [LWUtility getColorFromString:[defaults objectForKey:@"textSelectedColor"]];
+    self.backgroundColor = [LWFUtility getColorFromString:[defaults objectForKey:@"backgroundColor"]];
+    self.borderColor = [LWFUtility getColorFromString:[defaults objectForKey:@"borderColor"]];
+    self.highlightColor = [LWFUtility getColorFromString:[defaults objectForKey:@"highlightColor"]];
+    self.textColor = [LWFUtility getColorFromString:[defaults objectForKey:@"textColor"]];
+    self.textSelectedColor = [LWFUtility getColorFromString:[defaults objectForKey:@"textSelectedColor"]];
     self.logoUrl = [defaults stringForKey:@"logoUrl"];
     if (self.logoUrl) {
         NSURL *url = [NSURL URLWithString:self.logoUrl];

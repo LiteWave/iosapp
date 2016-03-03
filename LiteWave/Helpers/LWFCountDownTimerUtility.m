@@ -2,9 +2,9 @@
 //  CountDownTimerUtility.m
 //  CountDownTimer
 
-#import "LWCountDownTimerUtility.h"
+#import "LWFCountDownTimerUtility.h"
 
-@implementation LWCountDownTimerUtility
+@implementation LWFCountDownTimerUtility
 @synthesize delegate;
 
 -(void)startCountDownTimerWithTime:(double)time andUILabel:(UILabel *)currentLabel

@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "LWAppDelegate.h"
+#import "LWFAppDelegate.h"
 
-@interface LWCircleTableViewCell : UITableViewCell
+@interface LWFCircleTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UIButton *button;

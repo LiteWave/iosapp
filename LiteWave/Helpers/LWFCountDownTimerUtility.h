@@ -10,7 +10,7 @@
 -(void)timesUpWithLabel:(UILabel *)label;
 @end
 
-@interface LWCountDownTimerUtility : NSObject
+@interface LWFCountDownTimerUtility : NSObject
 {
     NSTimer *CountTimer;
     NSTimer *CountDownTimer;

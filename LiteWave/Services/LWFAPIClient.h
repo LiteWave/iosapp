@@ -8,16 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-#import "LWAppDelegate.h"
+#import "LWFAppDelegate.h"
 
 typedef void (^Success)(id);
 typedef void (^Failure)(NSError*);
 
-@interface LWAPIClient : NSObject
+@interface LWFAPIClient : NSObject
 
-@property (nonatomic, retain) LWAppDelegate *appDelegate;
+@property (nonatomic, retain) LWFAppDelegate *appDelegate;
 
-+(LWAPIClient *)instance;
++(LWFAPIClient *)instance;
 
 -(void)makeRequest:(NSURLRequest*)request onSuccess:(Success)success onFailure:(Failure)failure;
 -(void)get:(NSURL*)url onSuccess:(Success)success onFailure:(Failure)failure;

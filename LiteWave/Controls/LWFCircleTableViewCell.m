@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 LightWave. All rights reserved.
 //
 
-#import "LWCircleTableViewCell.h"
-#import "LWConfiguration.h"
+#import "LWFCircleTableViewCell.h"
+#import "LWFConfiguration.h"
 
-@implementation LWCircleTableViewCell
+@implementation LWFCircleTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -40,7 +40,7 @@
                                        cellCircleHeight);
         self.button.clipsToBounds = YES;
         self.button.layer.cornerRadius = cellCircleHeight/2.0f;
-        self.button.layer.borderColor = [LWConfiguration instance].borderColor.CGColor;
+        self.button.layer.borderColor = [LWFConfiguration instance].borderColor.CGColor;
         self.button.layer.borderWidth = 2.0f;
         [self.contentView addSubview:self.button];
         
@@ -59,17 +59,17 @@
 }
 
 -(void)select {
-    self.button.layer.borderColor=[LWConfiguration instance].highlightColor.CGColor;
-    self.button.layer.backgroundColor=[LWConfiguration instance].highlightColor.CGColor;
+    self.button.layer.borderColor=[LWFConfiguration instance].highlightColor.CGColor;
+    self.button.layer.backgroundColor=[LWFConfiguration instance].highlightColor.CGColor;
     
-    [self.nameLabel setTextColor:[LWConfiguration instance].textSelectedColor];
+    [self.nameLabel setTextColor:[LWFConfiguration instance].textSelectedColor];
 }
 
 -(void)clear {
-    self.button.layer.borderColor=[LWConfiguration instance].borderColor.CGColor;
-    self.button.layer.backgroundColor=[LWConfiguration instance].backgroundColor.CGColor;
+    self.button.layer.borderColor=[LWFConfiguration instance].borderColor.CGColor;
+    self.button.layer.backgroundColor=[LWFConfiguration instance].backgroundColor.CGColor;
     
-    [self.nameLabel setTextColor:[LWConfiguration instance].textColor];
+    [self.nameLabel setTextColor:[LWFConfiguration instance].textColor];
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {

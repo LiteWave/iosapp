@@ -5,23 +5,23 @@
 //  Copyright (c) 2015 LightWave. All rights reserved.
 //
 
-#import "LWCircleTableViewCell.h"
-#import "LWLevelController.h"
-#import "LWSeatController.h"
+#import "LWFCircleTableViewCell.h"
+#import "LWFLevelController.h"
+#import "LWFSeatController.h"
 #import "LWFAFNetworking.h"
-#import "LWAppDelegate.h"
-#import "LWApiClient.h"
-#import "LWConfiguration.h"
+#import "LWFAppDelegate.h"
+#import "LWFApiClient.h"
+#import "LWFConfiguration.h"
 
-@implementation LWLevelController
+@implementation LWFLevelController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.appDelegate = (LWAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.appDelegate = (LWFAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    self.view.backgroundColor = [LWConfiguration instance].backgroundColor;
+    self.view.backgroundColor = [LWFConfiguration instance].backgroundColor;
     self.navigationItem.hidesBackButton = YES;
     
     viewTable.hidden = YES;
@@ -58,11 +58,11 @@
     selectedLevelIndex = [index intValue];
     [self clearCells:viewTable  selected:(int)index];
     
-    [LWConfiguration instance].levelID = [[levels objectAtIndex:selectedLevelIndex] valueForKeyPath:@"name"];
+    [LWFConfiguration instance].levelID = [[levels objectAtIndex:selectedLevelIndex] valueForKeyPath:@"name"];
     
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"LWMain"
-                                                         bundle:[NSBundle bundleForClass:LWLevelController.class]];
-    LWSeatController *seat = [storyboard instantiateViewControllerWithIdentifier:@"seat"];
+                                                         bundle:[NSBundle bundleForClass:LWFLevelController.class]];
+    LWFSeatController *seat = [storyboard instantiateViewControllerWithIdentifier:@"seat"];
     [self.navigationController pushViewController:seat animated:YES];
 }
 
@@ -81,9 +81,9 @@
 {
     static NSString *cellIdentifier = @"CircleTableViewCell";
     
-    LWCircleTableViewCell *cell = (LWCircleTableViewCell *)[viewTable dequeueReusableCellWithIdentifier:cellIdentifier];
+    LWFCircleTableViewCell *cell = (LWFCircleTableViewCell *)[viewTable dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[LWCircleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[LWFCircleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
     NSDictionary *data = [levels objectAtIndex:indexPath.row];
@@ -107,7 +107,7 @@
 - (void)clearCells:(UITableView*)tableView selected:(int)index
 {
     NSArray *cells = [tableView visibleCells];
-    for (LWCircleTableViewCell *cell in cells)
+    for (LWFCircleTableViewCell *cell in cells)
     {
         if ((int)cell.index == index)
             [cell select];
@@ -118,7 +118,7 @@
 
 - (void)getLevels
 {
-    [[LWAPIClient instance] getStadium: [LWConfiguration instance].stadiumID
+    [[LWFAPIClient instance] getStadium: [LWFConfiguration instance].stadiumID
                            onSuccess:^(id data) {
                                NSError *error2;
                                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:kNilOptions error:&error2];
@@ -129,7 +129,7 @@
                                                                options: NSJSONReadingMutableContainers
                                                                  error: &error2];
                                
-                               [LWConfiguration instance].levels = [[NSDictionary alloc] initWithDictionary:seatsDict copyItems:YES];
+                               [LWFConfiguration instance].levels = [[NSDictionary alloc] initWithDictionary:seatsDict copyItems:YES];
                                
                                [self loadLevels];
                            }
@@ -146,7 +146,7 @@
 
 - (void)loadLevels
 {
-    levels = [[NSMutableArray alloc] initWithArray:[[LWConfiguration instance].levels objectForKey:@"levels"]];
+    levels = [[NSMutableArray alloc] initWithArray:[[LWFConfiguration instance].levels objectForKey:@"levels"]];
     [viewTable reloadData];
 }
 
@@ -178,16 +178,16 @@
 
 - (void)loadImage
 {
-    if (![LWConfiguration instance].logoUrl || ![LWConfiguration instance].logoImage)
+    if (![LWFConfiguration instance].logoUrl || ![LWFConfiguration instance].logoImage)
         return;
     
     CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
     float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
     
     float height = 700;
-    float width = ([LWConfiguration instance].logoImage.size.width*height)/[LWConfiguration instance].logoImage.size.height;
+    float width = ([LWFConfiguration instance].logoImage.size.width*height)/[LWFConfiguration instance].logoImage.size.height;
     imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, self.view.frame.size.height/2 - height/2 - heightPadding, width, height);
-    imageView.image = [LWConfiguration instance].logoImage;
+    imageView.image = [LWFConfiguration instance].logoImage;
     imageView.alpha = .05;
     imageView.hidden = NO;
 }

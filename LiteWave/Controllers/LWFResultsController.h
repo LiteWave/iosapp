@@ -7,9 +7,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "LWAppDelegate.h"
+#import "LWFAppDelegate.h"
 
-@interface LWResultsController : UIViewController {
+@interface LWFResultsController : UIViewController {
     BOOL isWinner;  // device is a winner!
     
     IBOutlet UIButton *returnButton;
@@ -19,7 +19,7 @@
     IBOutlet UIImageView *logoImageView;
 }
 
-@property (nonatomic, retain) LWAppDelegate *appDelegate;
+@property (nonatomic, retain) LWFAppDelegate *appDelegate;
 
 @end
 
