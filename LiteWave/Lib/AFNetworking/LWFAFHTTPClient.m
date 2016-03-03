@@ -13,7 +13,7 @@
 #import <UIKit/UIKit.h>
 #endif
 
-#import "JSONKit.h"
+#import "LWFJSONKit.h"
 
 static NSString * const kAFMultipartFormLineDelimiter = @"\r\n"; // CRLF
 static NSString * const kAFMultipartFormBoundary = @"Boundary+0xAbCdEfGbOuNdArY";

@@ -1,14 +1,14 @@
 
 
 #import <Foundation/Foundation.h>
-#import "SBJsonBase.h"
+#import "LWFSBJsonBase.h"
 
 /**
  @brief Options for the writer class.
  
  This exists so the SBJSON facade can implement the options in the writer without having to re-declare them.
  */
-@protocol SBJsonWriter
+@protocol LWFSBJsonWriter
 
 /**
  @brief Whether we are generating human-readable (multiline) JSON.
@@ -64,7 +64,7 @@
  way you would expect.
  
  */
-@interface SBJsonWriter : SBJsonBase <SBJsonWriter> {
+@interface LWFSBJsonWriter : LWFSBJsonBase <LWFSBJsonWriter> {
 
 @private
     BOOL sortKeys, humanReadable;
@@ -73,7 +73,7 @@
 @end
 
 // don't use - exists for backwards compatibility. Will be removed in 2.3.
-@interface SBJsonWriter (Private)
+@interface LWFSBJsonWriter (Private)
 - (NSString*)stringWithFragment:(id)value;
 @end
 
@@ -96,7 +96,7 @@
  @endcode
  
  */
-@interface NSObject (SBProxyForJson)
+@interface NSObject (LWFSBProxyForJson)
 - (id)proxyForJson;
 @end
 

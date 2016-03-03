@@ -1,8 +1,8 @@
 
 
-#import "SBJsonParser.h"
+#import "LWFSBJsonParser.h"
 
-@interface SBJsonParser ()
+@interface LWFSBJsonParser ()
 
 - (BOOL)scanValue:(NSObject **)o;
 
@@ -27,7 +27,7 @@
 #define skipDigits(c) while (isdigit(*c)) c++
 
 
-@implementation SBJsonParser
+@implementation LWFSBJsonParser
 
 static char ctrl[0x22];
 

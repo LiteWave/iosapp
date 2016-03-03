@@ -1,10 +1,10 @@
 
 
-#import "SBJsonBase.h"
+#import "LWFSBJsonBase.h"
 NSString * SBJSONErrorDomain = @"com.crowdpxl.test";
 
 
-@implementation SBJsonBase
+@implementation LWFSBJsonBase
 
 @synthesize errorTrace;
 @synthesize maxDepth;

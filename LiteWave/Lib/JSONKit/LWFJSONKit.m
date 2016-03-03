@@ -88,7 +88,7 @@
 #include <sys/errno.h>
 #include <math.h>
 
-#import "JSONKit.h"
+#import "LWFJSONKit.h"
 
 //#include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/CFString.h>
@@ -1338,7 +1338,7 @@ static id json_parse_it(JKParseState *parseState) {
   return(parsedObject);
 }
 
-@implementation JSONDecoder
+@implementation LWFJSONDecoder
 
 + (id)decoder
 {
@@ -1474,7 +1474,7 @@ static id json_parse_it(JKParseState *parseState) {
 
 @end
 
-@implementation NSString (JSONKit)
+@implementation NSString (LWFJSONKit)
 
 - (id)objectFromJSONString
 {
@@ -1492,12 +1492,12 @@ static id json_parse_it(JKParseState *parseState) {
   if(utf8String == NULL) { return(NULL); }
   size_t               utf8Length = strlen((const char *)utf8String);
 
-  return([[JSONDecoder decoderWithParseOptions:parseOptionFlags] parseUTF8String:utf8String length:utf8Length error:error]);
+  return([[LWFJSONDecoder decoderWithParseOptions:parseOptionFlags] parseUTF8String:utf8String length:utf8Length error:error]);
 }
 
 @end
 
-@implementation NSData (JSONKit)
+@implementation NSData (LWFJSONKit)
 
 - (id)objectFromJSONData
 {
@@ -1511,7 +1511,7 @@ static id json_parse_it(JKParseState *parseState) {
 
 - (id)objectFromJSONDataWithParseOptions:(JKParseOptionFlags)parseOptionFlags error:(NSError **)error
 {
-  return([[JSONDecoder decoderWithParseOptions:parseOptionFlags] parseJSONData:self error:error]);
+  return([[LWFJSONDecoder decoderWithParseOptions:parseOptionFlags] parseJSONData:self error:error]);
 }
 
 @end
@@ -1840,7 +1840,7 @@ static NSData *jk_encode(void *object, JKSerializeOptionFlags optionFlags, NSErr
 }
 
 
-@implementation NSArray (JSONKit)
+@implementation NSArray (LWFJSONKit)
 
 - (NSData *)JSONData
 {
@@ -1864,7 +1864,7 @@ static NSData *jk_encode(void *object, JKSerializeOptionFlags optionFlags, NSErr
 
 @end
 
-@implementation NSDictionary (JSONKit)
+@implementation NSDictionary (LWFJSONKit)
 
 - (NSData *)JSONData
 {

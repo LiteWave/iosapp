@@ -1,12 +1,12 @@
 
 
-#import "NSObject+SBJSON.h"
-#import "SBJsonWriter.h"
+#import "NSObject+LWFSBJSON.h"
+#import "LWFSBJsonWriter.h"
 
-@implementation NSObject (NSObject_SBJSON)
+@implementation NSObject (NSObject_LWFSBJSON)
 
 - (NSString *)JSONFragment {
-    SBJsonWriter *jsonWriter = [SBJsonWriter new];
+    LWFSBJsonWriter *jsonWriter = [LWFSBJsonWriter new];
     NSString *json = [jsonWriter stringWithFragment:self];    
     if (!json)
         NSLog(@"-JSONFragment failed. Error trace is: %@", [jsonWriter errorTrace]);
@@ -15,7 +15,7 @@
 }
 
 - (NSString *)JSONRepresentation {
-    SBJsonWriter *jsonWriter = [SBJsonWriter new];    
+    LWFSBJsonWriter *jsonWriter = [LWFSBJsonWriter new];    
     NSString *json = [jsonWriter stringWithObject:self];
     if (!json)
         NSLog(@"-JSONRepresentation failed. Error trace is: %@", [jsonWriter errorTrace]);

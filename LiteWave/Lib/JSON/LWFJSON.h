@@ -17,7 +17,7 @@
  
 */
 
-#import "SBJSON.h"
-#import "NSObject+SBJSON.h"
-#import "NSString+SBJSON.h"
+#import "LWFSBJSON.h"
+#import "NSObject+LWFSBJSON.h"
+#import "NSString+LWFSBJSON.h"
 

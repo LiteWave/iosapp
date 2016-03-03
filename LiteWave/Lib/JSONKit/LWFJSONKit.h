@@ -213,7 +213,7 @@ typedef JKFlags JKSerializeOptionFlags;
 
 // As a general rule of thumb, if you use a method that doesn't accept a JKParseOptionFlags argument, it defaults to JKParseOptionStrict
 
-@interface JSONDecoder : NSObject {
+@interface LWFJSONDecoder : NSObject {
   JKParseState parseState;
 }
 + (id)decoder;
@@ -227,27 +227,27 @@ typedef JKFlags JKSerializeOptionFlags;
 - (id)parseJSONData:(NSData *)jsonData error:(NSError **)error;
 @end
 
-@interface NSString (JSONKit)
+@interface NSString (LWFJSONKit)
 - (id)objectFromJSONString;
 - (id)objectFromJSONStringWithParseOptions:(JKParseOptionFlags)parseOptionFlags;
 - (id)objectFromJSONStringWithParseOptions:(JKParseOptionFlags)parseOptionFlags error:(NSError **)error;
 @end
 
-@interface NSData (JSONKit)
+@interface NSData (LWFJSONKit)
 // The NSData MUST be UTF8 encoded JSON.
 - (id)objectFromJSONData;
 - (id)objectFromJSONDataWithParseOptions:(JKParseOptionFlags)parseOptionFlags;
 - (id)objectFromJSONDataWithParseOptions:(JKParseOptionFlags)parseOptionFlags error:(NSError **)error;
 @end
 
-@interface NSArray (JSONKit)
+@interface NSArray (LWFJSONKit)
 - (NSData *)JSONData;
 - (NSData *)JSONDataWithOptions:(JKSerializeOptionFlags)serializeOptions error:(NSError **)error;
 - (NSString *)JSONString;
 - (NSString *)JSONStringWithOptions:(JKSerializeOptionFlags)serializeOptions error:(NSError **)error;
 @end
 
-@interface NSDictionary (JSONKit)
+@interface NSDictionary (LWFJSONKit)
 - (NSData *)JSONData;
 - (NSData *)JSONDataWithOptions:(JKSerializeOptionFlags)serializeOptions error:(NSError **)error;
 - (NSString *)JSONString;

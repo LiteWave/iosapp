@@ -1,8 +1,8 @@
 
 
-#import "SBJsonWriter.h"
+#import "LWFSBJsonWriter.h"
 
-@interface SBJsonWriter ()
+@interface LWFSBJsonWriter ()
 
 - (BOOL)appendValue:(id)fragment into:(NSMutableString*)json;
 - (BOOL)appendArray:(NSArray*)fragment into:(NSMutableString*)json;
@@ -13,7 +13,7 @@
 
 @end
 
-@implementation SBJsonWriter
+@implementation LWFSBJsonWriter
 
 @synthesize sortKeys;
 @synthesize humanReadable;

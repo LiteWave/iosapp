@@ -1,13 +1,13 @@
 
 
-#import "NSString+SBJSON.h"
-#import "SBJsonParser.h"
+#import "NSString+LWFSBJSON.h"
+#import "LWFSBJsonParser.h"
 
-@implementation NSString (NSString_SBJSON)
+@implementation NSString (NSString_LWFSBJSON)
 
 - (id)JSONFragmentValue
 {
-    SBJsonParser *jsonParser = [SBJsonParser new];    
+    LWFSBJsonParser *jsonParser = [LWFSBJsonParser new];    
     id repr = [jsonParser fragmentWithString:self];    
     if (!repr)
         NSLog(@"-JSONFragmentValue failed. Error trace is: %@", [jsonParser errorTrace]);
@@ -17,7 +17,7 @@
 
 - (id)JSONValue
 {
-    SBJsonParser *jsonParser = [SBJsonParser new];
+    LWFSBJsonParser *jsonParser = [LWFSBJsonParser new];
     id repr = [jsonParser objectWithString:self];
     if (!repr)
         NSLog(@"-JSONValue failed. Error trace is: %@", [jsonParser errorTrace]);

@@ -1,14 +1,14 @@
 
 
-#import "SBJSON.h"
+#import "LWFSBJSON.h"
 
-@implementation SBJSON
+@implementation LWFSBJSON
 
 - (id)init {
     self = [super init];
     if (self) {
-        jsonWriter = [SBJsonWriter new];
-        jsonParser = [SBJsonParser new];
+        jsonWriter = [LWFSBJsonWriter new];
+        jsonParser = [LWFSBJsonParser new];
         [self setMaxDepth:512];
 
     }
