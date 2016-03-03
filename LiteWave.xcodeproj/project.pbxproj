@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		815EA9071B904D16007D6C73 /* lwlogo-sm.png in Resources */ = {isa = PBXBuildFile; fileRef = 815EA9061B904D16007D6C73 /* lwlogo-sm.png */; };
+		815EA9071B904D16007D6C73 /* lwf-lwlogo-sm.png in Resources */ = {isa = PBXBuildFile; fileRef = 815EA9061B904D16007D6C73 /* lwf-lwlogo-sm.png */; };
 		815EA9131B9271ED007D6C73 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 815EA9121B9271ED007D6C73 /* Images.xcassets */; };
 		81612A6E1B656DEA009A7E44 /* LWFSeatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81612A6D1B656DEA009A7E44 /* LWFSeatController.m */; };
 		81612A721B656E79009A7E44 /* LWFLevelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81612A711B656E79009A7E44 /* LWFLevelController.m */; };
@@ -81,7 +81,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		815EA9061B904D16007D6C73 /* lwlogo-sm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lwlogo-sm.png"; sourceTree = "<group>"; };
+		815EA9061B904D16007D6C73 /* lwf-lwlogo-sm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lwf-lwlogo-sm.png"; sourceTree = "<group>"; };
 		815EA9121B9271ED007D6C73 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		81612A6C1B656DD8009A7E44 /* LWFSeatController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWFSeatController.h; sourceTree = "<group>"; };
 		81612A6D1B656DEA009A7E44 /* LWFSeatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWFSeatController.m; sourceTree = "<group>"; };
@@ -337,7 +337,7 @@
 		845CD903181DC94B004932BF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				815EA9061B904D16007D6C73 /* lwlogo-sm.png */,
+				815EA9061B904D16007D6C73 /* lwf-lwlogo-sm.png */,
 				845CD904181DC94B004932BF /* Default-568h@2x~iphone.png */,
 				845CD905181DC94B004932BF /* Default~iphone.png */,
 				845CD906181DC94B004932BF /* Default.png */,
@@ -525,7 +525,7 @@
 				845CD91F181DC94B004932BF /* Icon-72.png in Resources */,
 				845CD91C181DC94B004932BF /* Icon-40@2x.png in Resources */,
 				845CD927181DC94B004932BF /* Icon.png in Resources */,
-				815EA9071B904D16007D6C73 /* lwlogo-sm.png in Resources */,
+				815EA9071B904D16007D6C73 /* lwf-lwlogo-sm.png in Resources */,
 				84157963181A286800D4EBB1 /* LWFMain.storyboard in Resources */,
 				845CD918181DC94B004932BF /* Default-568h@2x~iphone.png in Resources */,
 				845CD928181DC94B004932BF /* Icon@2x.png in Resources */,
