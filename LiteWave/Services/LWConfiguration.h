@@ -14,7 +14,6 @@
 
 @property (nonatomic, retain) NSMutableDictionary *properties;
 
-@property (nonatomic, assign) BOOL isOnline;
 @property (nonatomic, strong) NSString *apiURL;
 @property (nonatomic, strong) NSString *clientID;
 @property (nonatomic, strong) NSString *eventID;

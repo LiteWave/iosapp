@@ -8,66 +8,16 @@
 
 #import "LWAppDelegate.h"
 #import "LWUtility.h"
-#import "Reachability.h"
 
 @implementation LWAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
-    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
-    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     return YES;
 }
-
-- (void) updateInterfaceWithReachability: (Reachability*) curReach
-{
-    self.isOnline=YES;
-    if(curReach == hostReach)
-    {
-        BOOL connectionRequired = [curReach connectionRequired];
-        
-        NSString* baseLabel=  @"";
-        if(connectionRequired)
-        {
-            baseLabel=  @"Cellular data network is available.\n  Internet traffic will be routed through it after a connection is established.";
-        }
-        else
-        {
-            baseLabel=  @"Cellular data network is active.\n  Internet traffic will be routed through it.";
-        }
-        
-    }
-    if (curReach == internetReach)
-    {
-        
-    }
-    if (curReach == wifiReach)
-    {
-       
-    }
-}
-
-//Called by Reachability whenever status changes.
-- (void) reachabilityChanged: (NSNotification* )note
-{
-    Reachability* curReach = [note object];
-    NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
-    [self updateInterfaceWithReachability: curReach];
-    
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus internetStatus = [reachability currentReachabilityStatus];
-    
-    if (internetStatus != NotReachable) {
-        self.isOnline=NO;
-    } else {
-        self.isOnline=YES;
-    }
-}
-
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {

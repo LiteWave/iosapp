@@ -67,7 +67,6 @@
 		84789F01181C65DB00FC59E4 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789E05181C65DA00FC59E4 /* SBJsonParser.m */; };
 		84789F02181C65DB00FC59E4 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789E07181C65DA00FC59E4 /* SBJsonWriter.m */; };
 		84789F03181C65DB00FC59E4 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789E0A181C65DA00FC59E4 /* JSONKit.m */; };
-		84789F35181C65DB00FC59E4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789E7C181C65DB00FC59E4 /* Reachability.m */; };
 		84789FF6181C66B800FC59E4 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84789FF5181C66B800FC59E4 /* MobileCoreServices.framework */; };
 		84789FF8181C66CB00FC59E4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84789FF7181C66CB00FC59E4 /* SystemConfiguration.framework */; };
 		84789FFA181C66DB00FC59E4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84789FF9181C66DB00FC59E4 /* MessageUI.framework */; };
@@ -179,8 +178,6 @@
 		84789E07181C65DA00FC59E4 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		84789E09181C65DA00FC59E4 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		84789E0A181C65DA00FC59E4 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
-		84789E7B181C65DB00FC59E4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		84789E7C181C65DB00FC59E4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		84789FF5181C66B800FC59E4 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		84789FF7181C66CB00FC59E4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		84789FF9181C66DB00FC59E4 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -397,7 +394,6 @@
 				84789D93181C65DA00FC59E4 /* AFNetworking */,
 				84789DFA181C65DA00FC59E4 /* JSON */,
 				84789E08181C65DA00FC59E4 /* JSONKit */,
-				84789E7A181C65DB00FC59E4 /* Reachability2.0 */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -457,15 +453,6 @@
 				84789E0A181C65DA00FC59E4 /* JSONKit.m */,
 			);
 			path = JSONKit;
-			sourceTree = "<group>";
-		};
-		84789E7A181C65DB00FC59E4 /* Reachability2.0 */ = {
-			isa = PBXGroup;
-			children = (
-				84789E7B181C65DB00FC59E4 /* Reachability.h */,
-				84789E7C181C65DB00FC59E4 /* Reachability.m */,
-			);
-			path = Reachability2.0;
 			sourceTree = "<group>";
 		};
 		84789F61181C65E400FC59E4 /* Helpers */ = {
@@ -608,7 +595,6 @@
 				84789ED3181C65DB00FC59E4 /* AFJSONRequestOperation.m in Sources */,
 				84067FEC183B073200232065 /* LWCountDownTimerUtility.m in Sources */,
 				84789ED2181C65DB00FC59E4 /* AFImageRequestOperation.m in Sources */,
-				84789F35181C65DB00FC59E4 /* Reachability.m in Sources */,
 				84789ED5181C65DB00FC59E4 /* AFPropertyListRequestOperation.m in Sources */,
 				84789F03181C65DB00FC59E4 /* JSONKit.m in Sources */,
 				84789EFE181C65DB00FC59E4 /* NSString+SBJSON.m in Sources */,

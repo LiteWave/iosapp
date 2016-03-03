@@ -8,16 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@class Reachability;
-
 @interface LWAppDelegate : UIResponder <UIApplicationDelegate> {
-    
-    Reachability* hostReach;
-    Reachability* internetReach;
-    Reachability* wifiReach;
 }
 
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, assign) BOOL isOnline;
 
 @end
