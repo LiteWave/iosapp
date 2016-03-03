@@ -7,17 +7,17 @@
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
 
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+LWFAFNetworking.h"
 
-#import "AFImageCache.h"
+#import "LWFAFImageCache.h"
 
 static char kAFImageRequestOperationObjectKey;
 
-@interface UIImageView (_AFNetworking)
-@property (readwrite, nonatomic, retain, setter = af_setImageRequestOperation:) AFImageRequestOperation *af_imageRequestOperation;
+@interface UIImageView (_LWFAFNetworking)
+@property (readwrite, nonatomic, retain, setter = af_setImageRequestOperation:) LWFAFImageRequestOperation *af_imageRequestOperation;
 @end
 
-@implementation UIImageView (_AFNetworking)
+@implementation UIImageView (_LWFAFNetworking)
 @dynamic af_imageRequestOperation;
 @end
 
@@ -25,11 +25,11 @@ static char kAFImageRequestOperationObjectKey;
 
 @implementation UIImageView (AFNetworking)
 
-- (AFHTTPRequestOperation *)af_imageRequestOperation {
-    return (AFHTTPRequestOperation *)objc_getAssociatedObject(self, &kAFImageRequestOperationObjectKey);
+- (LWFAFHTTPRequestOperation *)af_imageRequestOperation {
+    return (LWFAFHTTPRequestOperation *)objc_getAssociatedObject(self, &kAFImageRequestOperationObjectKey);
 }
 
-- (void)af_setImageRequestOperation:(AFImageRequestOperation *)imageRequestOperation {
+- (void)af_setImageRequestOperation:(LWFAFImageRequestOperation *)imageRequestOperation {
     objc_setAssociatedObject(self, &kAFImageRequestOperationObjectKey, imageRequestOperation, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
@@ -71,7 +71,7 @@ static char kAFImageRequestOperationObjectKey;
         [self cancelImageRequestOperation];
     }
     
-    UIImage *cachedImage = [[AFImageCache sharedImageCache] cachedImageForURL:[urlRequest URL] cacheName:nil];
+    UIImage *cachedImage = [[LWFAFImageCache sharedImageCache] cachedImageForURL:[urlRequest URL] cacheName:nil];
     if (cachedImage) {
         self.image = cachedImage;
         self.af_imageRequestOperation = nil;
@@ -82,7 +82,7 @@ static char kAFImageRequestOperationObjectKey;
     } else {
         self.image = placeholderImage;
         
-        self.af_imageRequestOperation = [AFImageRequestOperation imageRequestOperationWithRequest:urlRequest imageProcessingBlock:nil cacheName:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {            
+        self.af_imageRequestOperation = [LWFAFImageRequestOperation imageRequestOperationWithRequest:urlRequest imageProcessingBlock:nil cacheName:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
             if (self.af_imageRequestOperation && ![self.af_imageRequestOperation isCancelled]) {
                 if (success) {
                     success(request, response, image);

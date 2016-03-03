@@ -2,8 +2,8 @@
 //
 
 
-#import "AFImageRequestOperation.h"
-#import "AFImageCache.h"
+#import "LWFAFImageRequestOperation.h"
+#import "LWFAFImageCache.h"
 
 static dispatch_queue_t af_image_request_operation_processing_queue;
 static dispatch_queue_t image_request_operation_processing_queue() {
@@ -14,7 +14,7 @@ static dispatch_queue_t image_request_operation_processing_queue() {
     return af_image_request_operation_processing_queue;
 }
 
-@interface AFImageRequestOperation ()
+@interface LWFAFImageRequestOperation ()
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
 @property (readwrite, nonatomic, retain) UIImage *responseImage;
 #elif __MAC_OS_X_VERSION_MIN_REQUIRED 
@@ -25,11 +25,11 @@ static dispatch_queue_t image_request_operation_processing_queue() {
 + (NSSet *)defaultAcceptablePathExtensions;
 @end
 
-@implementation AFImageRequestOperation
+@implementation LWFAFImageRequestOperation
 @synthesize responseImage = _responseImage;
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
-+ (AFImageRequestOperation *)imageRequestOperationWithRequest:(NSURLRequest *)urlRequest                
++ (LWFAFImageRequestOperation *)imageRequestOperationWithRequest:(NSURLRequest *)urlRequest                
                                                       success:(void (^)(UIImage *image))success
 {
     return [self imageRequestOperationWithRequest:urlRequest imageProcessingBlock:nil cacheName:nil success:^(NSURLRequest __unused *request, NSHTTPURLResponse __unused *response, UIImage *image) {
@@ -52,13 +52,13 @@ static dispatch_queue_t image_request_operation_processing_queue() {
 
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
-+ (AFImageRequestOperation *)imageRequestOperationWithRequest:(NSURLRequest *)urlRequest
++ (LWFAFImageRequestOperation *)imageRequestOperationWithRequest:(NSURLRequest *)urlRequest
                                          imageProcessingBlock:(UIImage *(^)(UIImage *))imageProcessingBlock
                                                     cacheName:(NSString *)cacheNameOrNil
                                                       success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image))success
                                                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
 {
-    AFImageRequestOperation *operation = [[AFImageRequestOperation alloc] initWithRequest:urlRequest];
+    LWFAFImageRequestOperation *operation = [[LWFAFImageRequestOperation alloc] initWithRequest:urlRequest];
     
     operation.completionBlock = ^ {
         if ([operation isCancelled]) {
@@ -86,7 +86,7 @@ static dispatch_queue_t image_request_operation_processing_queue() {
                 }
                 
                 if ([operation.request cachePolicy] != NSURLCacheStorageNotAllowed) {
-                    [[AFImageCache sharedImageCache] cacheImageData:operation.responseData forURL:[operation.request URL] cacheName:cacheNameOrNil];
+                    [[LWFAFImageCache sharedImageCache] cacheImageData:operation.responseData forURL:[operation.request URL] cacheName:cacheNameOrNil];
                 }
             }
         });        
@@ -192,7 +192,7 @@ static dispatch_queue_t image_request_operation_processing_queue() {
 }
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
-+ (AFHTTPRequestOperation *)HTTPRequestOperationWithRequest:(NSURLRequest *)urlRequest
++ (LWFAFHTTPRequestOperation *)HTTPRequestOperationWithRequest:(NSURLRequest *)urlRequest
                                                     success:(void (^)(id object))success 
                                                     failure:(void (^)(NSHTTPURLResponse *response, NSError *error))failure
 {

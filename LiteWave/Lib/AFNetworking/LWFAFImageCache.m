@@ -2,16 +2,16 @@
 //
 
 
-#import "AFImageCache.h"
+#import "LWFAFImageCache.h"
 
 static inline NSString * AFImageCacheKeyFromURLAndCacheName(NSURL *url, NSString *cacheName) {
     return [[url absoluteString] stringByAppendingFormat:@"#%@", cacheName];
 }
 
-@implementation AFImageCache
+@implementation LWFAFImageCache
 
-+ (AFImageCache *)sharedImageCache {
-    static AFImageCache *_sharedImageCache = nil;
++ (LWFAFImageCache *)sharedImageCache {
+    static LWFAFImageCache *_sharedImageCache = nil;
     static dispatch_once_t oncePredicate;
 
     dispatch_once(&oncePredicate, ^{

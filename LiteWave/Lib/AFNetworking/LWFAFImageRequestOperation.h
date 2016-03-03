@@ -3,7 +3,7 @@
 
 
 #import <Foundation/Foundation.h>
-#import "AFHTTPRequestOperation.h"
+#import "LWFAFHTTPRequestOperation.h"
 
 #import <Availability.h>
 
@@ -31,7 +31,7 @@
  - `image/x-xbitmap`
  - `image/x-win-bitmap`
  */
-@interface AFImageRequestOperation : AFHTTPRequestOperation {
+@interface LWFAFImageRequestOperation : LWFAFHTTPRequestOperation {
 @private
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
     UIImage *_responseImage;
@@ -55,7 +55,7 @@
  @return A new image request operation
  */
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
-+ (AFImageRequestOperation *)imageRequestOperationWithRequest:(NSURLRequest *)urlRequest                
++ (LWFAFImageRequestOperation *)imageRequestOperationWithRequest:(NSURLRequest *)urlRequest                
                                                       success:(void (^)(UIImage *image))success;
 #elif __MAC_OS_X_VERSION_MIN_REQUIRED
 + (AFImageRequestOperation *)imageRequestOperationWithRequest:(NSURLRequest *)urlRequest                
@@ -74,7 +74,7 @@
  @return A new image request operation
  */
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
-+ (AFImageRequestOperation *)imageRequestOperationWithRequest:(NSURLRequest *)urlRequest
++ (LWFAFImageRequestOperation *)imageRequestOperationWithRequest:(NSURLRequest *)urlRequest
                                          imageProcessingBlock:(UIImage *(^)(UIImage *))imageProcessingBlock
                                                     cacheName:(NSString *)cacheNameOrNil
                                                       success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image))success

@@ -2,14 +2,14 @@
 //
 
 
-#import "AFNetworkActivityIndicatorManager.h"
+#import "LWFAFNetworkActivityIndicatorManager.h"
 
-#import "AFHTTPRequestOperation.h"
+#import "LWFAFHTTPRequestOperation.h"
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
 static NSTimeInterval const kAFNetworkActivityIndicatorInvisibilityDelay = 0.25;
 
-@interface AFNetworkActivityIndicatorManager ()
+@interface LWFAFNetworkActivityIndicatorManager ()
 @property (readwrite, nonatomic, assign) NSInteger activityCount;
 @property (readwrite, nonatomic, retain) NSTimer *activityIndicatorVisibilityTimer;
 @property (readonly, getter = isNetworkActivityIndicatorVisible) BOOL networkActivityIndicatorVisible;
@@ -17,14 +17,14 @@ static NSTimeInterval const kAFNetworkActivityIndicatorInvisibilityDelay = 0.25;
 - (void)updateNetworkActivityIndicatorVisibility;
 @end
 
-@implementation AFNetworkActivityIndicatorManager
+@implementation LWFAFNetworkActivityIndicatorManager
 @synthesize activityCount = _activityCount;
 @synthesize activityIndicatorVisibilityTimer = _activityIndicatorVisibilityTimer;
 @synthesize enabled = _enabled;
 @dynamic networkActivityIndicatorVisible;
 
-+ (AFNetworkActivityIndicatorManager *)sharedManager {
-    static AFNetworkActivityIndicatorManager *_sharedManager = nil;
++ (LWFAFNetworkActivityIndicatorManager *)sharedManager {
+    static LWFAFNetworkActivityIndicatorManager *_sharedManager = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
         _sharedManager = [[self alloc] init];

@@ -4,8 +4,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "AFHTTPClient.h"
-#import "AFHTTPRequestOperation.h"
+#import "LWFAFHTTPClient.h"
+#import "LWFAFHTTPRequestOperation.h"
 
 #import <Availability.h>
 
@@ -125,14 +125,14 @@ static NSString * AFPropertyListStringFromParameters(NSDictionary *parameters) {
     return propertyListString;
 }
 
-@interface AFHTTPClient ()
+@interface LWFAFHTTPClient ()
 @property (readwrite, nonatomic, retain) NSURL *baseURL;
 @property (readwrite, nonatomic, retain) NSMutableArray *registeredHTTPOperationClassNames;
 @property (readwrite, nonatomic, retain) NSMutableDictionary *defaultHeaders;
 @property (readwrite, nonatomic, retain) NSOperationQueue *operationQueue;
 @end
 
-@implementation AFHTTPClient
+@implementation LWFAFHTTPClient
 @synthesize baseURL = _baseURL;
 @synthesize stringEncoding = _stringEncoding;
 @synthesize parameterEncoding = _parameterEncoding;
@@ -140,7 +140,7 @@ static NSString * AFPropertyListStringFromParameters(NSDictionary *parameters) {
 @synthesize defaultHeaders = _defaultHeaders;
 @synthesize operationQueue = _operationQueue;
 
-+ (AFHTTPClient *)clientWithBaseURL:(NSURL *)url {
++ (LWFAFHTTPClient *)clientWithBaseURL:(NSURL *)url {
     return [[self alloc] initWithBaseURL:url];
 }
 
@@ -306,7 +306,7 @@ static NSString * AFPropertyListStringFromParameters(NSDictionary *parameters) {
                                        success:(void (^)(id object))success 
                                        failure:(void (^)(NSHTTPURLResponse *response, NSError *error))failure 
 {
-    AFHTTPRequestOperation *operation = nil;
+    LWFAFHTTPRequestOperation *operation = nil;
     NSString *className = nil;
     NSEnumerator *enumerator = [self.registeredHTTPOperationClassNames reverseObjectEnumerator];
     while (!operation && (className = [enumerator nextObject])) {
@@ -317,18 +317,18 @@ static NSString * AFPropertyListStringFromParameters(NSDictionary *parameters) {
     }
     
     if (!operation) {
-        operation = [AFHTTPRequestOperation HTTPRequestOperationWithRequest:urlRequest success:success failure:failure];
+        operation = [LWFAFHTTPRequestOperation HTTPRequestOperationWithRequest:urlRequest success:success failure:failure];
     }
        
     [self enqueueHTTPRequestOperation:operation];
 }
 
-- (void)enqueueHTTPRequestOperation:(AFHTTPRequestOperation *)operation {
+- (void)enqueueHTTPRequestOperation:(LWFAFHTTPRequestOperation *)operation {
     [self.operationQueue addOperation:operation];
 }
 
 - (void)cancelHTTPOperationsWithMethod:(NSString *)method andURL:(NSURL *)url {
-    for (AFHTTPRequestOperation *operation in [self.operationQueue operations]) {
+    for (LWFAFHTTPRequestOperation *operation in [self.operationQueue operations]) {
         if ([[[operation request] HTTPMethod] isEqualToString:method] && [[[operation request] URL] isEqual:url]) {
             [operation cancel];
         }

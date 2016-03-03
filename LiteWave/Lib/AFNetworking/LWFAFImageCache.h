@@ -3,7 +3,7 @@
 
 
 #import <Foundation/Foundation.h>
-#import "AFImageRequestOperation.h"
+#import "LWFAFImageRequestOperation.h"
 
 #import <Availability.h>
 
@@ -12,14 +12,14 @@
  
  @discussion `AFImageCache` is used to cache images for successful `AFImageRequestOperations` with the proper cache policy.
  */
-@interface AFImageCache : NSCache
+@interface LWFAFImageCache : NSCache
 
 /**
  Returns the shared image cache object for the system.
  
  @return The systemwide image cache.
  */
-+ (AFImageCache *)sharedImageCache;
++ (LWFAFImageCache *)sharedImageCache;
 
 /**
  Returns the image associated with a given URL and cache name.

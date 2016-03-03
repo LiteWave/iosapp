@@ -2,7 +2,7 @@
 //
 
 
-#import "AFURLConnectionOperation.h"
+#import "LWFAFURLConnectionOperation.h"
 
 static NSUInteger const kAFHTTPMinimumInitialDataCapacity = 1024;
 static NSUInteger const kAFHTTPMaximumInitialDataCapacity = 1024 * 1024 * 8;
@@ -33,7 +33,7 @@ static inline NSString * AFKeyPathFromOperationState(AFOperationState state) {
     }
 }
 
-@interface AFURLConnectionOperation ()
+@interface LWFAFURLConnectionOperation ()
 @property (readwrite, nonatomic, assign) AFOperationState state;
 @property (readwrite, nonatomic, assign, getter = isCancelled) BOOL cancelled;
 @property (readwrite, nonatomic, retain) NSURLConnection *connection;
@@ -52,7 +52,7 @@ static inline NSString * AFKeyPathFromOperationState(AFOperationState state) {
 - (void)finish;
 @end
 
-@implementation AFURLConnectionOperation
+@implementation LWFAFURLConnectionOperation
 @synthesize state = _state;
 @synthesize cancelled = _cancelled;
 @synthesize connection = _connection;

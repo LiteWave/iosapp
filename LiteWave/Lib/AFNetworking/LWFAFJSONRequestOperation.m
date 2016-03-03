@@ -2,7 +2,7 @@
 //
 
 
-#import "AFJSONRequestOperation.h"
+#import "LWFAFJSONRequestOperation.h"
 
 #include <Availability.h>
 
@@ -17,7 +17,7 @@ static dispatch_queue_t json_request_operation_processing_queue() {
     return af_json_request_operation_processing_queue;
 }
 
-@interface AFJSONRequestOperation ()
+@interface LWFAFJSONRequestOperation ()
 @property (readwrite, nonatomic, retain) id responseJSON;
 @property (readwrite, nonatomic, retain) NSError *JSONError;
 
@@ -25,15 +25,15 @@ static dispatch_queue_t json_request_operation_processing_queue() {
 + (NSSet *)defaultAcceptablePathExtensions;
 @end
 
-@implementation AFJSONRequestOperation
+@implementation LWFAFJSONRequestOperation
 @synthesize responseJSON = _responseJSON;
 @synthesize JSONError = _JSONError;
 
-+ (AFJSONRequestOperation *)JSONRequestOperationWithRequest:(NSURLRequest *)urlRequest
++ (LWFAFJSONRequestOperation *)JSONRequestOperationWithRequest:(NSURLRequest *)urlRequest
                                                     success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id JSON))success
                                                     failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
 {
-    AFJSONRequestOperation *operation = [[self alloc] initWithRequest:urlRequest];
+    LWFAFJSONRequestOperation *operation = [[self alloc] initWithRequest:urlRequest];
     operation.completionBlock = ^ {
         if ([operation isCancelled]) {
             return;
@@ -129,7 +129,7 @@ static dispatch_queue_t json_request_operation_processing_queue() {
     return [[self defaultAcceptableContentTypes] containsObject:[request valueForHTTPHeaderField:@"Accept"]] || [[self defaultAcceptablePathExtensions] containsObject:[[request URL] pathExtension]];
 }
 
-+ (AFHTTPRequestOperation *)HTTPRequestOperationWithRequest:(NSURLRequest *)urlRequest
++ (LWFAFHTTPRequestOperation *)HTTPRequestOperationWithRequest:(NSURLRequest *)urlRequest
                                                     success:(void (^)(id object))success 
                                                     failure:(void (^)(NSHTTPURLResponse *response, NSError *error))failure
 {

@@ -10,7 +10,7 @@
 #import "LWShowController.h"
 #import "LWAppDelegate.h"
 #import "LWUtility.h"
-#import "AFNetworking.h"
+#import "LWFAFNetworking.h"
 #import "LWApiClient.h"
 #import "LWConfiguration.h"
 

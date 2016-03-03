@@ -3,7 +3,7 @@
 
 
 #import <Foundation/Foundation.h>
-#import "AFImageRequestOperation.h"
+#import "LWFAFImageRequestOperation.h"
 
 #import <Availability.h>
 
@@ -13,7 +13,7 @@
 /**
  This category adds methods to the UIKit framework's `UIImageView` class. The methods in this category provide support for loading remote images asynchronously from a URL.
  */
-@interface UIImageView (AFNetworking)
+@interface UIImageView (LWFAFNetworking)
 
 /**
  Creates and enqueues an image request operation, which asynchronously downloads the image from the specified URL, and sets it the request is finished. If the image is cached locally, the image is set immediately, otherwise, the image is set once the request is finished.

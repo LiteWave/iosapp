@@ -2,14 +2,14 @@
 //
 
 
-#import "AFHTTPRequestOperation.h"
+#import "LWFAFHTTPRequestOperation.h"
 
-@interface AFHTTPRequestOperation ()
+@interface LWFAFHTTPRequestOperation ()
 @property (readwrite, nonatomic, retain) NSError *error;
 @property (readonly, nonatomic, assign) BOOL hasContent;
 @end
 
-@implementation AFHTTPRequestOperation
+@implementation LWFAFHTTPRequestOperation
 @synthesize acceptableStatusCodes = _acceptableStatusCodes;
 @synthesize acceptableContentTypes = _acceptableContentTypes;
 @synthesize error = _HTTPError;
@@ -71,11 +71,11 @@
     return NO;
 }
 
-+ (AFHTTPRequestOperation *)HTTPRequestOperationWithRequest:(NSURLRequest *)urlRequest
++ (LWFAFHTTPRequestOperation *)HTTPRequestOperationWithRequest:(NSURLRequest *)urlRequest
                                                     success:(void (^)(id object))success 
                                                     failure:(void (^)(NSHTTPURLResponse *response, NSError *error))failure
 {
-    AFHTTPRequestOperation *operation = [[self alloc] initWithRequest:urlRequest];
+    LWFAFHTTPRequestOperation *operation = [[self alloc] initWithRequest:urlRequest];
     operation.completionBlock = ^ {
         if ([operation isCancelled]) {
             return;

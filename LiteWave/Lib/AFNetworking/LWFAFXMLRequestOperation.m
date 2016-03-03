@@ -2,7 +2,7 @@
 //
 
 
-#import "AFXMLRequestOperation.h"
+#import "LWFAFXMLRequestOperation.h"
 
 #include <Availability.h>
 
@@ -15,7 +15,7 @@ static dispatch_queue_t xml_request_operation_processing_queue() {
     return af_xml_request_operation_processing_queue;
 }
 
-@interface AFXMLRequestOperation ()
+@interface LWFAFXMLRequestOperation ()
 @property (readwrite, nonatomic, retain) NSXMLParser *responseXMLParser;
 #if __MAC_OS_X_VERSION_MIN_REQUIRED
 @property (readwrite, nonatomic, retain) NSXMLDocument *responseXMLDocument;
@@ -26,18 +26,18 @@ static dispatch_queue_t xml_request_operation_processing_queue() {
 + (NSSet *)defaultAcceptablePathExtensions;
 @end
 
-@implementation AFXMLRequestOperation
+@implementation LWFAFXMLRequestOperation
 @synthesize responseXMLParser = _responseXMLParser;
 #if __MAC_OS_X_VERSION_MIN_REQUIRED
 @synthesize responseXMLDocument = _responseXMLDocument;
 #endif
 @synthesize error = _XMLError;
 
-+ (AFXMLRequestOperation *)XMLParserRequestOperationWithRequest:(NSURLRequest *)urlRequest
++ (LWFAFXMLRequestOperation *)XMLParserRequestOperationWithRequest:(NSURLRequest *)urlRequest
                                                         success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser))success
                                                         failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
 {
-    AFXMLRequestOperation *operation = [[self alloc] initWithRequest:urlRequest];
+    LWFAFXMLRequestOperation *operation = [[self alloc] initWithRequest:urlRequest];
     operation.completionBlock = ^ {
         if ([operation isCancelled]) {
             return;
@@ -159,7 +159,7 @@ static dispatch_queue_t xml_request_operation_processing_queue() {
     return [[self defaultAcceptableContentTypes] containsObject:[request valueForHTTPHeaderField:@"Accept"]] || [[self defaultAcceptablePathExtensions] containsObject:[[request URL] pathExtension]];
 }
 
-+ (AFHTTPRequestOperation *)HTTPRequestOperationWithRequest:(NSURLRequest *)urlRequest
++ (LWFAFHTTPRequestOperation *)HTTPRequestOperationWithRequest:(NSURLRequest *)urlRequest
                                                     success:(void (^)(id object))success 
                                                     failure:(void (^)(NSHTTPURLResponse *response, NSError *error))failure
 {

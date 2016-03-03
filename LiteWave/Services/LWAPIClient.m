@@ -8,7 +8,7 @@
 
 #import "LWAPIClient.h"
 #import "LWConfiguration.h"
-#import "AFNetworking.h"
+#import "LWFAFNetworking.h"
 
 @implementation LWAPIClient
 
@@ -33,8 +33,8 @@
 -(void)makeRequest:(NSURLRequest*)request onSuccess:(Success)success onFailure:(Failure)failure {
     
     NSLog(@"requesting: %@", request.URL);
-    AFJSONRequestOperation *operation =
-    [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+    LWFAFJSONRequestOperation *operation =
+    [LWFAFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                     success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
                                                         success(JSON);
                                                     }

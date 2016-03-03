@@ -3,7 +3,7 @@
 
 
 #import <Foundation/Foundation.h>
-#import "AFHTTPRequestOperation.h"
+#import "LWFAFHTTPRequestOperation.h"
 
 /**
  `AFJSONRequestOperation` is a subclass of `AFHTTPRequestOperation` for downloading and working with JSON response data.
@@ -15,7 +15,7 @@
  - `application/json`
  - `text/json`
  */
-@interface AFJSONRequestOperation : AFHTTPRequestOperation {
+@interface LWFAFJSONRequestOperation : LWFAFHTTPRequestOperation {
 @private
     id _responseJSON;
     NSError *_JSONError;
@@ -43,7 +43,7 @@
   
  @return A new JSON request operation
  */
-+ (AFJSONRequestOperation *)JSONRequestOperationWithRequest:(NSURLRequest *)urlRequest
++ (LWFAFJSONRequestOperation *)JSONRequestOperationWithRequest:(NSURLRequest *)urlRequest
                                                     success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id JSON))success
                                                     failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure;
 @end

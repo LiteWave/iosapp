@@ -4,7 +4,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class AFHTTPRequestOperation;
+@class LWFAFHTTPRequestOperation;
 @protocol AFHTTPClientOperation;
 @protocol AFMultipartFormData;
 
@@ -44,7 +44,7 @@ typedef enum {
  
  You can override these HTTP headers or define new ones using `setDefaultHeader:value:`. 
  */
-@interface AFHTTPClient : NSObject {
+@interface LWFAFHTTPClient : NSObject {
 @private
     NSURL *_baseURL;
     NSStringEncoding _stringEncoding;
@@ -89,7 +89,7 @@ typedef enum {
   
  @return The newly-initialized HTTP client
  */
-+ (AFHTTPClient *)clientWithBaseURL:(NSURL *)url;
++ (LWFAFHTTPClient *)clientWithBaseURL:(NSURL *)url;
 
 /**
  Initializes an `AFHTTPClient` object with the specified base URL.
@@ -233,7 +233,7 @@ typedef enum {
  
  @param operation The HTTP request operation to be enqueued.
  */
-- (void)enqueueHTTPRequestOperation:(AFHTTPRequestOperation *)operation;
+- (void)enqueueHTTPRequestOperation:(LWFAFHTTPRequestOperation *)operation;
 
 ///---------------------------------
 /// @name Cancelling HTTP Operations

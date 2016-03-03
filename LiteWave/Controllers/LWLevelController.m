@@ -9,7 +9,7 @@
 #import "LWCircleTableViewCell.h"
 #import "LWLevelController.h"
 #import "LWSeatController.h"
-#import "AFNetworking.h"
+#import "LWFAFNetworking.h"
 #import "LWAppDelegate.h"
 #import "LWApiClient.h"
 #import "LWConfiguration.h"

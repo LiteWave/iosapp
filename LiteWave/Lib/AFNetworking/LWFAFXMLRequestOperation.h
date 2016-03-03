@@ -3,7 +3,7 @@
 
 
 #import <Foundation/Foundation.h>
-#import "AFHTTPRequestOperation.h"
+#import "LWFAFHTTPRequestOperation.h"
 
 #import <Availability.h>
 
@@ -17,7 +17,7 @@
  - `application/xml`
  - `text/xml`
  */
-@interface AFXMLRequestOperation : AFHTTPRequestOperation {
+@interface LWFAFXMLRequestOperation : LWFAFHTTPRequestOperation {
 @private
     NSXMLParser *_responseXMLParser;
 #if __MAC_OS_X_VERSION_MIN_REQUIRED
@@ -51,7 +51,7 @@
  
  @return A new XML request operation
  */
-+ (AFXMLRequestOperation *)XMLParserRequestOperationWithRequest:(NSURLRequest *)urlRequest
++ (LWFAFXMLRequestOperation *)XMLParserRequestOperationWithRequest:(NSURLRequest *)urlRequest
                                                         success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser))success
                                                         failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure;
 

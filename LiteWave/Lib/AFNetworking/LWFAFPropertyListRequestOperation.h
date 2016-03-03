@@ -3,7 +3,7 @@
 
 
 #import <Foundation/Foundation.h>
-#import "AFHTTPRequestOperation.h"
+#import "LWFAFHTTPRequestOperation.h"
 
 /**
  `AFPropertyListRequestOperation` is a subclass of `AFHTTPRequestOperation` for downloading and deserializing objects with property list (plist) response data.
@@ -14,7 +14,7 @@
  
  - `application/x-plist`
  */
-@interface AFPropertyListRequestOperation : AFHTTPRequestOperation {
+@interface LWFAFPropertyListRequestOperation : LWFAFHTTPRequestOperation {
 @private
     id _responsePropertyList;
     NSPropertyListFormat _propertyListFormat;
@@ -49,7 +49,7 @@
  
  @return A new property list request operation
  */
-+ (AFPropertyListRequestOperation *)propertyListRequestOperationWithRequest:(NSURLRequest *)request
++ (LWFAFPropertyListRequestOperation *)propertyListRequestOperationWithRequest:(NSURLRequest *)request
                                                                     success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id propertyList))success
                                                                     failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure;
 

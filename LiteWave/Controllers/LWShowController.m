@@ -5,7 +5,7 @@
 
 #import "LWShowController.h"
 #import <AudioToolbox/AudioToolbox.h>
-#import "AFNetworking.h"
+#import "LWFAFNetworking.h"
 #import "LWAppDelegate.h"
 #import "LWResultsController.h"
 #import "LWUtility.h"

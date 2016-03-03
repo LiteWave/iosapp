@@ -2,7 +2,7 @@
 //
 
 
-#import "AFPropertyListRequestOperation.h"
+#import "LWFAFPropertyListRequestOperation.h"
 
 static dispatch_queue_t af_property_list_request_operation_processing_queue;
 static dispatch_queue_t property_list_request_operation_processing_queue() {
@@ -13,7 +13,7 @@ static dispatch_queue_t property_list_request_operation_processing_queue() {
     return af_property_list_request_operation_processing_queue;
 }
 
-@interface AFPropertyListRequestOperation ()
+@interface LWFAFPropertyListRequestOperation ()
 @property (readwrite, nonatomic, retain) id responsePropertyList;
 @property (readwrite, nonatomic, assign) NSPropertyListFormat propertyListFormat;
 @property (readwrite, nonatomic, retain) NSError *error;
@@ -22,17 +22,17 @@ static dispatch_queue_t property_list_request_operation_processing_queue() {
 + (NSSet *)defaultAcceptablePathExtensions;
 @end
 
-@implementation AFPropertyListRequestOperation
+@implementation LWFAFPropertyListRequestOperation
 @synthesize responsePropertyList = _responsePropertyList;
 @synthesize propertyListReadOptions = _propertyListReadOptions;
 @synthesize propertyListFormat = _propertyListFormat;
 @synthesize error = _propertyListError;
 
-+ (AFPropertyListRequestOperation *)propertyListRequestOperationWithRequest:(NSURLRequest *)request
++ (LWFAFPropertyListRequestOperation *)propertyListRequestOperationWithRequest:(NSURLRequest *)request
                                                                     success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id propertyList))success
                                                                     failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
 {
-    AFPropertyListRequestOperation *operation = [[self alloc] initWithRequest:request];
+    LWFAFPropertyListRequestOperation *operation = [[self alloc] initWithRequest:request];
     operation.completionBlock = ^ {
         if ([operation isCancelled]) {
             return;
@@ -109,7 +109,7 @@ static dispatch_queue_t property_list_request_operation_processing_queue() {
     return [[self defaultAcceptableContentTypes] containsObject:[request valueForHTTPHeaderField:@"Accept"]] || [[self defaultAcceptablePathExtensions] containsObject:[[request URL] pathExtension]];
 }
 
-+ (AFHTTPRequestOperation *)HTTPRequestOperationWithRequest:(NSURLRequest *)urlRequest
++ (LWFAFHTTPRequestOperation *)HTTPRequestOperationWithRequest:(NSURLRequest *)urlRequest
                                                     success:(void (^)(id object))success 
                                                     failure:(void (^)(NSHTTPURLResponse *response, NSError *error))failure
 {
