@@ -134,7 +134,7 @@
                              [LWConfiguration instance].mobileOffset = [joinDict objectForKey:@"mobileTimeOffset"];
                              [LWConfiguration instance].showData = [[NSDictionary alloc] initWithDictionary:joinDict copyItems:YES];
                              
-                             UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main"
+                             UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"LWMain"
                                                                                   bundle:[NSBundle bundleForClass:LWReadyController.class]];
                              UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"playing"];
                              [self presentViewController:vc animated:YES completion:nil];

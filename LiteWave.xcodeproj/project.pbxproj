@@ -21,9 +21,8 @@
 		8415795A181A286800D4EBB1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84157958181A286800D4EBB1 /* InfoPlist.strings */; };
 		8415795C181A286800D4EBB1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8415795B181A286800D4EBB1 /* main.m */; };
 		84157960181A286800D4EBB1 /* LWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8415795F181A286800D4EBB1 /* LWAppDelegate.m */; };
-		84157963181A286800D4EBB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84157961181A286800D4EBB1 /* Main.storyboard */; };
+		84157963181A286800D4EBB1 /* LWMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84157961181A286800D4EBB1 /* LWMain.storyboard */; };
 		84157966181A286800D4EBB1 /* LWMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84157965181A286800D4EBB1 /* LWMainController.m */; };
-		8415796F181A286800D4EBB1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8415796E181A286800D4EBB1 /* XCTest.framework */; };
 		84157970181A286800D4EBB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8415794F181A286800D4EBB1 /* Foundation.framework */; };
 		84157971181A286800D4EBB1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84157953181A286800D4EBB1 /* UIKit.framework */; };
 		84157979181A286800D4EBB1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84157977181A286800D4EBB1 /* InfoPlist.strings */; };
@@ -69,9 +68,6 @@
 		84789F02181C65DB00FC59E4 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789E07181C65DA00FC59E4 /* SBJsonWriter.m */; };
 		84789F03181C65DB00FC59E4 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789E0A181C65DA00FC59E4 /* JSONKit.m */; };
 		84789F35181C65DB00FC59E4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789E7C181C65DB00FC59E4 /* Reachability.m */; };
-		84789FC6181C65E400FC59E4 /* NSArray+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789F64181C65E400FC59E4 /* NSArray+Extensions.m */; };
-		84789FC7181C65E400FC59E4 /* NSDictionary+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789F66181C65E400FC59E4 /* NSDictionary+Extensions.m */; };
-		84789FC8181C65E400FC59E4 /* NSUserDefaults+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789F68181C65E400FC59E4 /* NSUserDefaults+Extensions.m */; };
 		84789FF6181C66B800FC59E4 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84789FF5181C66B800FC59E4 /* MobileCoreServices.framework */; };
 		84789FF8181C66CB00FC59E4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84789FF7181C66CB00FC59E4 /* SystemConfiguration.framework */; };
 		84789FFA181C66DB00FC59E4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84789FF9181C66DB00FC59E4 /* MessageUI.framework */; };
@@ -119,7 +115,6 @@
 		84157964181A286800D4EBB1 /* LWMainController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWMainController.h; sourceTree = "<group>"; };
 		84157965181A286800D4EBB1 /* LWMainController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWMainController.m; sourceTree = "<group>"; };
 		8415796D181A286800D4EBB1 /* LiteWaveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiteWaveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8415796E181A286800D4EBB1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		84157976181A286800D4EBB1 /* LightWaveTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LightWaveTests-Info.plist"; sourceTree = "<group>"; };
 		84157978181A286800D4EBB1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8415797A181A286900D4EBB1 /* LiteWaveTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiteWaveTests.m; sourceTree = "<group>"; };
@@ -147,7 +142,7 @@
 		845CD915181DC94B004932BF /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		845CD916181DC94B004932BF /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		845CD917181DC94B004932BF /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
-		845CD92B181DCBD7004932BF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
+		845CD92B181DCBD7004932BF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LWMain.storyboard; sourceTree = "<group>"; };
 		84789D94181C65DA00FC59E4 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		84789D95181C65DA00FC59E4 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		84789D96181C65DA00FC59E4 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -186,12 +181,6 @@
 		84789E0A181C65DA00FC59E4 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		84789E7B181C65DB00FC59E4 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		84789E7C181C65DB00FC59E4 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		84789F63181C65E400FC59E4 /* NSArray+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Extensions.h"; sourceTree = "<group>"; };
-		84789F64181C65E400FC59E4 /* NSArray+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Extensions.m"; sourceTree = "<group>"; };
-		84789F65181C65E400FC59E4 /* NSDictionary+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Extensions.h"; sourceTree = "<group>"; };
-		84789F66181C65E400FC59E4 /* NSDictionary+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Extensions.m"; sourceTree = "<group>"; };
-		84789F67181C65E400FC59E4 /* NSUserDefaults+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+Extensions.h"; sourceTree = "<group>"; };
-		84789F68181C65E400FC59E4 /* NSUserDefaults+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+Extensions.m"; sourceTree = "<group>"; };
 		84789FF5181C66B800FC59E4 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		84789FF7181C66CB00FC59E4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		84789FF9181C66DB00FC59E4 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -226,7 +215,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8415796F181A286800D4EBB1 /* XCTest.framework in Frameworks */,
 				84157971181A286800D4EBB1 /* UIKit.framework in Frameworks */,
 				84157970181A286800D4EBB1 /* Foundation.framework in Frameworks */,
 			);
@@ -278,7 +266,7 @@
 				815EA9121B9271ED007D6C73 /* Images.xcassets */,
 				845CD903181DC94B004932BF /* Assets */,
 				84157955181A286800D4EBB1 /* LiteWave */,
-				84157961181A286800D4EBB1 /* Main.storyboard */,
+				84157961181A286800D4EBB1 /* LWMain.storyboard */,
 				84157974181A286800D4EBB1 /* LiteWaveTests */,
 				8415794E181A286800D4EBB1 /* Frameworks */,
 				8415794D181A286800D4EBB1 /* Products */,
@@ -307,7 +295,6 @@
 				8415794F181A286800D4EBB1 /* Foundation.framework */,
 				84157951181A286800D4EBB1 /* CoreGraphics.framework */,
 				84157953181A286800D4EBB1 /* UIKit.framework */,
-				8415796E181A286800D4EBB1 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -486,22 +473,8 @@
 			children = (
 				84067FEA183B073200232065 /* LWCountDownTimerUtility.h */,
 				84067FEB183B073200232065 /* LWCountDownTimerUtility.m */,
-				84789F62181C65E400FC59E4 /* Categories */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		84789F62181C65E400FC59E4 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				84789F63181C65E400FC59E4 /* NSArray+Extensions.h */,
-				84789F64181C65E400FC59E4 /* NSArray+Extensions.m */,
-				84789F65181C65E400FC59E4 /* NSDictionary+Extensions.h */,
-				84789F66181C65E400FC59E4 /* NSDictionary+Extensions.m */,
-				84789F67181C65E400FC59E4 /* NSUserDefaults+Extensions.h */,
-				84789F68181C65E400FC59E4 /* NSUserDefaults+Extensions.m */,
-			);
-			path = Categories;
 			sourceTree = "<group>";
 		};
 		84789FFD181C779B00FC59E4 /* Models */ = {
@@ -606,7 +579,7 @@
 				845CD91C181DC94B004932BF /* Icon-40@2x.png in Resources */,
 				845CD927181DC94B004932BF /* Icon.png in Resources */,
 				815EA9071B904D16007D6C73 /* lwlogo-sm.png in Resources */,
-				84157963181A286800D4EBB1 /* Main.storyboard in Resources */,
+				84157963181A286800D4EBB1 /* LWMain.storyboard in Resources */,
 				845CD918181DC94B004932BF /* Default-568h@2x~iphone.png in Resources */,
 				845CD928181DC94B004932BF /* Icon@2x.png in Resources */,
 				845CD919181DC94B004932BF /* Default~iphone.png in Resources */,
@@ -644,7 +617,6 @@
 				84157960181A286800D4EBB1 /* LWAppDelegate.m in Sources */,
 				84789ED0181C65DB00FC59E4 /* AFHTTPRequestOperation.m in Sources */,
 				81612A721B656E79009A7E44 /* LWLevelController.m in Sources */,
-				84789FC6181C65E400FC59E4 /* NSArray+Extensions.m in Sources */,
 				81612A6E1B656DEA009A7E44 /* LWSeatController.m in Sources */,
 				84AB8D5E1835F22300E3E8AE /* LWAPIClient.m in Sources */,
 				816D5E341B8948610024C6B5 /* LWUtility.m in Sources */,
@@ -656,8 +628,6 @@
 				84789ED4181C65DB00FC59E4 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				84789ED8181C65DB00FC59E4 /* UIImageView+AFNetworking.m in Sources */,
 				84789ED7181C65DB00FC59E4 /* AFXMLRequestOperation.m in Sources */,
-				84789FC7181C65E400FC59E4 /* NSDictionary+Extensions.m in Sources */,
-				84789FC8181C65E400FC59E4 /* NSUserDefaults+Extensions.m in Sources */,
 				84446C24182CB1AC002D8BDC /* LWShowController.m in Sources */,
 				84789ECF181C65DB00FC59E4 /* AFHTTPClient.m in Sources */,
 				84157966181A286800D4EBB1 /* LWMainController.m in Sources */,
@@ -696,12 +666,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		84157961181A286800D4EBB1 /* Main.storyboard */ = {
+		84157961181A286800D4EBB1 /* LWMain.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				845CD92B181DCBD7004932BF /* en */,
 			);
-			name = Main.storyboard;
+			name = LWMain.storyboard;
 			path = LiteWave;
 			sourceTree = "<group>";
 		};
@@ -822,7 +792,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.litewaveinc.litewave;
 				PRODUCT_NAME = LiteWave;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -852,7 +822,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.litewaveinc.litewave;
 				PRODUCT_NAME = LiteWave;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
