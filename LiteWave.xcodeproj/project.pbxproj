@@ -21,7 +21,7 @@
 		8415795A181A286800D4EBB1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84157958181A286800D4EBB1 /* InfoPlist.strings */; };
 		8415795C181A286800D4EBB1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8415795B181A286800D4EBB1 /* main.m */; };
 		84157960181A286800D4EBB1 /* LWFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8415795F181A286800D4EBB1 /* LWFAppDelegate.m */; };
-		84157963181A286800D4EBB1 /* LWMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84157961181A286800D4EBB1 /* LWMain.storyboard */; };
+		84157963181A286800D4EBB1 /* LWFMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84157961181A286800D4EBB1 /* LWFMain.storyboard */; };
 		84157966181A286800D4EBB1 /* LWFMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84157965181A286800D4EBB1 /* LWFMainController.m */; };
 		84157970181A286800D4EBB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8415794F181A286800D4EBB1 /* Foundation.framework */; };
 		84157971181A286800D4EBB1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84157953181A286800D4EBB1 /* UIKit.framework */; };
@@ -135,7 +135,7 @@
 		845CD915181DC94B004932BF /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		845CD916181DC94B004932BF /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		845CD917181DC94B004932BF /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
-		845CD92B181DCBD7004932BF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LWMain.storyboard; sourceTree = "<group>"; };
+		845CD92B181DCBD7004932BF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LWFMain.storyboard; sourceTree = "<group>"; };
 		84789D94181C65DA00FC59E4 /* LWFAFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWFAFHTTPClient.h; sourceTree = "<group>"; };
 		84789D95181C65DA00FC59E4 /* LWFAFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWFAFHTTPClient.m; sourceTree = "<group>"; };
 		84789D96181C65DA00FC59E4 /* LWFAFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWFAFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -244,7 +244,7 @@
 				815EA9121B9271ED007D6C73 /* Images.xcassets */,
 				845CD903181DC94B004932BF /* Assets */,
 				84157955181A286800D4EBB1 /* LiteWave */,
-				84157961181A286800D4EBB1 /* LWMain.storyboard */,
+				84157961181A286800D4EBB1 /* LWFMain.storyboard */,
 				84157974181A286800D4EBB1 /* LiteWaveTests */,
 				8415794E181A286800D4EBB1 /* Frameworks */,
 				8415794D181A286800D4EBB1 /* Products */,
@@ -526,7 +526,7 @@
 				845CD91C181DC94B004932BF /* Icon-40@2x.png in Resources */,
 				845CD927181DC94B004932BF /* Icon.png in Resources */,
 				815EA9071B904D16007D6C73 /* lwlogo-sm.png in Resources */,
-				84157963181A286800D4EBB1 /* LWMain.storyboard in Resources */,
+				84157963181A286800D4EBB1 /* LWFMain.storyboard in Resources */,
 				845CD918181DC94B004932BF /* Default-568h@2x~iphone.png in Resources */,
 				845CD928181DC94B004932BF /* Icon@2x.png in Resources */,
 				845CD919181DC94B004932BF /* Default~iphone.png in Resources */,
@@ -606,12 +606,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		84157961181A286800D4EBB1 /* LWMain.storyboard */ = {
+		84157961181A286800D4EBB1 /* LWFMain.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				845CD92B181DCBD7004932BF /* en */,
 			);
-			name = LWMain.storyboard;
+			name = LWFMain.storyboard;
 			path = LiteWave;
 			sourceTree = "<group>";
 		};

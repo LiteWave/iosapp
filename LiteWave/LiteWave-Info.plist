@@ -73,7 +73,7 @@
 		</dict>
 	</dict>
 	<key>UIMainStoryboardFile</key>
-	<string>LWMain</string>
+	<string>LWFMain</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

@@ -432,7 +432,7 @@
                               [defaults setValue:[LWFConfiguration instance].mobileOffset forKey:@"mobileOffset"];
                               [defaults synchronize];
                               
-                              UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"LWMain"
+                              UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"LWFMain"
                                                                                    bundle:[NSBundle bundleForClass:LWFSeatController.class]];
                               LWFReadyController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
                               [self.navigationController pushViewController:ready animated:YES];

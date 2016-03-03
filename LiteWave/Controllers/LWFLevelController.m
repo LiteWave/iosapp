@@ -60,7 +60,7 @@
     
     [LWFConfiguration instance].levelID = [[levels objectAtIndex:selectedLevelIndex] valueForKeyPath:@"name"];
     
-    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"LWMain"
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"LWFMain"
                                                          bundle:[NSBundle bundleForClass:LWFLevelController.class]];
     LWFSeatController *seat = [storyboard instantiateViewControllerWithIdentifier:@"seat"];
     [self.navigationController pushViewController:seat animated:YES];

@@ -126,7 +126,7 @@
 {
     [self.frameTimer invalidate];
     
-    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"LWMain"
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"LWFMain"
                                                          bundle:[NSBundle bundleForClass:LWFShowController.class]];
     LWFResultsController *results = [storyboard instantiateViewControllerWithIdentifier:@"results"];
     [self presentViewController:results animated:YES completion:nil];
