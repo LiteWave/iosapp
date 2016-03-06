@@ -41,7 +41,7 @@
     
     sourceGMTOffset = [destinationTimeZone secondsFromGMTForDate:today];
     destinationGMTOffset = [sourceTimeZone secondsFromGMTForDate:today];
-    interval = destinationGMTOffset - sourceGMTOffset + offset/1000;
+    interval = destinationGMTOffset - sourceGMTOffset - offset/1000;
     
     NSDate* todayDate = [[NSDate alloc] initWithTimeInterval:interval sinceDate:today];
 

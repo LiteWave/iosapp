@@ -293,7 +293,6 @@
     buttonLabel.textAlignment = NSTextAlignmentCenter;
     [buttonLabel setTextColor:[LWFConfiguration instance].textSelectedColor];
     [buttonLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:20.0f]];
-    [buttonLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:buttonLabel];
 }
 
@@ -305,7 +304,6 @@
                                                          50)];
     [infoLabel setTextColor:[LWFConfiguration instance].textColor];
     [infoLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:19.0f]];
-    [infoLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     infoLabel.textAlignment = NSTextAlignmentCenter;
     infoLabel.text = label;
     [self.view addSubview:infoLabel];
