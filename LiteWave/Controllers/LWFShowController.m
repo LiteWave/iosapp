@@ -21,10 +21,7 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    self.timerLabel.hidden = YES;
-    self.startsInLabel.hidden = YES;
-    self.winnerLabel.hidden = YES;
-    self.infoLabel.hidden = YES;
+    [self clearShow];
     
     [self.navigationItem setHidesBackButton:YES animated:NO];
 
@@ -33,7 +30,6 @@
     
     self.appDelegate = (LWFAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    self.view.backgroundColor = [UIColor blackColor];
     self.timerLabel.textColor = [LWFConfiguration instance].highlightColor;
     self.startsInLabel.textColor = [LWFConfiguration instance].highlightColor;
     self.infoLabel.textColor = [LWFConfiguration instance].highlightColor;
@@ -41,19 +37,15 @@
                                       self.view.frame.size.height - self.infoLabel.frame.size.height - 10,
                                       self.infoLabel.frame.size.width,
                                       self.infoLabel.frame.size.height);
+    
+    position=0;
+    diff=0;
+
+    [self startShow];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
-    
     [self.navigationItem setHidesBackButton:YES animated:NO];
-    
-    self.timerLabel.hidden = YES;
-    self.startsInLabel.hidden = YES;
-    self.infoLabel.hidden = YES;
-    position=0;
-    diff=0;
-    
-    [self startShow];
 }
 
 -(void)viewDidUnload {
@@ -65,6 +57,15 @@
 -(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)clearShow {
+    self.view.backgroundColor = [UIColor blackColor];
+
+    self.timerLabel.hidden = YES;
+    self.startsInLabel.hidden = YES;
+    self.winnerLabel.hidden = YES;
+    self.infoLabel.hidden = YES;
 }
 
 -(void)startShow {
@@ -131,7 +132,7 @@
     LWFResultsController *results = [storyboard instantiateViewControllerWithIdentifier:@"results"];
     [self presentViewController:results animated:YES completion:nil];
     
-    self.winnerLabel.hidden = YES;
+    [self clearShow];
 }
 
 -(void)timesUpWithLabel:(UILabel *)label

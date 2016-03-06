@@ -137,6 +137,8 @@
                                                                                   bundle:[NSBundle bundleForClass:LWFReadyController.class]];
                              UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"playing"];
                              [self presentViewController:vc animated:YES completion:nil];
+
+                             [self disableJoin];
                          }
                          onFailure:^(NSError *error) {
                              UIAlertController *alert =  [UIAlertController
