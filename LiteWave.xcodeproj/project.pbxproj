@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8115B4681CA658FE00F48E33 /* LWFLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8115B4671CA658FE00F48E33 /* LWFLaunchScreen.storyboard */; };
+		8115B46A1CA65B6100F48E33 /* Default-736@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8115B4691CA65B6100F48E33 /* Default-736@2x.png */; };
 		815EA9071B904D16007D6C73 /* lwf-lwlogo-sm.png in Resources */ = {isa = PBXBuildFile; fileRef = 815EA9061B904D16007D6C73 /* lwf-lwlogo-sm.png */; };
 		815EA9131B9271ED007D6C73 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 815EA9121B9271ED007D6C73 /* Images.xcassets */; };
 		81612A6E1B656DEA009A7E44 /* LWFSeatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81612A6D1B656DEA009A7E44 /* LWFSeatController.m */; };
@@ -81,6 +83,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8115B4671CA658FE00F48E33 /* LWFLaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LWFLaunchScreen.storyboard; path = LiteWave/LWFLaunchScreen.storyboard; sourceTree = "<group>"; };
+		8115B4691CA65B6100F48E33 /* Default-736@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736@2x.png"; sourceTree = "<group>"; };
 		815EA9061B904D16007D6C73 /* lwf-lwlogo-sm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lwf-lwlogo-sm.png"; sourceTree = "<group>"; };
 		815EA9121B9271ED007D6C73 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		81612A6C1B656DD8009A7E44 /* LWFSeatController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWFSeatController.h; sourceTree = "<group>"; };
@@ -245,6 +249,7 @@
 				845CD903181DC94B004932BF /* Assets */,
 				84157955181A286800D4EBB1 /* LiteWave */,
 				84157961181A286800D4EBB1 /* LWFMain.storyboard */,
+				8115B4671CA658FE00F48E33 /* LWFLaunchScreen.storyboard */,
 				84157974181A286800D4EBB1 /* LiteWaveTests */,
 				8415794E181A286800D4EBB1 /* Frameworks */,
 				8415794D181A286800D4EBB1 /* Products */,
@@ -337,6 +342,7 @@
 		845CD903181DC94B004932BF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				8115B4691CA65B6100F48E33 /* Default-736@2x.png */,
 				815EA9061B904D16007D6C73 /* lwf-lwlogo-sm.png */,
 				845CD904181DC94B004932BF /* Default-568h@2x~iphone.png */,
 				845CD905181DC94B004932BF /* Default~iphone.png */,
@@ -513,6 +519,7 @@
 			files = (
 				845CD91D181DC94B004932BF /* Icon-60.png in Resources */,
 				815EA9131B9271ED007D6C73 /* Images.xcassets in Resources */,
+				8115B46A1CA65B6100F48E33 /* Default-736@2x.png in Resources */,
 				845CD91B181DC94B004932BF /* Icon-40.png in Resources */,
 				845CD926181DC94B004932BF /* Icon-Small@2x.png in Resources */,
 				845CD924181DC94B004932BF /* Icon-Small-50@2x.png in Resources */,
@@ -529,6 +536,7 @@
 				84157963181A286800D4EBB1 /* LWFMain.storyboard in Resources */,
 				845CD918181DC94B004932BF /* Default-568h@2x~iphone.png in Resources */,
 				845CD928181DC94B004932BF /* Icon@2x.png in Resources */,
+				8115B4681CA658FE00F48E33 /* LWFLaunchScreen.storyboard in Resources */,
 				845CD919181DC94B004932BF /* Default~iphone.png in Resources */,
 				845CD91A181DC94B004932BF /* Default.png in Resources */,
 				845CD922181DC94B004932BF /* Icon-76@2x.png in Resources */,

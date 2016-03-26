@@ -72,6 +72,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>UILaunchStoryboardName</key>
+	<string>LWFLaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>LWFMain</string>
 	<key>UIRequiredDeviceCapabilities</key>
