@@ -91,6 +91,11 @@
 - (void)saveEvent:(id)event {
     self.view.backgroundColor = [LWFConfiguration instance].backgroundColor;
     
+    // if the event changed, clear the seat info
+    if (![[LWFConfiguration instance].eventID isEqualToString:[event valueForKey:@"_id"]]) {
+        [LWFConfiguration instance].userLocationID = nil;
+    }
+    
     [LWFConfiguration instance].eventID = [event valueForKey:@"_id"];
     [LWFConfiguration instance].eventName = [event valueForKey:@"name"];
     
@@ -142,6 +147,7 @@
 - (void)updateDefaults {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
+    [defaults setObject:[LWFConfiguration instance].eventID forKey:@"eventID"];
     [defaults setObject:[LWFConfiguration instance].stadiumID forKey:@"stadiumID"];
     [defaults setObject:[LWFConfiguration instance].seatID forKey:@"seatID"];
     [defaults setObject:[LWFConfiguration instance].rowID forKey:@"rowID"];
