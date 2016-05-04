@@ -9,17 +9,17 @@
  
  @discussion Error codes for AFNetworkingErrorDomain correspond to codes in NSURLErrorDomain.
  */
-extern NSString * const AFNetworkingErrorDomain;
+extern NSString * const LWFAFNetworkingErrorDomain;
 
 /**
  Posted when an operation begins executing.
  */
-extern NSString * const AFNetworkingOperationDidStartNotification;
+extern NSString * const LWFAFNetworkingOperationDidStartNotification;
 
 /**
  Posted when an operation finishes.
  */
-extern NSString * const AFNetworkingOperationDidFinishNotification;
+extern NSString * const LWFAFNetworkingOperationDidFinishNotification;
 
 /**
  `AFURLConnectionOperation` is an `NSOperation` that implements NSURLConnection delegate methods.

@@ -4,7 +4,7 @@
 
 #import "LWFAFImageCache.h"
 
-static inline NSString * AFImageCacheKeyFromURLAndCacheName(NSURL *url, NSString *cacheName) {
+static inline NSString * LWFAFImageCacheKeyFromURLAndCacheName(NSURL *url, NSString *cacheName) {
     return [[url absoluteString] stringByAppendingFormat:@"#%@", cacheName];
 }
 
@@ -25,7 +25,7 @@ static inline NSString * AFImageCacheKeyFromURLAndCacheName(NSURL *url, NSString
 - (UIImage *)cachedImageForURL:(NSURL *)url
                      cacheName:(NSString *)cacheName
 {
-    return [UIImage imageWithData:[self objectForKey:AFImageCacheKeyFromURLAndCacheName(url, cacheName)]];
+    return [UIImage imageWithData:[self objectForKey:LWFAFImageCacheKeyFromURLAndCacheName(url, cacheName)]];
 }
 #elif __MAC_OS_X_VERSION_MIN_REQUIRED
 - (NSImage *)cachedImageForURL:(NSURL *)url
@@ -39,7 +39,7 @@ static inline NSString * AFImageCacheKeyFromURLAndCacheName(NSURL *url, NSString
                 forURL:(NSURL *)url
              cacheName:(NSString *)cacheName
 {
-    [self setObject:[NSPurgeableData dataWithData:imageData] forKey:AFImageCacheKeyFromURLAndCacheName(url, cacheName)];
+    [self setObject:[NSPurgeableData dataWithData:imageData] forKey:LWFAFImageCacheKeyFromURLAndCacheName(url, cacheName)];
 }
 
 @end

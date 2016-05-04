@@ -15,10 +15,10 @@
 
 #import "LWFJSONKit.h"
 
-static NSString * const kAFMultipartFormLineDelimiter = @"\r\n"; // CRLF
-static NSString * const kAFMultipartFormBoundary = @"Boundary+0xAbCdEfGbOuNdArY";
+static NSString * const kLWFAFMultipartFormLineDelimiter = @"\r\n"; // CRLF
+static NSString * const kLWFAFMultipartFormBoundary = @"Boundary+0xAbCdEfGbOuNdArY";
 
-@interface AFMultipartFormData : NSObject <AFMultipartFormData> {
+@interface LWFAFMultipartFormData : NSObject <LWFAFMultipartFormData> {
 @private
     NSStringEncoding _stringEncoding;
     NSMutableData *_mutableData;
@@ -32,9 +32,9 @@ static NSString * const kAFMultipartFormBoundary = @"Boundary+0xAbCdEfGbOuNdArY"
 
 #pragma mark -
 
-static NSUInteger const kAFHTTPClientDefaultMaxConcurrentOperationCount = 4;
+static NSUInteger const kLWFAFHTTPClientDefaultMaxConcurrentOperationCount = 4;
 
-static NSString * AFBase64EncodedStringFromString(NSString *string) {
+static NSString * LWFAFBase64EncodedStringFromString(NSString *string) {
     NSData *data = [NSData dataWithBytes:[string UTF8String] length:[string length]];
     NSUInteger length = [data length];
     NSMutableData *mutableData = [NSMutableData dataWithLength:((length + 2) / 3) * 4];
@@ -63,7 +63,7 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
     return [[NSString alloc] initWithData:mutableData encoding:NSASCIIStringEncoding];
 }
 
-static NSURL * AFURLWithPathRelativeToURL(NSString *path, NSURL *baseURL) {
+static NSURL * LWFAFURLWithPathRelativeToURL(NSString *path, NSURL *baseURL) {
     if (!path) {
         return baseURL;
     }
@@ -77,23 +77,23 @@ static NSURL * AFURLWithPathRelativeToURL(NSString *path, NSURL *baseURL) {
     return [NSURL URLWithString:URLString];
 }
 
-static NSString * AFURLEncodedStringFromString(NSString *string) {
+static NSString * LWFAFURLEncodedStringFromString(NSString *string) {
     static NSString * const kAFLegalCharactersToBeEscaped = @"?!@#$^&%*+,:;='\"`<>()[]{}/\\|~ ";
     
 	return (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)string, NULL, (CFStringRef)kAFLegalCharactersToBeEscaped, CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
 }
 
-static NSString * AFQueryStringFromParameters(NSDictionary *parameters) {
+static NSString * LWFAFQueryStringFromParameters(NSDictionary *parameters) {
     NSMutableArray *mutableParameterComponents = [NSMutableArray array];
     for (id key in [parameters allKeys]) {
-        NSString *component = [NSString stringWithFormat:@"%@=%@", AFURLEncodedStringFromString([key description]), AFURLEncodedStringFromString([[parameters valueForKey:key] description])];
+        NSString *component = [NSString stringWithFormat:@"%@=%@", LWFAFURLEncodedStringFromString([key description]), LWFAFURLEncodedStringFromString([[parameters valueForKey:key] description])];
         [mutableParameterComponents addObject:component];
     }
     
     return [mutableParameterComponents componentsJoinedByString:@"&"];
 }
 
-static NSString * AFJSONStringFromParameters(NSDictionary *parameters) {
+static NSString * LWFAFJSONStringFromParameters(NSDictionary *parameters) {
     NSString *JSONString = nil;
     
 #if __IPHONE_OS_VERSION_MIN_REQUIRED > __IPHONE_4_3 || __MAC_OS_X_VERSION_MIN_REQUIRED > __MAC_10_6
@@ -113,7 +113,7 @@ static NSString * AFJSONStringFromParameters(NSDictionary *parameters) {
     return JSONString;
 }
 
-static NSString * AFPropertyListStringFromParameters(NSDictionary *parameters) {
+static NSString * LWFAFPropertyListStringFromParameters(NSDictionary *parameters) {
     NSString *propertyListString = nil;
     NSError *error = nil;
     
@@ -153,7 +153,7 @@ static NSString * AFPropertyListStringFromParameters(NSDictionary *parameters) {
     self.baseURL = url;
     
     self.stringEncoding = NSUTF8StringEncoding;
-    self.parameterEncoding = AFFormURLParameterEncoding;
+    self.parameterEncoding = LWFAFFormURLParameterEncoding;
 	
     self.registeredHTTPOperationClassNames = [NSMutableArray array];
     
@@ -174,7 +174,7 @@ static NSString * AFPropertyListStringFromParameters(NSDictionary *parameters) {
 #endif
     
     self.operationQueue = [[NSOperationQueue alloc] init];
-	[self.operationQueue setMaxConcurrentOperationCount:kAFHTTPClientDefaultMaxConcurrentOperationCount];
+	[self.operationQueue setMaxConcurrentOperationCount:kLWFAFHTTPClientDefaultMaxConcurrentOperationCount];
     
     return self;
 }
@@ -186,7 +186,7 @@ static NSString * AFPropertyListStringFromParameters(NSDictionary *parameters) {
 #pragma mark -
 
 - (BOOL)registerHTTPOperationClass:(Class)operationClass {
-    if (![operationClass conformsToProtocol:@protocol(AFHTTPClientOperation)]) {
+    if (![operationClass conformsToProtocol:@protocol(LWFAFHTTPClientOperation)]) {
         return NO;
     }
     
@@ -214,7 +214,7 @@ static NSString * AFPropertyListStringFromParameters(NSDictionary *parameters) {
 
 - (void)setAuthorizationHeaderWithUsername:(NSString *)username password:(NSString *)password {
 	NSString *basicAuthCredentials = [NSString stringWithFormat:@"%@:%@", username, password];
-    [self setDefaultHeader:@"Authorization" value:[NSString stringWithFormat:@"Basic %@", AFBase64EncodedStringFromString(basicAuthCredentials)]];
+    [self setDefaultHeader:@"Authorization" value:[NSString stringWithFormat:@"Basic %@", LWFAFBase64EncodedStringFromString(basicAuthCredentials)]];
 }
 
 - (void)setAuthorizationHeaderWithToken:(NSString *)token {
@@ -231,29 +231,29 @@ static NSString * AFPropertyListStringFromParameters(NSDictionary *parameters) {
                                       path:(NSString *)path 
                                 parameters:(NSDictionary *)parameters 
 {	
-    NSURL *url = AFURLWithPathRelativeToURL(path, self.baseURL);
+    NSURL *url = LWFAFURLWithPathRelativeToURL(path, self.baseURL);
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setHTTPMethod:method];
     [request setAllHTTPHeaderFields:self.defaultHeaders];
 	
     if (parameters) {        
         if ([method isEqualToString:@"GET"]) {
-            url = [NSURL URLWithString:[[url absoluteString] stringByAppendingFormat:[path rangeOfString:@"?"].location == NSNotFound ? @"?%@" : @"&%@", AFQueryStringFromParameters(parameters)]];
+            url = [NSURL URLWithString:[[url absoluteString] stringByAppendingFormat:[path rangeOfString:@"?"].location == NSNotFound ? @"?%@" : @"&%@", LWFAFQueryStringFromParameters(parameters)]];
             [request setURL:url];
         } else {
             NSString *charset = (NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(self.stringEncoding));
             switch (self.parameterEncoding) {
-                case AFFormURLParameterEncoding:;
+                case LWFAFFormURLParameterEncoding:;
                     [request setValue:[NSString stringWithFormat:@"application/x-www-form-urlencoded; charset=%@", charset] forHTTPHeaderField:@"Content-Type"];
-                    [request setHTTPBody:[AFQueryStringFromParameters(parameters) dataUsingEncoding:self.stringEncoding]];
+                    [request setHTTPBody:[LWFAFQueryStringFromParameters(parameters) dataUsingEncoding:self.stringEncoding]];
                     break;
-                case AFJSONParameterEncoding:;
+                case LWFAFJSONParameterEncoding:;
                     [request setValue:[NSString stringWithFormat:@"application/json; charset=%@", charset] forHTTPHeaderField:@"Content-Type"];
-                    [request setHTTPBody:[AFJSONStringFromParameters(parameters) dataUsingEncoding:self.stringEncoding]];
+                    [request setHTTPBody:[LWFAFJSONStringFromParameters(parameters) dataUsingEncoding:self.stringEncoding]];
                     break;
-                case AFPropertyListParameterEncoding:;
+                case LWFAFPropertyListParameterEncoding:;
                     [request setValue:[NSString stringWithFormat:@"application/x-plist; charset=%@", charset] forHTTPHeaderField:@"Content-Type"];
-                    [request setHTTPBody:[AFPropertyListStringFromParameters(parameters) dataUsingEncoding:self.stringEncoding]];
+                    [request setHTTPBody:[LWFAFPropertyListStringFromParameters(parameters) dataUsingEncoding:self.stringEncoding]];
                     break;
             }
         }
@@ -265,7 +265,7 @@ static NSString * AFPropertyListStringFromParameters(NSDictionary *parameters) {
 - (NSMutableURLRequest *)multipartFormRequestWithMethod:(NSString *)method
                                                    path:(NSString *)path
                                              parameters:(NSDictionary *)parameters
-                              constructingBodyWithBlock:(void (^)(id <AFMultipartFormData>formData))block
+                              constructingBodyWithBlock:(void (^)(id <LWFAFMultipartFormData>formData))block
 {
     if (!([method isEqualToString:@"POST"] || [method isEqualToString:@"PUT"] || [method isEqualToString:@"DELETE"])) {
         [NSException raise:@"Invalid HTTP Method" format:@"%@ is not supported for multipart form requests; must be either POST, PUT, or DELETE", method];
@@ -273,7 +273,7 @@ static NSString * AFPropertyListStringFromParameters(NSDictionary *parameters) {
     }
     
     NSMutableURLRequest *request = [self requestWithMethod:method path:path parameters:nil];
-    __block AFMultipartFormData *formData = [[AFMultipartFormData alloc] initWithStringEncoding:self.stringEncoding];
+    __block LWFAFMultipartFormData *formData = [[LWFAFMultipartFormData alloc] initWithStringEncoding:self.stringEncoding];
     
     id key = nil;
 	NSEnumerator *enumerator = [parameters keyEnumerator];
@@ -294,7 +294,7 @@ static NSString * AFPropertyListStringFromParameters(NSDictionary *parameters) {
         block(formData);
     }
     
-    [request setValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@", kAFMultipartFormBoundary] forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@", kLWFAFMultipartFormBoundary] forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:[formData data]];
     
 
@@ -377,20 +377,20 @@ static NSString * AFPropertyListStringFromParameters(NSDictionary *parameters) {
 
 #pragma mark -
 
-static inline NSString * AFMultipartFormEncapsulationBoundary() {
-    return [NSString stringWithFormat:@"%@--%@%@", kAFMultipartFormLineDelimiter, kAFMultipartFormBoundary, kAFMultipartFormLineDelimiter];
+static inline NSString * LWFAFMultipartFormEncapsulationBoundary() {
+    return [NSString stringWithFormat:@"%@--%@%@", kLWFAFMultipartFormLineDelimiter, kLWFAFMultipartFormBoundary, kLWFAFMultipartFormLineDelimiter];
 }
 
-static inline NSString * AFMultipartFormFinalBoundary() {
-    return [NSString stringWithFormat:@"%@--%@--", kAFMultipartFormLineDelimiter, kAFMultipartFormBoundary];
+static inline NSString * LWFAFMultipartFormFinalBoundary() {
+    return [NSString stringWithFormat:@"%@--%@--", kLWFAFMultipartFormLineDelimiter, kLWFAFMultipartFormBoundary];
 }
 
-@interface AFMultipartFormData ()
+@interface LWFAFMultipartFormData ()
 @property (readwrite, nonatomic, assign) NSStringEncoding stringEncoding;
 @property (readwrite, nonatomic, retain) NSMutableData *mutableData;
 @end
 
-@implementation AFMultipartFormData
+@implementation LWFAFMultipartFormData
 @synthesize stringEncoding = _stringEncoding;
 @synthesize mutableData = _mutableData;
 
@@ -412,20 +412,20 @@ static inline NSString * AFMultipartFormFinalBoundary() {
 
 - (NSData *)data {
     NSMutableData *finalizedData = [NSMutableData dataWithData:self.mutableData];
-    [finalizedData appendData:[AFMultipartFormFinalBoundary() dataUsingEncoding:self.stringEncoding]];
+    [finalizedData appendData:[LWFAFMultipartFormFinalBoundary() dataUsingEncoding:self.stringEncoding]];
     return finalizedData;
 }
 
-#pragma mark - AFMultipartFormData
+#pragma mark - LWFAFMultipartFormData
 
 - (void)appendPartWithHeaders:(NSDictionary *)headers body:(NSData *)body {
-    [self appendString:AFMultipartFormEncapsulationBoundary()];
+    [self appendString:LWFAFMultipartFormEncapsulationBoundary()];
     
     for (NSString *field in [headers allKeys]) {
-        [self appendString:[NSString stringWithFormat:@"%@: %@%@", field, [headers valueForKey:field], kAFMultipartFormLineDelimiter]];
+        [self appendString:[NSString stringWithFormat:@"%@: %@%@", field, [headers valueForKey:field], kLWFAFMultipartFormLineDelimiter]];
     }
     
-    [self appendString:kAFMultipartFormLineDelimiter];
+    [self appendString:kLWFAFMultipartFormLineDelimiter];
     [self appendData:body];
 }
 

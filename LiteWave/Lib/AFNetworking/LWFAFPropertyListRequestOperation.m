@@ -4,13 +4,13 @@
 
 #import "LWFAFPropertyListRequestOperation.h"
 
-static dispatch_queue_t af_property_list_request_operation_processing_queue;
+static dispatch_queue_t lwfaf_property_list_request_operation_processing_queue;
 static dispatch_queue_t property_list_request_operation_processing_queue() {
-    if (af_property_list_request_operation_processing_queue == NULL) {
-        af_property_list_request_operation_processing_queue = dispatch_queue_create("com.alamofire.networking.property-list-request.processing", 0);
+    if (lwfaf_property_list_request_operation_processing_queue == NULL) {
+        lwfaf_property_list_request_operation_processing_queue = dispatch_queue_create("com.alamofire.networking.property-list-request.processing", 0);
     }
     
-    return af_property_list_request_operation_processing_queue;
+    return lwfaf_property_list_request_operation_processing_queue;
 }
 
 @interface LWFAFPropertyListRequestOperation ()
@@ -103,7 +103,7 @@ static dispatch_queue_t property_list_request_operation_processing_queue() {
     return _responsePropertyList;
 }
 
-#pragma mark - AFHTTPClientOperation
+#pragma mark - LWFAFHTTPClientOperation
 
 + (BOOL)canProcessRequest:(NSURLRequest *)request {
     return [[self defaultAcceptableContentTypes] containsObject:[request valueForHTTPHeaderField:@"Accept"]] || [[self defaultAcceptablePathExtensions] containsObject:[[request URL] pathExtension]];

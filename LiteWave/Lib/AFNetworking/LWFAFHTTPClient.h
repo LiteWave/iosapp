@@ -5,17 +5,17 @@
 #import <Foundation/Foundation.h>
 
 @class LWFAFHTTPRequestOperation;
-@protocol AFHTTPClientOperation;
-@protocol AFMultipartFormData;
+@protocol LWFAFHTTPClientOperation;
+@protocol LWFAFMultipartFormData;
 
 /**
  Method used to encode parameters into request body 
  */
 typedef enum {
-    AFFormURLParameterEncoding,
-    AFJSONParameterEncoding,
-    AFPropertyListParameterEncoding,
-} AFHTTPClientParameterEncoding;
+    LWFAFFormURLParameterEncoding,
+    LWFAFJSONParameterEncoding,
+    LWFAFPropertyListParameterEncoding,
+} LWFAFHTTPClientParameterEncoding;
 
 /**
  `AFHTTPClient` captures the common patterns of communicating with an web application over HTTP. It encapsulates information like base URL, authorization credentials, and HTTP headers, and uses them to construct and manage the execution of HTTP request operations.
@@ -48,7 +48,7 @@ typedef enum {
 @private
     NSURL *_baseURL;
     NSStringEncoding _stringEncoding;
-    AFHTTPClientParameterEncoding _parameterEncoding;
+    LWFAFHTTPClientParameterEncoding _parameterEncoding;
     NSMutableArray *_registeredHTTPOperationClassNames;
     NSMutableDictionary *_defaultHeaders;
     NSOperationQueue *_operationQueue;
@@ -71,7 +71,7 @@ typedef enum {
 /**
  The `AFHTTPClientParameterEncoding` value corresponding to how parameters are encoded into a request body. This is `AFFormURLParameterEncoding` by default.
  */
-@property (nonatomic, assign) AFHTTPClientParameterEncoding parameterEncoding;
+@property (nonatomic, assign) LWFAFHTTPClientParameterEncoding parameterEncoding;
 
 /**
  The operation queue which manages operations enqueued by the HTTP client.
@@ -207,7 +207,7 @@ typedef enum {
 - (NSMutableURLRequest *)multipartFormRequestWithMethod:(NSString *)method
                                                    path:(NSString *)path
                                              parameters:(NSDictionary *)parameters
-                              constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block;
+                              constructingBodyWithBlock:(void (^)(id <LWFAFMultipartFormData> formData))block;
 
 
 ///--------------------------------
@@ -319,7 +319,7 @@ typedef enum {
  
  @see `AFHTTPClient -registerHTTPOperationClass:`
  */
-@protocol AFHTTPClientOperation
+@protocol LWFAFHTTPClientOperation
 
 /**
  A Boolean value determining whether or not the class can process the specified request. For example, `AFJSONRequestOperation` may check to make sure the content type was `application/json` or the URL path extension was `.json`.
@@ -348,7 +348,7 @@ typedef enum {
  @see `AFHTTPClient -multipartFormRequestWithMethod:path:parameters:constructingBodyWithBlock:`
 
  */
-@protocol AFMultipartFormData
+@protocol LWFAFMultipartFormData
 
 /**
  Appends HTTP headers, followed by the encoded data and the multipart form boundary.

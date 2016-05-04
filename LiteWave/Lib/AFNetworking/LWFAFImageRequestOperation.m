@@ -5,13 +5,13 @@
 #import "LWFAFImageRequestOperation.h"
 #import "LWFAFImageCache.h"
 
-static dispatch_queue_t af_image_request_operation_processing_queue;
+static dispatch_queue_t lwfaf_image_request_operation_processing_queue;
 static dispatch_queue_t image_request_operation_processing_queue() {
-    if (af_image_request_operation_processing_queue == NULL) {
-        af_image_request_operation_processing_queue = dispatch_queue_create("com.alamofire.networking.image-request.processing", 0);
+    if (lwfaf_image_request_operation_processing_queue == NULL) {
+        lwfaf_image_request_operation_processing_queue = dispatch_queue_create("com.alamofire.networking.image-request.processing", 0);
     }
     
-    return af_image_request_operation_processing_queue;
+    return lwfaf_image_request_operation_processing_queue;
 }
 
 @interface LWFAFImageRequestOperation ()
@@ -39,7 +39,7 @@ static dispatch_queue_t image_request_operation_processing_queue() {
     } failure:nil];
 }
 #elif __MAC_OS_X_VERSION_MIN_REQUIRED 
-+ (AFImageRequestOperation *)imageRequestOperationWithRequest:(NSURLRequest *)urlRequest                
++ (LWFAFImageRequestOperation *)imageRequestOperationWithRequest:(NSURLRequest *)urlRequest
                                                       success:(void (^)(NSImage *image))success
 {
     return [self imageRequestOperationWithRequest:urlRequest imageProcessingBlock:nil cacheName:nil success:^(NSURLRequest __unused *request, NSHTTPURLResponse __unused *response, NSImage *image) {
@@ -95,13 +95,13 @@ static dispatch_queue_t image_request_operation_processing_queue() {
     return operation;
 }
 #elif __MAC_OS_X_VERSION_MIN_REQUIRED 
-+ (AFImageRequestOperation *)imageRequestOperationWithRequest:(NSURLRequest *)urlRequest
++ (LWFAFImageRequestOperation *)imageRequestOperationWithRequest:(NSURLRequest *)urlRequest
                                          imageProcessingBlock:(NSImage *(^)(NSImage *))imageProcessingBlock
                                                     cacheName:(NSString *)cacheNameOrNil
                                                       success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSImage *image))success
                                                       failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
 {
-    AFImageRequestOperation *operation = [[[AFImageRequestOperation alloc] initWithRequest:urlRequest] autorelease];
+    LWFAFImageRequestOperation *operation = [[[LWFAFImageRequestOperation alloc] initWithRequest:urlRequest] autorelease];
     
     operation.completionBlock = ^ {
         if ([operation isCancelled]) {
@@ -129,7 +129,7 @@ static dispatch_queue_t image_request_operation_processing_queue() {
                 }
                 
                 if ([operation.request cachePolicy] != NSURLCacheStorageNotAllowed) {
-                    [[AFImageCache sharedImageCache] cacheImageData:operation.responseData forURL:[operation.request URL] cacheName:cacheNameOrNil];
+                    [[LWFAFImageCache sharedImageCache] cacheImageData:operation.responseData forURL:[operation.request URL] cacheName:cacheNameOrNil];
                 }
             }
         });        
@@ -185,7 +185,7 @@ static dispatch_queue_t image_request_operation_processing_queue() {
 }
 #endif
 
-#pragma mark - AFHTTPClientOperation
+#pragma mark - LWFAFHTTPClientOperation
 
 + (BOOL)canProcessRequest:(NSURLRequest *)request {
     return [[self defaultAcceptableContentTypes] containsObject:[request valueForHTTPHeaderField:@"Accept"]] || [[self defaultAcceptablePathExtensions] containsObject:[[request URL] pathExtension]];
@@ -203,7 +203,7 @@ static dispatch_queue_t image_request_operation_processing_queue() {
     }];
 }
 #elif __MAC_OS_X_VERSION_MIN_REQUIRED 
-+ (AFHTTPRequestOperation *)HTTPRequestOperationWithRequest:(NSURLRequest *)urlRequest
++ (LWFAFHTTPRequestOperation *)HTTPRequestOperationWithRequest:(NSURLRequest *)urlRequest
                                                     success:(void (^)(id object))success 
                                                     failure:(void (^)(NSHTTPURLResponse *response, NSError *error))failure
 {

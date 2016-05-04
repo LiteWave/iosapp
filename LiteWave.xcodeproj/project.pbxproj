@@ -61,7 +61,6 @@
 		84789ED5181C65DB00FC59E4 /* LWFAFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789DA2181C65DA00FC59E4 /* LWFAFPropertyListRequestOperation.m */; };
 		84789ED6181C65DB00FC59E4 /* LWFAFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789DA4181C65DA00FC59E4 /* LWFAFURLConnectionOperation.m */; };
 		84789ED7181C65DB00FC59E4 /* LWFAFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789DA6181C65DA00FC59E4 /* LWFAFXMLRequestOperation.m */; };
-		84789ED8181C65DB00FC59E4 /* UIImageView+LWFAFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789DA8181C65DA00FC59E4 /* UIImageView+LWFAFNetworking.m */; };
 		84789F03181C65DB00FC59E4 /* LWFJSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84789E0A181C65DA00FC59E4 /* LWFJSONKit.m */; };
 		84789FF6181C66B800FC59E4 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84789FF5181C66B800FC59E4 /* MobileCoreServices.framework */; };
 		84789FF8181C66CB00FC59E4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84789FF7181C66CB00FC59E4 /* SystemConfiguration.framework */; };
@@ -159,8 +158,6 @@
 		84789DA4181C65DA00FC59E4 /* LWFAFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWFAFURLConnectionOperation.m; sourceTree = "<group>"; };
 		84789DA5181C65DA00FC59E4 /* LWFAFXMLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWFAFXMLRequestOperation.h; sourceTree = "<group>"; };
 		84789DA6181C65DA00FC59E4 /* LWFAFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWFAFXMLRequestOperation.m; sourceTree = "<group>"; };
-		84789DA7181C65DA00FC59E4 /* UIImageView+LWFAFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LWFAFNetworking.h"; sourceTree = "<group>"; };
-		84789DA8181C65DA00FC59E4 /* UIImageView+LWFAFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LWFAFNetworking.m"; sourceTree = "<group>"; };
 		84789E09181C65DA00FC59E4 /* LWFJSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWFJSONKit.h; sourceTree = "<group>"; };
 		84789E0A181C65DA00FC59E4 /* LWFJSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LWFJSONKit.m; sourceTree = "<group>"; };
 		84789FF5181C66B800FC59E4 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -406,8 +403,6 @@
 				84789DA4181C65DA00FC59E4 /* LWFAFURLConnectionOperation.m */,
 				84789DA5181C65DA00FC59E4 /* LWFAFXMLRequestOperation.h */,
 				84789DA6181C65DA00FC59E4 /* LWFAFXMLRequestOperation.m */,
-				84789DA7181C65DA00FC59E4 /* UIImageView+LWFAFNetworking.h */,
-				84789DA8181C65DA00FC59E4 /* UIImageView+LWFAFNetworking.m */,
 			);
 			path = AFNetworking;
 			sourceTree = "<group>";
@@ -577,7 +572,6 @@
 				84AB8D571835C54A00E3E8AE /* LWFReadyController.m in Sources */,
 				84EFEF3C182CBC9100E3DD89 /* LWFResultsController.m in Sources */,
 				84789ED4181C65DB00FC59E4 /* LWFAFNetworkActivityIndicatorManager.m in Sources */,
-				84789ED8181C65DB00FC59E4 /* UIImageView+LWFAFNetworking.m in Sources */,
 				84789ED7181C65DB00FC59E4 /* LWFAFXMLRequestOperation.m in Sources */,
 				84446C24182CB1AC002D8BDC /* LWFShowController.m in Sources */,
 				84789ECF181C65DB00FC59E4 /* LWFAFHTTPClient.m in Sources */,

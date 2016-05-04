@@ -4,29 +4,29 @@
 
 #import "LWFAFURLConnectionOperation.h"
 
-static NSUInteger const kAFHTTPMinimumInitialDataCapacity = 1024;
-static NSUInteger const kAFHTTPMaximumInitialDataCapacity = 1024 * 1024 * 8;
+static NSUInteger const kLWFAFHTTPMinimumInitialDataCapacity = 1024;
+static NSUInteger const kLWFAFHTTPMaximumInitialDataCapacity = 1024 * 1024 * 8;
 
 typedef enum {
-    AFHTTPOperationReadyState       = 1,
-    AFHTTPOperationExecutingState   = 2,
-    AFHTTPOperationFinishedState    = 3,
-} AFOperationState;
+    LWFAFHTTPOperationReadyState       = 1,
+    LWFAFHTTPOperationExecutingState   = 2,
+    LWFAFHTTPOperationFinishedState    = 3,
+} LWFAFOperationState;
 
-NSString * const AFNetworkingErrorDomain = @"com.alamofire.networking.error";
+NSString * const LWFAFNetworkingErrorDomain = @"com.alamofire.networking.error";
 
-NSString * const AFNetworkingOperationDidStartNotification = @"com.alamofire.networking.operation.start";
-NSString * const AFNetworkingOperationDidFinishNotification = @"com.alamofire.networking.operation.finish";
+NSString * const LWFAFNetworkingOperationDidStartNotification = @"com.alamofire.networking.operation.start";
+NSString * const LWFAFNetworkingOperationDidFinishNotification = @"com.alamofire.networking.operation.finish";
 
-typedef void (^AFURLConnectionOperationProgressBlock)(NSInteger bytes, NSInteger totalBytes, NSInteger totalBytesExpected);
+typedef void (^LWFAFURLConnectionOperationProgressBlock)(NSInteger bytes, NSInteger totalBytes, NSInteger totalBytesExpected);
 
-static inline NSString * AFKeyPathFromOperationState(AFOperationState state) {
+static inline NSString * LWFAFKeyPathFromOperationState(LWFAFOperationState state) {
     switch (state) {
-        case AFHTTPOperationReadyState:
+        case LWFAFHTTPOperationReadyState:
             return @"isReady";
-        case AFHTTPOperationExecutingState:
+        case LWFAFHTTPOperationExecutingState:
             return @"isExecuting";
-        case AFHTTPOperationFinishedState:
+        case LWFAFHTTPOperationFinishedState:
             return @"isFinished";
         default:
             return @"state";
@@ -34,7 +34,7 @@ static inline NSString * AFKeyPathFromOperationState(AFOperationState state) {
 }
 
 @interface LWFAFURLConnectionOperation ()
-@property (readwrite, nonatomic, assign) AFOperationState state;
+@property (readwrite, nonatomic, assign) LWFAFOperationState state;
 @property (readwrite, nonatomic, assign, getter = isCancelled) BOOL cancelled;
 @property (readwrite, nonatomic, retain) NSURLConnection *connection;
 @property (readwrite, nonatomic, retain) NSURLRequest *request;
@@ -44,10 +44,10 @@ static inline NSString * AFKeyPathFromOperationState(AFOperationState state) {
 @property (readwrite, nonatomic, copy) NSString *responseString;
 @property (readwrite, nonatomic, assign) NSInteger totalBytesRead;
 @property (readwrite, nonatomic, retain) NSMutableData *dataAccumulator;
-@property (readwrite, nonatomic, copy) AFURLConnectionOperationProgressBlock uploadProgress;
-@property (readwrite, nonatomic, copy) AFURLConnectionOperationProgressBlock downloadProgress;
+@property (readwrite, nonatomic, copy) LWFAFURLConnectionOperationProgressBlock uploadProgress;
+@property (readwrite, nonatomic, copy) LWFAFURLConnectionOperationProgressBlock downloadProgress;
 
-- (BOOL)shouldTransitionToState:(AFOperationState)state;
+- (BOOL)shouldTransitionToState:(LWFAFOperationState)state;
 - (void)operationDidStart;
 - (void)finish;
 @end
@@ -99,7 +99,7 @@ static inline NSString * AFKeyPathFromOperationState(AFOperationState state) {
     
     self.request = urlRequest;
     
-    self.state = AFHTTPOperationReadyState;
+    self.state = LWFAFHTTPOperationReadyState;
 	
     return self;
 }
@@ -138,13 +138,13 @@ static inline NSString * AFKeyPathFromOperationState(AFOperationState state) {
     self.downloadProgress = block;
 }
 
-- (void)setState:(AFOperationState)state {
+- (void)setState:(LWFAFOperationState)state {
     if (![self shouldTransitionToState:state]) {
         return;
     }
     
-    NSString *oldStateKey = AFKeyPathFromOperationState(self.state);
-    NSString *newStateKey = AFKeyPathFromOperationState(state);
+    NSString *oldStateKey = LWFAFKeyPathFromOperationState(self.state);
+    NSString *newStateKey = LWFAFKeyPathFromOperationState(state);
     
     [self willChangeValueForKey:newStateKey];
     [self willChangeValueForKey:oldStateKey];
@@ -153,34 +153,34 @@ static inline NSString * AFKeyPathFromOperationState(AFOperationState state) {
     [self didChangeValueForKey:newStateKey];
     
     switch (state) {
-        case AFHTTPOperationExecutingState:
-            [[NSNotificationCenter defaultCenter] postNotificationName:AFNetworkingOperationDidStartNotification object:self];
+        case LWFAFHTTPOperationExecutingState:
+            [[NSNotificationCenter defaultCenter] postNotificationName:LWFAFNetworkingOperationDidStartNotification object:self];
             break;
-        case AFHTTPOperationFinishedState:
-            [[NSNotificationCenter defaultCenter] postNotificationName:AFNetworkingOperationDidFinishNotification object:self];
+        case LWFAFHTTPOperationFinishedState:
+            [[NSNotificationCenter defaultCenter] postNotificationName:LWFAFNetworkingOperationDidFinishNotification object:self];
             break;
         default:
             break;
     }
 }
 
-- (BOOL)shouldTransitionToState:(AFOperationState)state {    
+- (BOOL)shouldTransitionToState:(LWFAFOperationState)state {
     switch (self.state) {
-        case AFHTTPOperationReadyState:
+        case LWFAFHTTPOperationReadyState:
             switch (state) {
-                case AFHTTPOperationExecutingState:
+                case LWFAFHTTPOperationExecutingState:
                     return YES;
                 default:
                     return NO;
             }
-        case AFHTTPOperationExecutingState:
+        case LWFAFHTTPOperationExecutingState:
             switch (state) {
-                case AFHTTPOperationFinishedState:
+                case LWFAFHTTPOperationFinishedState:
                     return YES;
                 default:
                     return NO;
             }
-        case AFHTTPOperationFinishedState:
+        case LWFAFHTTPOperationFinishedState:
             return NO;
         default:
             return YES;
@@ -193,7 +193,7 @@ static inline NSString * AFKeyPathFromOperationState(AFOperationState state) {
     [self didChangeValueForKey:@"isCancelled"];
     
     if ([self isCancelled]) {
-        self.state = AFHTTPOperationFinishedState;
+        self.state = LWFAFHTTPOperationFinishedState;
     }
 }
 
@@ -213,15 +213,15 @@ static inline NSString * AFKeyPathFromOperationState(AFOperationState state) {
 #pragma mark - NSOperation
 
 - (BOOL)isReady {
-    return self.state == AFHTTPOperationReadyState;
+    return self.state == LWFAFHTTPOperationReadyState;
 }
 
 - (BOOL)isExecuting {
-    return self.state == AFHTTPOperationExecutingState;
+    return self.state == LWFAFHTTPOperationExecutingState;
 }
 
 - (BOOL)isFinished {
-    return self.state == AFHTTPOperationFinishedState;
+    return self.state == LWFAFHTTPOperationFinishedState;
 }
 
 - (BOOL)isConcurrent {
@@ -233,7 +233,7 @@ static inline NSString * AFKeyPathFromOperationState(AFOperationState state) {
         return;
     }
     
-    self.state = AFHTTPOperationExecutingState;
+    self.state = LWFAFHTTPOperationExecutingState;
     
     [self performSelector:@selector(operationDidStart) onThread:[[self class] networkRequestThread] withObject:nil waitUntilDone:YES modes:[self.runLoopModes allObjects]];
 }
@@ -256,7 +256,7 @@ static inline NSString * AFKeyPathFromOperationState(AFOperationState state) {
 }
 
 - (void)finish {
-    self.state = AFHTTPOperationFinishedState;
+    self.state = LWFAFHTTPOperationFinishedState;
 }
 
 - (void)cancel {
@@ -291,8 +291,8 @@ didReceiveResponse:(NSURLResponse *)response
     if (self.outputStream) {
         [self.outputStream open];
     } else {
-        NSUInteger maxCapacity = MAX((NSUInteger)llabs(response.expectedContentLength), kAFHTTPMinimumInitialDataCapacity);
-        NSUInteger capacity = MIN(maxCapacity, kAFHTTPMaximumInitialDataCapacity);
+        NSUInteger maxCapacity = MAX((NSUInteger)llabs(response.expectedContentLength), kLWFAFHTTPMinimumInitialDataCapacity);
+        NSUInteger capacity = MIN(maxCapacity, kLWFAFHTTPMaximumInitialDataCapacity);
         self.dataAccumulator = [NSMutableData dataWithCapacity:capacity];
     }
 }

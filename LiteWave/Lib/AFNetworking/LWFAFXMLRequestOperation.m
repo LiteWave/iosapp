@@ -6,13 +6,13 @@
 
 #include <Availability.h>
 
-static dispatch_queue_t af_xml_request_operation_processing_queue;
+static dispatch_queue_t lwfaf_xml_request_operation_processing_queue;
 static dispatch_queue_t xml_request_operation_processing_queue() {
-    if (af_xml_request_operation_processing_queue == NULL) {
-        af_xml_request_operation_processing_queue = dispatch_queue_create("com.alamofire.networking.xml-request.processing", 0);
+    if (lwfaf_xml_request_operation_processing_queue == NULL) {
+        lwfaf_xml_request_operation_processing_queue = dispatch_queue_create("com.alamofire.networking.xml-request.processing", 0);
     }
     
-    return af_xml_request_operation_processing_queue;
+    return lwfaf_xml_request_operation_processing_queue;
 }
 
 @interface LWFAFXMLRequestOperation ()
@@ -63,11 +63,11 @@ static dispatch_queue_t xml_request_operation_processing_queue() {
 }
 
 #if __MAC_OS_X_VERSION_MIN_REQUIRED
-+ (AFXMLRequestOperation *)XMLDocumentRequestOperationWithRequest:(NSURLRequest *)urlRequest
++ (LWFAFXMLRequestOperation *)XMLDocumentRequestOperationWithRequest:(NSURLRequest *)urlRequest
                                                           success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLDocument *document))success
                                                           failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
 {
-    AFXMLRequestOperation *operation = [[[self alloc] initWithRequest:urlRequest] autorelease];
+    LWFAFXMLRequestOperation *operation = [[[self alloc] initWithRequest:urlRequest] autorelease];
     operation.completionBlock = ^ {
         if ([operation isCancelled]) {
             return;
@@ -153,7 +153,7 @@ static dispatch_queue_t xml_request_operation_processing_queue() {
     self.responseXMLParser.delegate = nil;
 }
 
-#pragma mark - AFHTTPClientOperation
+#pragma mark - LWFAFHTTPClientOperation
 
 + (BOOL)canProcessRequest:(NSURLRequest *)request {
     return [[self defaultAcceptableContentTypes] containsObject:[request valueForHTTPHeaderField:@"Accept"]] || [[self defaultAcceptablePathExtensions] containsObject:[[request URL] pathExtension]];
