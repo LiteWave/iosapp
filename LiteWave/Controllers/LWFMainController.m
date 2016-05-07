@@ -25,9 +25,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.appDelegate = (LWFAppDelegate *)[[UIApplication sharedApplication] delegate];
+    appSize = [LWFUtility determineAppSize:self];
     
     [self updateNavigationColor: [LWFConfiguration instance].defaultColor];
-    
+
     imageView.hidden = YES;
     unavailableLabel.hidden = YES;
     logoImageView.hidden = YES;
@@ -176,9 +177,7 @@
     // remove observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"LWFMain"
-                                                         bundle:[NSBundle bundleForClass:LWFMainController.class]];
-    
+    UIStoryboard* storyboard = [LWFUtility getStoryboard:self];
     LWFLevelController *level = [storyboard instantiateViewControllerWithIdentifier:@"level"];
     [self.navigationController pushViewController:level animated:NO];
     
@@ -207,24 +206,23 @@
                                 
                                 [self loadImage];
                                 
-                                logoImageView.frame = CGRectMake(self.view.frame.size.width/2 - logoImageView.frame.size.width/2,
-                                                                 self.view.frame.size.height - logoImageView.frame.size.height - 10,
+                                logoImageView.frame = CGRectMake(appSize.width/2 - logoImageView.frame.size.width/2,
+                                                                 appSize.height - logoImageView.frame.size.height - 10,
                                                                  logoImageView.frame.size.width,
                                                                  logoImageView.frame.size.height);
                                 logoImageView.hidden = NO;
                                 
-
                                 poweredByLabel.hidden = NO;
-                                poweredByLabel.frame = CGRectMake(self.view.frame.size.width/2 - (self.view.frame.size.width*.85)/2,
+                                poweredByLabel.frame = CGRectMake(appSize.width/2 - (appSize.width*.85)/2,
                                                                   logoImageView.frame.origin.y - 20,
-                                                                  self.view.frame.size.width*.85,
+                                                                  appSize.width*.85,
                                                                   poweredByLabel.frame.size.height);
 
-                                [unavailableLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:self.view.frame.size.width*.065]];
+                                [unavailableLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:appSize.width*.065]];
                                 unavailableLabel.hidden = NO;
-                                unavailableLabel.frame = CGRectMake(self.view.frame.size.width/2 - (self.view.frame.size.width*.85)/2,
-                                                                  self.view.frame.size.height*.03,
-                                                                  self.view.frame.size.width*.85,
+                                unavailableLabel.frame = CGRectMake(appSize.width/2 - (appSize.width*.85)/2,
+                                                                  appSize.height*.03,
+                                                                  appSize.width*.85,
                                                                   unavailableLabel.frame.size.height);
                             }
                             onFailure:^(NSError *error) {
@@ -240,9 +238,9 @@
     if (![LWFConfiguration instance].logoUrl || ![LWFConfiguration instance].logoImage)
         return;
     
-    float height = 700;
+    float height = appSize.height*1.18; // make image 118% of view
     float width = ([LWFConfiguration instance].logoImage.size.width*height)/[LWFConfiguration instance].logoImage.size.height;
-    imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, self.view.frame.size.height/2 - height/2, width, height);
+    imageView.frame = CGRectMake(appSize.width/2 - width/2, appSize.height/2 - height/2, width, height);
     imageView.image = [LWFConfiguration instance].logoImage;
     imageView.alpha = .05;
     imageView.hidden = NO;

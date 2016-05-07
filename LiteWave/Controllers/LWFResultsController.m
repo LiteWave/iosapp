@@ -8,6 +8,7 @@
 #import "LWFResultsController.h"
 #import "LWFAppDelegate.h"
 #import "LWFConfiguration.h"
+#import "LWFUtility.h"
 
 @implementation LWFResultsController
 
@@ -16,6 +17,12 @@
     [super viewDidLoad];
 
     self.appDelegate = (LWFAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    appSize = [LWFUtility determineAppSize:self];
+    // using full screen in this view
+    CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
+    appSize.height += statusBarHeight;
+
     
     NSString *winnerID = [[LWFConfiguration instance].showData valueForKey:@"_winnerId"];
     if (winnerID != (id)[NSNull null] && [winnerID isEqualToString:[LWFConfiguration instance].userLocationID]) {
@@ -69,8 +76,8 @@
 -(void)prepareView {
     
     returnButton.frame = CGRectMake(0,
-                                    self.view.bounds.size.height - 50,
-                                    self.view.bounds.size.width,
+                                    appSize.height - 50,
+                                    appSize.width,
                                     50);
     returnButton.layer.borderColor=[LWFConfiguration instance].highlightColor.CGColor;
     returnButton.layer.backgroundColor=[LWFConfiguration instance].highlightColor.CGColor;
@@ -88,10 +95,10 @@
             NSData *data = [NSData dataWithContentsOfURL:url];
             UIImage *image = [[UIImage alloc] initWithData:data];
             
-            float newWidth = self.view.frame.size.width;
+            float newWidth = appSize.width;
             float newHeight = newWidth*image.size.height/image.size.width;
-            imageView.frame = CGRectMake(self.view.frame.size.width/2 - newWidth/2,
-                                         (self.view.frame.size.height-returnHeight/2)/2 - newHeight/2,
+            imageView.frame = CGRectMake(appSize.width/2 - newWidth/2,
+                                         (appSize.height-returnHeight/2)/2 - newHeight/2,
                                          newWidth,
                                          newHeight);
             
@@ -106,24 +113,24 @@
     } else {
         [self loadImage];
         
-        logoImageView.frame = CGRectMake(self.view.frame.size.width/2 - logoImageView.frame.size.width/2,
-                                         self.view.frame.size.height - logoImageView.frame.size.height - 20 - returnHeight,
+        logoImageView.frame = CGRectMake(appSize.width/2 - logoImageView.frame.size.width/2,
+                                         appSize.height - logoImageView.frame.size.height - 20 - returnHeight,
                                          logoImageView.frame.size.width,
                                          logoImageView.frame.size.height);
         logoImageView.hidden = NO;
         
         poweredByLabel.frame = CGRectMake(0,
                                           logoImageView.frame.origin.y - 20,
-                                          self.view.frame.size.width,
+                                          appSize.width,
                                           poweredByLabel.frame.size.height);
         poweredByLabel.hidden = NO;
 
-        [participationLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:self.view.frame.size.width*.075]];
+        [participationLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:appSize.width*.075]];
         participationLabel.textColor = [LWFConfiguration instance].textColor;
         participationLabel.hidden = NO;
         participationLabel.frame = CGRectMake(0,
-                                     self.view.frame.size.height*.04,
-                                     self.view.frame.size.width,
+                                     appSize.height*.04,
+                                     appSize.width,
                                      participationLabel.frame.size.height);
     }
 }
@@ -133,9 +140,9 @@
     if (![LWFConfiguration instance].logoUrl || ![LWFConfiguration instance].logoImage)
         return;
     
-    float height = 700;
+    float height = appSize.height*1.18; // make image 118% of view
     float width = ([LWFConfiguration instance].logoImage.size.width*height)/[LWFConfiguration instance].logoImage.size.height;
-    imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, self.view.frame.size.height/2 - height/2, width, height);
+    imageView.frame = CGRectMake(appSize.width/2 - width/2, appSize.height/2 - height/2, width, height);
     imageView.image = [LWFConfiguration instance].logoImage;
     imageView.alpha = .05;
     imageView.hidden = NO;

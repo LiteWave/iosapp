@@ -90,5 +90,34 @@
     }
 }
 
++(CGSize)determineAppSize:(UIViewController*)controller {
+    CGSize appSize = [[UIScreen mainScreen] applicationFrame].size;
+    if (controller.tabBarController != nil) {
+        CGSize tsize = controller.tabBarController.tabBar.frame.size;
+        appSize.height -= MIN(tsize.width, tsize.height);
+    }
+    if (controller.navigationController != nil) {
+        CGSize nsize = controller.navigationController.navigationBar.frame.size;
+        appSize.height -= MIN(nsize.width, nsize.height);
+    }
+    return appSize;
+}
+
++(UIStoryboard*)getStoryboard:(UIViewController*)controller {
+    NSBundle* bundle;
+    @try {
+        bundle = [NSBundle bundleWithURL:[[NSBundle mainBundle]URLForResource:@"LiteWave"
+                                                                withExtension:@"bundle"]];
+    } @catch (NSException *e) {
+        NSLog(@"Litewave bundle not available");
+        bundle = [NSBundle bundleForClass:controller.class];
+    } @finally {
+        return [UIStoryboard storyboardWithName:@"LWFMain"
+                                         bundle:bundle];
+    }
+}
+
+
+
 
 @end

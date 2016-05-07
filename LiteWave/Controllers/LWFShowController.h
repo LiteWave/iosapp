@@ -23,6 +23,8 @@
     UIColor *backgroundColor;   // (rgb)
     
     LWFCountDownTimerUtility *counterUtil;
+    
+    CGSize appSize;
 @public
     double diff;
     int position; // command position in the array

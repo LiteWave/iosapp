@@ -16,5 +16,7 @@
 +(NSString*)getTodayInGMT;
 +(UIColor*)getColorFromString:(NSString*)color;
 +(NSString*)getStringFromColor:(UIColor*)color;
++(CGSize)determineAppSize:(UIViewController*)controller;
++(UIStoryboard*)getStoryboard:(UIViewController*)controller;
 
 @end

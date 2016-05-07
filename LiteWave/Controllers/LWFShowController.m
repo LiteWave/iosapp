@@ -29,12 +29,13 @@
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     
     self.appDelegate = (LWFAppDelegate *)[[UIApplication sharedApplication] delegate];
+    appSize = [LWFUtility determineAppSize:self];
     
     self.timerLabel.textColor = [LWFConfiguration instance].highlightColor;
     self.startsInLabel.textColor = [LWFConfiguration instance].highlightColor;
     self.infoLabel.textColor = [LWFConfiguration instance].highlightColor;
     self.infoLabel.frame = CGRectMake(self.infoLabel.frame.origin.x,
-                                      self.view.frame.size.height - self.infoLabel.frame.size.height - 10,
+                                      appSize.height - self.infoLabel.frame.size.height - 10,
                                       self.infoLabel.frame.size.width,
                                       self.infoLabel.frame.size.height);
     
@@ -98,25 +99,25 @@
         self.view.backgroundColor = [UIColor blackColor];
         
         
-        [self.timerLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:self.view.frame.size.width*.55]];
+        [self.timerLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:appSize.width*.55]];
         self.timerLabel.hidden = NO;
         self.timerLabel.frame = CGRectMake(0,
-                                     self.view.frame.size.height/3,
-                                     self.view.frame.size.width,
+                                     appSize.height/3,
+                                     appSize.width,
                                      self.timerLabel.frame.size.height);
         
-        [self.startsInLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:self.view.frame.size.width*.05]];
+        [self.startsInLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:appSize.width*.05]];
         self.startsInLabel.hidden = NO;
         self.startsInLabel.frame = CGRectMake(0,
-                                              self.timerLabel.frame.origin.y - self.view.frame.size.height*.06,
-                                              self.view.frame.size.width,
+                                              self.timerLabel.frame.origin.y - appSize.height*.06,
+                                              appSize.width,
                                               self.startsInLabel.frame.size.height);
         
         self.infoLabel.hidden = NO;
-        [self.infoLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:self.view.frame.size.width*.05]];
-        self.infoLabel.frame = CGRectMake(self.view.frame.size.width/2 - (self.view.frame.size.width*.85)/2,
-                                          self.infoLabel.frame.origin.y,
-                                          self.view.frame.size.width*.85,
+        [self.infoLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:appSize.width*.05]];
+        self.infoLabel.frame = CGRectMake(appSize.width/2 - (appSize.width*.85)/2,
+                                          appSize.height - self.infoLabel.frame.size.height,
+                                          appSize.width*.85,
                                           self.infoLabel.frame.size.height);
 
         [counterUtil startCountDownTimerWithTime:diff andUILabel:self.timerLabel];
@@ -127,8 +128,7 @@
 {
     [self.frameTimer invalidate];
     
-    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"LWFMain"
-                                                         bundle:[NSBundle bundleForClass:LWFShowController.class]];
+    UIStoryboard* storyboard = [LWFUtility getStoryboard:self];
     LWFResultsController *results = [storyboard instantiateViewControllerWithIdentifier:@"results"];
     [self presentViewController:results animated:YES completion:nil];
     
@@ -228,7 +228,7 @@
     self.winnerLabel.text = @"WINNER!";
     self.winnerLabel.frame = CGRectMake(0,
                                  self.winnerLabel.frame.origin.y,
-                                 self.view.frame.size.width,
+                                 appSize.width,
                                  self.winnerLabel.frame.size.height);
 }
 

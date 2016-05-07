@@ -20,6 +20,7 @@
     [super viewDidLoad];
     
     self.appDelegate = (LWFAppDelegate *)[[UIApplication sharedApplication] delegate];
+    appSize = [LWFUtility determineAppSize:self];
     
     self.view.backgroundColor = [LWFConfiguration instance].backgroundColor;
     
@@ -249,20 +250,17 @@
 
 - (void)prepareView
 {
-    CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
-    float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
-    
     joinButton.frame = CGRectMake(0,
-                                  self.view.bounds.size.height - 50 - heightPadding,
-                                  self.view.bounds.size.width,
+                                  appSize.height - 50,
+                                  appSize.width,
                                   50);
     [self disableJoin];
     
     sectionTable.hidden = NO;
     sectionTable.frame = CGRectMake(0,
                                     0,
-                                    self.view.frame.size.width/3.0,
-                                    self.view.frame.size.height - joinButton.frame.size.height);
+                                    appSize.width/3.0,
+                                    appSize.height - joinButton.frame.size.height);
     sectionTable.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0];
     sectionTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [sectionTable setShowsVerticalScrollIndicator:NO];
@@ -271,10 +269,10 @@
     [sectionTable setDelegate:self];
     
     rowTable.frame = CGRectMake(
-                                self.view.frame.size.width/3.0,
+                                appSize.width/3.0,
                                 0,
-                                self.view.frame.size.width/3.0,
-                                self.view.frame.size.height - joinButton.frame.size.height);
+                                appSize.width/3.0,
+                                appSize.height - joinButton.frame.size.height);
     rowTable.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0];
     rowTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     rowTable.hidden = YES;
@@ -284,10 +282,10 @@
     [rowTable setDelegate:self];
     
     seatTable.frame = CGRectMake(
-                                 2.0*self.view.frame.size.width/3.0,
+                                 2.0*appSize.width/3.0,
                                  0,
-                                 self.view.frame.size.width/3.0,
-                                 self.view.frame.size.height - joinButton.frame.size.height);
+                                 appSize.width/3.0,
+                                 appSize.height - joinButton.frame.size.height);
     seatTable.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0];
     seatTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     seatTable.hidden = YES;
@@ -337,12 +335,9 @@
     if (![LWFConfiguration instance].logoUrl || ![LWFConfiguration instance].logoImage)
         return;
     
-    CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
-    float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
-    
-    float height = 700;
+    float height = appSize.height*1.18; // make image 118% of view
     float width = ([LWFConfiguration instance].logoImage.size.width*height)/[LWFConfiguration instance].logoImage.size.height;
-    imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, self.view.frame.size.height/2 - height/2 - heightPadding, width, height);
+    imageView.frame = CGRectMake(appSize.width/2 - width/2, appSize.height/2 - height/2, width, height);
     imageView.image = [LWFConfiguration instance].logoImage;
     imageView.alpha = .05;
     imageView.hidden = NO;
@@ -432,8 +427,7 @@
                               [defaults setValue:[LWFConfiguration instance].mobileOffset forKey:@"mobileOffset"];
                               [defaults synchronize];
                               
-                              UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"LWFMain"
-                                                                                   bundle:[NSBundle bundleForClass:LWFSeatController.class]];
+                              UIStoryboard* storyboard = [LWFUtility getStoryboard:self];
                               LWFReadyController *ready = [storyboard instantiateViewControllerWithIdentifier:@"ready"];
                               [self.navigationController pushViewController:ready animated:YES];
                               

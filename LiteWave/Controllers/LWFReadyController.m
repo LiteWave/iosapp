@@ -15,8 +15,6 @@
 
 @interface LWFReadyController ()
 
--(IBAction)changeSeat:(id)sender;
-
 @end
 
 @implementation LWFReadyController
@@ -28,6 +26,7 @@
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
     self.appDelegate = (LWFAppDelegate *)[[UIApplication sharedApplication] delegate];
+    appSize = [LWFUtility determineAppSize:self];
     
     self.view.backgroundColor = [LWFConfiguration instance].backgroundColor;
     
@@ -53,7 +52,7 @@
 - (void)viewDidAppear:(BOOL)animated{
     [self.navigationItem setHidesBackButton:NO animated:NO];
 
-    self.title = [LWFConfiguration instance].eventName;
+    self.title = [[LWFConfiguration instance].eventName uppercaseString];
 
     [self getShow];
     [self beginTimer];
@@ -133,8 +132,7 @@
                              [LWFConfiguration instance].mobileOffset = [joinDict objectForKey:@"mobileTimeOffset"];
                              [LWFConfiguration instance].showData = [[NSDictionary alloc] initWithDictionary:joinDict copyItems:YES];
                              
-                             UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"LWFMain"
-                                                                                  bundle:[NSBundle bundleForClass:LWFReadyController.class]];
+                             UIStoryboard* storyboard = [LWFUtility getStoryboard:self];
                              UIViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"playing"];
                              [self presentViewController:vc animated:YES completion:nil];
 
@@ -209,29 +207,26 @@
 
 - (void)prepareView
 {
-    CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
-    float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
-    
     [self loadImage];
     
-    [waitLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:self.view.frame.size.width*.065]];
+    [waitLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:appSize.width*.065]];
     waitLabel.textColor = [LWFConfiguration instance].textColor;
     waitLabel.frame = CGRectMake(0,
-                                 self.view.frame.size.height*.03,
-                                 self.view.frame.size.width,
+                                 appSize.height*.03,
+                                 appSize.width,
                                  waitLabel.frame.size.height);
     
-    spinner.frame = CGRectMake(self.view.frame.size.width/2 - spinner.frame.size.width/2,
+    spinner.frame = CGRectMake(appSize.width/2 - spinner.frame.size.width/2,
                                waitLabel.frame.origin.y + 75,
                                spinner.frame.size.width,
                                spinner.frame.size.height);
     spinner.color = [LWFConfiguration instance].highlightColor;
     
     
-    int buttonWidth = self.view.frame.size.width*.2;
-    int buttonPadding = (self.view.frame.size.width - (4*buttonWidth))/5;
+    int buttonWidth = appSize.width*.2;
+    int buttonPadding = (appSize.width - (4*buttonWidth))/5;
     int buttonXPosition = buttonPadding;
-    int buttonYPostion = self.view.frame.size.height - 220;
+    int buttonYPostion = appSize.height - 160;
     
     // level
     [self buildInfoLabel:@"level" x:(buttonXPosition-5) y:(buttonYPostion-50) size:(buttonWidth+10)];
@@ -254,8 +249,8 @@
     
     
     joinButton.frame = CGRectMake(0,
-                                  self.view.bounds.size.height - heightPadding - 50,
-                                  self.view.bounds.size.width,
+                                  appSize.height - 50,
+                                  appSize.width,
                                   50);
     [self disableJoin];
 }
@@ -265,12 +260,9 @@
     if (![LWFConfiguration instance].logoUrl || ![LWFConfiguration instance].logoImage)
         return;
     
-    CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
-    float heightPadding = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
-    
-    float height = 700;
+    float height = appSize.height*1.18; // make image 118% of view
     float width = ([LWFConfiguration instance].logoImage.size.width*height)/[LWFConfiguration instance].logoImage.size.height;
-    imageView.frame = CGRectMake(self.view.frame.size.width/2 - width/2, self.view.frame.size.height/2 - height/2 - heightPadding, width, height);
+    imageView.frame = CGRectMake(appSize.width/2 - width/2, appSize.height/2 - height/2, width, height);
     imageView.image = [LWFConfiguration instance].logoImage;
     imageView.alpha = .05;
     imageView.hidden = NO;

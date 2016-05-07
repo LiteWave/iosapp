@@ -17,6 +17,7 @@
     IBOutlet UIImageView *imageView;
     
     BOOL pressedChangeSeat;
+    CGSize appSize;
 }
 
 @property (nonatomic, retain) LWFAppDelegate *appDelegate;

@@ -14,6 +14,8 @@
     IBOutlet UILabel *poweredByLabel;
     IBOutlet UIImageView *logoImageView;
     IBOutlet UIImageView *imageView;
+    
+    CGSize appSize;
 }
 
 @property (nonatomic, retain) LWFAppDelegate *appDelegate;

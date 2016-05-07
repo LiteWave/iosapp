@@ -20,6 +20,8 @@
     NSDictionary *levelDictionary;
     
     int selectedLevelIndex;
+    
+    CGSize appSize;
 }
 
 @property (nonatomic, retain) LWFAppDelegate *appDelegate;

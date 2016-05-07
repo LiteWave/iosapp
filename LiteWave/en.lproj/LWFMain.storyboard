@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--My Event-->
+        <!-- -->
         <scene sceneID="Axo-Eg-Ar3">
             <objects>
                 <viewController storyboardIdentifier="ready" id="Bq9-dY-bod" customClass="LWFReadyController" sceneMemberID="viewController">
@@ -40,7 +40,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="My Event" id="3Nl-9v-JyO"/>
+                    <navigationItem key="navigationItem" title=" " id="3Nl-9v-JyO"/>
                     <connections>
                         <outlet property="imageView" destination="cJK-DT-Fpe" id="APu-U3-mvT"/>
                         <outlet property="joinButton" destination="BOy-3g-cIp" id="sGn-3k-nDa"/>
@@ -52,7 +52,7 @@
             </objects>
             <point key="canvasLocation" x="367" y="-360.91666666666669"/>
         </scene>
-        <!--Events-->
+        <!--EVENTS-->
         <scene sceneID="kXH-VM-hHa">
             <objects>
                 <viewController restorationIdentifier="register" storyboardIdentifier="register" id="iss-ty-u8M" customClass="LWFMainController" sceneMemberID="viewController">
@@ -85,7 +85,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Events" id="I6c-ia-4w7">
+                    <navigationItem key="navigationItem" title="EVENTS" id="I6c-ia-4w7">
                         <barButtonItem key="backBarButtonItem" title=" " id="nsP-yZ-yYp"/>
                     </navigationItem>
                     <connections>
@@ -99,7 +99,7 @@
             </objects>
             <point key="canvasLocation" x="367" y="371.56666666666666"/>
         </scene>
-        <!--Choose level-->
+        <!--CHOOSE LEVEL-->
         <scene sceneID="ae5-yi-0UU">
             <objects>
                 <viewController storyboardIdentifier="level" id="6Cv-ty-NCf" customClass="LWFLevelController" sceneMemberID="viewController">
@@ -126,7 +126,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Choose level" id="RXL-7A-gNO">
+                    <navigationItem key="navigationItem" title="CHOOSE LEVEL" id="RXL-7A-gNO">
                         <barButtonItem key="backBarButtonItem" title=" " id="aLo-Gf-zZW"/>
                     </navigationItem>
                     <connections>
@@ -139,7 +139,7 @@
             </objects>
             <point key="canvasLocation" x="772" y="370.38333333333333"/>
         </scene>
-        <!--Choose seat-->
+        <!--CHOOSE SEAT-->
         <scene sceneID="riY-jI-e2p">
             <objects>
                 <viewController storyboardIdentifier="seat" id="Iox-nc-KfJ" customClass="LWFSeatController" sceneMemberID="viewController">
@@ -178,7 +178,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Choose seat" id="7vM-kh-5ET">
+                    <navigationItem key="navigationItem" title="CHOOSE SEAT" id="7vM-kh-5ET">
                         <barButtonItem key="backBarButtonItem" title=" " id="BPV-gI-9qj"/>
                     </navigationItem>
                     <connections>
@@ -310,6 +310,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hZG-2I-b57">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -328,6 +331,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4zx-Ei-q7y">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="27"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

@@ -41,6 +41,8 @@
     int selectedSectionIndex;
     int selectedRowIndex;
     int selectedSeatIndex;
+    
+    CGSize appSize;
 }
 
 @property (nonatomic, retain) LWFAppDelegate *appDelegate;
