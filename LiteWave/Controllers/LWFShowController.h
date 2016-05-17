@@ -12,6 +12,7 @@
 
 @interface LWFShowController : UIViewController <UIAccelerometerDelegate, CountDownTimerProtocol>
 {
+    BOOL created;
     BOOL isWinner;  // device is a winner!
     BOOL onORoff;   // screen control
 

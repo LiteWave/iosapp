@@ -91,14 +91,11 @@
 }
 
 +(CGSize)determineAppSize:(UIViewController*)controller {
-    CGSize appSize = [[UIScreen mainScreen] applicationFrame].size;
+    CGSize appSize = controller.view.frame.size;
+    
     if (controller.tabBarController != nil) {
         CGSize tsize = controller.tabBarController.tabBar.frame.size;
         appSize.height -= MIN(tsize.width, tsize.height);
-    }
-    if (controller.navigationController != nil) {
-        CGSize nsize = controller.navigationController.navigationBar.frame.size;
-        appSize.height -= MIN(nsize.width, nsize.height);
     }
     return appSize;
 }

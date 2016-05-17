@@ -11,6 +11,7 @@
 
 @interface LWFResultsController : UIViewController {
     BOOL isWinner;  // device is a winner!
+    BOOL created;
     CGSize appSize;
     
     IBOutlet UIButton *returnButton;

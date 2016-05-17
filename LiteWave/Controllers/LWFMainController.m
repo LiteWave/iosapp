@@ -23,9 +23,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
+    created = NO;
     self.appDelegate = (LWFAppDelegate *)[[UIApplication sharedApplication] delegate];
-    appSize = [LWFUtility determineAppSize:self];
     
     [self updateNavigationColor: [LWFConfiguration instance].defaultColor];
 
@@ -33,10 +33,18 @@
     unavailableLabel.hidden = YES;
     logoImageView.hidden = YES;
     poweredByLabel.hidden = YES;
+    
+    [self loadImage];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self getEvent];
+    [super viewDidAppear: animated];
+
+    appSize = [LWFUtility determineAppSize:self];
+    if (!created) {
+        created = YES;
+        [self getEvent];
+    }
 }
 
 - (void)onBecomeActive
@@ -204,8 +212,6 @@
                                 
                                 [self saveSettings:[clientDict objectForKey:@"settings"]];
                                 
-                                [self loadImage];
-                                
                                 logoImageView.frame = CGRectMake(appSize.width/2 - logoImageView.frame.size.width/2,
                                                                  appSize.height - logoImageView.frame.size.height - 10,
                                                                  logoImageView.frame.size.width,
@@ -238,9 +244,10 @@
     if (![LWFConfiguration instance].logoUrl || ![LWFConfiguration instance].logoImage)
         return;
     
-    float height = appSize.height*1.18; // make image 118% of view
-    float width = ([LWFConfiguration instance].logoImage.size.width*height)/[LWFConfiguration instance].logoImage.size.height;
-    imageView.frame = CGRectMake(appSize.width/2 - width/2, appSize.height/2 - height/2, width, height);
+    CGSize frameSize = self.view.frame.size;
+    float imageHeight = frameSize.height*1.18; // make image 118% of view
+    float imageWidth = ([LWFConfiguration instance].logoImage.size.width*imageHeight)/[LWFConfiguration instance].logoImage.size.height;
+    imageView.frame = CGRectMake(frameSize.width/2 - imageWidth/2, frameSize.height/2 - imageHeight/2, imageWidth, imageHeight);
     imageView.image = [LWFConfiguration instance].logoImage;
     imageView.alpha = .05;
     imageView.hidden = NO;

@@ -17,12 +17,7 @@
     [super viewDidLoad];
 
     self.appDelegate = (LWFAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    appSize = [LWFUtility determineAppSize:self];
-    // using full screen in this view
-    CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
-    appSize.height += statusBarHeight;
-
+    created = NO;
     
     NSString *winnerID = [[LWFConfiguration instance].showData valueForKey:@"_winnerId"];
     if (winnerID != (id)[NSNull null] && [winnerID isEqualToString:[LWFConfiguration instance].userLocationID]) {
@@ -30,19 +25,25 @@
     } else {
         isWinner=NO;
     }
-    self.view.backgroundColor = [LWFConfiguration instance].backgroundColor;
+    self.view.backgroundColor = [UIColor blackColor];
     
     imageView.hidden = YES;
     participationLabel.hidden = YES;
     logoImageView.hidden = YES;
     poweredByLabel.hidden = YES;
-    
-    [self prepareView];
+    returnButton.hidden = YES;
 }
 
 -(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear: animated];
     
     [self.navigationItem setHidesBackButton:YES animated:NO];
+    
+    appSize = [LWFUtility determineAppSize:self];
+    if (!created) {
+        created = YES;
+        [self prepareView];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -82,13 +83,12 @@
     returnButton.layer.borderColor=[LWFConfiguration instance].highlightColor.CGColor;
     returnButton.layer.backgroundColor=[LWFConfiguration instance].highlightColor.CGColor;
     returnButton.layer.borderWidth=2.0f;
+    returnButton.hidden = NO;
     [returnButton setTitleColor:[UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     [returnButton addTarget:self action:@selector(onReturnSelect) forControlEvents:UIControlEventTouchUpInside];
     
     float returnHeight = returnButton.frame.size.height;
     if (isWinner) {
-        self.view.backgroundColor = [UIColor blackColor];
-        
         NSString *winnerImageURL = [[LWFConfiguration instance].show valueForKey:@"winnerImageUrl"];
         if (winnerImageURL != (id)[NSNull null]) {
             NSURL *url = [NSURL URLWithString:winnerImageURL];
@@ -111,6 +111,7 @@
             participationLabel.hidden = YES;
         }
     } else {
+        self.view.backgroundColor = [LWFConfiguration instance].backgroundColor;
         [self loadImage];
         
         logoImageView.frame = CGRectMake(appSize.width/2 - logoImageView.frame.size.width/2,

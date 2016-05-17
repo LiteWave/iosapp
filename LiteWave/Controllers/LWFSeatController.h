@@ -42,6 +42,8 @@
     int selectedRowIndex;
     int selectedSeatIndex;
     
+    BOOL created;
+    
     CGSize appSize;
 }
 

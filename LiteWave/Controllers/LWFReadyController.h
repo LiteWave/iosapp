@@ -17,6 +17,7 @@
     IBOutlet UIImageView *imageView;
     
     BOOL pressedChangeSeat;
+    BOOL created;
     CGSize appSize;
 }
 

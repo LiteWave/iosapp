@@ -19,23 +19,46 @@
 
 @implementation LWFReadyController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 	
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
     self.appDelegate = (LWFAppDelegate *)[[UIApplication sharedApplication] delegate];
-    appSize = [LWFUtility determineAppSize:self];
     
     self.view.backgroundColor = [LWFConfiguration instance].backgroundColor;
     
+    created = NO;
     pressedChangeSeat = NO;
+    
+    joinButton.hidden = YES;
+    waitLabel.hidden = YES;
+    spinner.hidden = YES;
+    spinner.frame = CGRectMake(-100,
+                               -100,
+                               0,
+                               0);
     
     // enable fade of screen
     [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+    [self loadImage];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear: animated];
     
-    [self prepareView];
+    [self.navigationItem setHidesBackButton:NO animated:NO];
+    
+    appSize = [LWFUtility determineAppSize:self];
+    if (!created) {
+        created = YES;
+        [self prepareView];
+        
+        self.title = [[LWFConfiguration instance].eventName uppercaseString];
+    }
+    
+    [self getShow];
+    [self beginTimer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -45,18 +68,12 @@
         return;
     
     if (self.isMovingFromParentViewController) {
+        [self stopTimer];
         [self withdraw];
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [self.navigationItem setHidesBackButton:NO animated:NO];
 
-    self.title = [[LWFConfiguration instance].eventName uppercaseString];
-
-    [self getShow];
-    [self beginTimer];
-}
 
 -(void)getShow {
     
@@ -207,21 +224,19 @@
 
 - (void)prepareView
 {
-    [self loadImage];
-    
     [waitLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:appSize.width*.065]];
     waitLabel.textColor = [LWFConfiguration instance].textColor;
     waitLabel.frame = CGRectMake(0,
                                  appSize.height*.03,
                                  appSize.width,
                                  waitLabel.frame.size.height);
+    waitLabel.hidden = NO;
     
     spinner.frame = CGRectMake(appSize.width/2 - spinner.frame.size.width/2,
-                               waitLabel.frame.origin.y + 75,
+                               waitLabel.frame.origin.y + 100,
                                spinner.frame.size.width,
                                spinner.frame.size.height);
     spinner.color = [LWFConfiguration instance].highlightColor;
-    
     
     int buttonWidth = appSize.width*.2;
     int buttonPadding = (appSize.width - (4*buttonWidth))/5;
@@ -252,6 +267,7 @@
                                   appSize.height - 50,
                                   appSize.width,
                                   50);
+    joinButton.hidden = NO;
     [self disableJoin];
 }
 
@@ -260,9 +276,10 @@
     if (![LWFConfiguration instance].logoUrl || ![LWFConfiguration instance].logoImage)
         return;
     
-    float height = appSize.height*1.18; // make image 118% of view
-    float width = ([LWFConfiguration instance].logoImage.size.width*height)/[LWFConfiguration instance].logoImage.size.height;
-    imageView.frame = CGRectMake(appSize.width/2 - width/2, appSize.height/2 - height/2, width, height);
+    CGSize frameSize = self.view.frame.size;
+    float imageHeight = frameSize.height*1.18; // make image 118% of view
+    float imageWidth = ([LWFConfiguration instance].logoImage.size.width*imageHeight)/[LWFConfiguration instance].logoImage.size.height;
+    imageView.frame = CGRectMake(frameSize.width/2 - imageWidth/2, frameSize.height/2 - imageHeight/2, imageWidth, imageHeight);
     imageView.image = [LWFConfiguration instance].logoImage;
     imageView.alpha = .05;
     imageView.hidden = NO;

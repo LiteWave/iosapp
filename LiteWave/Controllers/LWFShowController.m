@@ -29,24 +29,28 @@
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     
     self.appDelegate = (LWFAppDelegate *)[[UIApplication sharedApplication] delegate];
-    appSize = [LWFUtility determineAppSize:self];
+    
+    created = NO;
     
     self.timerLabel.textColor = [LWFConfiguration instance].highlightColor;
     self.startsInLabel.textColor = [LWFConfiguration instance].highlightColor;
     self.infoLabel.textColor = [LWFConfiguration instance].highlightColor;
-    self.infoLabel.frame = CGRectMake(self.infoLabel.frame.origin.x,
-                                      appSize.height - self.infoLabel.frame.size.height - 10,
-                                      self.infoLabel.frame.size.width,
-                                      self.infoLabel.frame.size.height);
     
     position=0;
     diff=0;
-
-    [self startShow];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear: animated];
+    
     [self.navigationItem setHidesBackButton:YES animated:NO];
+    
+    appSize = [LWFUtility determineAppSize:self];
+    if (!created) {
+        created = YES;
+        
+        [self startShow];
+    }
 }
 
 -(void)viewDidUnload {
@@ -114,6 +118,7 @@
                                               self.startsInLabel.frame.size.height);
         
         self.infoLabel.hidden = NO;
+        
         [self.infoLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:appSize.width*.05]];
         self.infoLabel.frame = CGRectMake(appSize.width/2 - (appSize.width*.85)/2,
                                           appSize.height - self.infoLabel.frame.size.height,

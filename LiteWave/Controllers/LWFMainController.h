@@ -16,6 +16,7 @@
     IBOutlet UIImageView *imageView;
     
     CGSize appSize;
+    BOOL created;
 }
 
 @property (nonatomic, retain) LWFAppDelegate *appDelegate;

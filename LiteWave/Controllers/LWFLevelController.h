@@ -20,6 +20,7 @@
     NSDictionary *levelDictionary;
     
     int selectedLevelIndex;
+    BOOL created;
     
     CGSize appSize;
 }
